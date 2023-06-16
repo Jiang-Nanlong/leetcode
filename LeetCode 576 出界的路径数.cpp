@@ -1,20 +1,20 @@
 /*
-����һ��m*n�����飬�����һ�����������ڵ�һ����(startRow,startColumn)�����������ڵ��ĸ��������ƶ�������һ������maxMove��ʾ������ƶ�maxMove�Σ�
-���ؽ����Ƴ��߽��·���������𰸿��ܷǳ��󣬷��ض�1000000007ȡ���Ľ��
+给定一个m*n的数组，起初有一个球在数组内的一个点(startRow,startColumn)，可以在相邻的四个方向上移动，给定一个整数maxMove表示球最多移动maxMove次，
+返回将球移出边界的路径数量。答案可能非常大，返回对1000000007取余后的结果
 */
 #include<iostream>
 #include <vector>
 using namespace std;
 
-//�ʼ�뵽����֮ǰ�����⣬ͨ��dfs���ص����������⣬�����Ҳ����ͨ��dfsһ��һ�����ƶ�����������ڵ�����(row,col),
-//row == 0��˵�����Դ��ϱ߳���
-//col == 0��˵�����Դ���߳���
-//row == m - 1��˵�����Դ��±߳���
-//col == n - 1��˵�����Դ��ұ߳��磬
-//˳��Ūһ����ά���飬��¼����ÿһ�㴦��ʣ��Ĳ����� ������ô�Ļ����о��ռ临�Ӷ�̫����
-//���԰�����(row,col)����һ����index = row * n + col����������ͳ���ά����,dp[index][maxMove]��ʾ�ӵ�index��ʼ�����maxMove�߳������·������
+//最开始想到的是之前做的题，通过dfs返回岛屿数量的题，这个题也可以通过dfs一步一步的移动球，如果球所在的坐标(row,col),
+//row == 0，说明可以从上边出界
+//col == 0，说明可以从左边出界
+//row == m - 1，说明可以从下边出界
+//col == n - 1，说明可以从右边出界，
+//顺便弄一个三维数组，记录球在每一点处的剩余的步数。 但是这么的话，感觉空间复杂度太大了
+//可以把坐标(row,col)换成一个数index = row * n + col，这样数组就成两维的了,dp[index][maxMove]表示从点index开始最多走maxMove走出数组的路径条数
 
-//��ʵ֤����������˼·���Ǻ������һ�����������Լ�û��д�������Ĵ��룬���Ǹо��������ֳɾ͸У���
+//事实证明，这个题的思路就是和我想的一样，但是我自己没有写出完整的代码，还是感觉不到那种成就感，嚓
 
 class Solution {
 public:
@@ -31,7 +31,7 @@ public:
 		int index = startRow * n + startCol;
 		if (dp[index][maxMove] != -1) 
 			return dp[index][maxMove];
-		//�±���ôд�Ļ�����ʱ��ᷢ��intԽ�����
+		//下边这么写的话，有时候会发生int越界错误。他妈的，下次再越界直接longlong
 		//int res = (dfs(m, n, maxMove - 1, startRow + 1, startCol, dp) +
 		//	dfs(m, n, maxMove - 1, startRow - 1, startCol, dp) +
 		//	dfs(m, n, maxMove - 1, startRow, startCol + 1, dp) +
