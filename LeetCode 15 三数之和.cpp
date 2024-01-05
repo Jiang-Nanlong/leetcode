@@ -39,7 +39,7 @@ public:
 		sort(nums.begin(), nums.end());
 		for (int k = 0; k < length - 2; k++) {
 			if (nums[k] > 0) break;
-			if (k > 0 && nums[k] == nums[k - 1]) continue;
+			if (k > 0 && nums[k] == nums[k - 1]) continue; //不能使用nums[k] == nums[k+1]代替这里的整个条件，如果遇到{-1，-1,2}这种，就会报错
 			int i = k + 1, j = length - 1;
 			while (i < j) {
 				int sum = nums[k] + nums[i] + nums[j];
