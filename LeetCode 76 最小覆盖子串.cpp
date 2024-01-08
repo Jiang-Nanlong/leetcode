@@ -4,6 +4,8 @@
 #include <algorithm>
 using namespace std;
 
+//给你一个字符串 s 、一个字符串 t 。返回 s 中涵盖 t 所有字符的最小子串。如果 s 中不存在涵盖 t 所有字符的子串，则返回空字符串 ""
+
 class Solution {
 	//public:
 	//	string minWindow(string s, string t) {
@@ -38,8 +40,8 @@ class Solution {
 	//		}
 	//		else return false;
 	//	}
-	//�ϱ������Լ�д�ģ�ģ����֮ǰ�Ļ������ڵ��⣬д��һ��ר�ŵıȽϺ������Ƚϣ����������s��t���ر���ʱ������г�ʱ�ˡ�
-	//��߿��˴�������¼�Ĵ����д�����ģ����ǻ���Ū��̫��
+	//上边是我自己写的，模仿着之前的滑动窗口的题，写了一个专门的比较函数来比较，但是如果当s和t都特别大的时候就运行超时了。
+	//后边看了代码随想录的代码才写出来的，但是还是弄不太清
 public:
 	string minWindow(string s, string t) {
 		int i = 0, j = 0, cnt = 0, k = 0, count = INT_MAX;
@@ -58,8 +60,8 @@ public:
 	}
 };
 
-//�о�����������ж���С���ں�ȷ��ÿ���������ǲ��ǰ�����t�����е��ַ����������ط���д���ر���
-//�ֿ��˼�������д�Ĵ��룬�Ի�����������һ�������ˣ�˼·����˫ָ�룬������С���ڵ��������ж�ÿ�������Ƿ����Ҫ��Ҫ�������
+//感觉这个代码在判断缩小窗口和确定每个窗口内是不是包含了t中所有的字符，这两个地方都写的特别巧
+//又看了几个别人写的代码，对滑动窗口有了一点理解了，思路都是双指针，但是缩小窗口的条件和判断每个窗口是否符合要求要因题而异
 
 int main() {
 	Solution st;
