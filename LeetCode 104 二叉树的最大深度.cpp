@@ -42,4 +42,38 @@ private:
 	}
 };
 
+//还可以使用前序遍历来求树的深度,还是用了回溯，这一解法与LeetCode 257 二叉树的所有路径一样
+class Solution1 {
+public:
+	int result;
+	void getDepth(TreeNode* node, int depth) {
+		result = depth > result ? depth : result;  //中
+		if (node->left == nullptr && node->right == nullptr) return;
+		if (node->left) {   //左
+			depth++;
+			getDepth(node->left, depth);
+			depth--;
+		}
+		if (node->right) {   //右
+			depth++;
+			getDepth(node->right, depth);
+			depth--;
+		}
+	}
+
+	//上述代码还可以再精简一下，隐藏回溯
+	void getDepth1(TreeNode* node, int depth) {
+		result = depth > result ? depth : result;
+		if (node->left == nullptr && node->right == nullptr) return;
+		if (node->left) getDepth1(node->left, depth + 1);
+		if (node->right) getDepth1(node->right, depth + 1);
+	}
+	int maxDepth(TreeNode* root) {
+		result = 0;
+		if (root == nullptr) return 0;
+		getDepth(root, 1);
+		return result;
+	}
+};
+
 void main() {}
