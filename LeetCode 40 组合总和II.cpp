@@ -44,7 +44,7 @@ public:
 			if (i > 0 && candidates[i] == candidates[i - 1] && used[i - 1] == false)
 				//used用来在树层去重，如果在树层中，当前节点的值和上一个值一样，那么used[i-1]==false，因为上一个节点已经回溯回来了，
 				//只有当在树枝上时，used[i-1]才会是true
-				//used[i-1]==false是在树层去重，used[i-1]==true是在树枝去重
+				//used[i-1]==false是在树层去重，used[i-1]==true是在树枝去重，有些问题使用树层去重和树枝去重都能做，但是树层去重的效率会更高一些。
 				continue;
 			cb.push_back(candidates[i]);
 			used[i] = true;
