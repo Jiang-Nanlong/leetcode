@@ -32,6 +32,34 @@ public:
 			cb.pop_back();
 		}
 	}
+
+	//使用used数组来去重
+	void Helper1(vector<int>& candidates, int target, int sum, int startindex, vector<bool>& used, vector<int>& cb, vector<vector<int>>& res) {
+		if (sum == target) {
+			res.push_back(cb);
+			return;
+		}
+
+		for (int i = startindex; i < candidates.size() && sum + candidates[i] <= target; i++) {
+			if (i > 0 && candidates[i] == candidates[i - 1] && used[i - 1] == false)
+				//used用来在树层去重，如果在树层中，当前节点的值和上一个值一样，那么used[i-1]==false，因为上一个节点已经回溯回来了，
+				//只有当在树枝上时，used[i-1]才会是true
+				continue;
+			cb.push_back(candidates[i]);
+			used[i] = true;
+			Helper1(candidates, target, sum + candidates[i], i + 1, used, cb, res);
+			used[i] = false;
+			cb.pop_back();
+		}
+	}
+	vector<vector<int>> combinationSum21(vector<int>& candidates, int target) {
+		vector<int> cb;
+		vector<vector<int>> res;
+		vector<bool> used(candidates.size(), false);
+		sort(candidates.begin(), candidates.end());
+		Helper1(candidates, target, 0, 0, used, cb, res);
+		return res;
+	}
 };
 
 void main() {
@@ -44,4 +72,12 @@ void main() {
 			cout << res[i][j] << " ";
 		cout << endl;
 	}
+
+	vector<vector<int>> res1 = st.combinationSum21(candidates, target);
+	for (int i = 0; i < res1.size(); i++) {
+		for (int j = 0; j < res1[i].size(); j++)
+			cout << res1[i][j] << " ";
+		cout << endl;
+	}
+
 }
