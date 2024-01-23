@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
+#include <unordered_set>
 using namespace std;
 
 //这个题相较于上个题，有一个不同点，就是nums数组中可能有重复数字，解集中不能包含重复解
@@ -32,6 +33,27 @@ public:
 				used[i] = true;
 				cb.push_back(nums[i]);
 				Helper(nums, cb, res, used);
+				cb.pop_back();
+				used[i] = false;
+			}
+		}
+	}
+
+	//也可以使用uset数组在层内去重
+	void Helper1(vector<int>& nums, vector<int>& cb, vector<vector<int>>& res, vector<bool>& used) {
+		if (cb.size() == nums.size()) {
+			res.push_back(cb);
+			return;
+		}
+
+		unordered_set<int> uset;
+		for (int i = 0; i < nums.size(); i++) {
+			if (uset.find(nums[i]) != uset.end()) continue;//uset用来在树层去重
+			if (used[i] == false) {			//used用来在树枝去重
+				uset.insert(nums[i]);
+				used[i] == true;
+				cb.push_back(nums[i]);
+				Helper1(nums, cb, res, used);
 				cb.pop_back();
 				used[i] = false;
 			}

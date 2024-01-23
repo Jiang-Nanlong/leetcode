@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
+#include <unordered_set>
 using namespace std;
 
 //给定一个candidates数组，找出数组中和为target的组合。这个题和LeetCode 39不一样的地方在于数组中可能有重复的数，但是解集中不能包含重复组合
@@ -60,6 +61,24 @@ public:
 		sort(candidates.begin(), candidates.end());
 		Helper1(candidates, target, 0, 0, used, cb, res);
 		return res;
+	}
+
+	//还可以在每层维护uset数组来在层内去重
+	void Helper2(vector<int>& candidates, int target, int sum, int startindex, vector<int>& cb, vector<vector<int>>& res) {
+		if (sum == target) {
+			res.push_back(cb);
+			return;
+		}
+
+		unordered_set<int> uset;
+		for (int i = startindex; i < candidates.size() && sum + candidates[i] <= target; i++) {
+			if (uset.find(candidates[i]) != uset.end()) continue;
+
+			uset.insert(candidates[i]);  //只在层内去重，不用回溯
+			cb.push_back(candidates[i]);
+			Helper2(candidates, target, sum + candidates[i], i + 1, cb, res);
+			cb.pop_back();
+		}
 	}
 };
 
