@@ -30,7 +30,7 @@ public:
 	bool Helper(int ticketsnum, vector<string>& res) {
 		if (res.size() == ticketsnum + 1)
 			return true;
-		for (pair<const string, int>& c : targets[res[res.size() - 1]]) {
+		for (pair<const string, int>& c : targets[res[res.size() - 1]]) { //这里pair中的string用const修饰是因为，map中的key是不允许被修改的
 			if (c.second > 0) {
 				res.push_back(c.first);
 				c.second -= 1;
