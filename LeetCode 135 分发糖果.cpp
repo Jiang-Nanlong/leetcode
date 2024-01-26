@@ -1,3 +1,8 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+
+//ÏÂ±ßÊÇÎÒÖ®Ç°ÔÚÀË³±µÄÊ±ºò×öµÄ
 /*
 n¸öº¢×ÓÕ¾³ÉÒ»ÅÅ£¬Ã¿¸öº¢×Ó×îÉÙ·ÖÅäÒ»¸öÌÇ¹û£¬ÏàÁÚµÄÁ½¸öº¢×ÓÆÀ·Ö¸ü¸ßµÄº¢×Ó»ñµÃ¸ü¶àµÄÌÇ¹û£¬·µ»Ø×îÉÙµÄÌÇ¹ûÊıÄ¿¡£
 ×î¿ªÊ¼µÄÊ±ºòÎÒÒÔÎªÓÃÅÅĞòµÄ·½·¨£¬´ÓµÍµ½¸ß£¬ÆÀ·Ö×îµÍµÄÈË·ÖÒ»¸ö£¬È»ºóÒÀ´ÎµİÔö£¬²»¹ıÕâÑù¾ÍÎ¥·´ÁËÖ®Ç°Ã¿¸öÈËµÄÎ»ÖÃ£¬¾Í¸Ä±ä¸ø¶¨µÄÌõ¼şÁË
@@ -5,7 +10,7 @@ n¸öº¢×ÓÕ¾³ÉÒ»ÅÅ£¬Ã¿¸öº¢×Ó×îÉÙ·ÖÅäÒ»¸öÌÇ¹û£¬ÏàÁÚµÄÁ½¸öº¢×ÓÆÀ·Ö¸ü¸ßµÄº¢×Ó»ñµÃ¸ü¶àµ
 ÒòÎªÃ¿¸öº¢×Ó¶¼ÖÁÉÙÒª»ñµÃÒ»¸öÌÇ¹û£¬È»ºó×î³õ¾Í°ÑÃ¿¸öÈËµÄÌÇ¹ûÉè³É1£¬È»ºó´Ó×óÍùÓÒ±éÀú£¬Èç¹ûÓÒ±ßº¢×Ó´óÓÚ×ó±ß£¬ÔòÓÒ±ßº¢×ÓµÄÌÇ¹ûÊıµÈÓÚ×ó±ßº¢×ÓÌÇ¹ûÊı+1£¬
 È»ºó´ÓÓÒÏò×ó±éÀú£¬Èç¹û×ó±ßº¢×ÓÆÀ·Ö´óÓÚÓÒ±ßº¢×Ó£¬ÇÒÌÇ¹ûÊıµÍÓÚ»òµÈÓÚÓÒ±ß£¬Ôò×ó±ßº¢×ÓµÄÌÇ¹ûÊıµÈÓÚÓÒ±ßµÄ+1
 */
-
+/*
 #include <iostream>
 #include <vector>
 #include <numeric>
@@ -26,19 +31,50 @@ public:
 				sweets[i - 1] = sweets[i] + 1;
 			}
 		}
+		*/
 		/*int sweet = 0;
 		for (int i : sweets)
 			sweet += i;
 		return sweet;*/
-		return accumulate(sweets.begin(), sweets.end(), 0);  //»¹¿ÉÒÔÕâÑùĞ´
+		/*
+				return accumulate(sweets.begin(), sweets.end(), 0);  //»¹¿ÉÒÔÕâÑùĞ´
+			}
+		};
+
+		int main() {
+			vector<int> ratings1 = { 1,0,2 };
+			vector<int> ratings2 = { 1,2,2 };
+			Solution s;
+			cout << s.candy(ratings1) << endl;
+			cout << s.candy(ratings2) << endl;
+			return 0;
+		}
+		*/
+
+		//Õâ´ÎÊÇ¿´µÄ´úÂëËæÏëÂ¼µÄ´úÂë£¬Ë¼Â·¸úÖ®Ç°ÊÇÒ»ÑùµÄ£¬ÕâÒ²Ì«ÄÑÏëÁË£¬´¿´¿ÄÔ½î¼±×ªÍä
+class Solution {
+public:
+	int candy(vector<int>& ratings) {
+		vector<int> count(ratings.size(), 1);
+		for (int i = 1; i < ratings.size(); i++) {
+			if (ratings[i] > ratings[i - 1])
+				count[i] = count[i - 1] + 1;
+		}
+		for (int i = ratings.size() - 2; i >= 0; i--) {
+			if (ratings[i] > ratings[i + 1])
+				count[i] = max(count[i + 1] + 1, count[i]);
+		}
+		int sum = 0;
+		for (int i : count)
+			sum += i;
+		return sum;
 	}
 };
 
 int main() {
-	vector<int> ratings1 = { 1,0,2 };
-	vector<int> ratings2 = { 1,2,2 };
-	Solution s;
-	cout << s.candy(ratings1) << endl;
-	cout << s.candy(ratings2) << endl;
+	Solution st;
+	vector<int> ratings{ 1,3,4,5,2 };
+	int sum = st.candy(ratings);
+	cout << sum << endl;
 	return 0;
 }
