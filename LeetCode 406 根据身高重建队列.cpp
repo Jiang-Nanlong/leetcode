@@ -18,7 +18,7 @@ public:
 	}
 	vector<vector<int>> reconstructQueue(vector<vector<int>>& people) {
 		sort(people.begin(), people.end(), cmp);
-		list<vector<int>> res;
+		list<vector<int>> res;   //因为要插入，所以选择队列，不用vector
 		for (int i = 0; i < people.size(); i++) {
 			int position = people[i][1];
 			auto iterator = res.begin();
