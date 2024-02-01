@@ -1,15 +1,50 @@
-/*
-给定一个区间的集合，返回需要移除区间的最小数量，是剩余的区间互不重叠
-*/
 #include <iostream>
 #include <vector>
 #include <algorithm>
 using namespace std;
 
+//这个题要计算至少移除多少个区间，可以使得剩余的区间不重叠。其实就是要统计有多少重叠的区间。
+//这个题可以模仿LeetCode 452 最少箭来射爆气球的题来写。那个题是遇到重叠区间 箭数不用加1，这个题正好相反，遇到重叠区间，count就++
+
+class Solution {
+public:
+	static bool cmp(vector<int>& a, vector<int>& b) {
+		return a[0] < b[0];
+	}
+	int eraseOverlapIntervals(vector<vector<int>>& intervals) {
+		int count = 0;
+		sort(intervals.begin(), intervals.end(), cmp);
+		int minrightmrigin = intervals[0][1];
+		for (int i = 1; i < intervals.size(); i++) {
+			if (intervals[i][0] >= minrightmrigin)
+				minrightmrigin = intervals[i][1];
+			else {
+				minrightmrigin = min(minrightmrigin, intervals[i][1]);
+				count++;
+			}
+		}
+		return count;
+	}
+};
+
+int main() {
+	Solution st;
+	vector<vector<int>> intervals{ {1,2} ,{2,3},{3,4},{1,3} };
+	int count = st.eraseOverlapIntervals(intervals);
+	cout << count << endl;
+	return 0;
+}
+
+//以下是之前写的代码
+
+/*
+给定一个区间的集合，返回需要移除区间的最小数量，是剩余的区间互不重叠
+*/
 //看到这种区间问题我真是一点思路都没有，嚓
 //今天懒得做了，嚓，明天来了再说吧
 //昨天看了题解，大致意思就是说按区间的右边界或者左边界排序，以按右边界排序为例，右边界从小到大排序，然后在从左向右依次遍历，
 //从最小的右边界的区间开始，每次记录当前区间的右边界，然后以这个数为标准，继续往右找与它不重叠的区间的左边界，依次进行，最后记录一共多少个重叠的区间
+/*
 class Solution {
 public:
 	static int cmp(vector<int>& x, vector<int>& y) {   //按右边界进行排序
@@ -61,6 +96,7 @@ int main() {
 	cout << s.eraseOverlapIntervals(intervals1) << endl;
 	cout << s.eraseOverlapIntervals(intervals2) << endl;
 	cout << s.eraseOverlapIntervals(intervals3) << endl;
-	
+
 	return 0;
 }
+*/
