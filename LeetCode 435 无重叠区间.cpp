@@ -5,6 +5,7 @@ using namespace std;
 
 //这个题要计算至少移除多少个区间，可以使得剩余的区间不重叠。其实就是要统计有多少重叠的区间。
 //这个题可以模仿LeetCode 452 最少箭来射爆气球的题来写。那个题是遇到重叠区间 箭数不用加1，这个题正好相反，遇到重叠区间，count就++
+//其实还可以把射箭的程序照搬过来，只需要把最后的return语句改为return intervals.size()-count就行，这里的count是箭的数量。
 
 class Solution {
 public:
