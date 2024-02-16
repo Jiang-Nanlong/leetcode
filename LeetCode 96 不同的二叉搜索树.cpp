@@ -2,7 +2,8 @@
 #include <vector>
 using namespace std;
 
-//������dp�����Լ��±�ĺ���ȽϺ��룬���ǵ��ƹ�ʽ��Ū�����˴�������¼��pdf���������⣬��Ҫ�Լ���������Ƚ�����
+//这个题的dp数组以及下标的含义比较好想，但是递推公式难弄，看了代码随想录的pdf才慢慢理解，想要自己推算出来比较困难
+//没想到最后的代码会这么简短
 
 class Solution {
 public:
