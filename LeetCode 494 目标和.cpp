@@ -57,7 +57,7 @@ public:
 
 		vector<vector<int>> dp(nums.size(), vector<int>(bagsize + 1, 0));
 		dp[0][0] = 1;
-		if (nums[0] <= bagsize)  //这个初始化的地方有问题，开始代码结果不对，看了别人的代码改的，这个初始化的地方还是有点弄不清
+		if (nums[0] <= bagsize)  //这个初始化的地方有问题，开始代码结果不对，看了别人的代码改的，这个初始化的地方还是有点弄不清，打印出dp数组感觉后知后觉的有点懂了
 			dp[0][nums[0]] += 1;
 		for (int i = 1; i < nums.size(); i++) {
 			for (int j = 0; j <= bagsize; j++) {
