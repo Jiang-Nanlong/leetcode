@@ -9,7 +9,7 @@ using namespace std;
 //这里的1 <= nums.length <= 200，1 <= nums[i] <= 100
 class Solution {
 public:
-	bool canPartition(vector<int>& nums) {
+	bool canPartition(vector<int>& nums) {  //用一维数组做
 		int sum = 0;
 		for (int i = 0; i < nums.size(); i++)
 			sum += nums[i];
@@ -26,11 +26,32 @@ public:
 		if (dp[bagsize] == bagsize) return true;
 		return false;
 	}
+
+	bool canPartition1(vector<int>& nums) {  //用二维数组做
+		int sum = 0;
+		for (int i = 0; i < nums.size(); i++)
+			sum += nums[i];
+
+		if (sum % 2 == 1) return false;
+		int bagsize = sum / 2;
+
+		vector<vector<int>> dp(nums.size(), vector<int>(bagsize + 1, 0));
+		for (int i = 1; i < nums.size(); i++) {
+			for (int j = 0; j <= bagsize; j++) {
+				if (j < nums[i])
+					dp[i][j] = dp[i - 1][j];
+				else
+					dp[i][j] = max(dp[i - 1][j], dp[i - 1][j - nums[i]] + nums[i]);
+			}
+		}
+		if (dp[nums.size() - 1][bagsize] == bagsize) return true;
+		return false;
+	}
 };
 
 int main() {
 	Solution st;
 	vector<int> nums{ 1,5,11,5 };
-	cout << boolalpha << st.canPartition(nums) << noboolalpha << endl;
+	cout << boolalpha << st.canPartition1(nums) << noboolalpha << endl;
 	return 0;
 }
