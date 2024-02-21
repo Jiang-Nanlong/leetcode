@@ -15,15 +15,15 @@ public:
 			sum += nums[i];
 
 		if (sum % 2 == 1) return false;  //如果数组和本身无法分割成两个相等的部分，就返回false
-		int target = sum / 2;
+		int bagsize = sum / 2;
 
-		vector<int> dp(10001, 0); //数组长度<=200，元素<=100，所以元素和<=20000,
+		vector<int> dp(bagsize + 1, 0);
 		for (int i = 0; i < nums.size(); i++) {
-			for (int j = target; j >= nums[i]; j--) {
+			for (int j = bagsize; j >= nums[i]; j--) {
 				dp[j] = max(dp[j], dp[j - nums[i]] + nums[i]);  //因为这里的重量就等于价值，所以递推公式也要相应改变
 			}
 		}
-		if (dp[target] == target) return true;
+		if (dp[bagsize] == bagsize) return true;
 		return false;
 	}
 };
