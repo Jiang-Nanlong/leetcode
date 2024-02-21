@@ -47,6 +47,34 @@ public:
 		}
 		return dp[bagsize];
 	}
+
+	int findTargetSumWays2(vector<int>& nums, int target) {  //用二维数组实现
+		int sum = 0;
+		for (int& i : nums) sum += i;
+		if (abs(target) > sum) return 0;
+		if ((sum + target) % 2 == 1) return 0;
+		int bagsize = (sum + target) / 2;
+
+		vector<vector<int>> dp(nums.size(), vector<int>(bagsize + 1, 0));
+		dp[0][0] = 1;
+		if (nums[0] <= bagsize)  //这个初始化的地方有问题，开始代码结果不对，看了别人的代码改的，这个初始化的地方还是有点弄不清
+			dp[0][nums[0]] += 1;
+		for (int i = 1; i < nums.size(); i++) {
+			for (int j = 0; j <= bagsize; j++) {
+				if (j < nums[i])
+					dp[i][j] = dp[i - 1][j];
+				else
+					dp[i][j] = dp[i - 1][j] + dp[i - 1][j - nums[i]];
+			}
+		}
+		for (int i = 0; i < dp.size(); i++) {
+			for (int j = 0; j < dp[0].size(); j++) {
+				cout << dp[i][j] << "  ";
+			}
+			cout << endl;
+		}
+		return dp[nums.size() - 1][bagsize];
+	}
 };
 
 //这个题的回溯方法比较简单，动态规划问题真难。最后对着dp数组才勉强看明白
@@ -56,6 +84,6 @@ int main() {
 	Solution st;
 	vector<int> nums{ 1,1,1,1,1 };
 	int target = 3;
-	cout << st.findTargetSumWays1(nums, target) << endl;
+	cout << st.findTargetSumWays2(nums, target) << endl;
 	return 0;
 }
