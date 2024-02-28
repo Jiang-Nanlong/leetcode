@@ -6,7 +6,7 @@ using namespace std;
 //看完题解以后发现不是这样的，dp[i][0]表示持有股票的最大价值，dp[i][1]表示不持有股票的最大价值
 //持有股票可以分为今天持有和今天买入两种情况，不持有可以分为今天不持有和今天卖出两种情况。
 //最后返回最后一天不持有股票的最大价值
-
+//这个题只能买卖一次股票，而LeetCode 122 买卖股票的最佳时机II可以买卖多次
 class Solution {
 public:
 	int maxProfit(vector<int>& prices) {
@@ -31,6 +31,17 @@ public:
 		}
 		return dp[(prices.size() - 1) % 2][1];
 	}
+
+	//这题还能用贪心做，贪心无非就是最低价买入，最高价卖出
+	int maxProfit2(vector<int>& prices) {
+		int low = INT_MAX;
+		int result = 0;
+		for (int i = 0; i < prices.size(); i++) {
+			low = min(low, prices[i]);
+			result = max(result, prices[i] - low);
+		}
+		return result;
+	}
 };
 
 int main() {
@@ -38,5 +49,6 @@ int main() {
 	vector<int> prices{ 7,1,5,3,6,4 };
 	cout << st.maxProfit(prices) << endl;
 	cout << st.maxProfit1(prices) << endl;
+	cout << st.maxProfit2(prices) << endl;
 	return 0;
 }
