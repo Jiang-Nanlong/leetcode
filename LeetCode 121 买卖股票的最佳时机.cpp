@@ -14,7 +14,7 @@ public:
 		dp[0][0] = -prices[0];
 		dp[0][1] = 0;
 		for (int i = 1; i < prices.size(); i++) {
-			dp[i][0] = max(dp[i - 1][0], -prices[i]);  //今天持有
+			dp[i][0] = max(dp[i - 1][0], -prices[i]);  //今天持有，这里用0-prices[i]表示购买就是第一次购买，也是唯一一次购买，因为手头只有0元
 			dp[i][1] = max(dp[i - 1][1], prices[i] + dp[i - 1][0]);   //今天不持有
 		}
 		return dp[prices.size() - 1][1];

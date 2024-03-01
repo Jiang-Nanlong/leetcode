@@ -78,6 +78,20 @@ public:
 		return max(dp[(prices.size() - 1) % 2][1], max(dp[(prices.size() - 1) % 2][2], dp[(prices.size() - 1) % 2][3]));
 	}
 
+	//还可以进行优化，之前有四个状态，现在可以优化成三个状态：不过这个方法的初始化和冷静期的递推公式，我还有地方搞不清
+	//0.持有股票的最大价值
+	//1.不持有股票的最大价值（冷冻期后可以购买的状态）
+	//2.不持有股票的最大价值（冷冻期）
+	int maxProfit3(vector<int>& prices) {
+		vector<vector<int>> dp(prices.size(), vector<int>(3, 0));
+		dp[0][0] = -prices[0];
+		for (int i = 1; i < prices.size(); i++) {
+			dp[i][0] = max(dp[i - 1][0], dp[i - 1][1] - prices[i]);
+			dp[i][1] = max(dp[i - 1][1], dp[i - 1][2]);
+			dp[i][2] = dp[i - 1][0] + prices[i];  //但是这个冷冻期的递推公式有点搞不明白，这不就是相当于今天才卖出去吗？
+		}
+		return max(dp[prices.size() - 1][1], dp[prices.size() - 1][2]);
+	}
 };
 
 int main() {
@@ -86,5 +100,6 @@ int main() {
 	cout << st.maxProfit(prices) << endl;
 	cout << st.maxProfit1(prices) << endl;
 	cout << st.maxProfit2(prices) << endl;
+	cout << st.maxProfit3(prices) << endl;
 	return 0;
 }

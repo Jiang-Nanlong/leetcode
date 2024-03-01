@@ -1,33 +1,38 @@
-/*
-* 和普通的股票交易一样，但是每笔交易都需要付手续费
-*/
 #include <iostream>
 #include <vector>
 using namespace std;
 
+//可以进行多次交易，不过每次交易的时候都需要交手续费fee。
+//这个题和LeetCode 122 买卖股票的最佳时机II 一样，只要在卖出的时候减去手续费就行
 class Solution {
 public:
 	int maxProfit(vector<int>& prices, int fee) {
-		int res = 0, minprice = prices[0];
+		vector<vector<int>> dp(prices.size(), vector<int>(2, 0));
+		dp[0][0] = -prices[0];
 		for (int i = 1; i < prices.size(); i++) {
-			if (prices[i] < minprice)    //当前价格比minprice还小，直接买入
-				minprice = prices[i];
-			if (prices[i] > minprice && prices[i] < minprice + fee) continue;    //当前价格支付完手续费就不挣钱了，直接跳过
-			if (prices[i] > minprice + fee) {
-				res += prices[i] - minprice - fee;
-				minprice = prices[i] - fee;	//为了避免当前节点只是这个区间中的一段，所以减去fee，循环下一次相当于再加上fee
-			}
+			dp[i][0] = max(dp[i - 1][0], dp[i - 1][1] - prices[i]);
+			dp[i][1] = max(dp[i - 1][1], dp[i - 1][0] + prices[i] - fee);
 		}
-		return res;
+		return dp[prices.size() - 1][1];
+	}
+
+	//优化dp数组
+	int maxProfit1(vector<int>& prices, int fee) {
+		vector<vector<int>> dp(2, vector<int>(2, 0));
+		dp[0][0] = -prices[0];
+		for (int i = 1; i < prices.size(); i++) {
+			dp[i % 2][0] = max(dp[(i - 1) % 2][0], dp[(i - 1) % 2][1] - prices[i]);
+			dp[i % 2][1] = max(dp[(i - 1) % 2][1], dp[(i - 1) % 2][0] + prices[i] - fee);
+		}
+		return dp[(prices.size() - 1) % 2][1];
 	}
 };
 
 int main() {
-	vector<int> prices = { 1,3,2,8,4,9 };
-	vector<int> prices1 = { 1,2,3,4,5,6,7,4,9 };
+	Solution st;
+	vector<int> prices{ 1, 3, 2, 8, 4, 9 };
 	int fee = 2;
-	Solution s;
-	cout << s.maxProfit(prices, fee) << endl;
-	cout << s.maxProfit(prices1, fee) << endl;
+	cout << st.maxProfit(prices, fee) << endl;
+	cout << st.maxProfit1(prices, fee) << endl;
 	return 0;
 }
