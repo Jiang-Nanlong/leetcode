@@ -25,10 +25,37 @@ public:
 		}
 		return result;
 	}
+
+	//这个题还可以用动态规划来做，现在再来做这题就感觉很简单了
+	int maxSubArray1(vector<int>& nums) {
+		if (nums.size() == 1) return nums[0];
+		vector<int> dp(nums.size(), 0);
+		dp[0] = nums[0];
+		int res = dp[0];
+
+		for (int i = 1; i < nums.size(); i++) {
+			dp[i] = max(dp[i - 1] + nums[i], nums[i]);
+			if (dp[i] > res) res = dp[i];
+		}
+		return res;
+	}
+
+	//还可以对dp数组进行优化，这里可以直接用nums数组来当dp数组
+	int maxSubArray2(vector<int>& nums) {
+		if (nums.size() == 1) return nums[0];
+		int res = nums[0];
+		for (int i = 1; i < nums.size(); i++) {
+			nums[i] = max(nums[i - 1] + nums[i], nums[i]);
+			if (nums[i] > res) res = nums[i];
+		}
+		return res;
+	}
 };
 
 void main() {
 	Solution st;
 	vector<int> nums{ -2,1,-3,4,-1,2,1,-5,4 };
 	cout << st.maxSubArray(nums) << endl;
+	cout << st.maxSubArray1(nums) << endl;
+	cout << st.maxSubArray2(nums) << endl;
 }
