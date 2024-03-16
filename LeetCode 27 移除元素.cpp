@@ -16,6 +16,18 @@ public:
 		}
 		return count;
 	}
+
+	//下边第二次做
+	int removeElement1(vector<int>& nums, int val) {
+		int i = 0, j = 0;
+		for (; j < nums.size(); j++) {
+			if (nums[j] != val) {
+				nums[i] = nums[j];
+				i++;
+			}
+		}
+		return i;
+	}
 };
 
 void main() {
@@ -24,4 +36,6 @@ void main() {
 	int val = 3;
 	int count = st.removeElement(nums, val);
 	cout << count << endl;
+	vector<int> nums1{ 3,2,2,3 };
+	cout << st.removeElement1(nums1, 3) << endl;
 }
