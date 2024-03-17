@@ -30,6 +30,34 @@ public:
 		}
 		return result;
 	}
+
+	//第二遍做了
+	int totalFruit1(vector<int>& fruits) {
+		if (fruits.size() < 3)
+			return fruits.size();
+		unordered_map<int, int> ump;
+		int res = 0;
+		for (int front = 0, last = 0; front < fruits.size(); front++) {
+			ump[fruits[front]]++;
+			//if (ump.size() > 2) {  //开始的时候加了个if判断，如果fruits数组里只有两种数的话就没法进入if语句，就没法修改res，最后只会返回0
+			//其实加了if判断，只要把res = max(res, front - last + 1);放在它的外边也不会影响结果。
+			while (ump.size() > 2) {
+				/*
+				if (--ump[fruits[last]] == 0)
+					ump.erase(fruits[last]);
+				last++;
+				*/
+				auto it = ump.find(fruits[last]);
+				--it->second;
+				if (it->second == 0)
+					ump.erase(fruits[last]);
+				last++;
+			}
+			res = max(res, front - last + 1);
+			//}
+		}
+		return res;
+	}
 };
 
 //开始想着得用一个额外的容器保存前边已经存在的数字，只想着存不存在的问题，而没考虑多少，所以就选的set，但是还是做不出来，
@@ -40,5 +68,7 @@ int main() {
 	vector<int> nums{ 1,2,3,2,2 };
 	int res = st.totalFruit(nums);
 	cout << res << endl;
+	cout << st.totalFruit1(nums) << endl;
+
 	return 0;
 }
