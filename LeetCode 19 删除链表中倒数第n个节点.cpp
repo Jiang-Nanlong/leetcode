@@ -27,6 +27,22 @@ public:
 		temp = nullptr;
 		return preHead->next;
 	}
+
+	//第二回做
+	ListNode* removeNthFromEnd(ListNode* head, int n) {
+		ListNode* phead = new ListNode(-1, head);
+		ListNode* p = phead, * q = phead;
+		while (n--)
+			p = p->next;
+		while (p->next) {
+			p = p->next;
+			q = q->next;
+		}
+		ListNode* temp = q->next;
+		q->next = temp->next;
+		delete temp;
+		return phead->next;
+	}
 };
 
 int main() {

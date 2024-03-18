@@ -31,6 +31,20 @@ public:
 		}
 		return preHead->next;
 	}
+
+	//这是第二次写的代码，但是我现在再看第一次写的已经看不懂了，感觉当时写的真复杂，这会写的简单多了，结构也清晰。
+	ListNode* swapPairs(ListNode* head) {
+		ListNode* phead = new ListNode(-1, head);
+		ListNode* p = phead;
+		while (p->next && p->next->next) {
+			ListNode* temp = p->next;
+			p->next = temp->next;
+			temp->next = p->next->next;
+			p->next->next = temp;
+			p = p->next->next;
+		}
+		return phead->next;
+	}
 };
 
 int main() {
