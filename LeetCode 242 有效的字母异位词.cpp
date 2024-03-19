@@ -21,6 +21,24 @@ public:
 		if (ump.empty()) return true;
 		else return false;
 	}
+
+	//第二次做
+	bool isAnagram1(string s, string t) {
+		if (s.size() != t.size())
+			return false;
+		int nums[26] = { 0 };
+		for (char& c : s)
+			nums[c - 'a']++;
+
+		for (char& c : t) {
+			if (--nums[c - 'a'] < 0)
+				return false;
+		}
+		for (int i = 0; i < 26; i++)
+			if (nums[i] != 0)
+				return false;
+		return true;
+	}
 };
 
 int main() {

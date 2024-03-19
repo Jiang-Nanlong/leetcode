@@ -16,6 +16,22 @@ public:
 		}
 		return vector<int>(uset.begin(), uset.end());
 	}
+
+	//第二次做
+	vector<int> intersection(vector<int>& nums1, vector<int>& nums2) {
+		unordered_set<int> res;
+		//unordered_set<int> uset;
+		//for(int &i:nums1)
+		//    uset.insert(i);
+		unordered_set<int> uset(nums1.begin(), nums1.end());  //可以直接用这种方法初始化，而不用for循环
+		for (int& i : nums2) {
+			if (uset.find(i) != uset.end()) {
+				res.insert(i);
+			}
+		}
+		return vector<int>(res.begin(), res.end());
+	}
+
 };
 
 int main() {
