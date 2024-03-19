@@ -24,6 +24,9 @@ public:
 			return NULL;
 		}
 	*/
+
+	//第二次再看，我头一回做居然能想到用unordered_set，我现在都想不到。
+	//这里可以把快慢指针每次移动一格和两格看成速度，然后从开始到相遇经过的时间相同，所以快指针走过的路程是慢指针走过路程的2倍。2*(x+y)=x+y+n(y+z)
 	ListNode* detectCycle(ListNode* head) {    //这个是看的代码随想录的，思路很巧妙，计算算出来的。先通过快慢指针判断是不是有环，如果有环再继续找入环节点。
 		ListNode* fast = head, * slow = head;
 		while (fast && fast->next) {

@@ -45,6 +45,46 @@ public:
 		}
 		return NULL;
 	}
+
+
+	//这是第二次写的代码，不如第一次做的时候写的简洁，还是第一次写的比较好
+	ListNode* getIntersectionNode1(ListNode* headA, ListNode* headB) {
+		int countA = 0, countB = 0;
+		ListNode* pheadA = new ListNode(-1), * pheadB = new ListNode(-1);
+		pheadA->next = headA, pheadB->next = headB;
+		ListNode* pA = pheadA, * pB = pheadB;
+		while (pA->next) {
+			countA++;
+			pA = pA->next;
+		}
+		while (pB->next) {
+			countB++;
+			pB = pB->next;
+		}
+
+		cout << countA << "  " << countB;
+		if (countA < countB) {  //这里让pA始终指向最长的那一条链表，后边只需要提前移动pA就行
+			pA = pheadB;
+			pB = pheadA;
+		}
+		else {
+			pA = pheadA;
+			pB = pheadB;
+		}
+
+		for (int i = 0; i < abs(countA - countB); i++) {
+			pA = pA->next;
+		}
+		while (pA && pA->next) {
+			if (pA->next == pB->next)
+				return pA->next;
+			else {
+				pA = pA->next;
+				pB = pB->next;
+			}
+		}
+		return NULL;
+	}
 };
 
 int main() {
