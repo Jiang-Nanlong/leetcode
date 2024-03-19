@@ -29,6 +29,20 @@ public:
 		}
 		return res;
 	}
+
+	//第二次做
+	vector<int> intersect1(vector<int>& nums1, vector<int>& nums2) {
+		vector<int> res;
+		unordered_map<int, int> umap;
+		for (int& i : nums1)
+			umap[i]++;
+
+		for (int& i : nums2) {
+			if (--umap[i] >= 0)
+				res.push_back(i);
+		}
+		return res;
+	}
 };
 
 int main() {
