@@ -19,6 +19,25 @@ public:
 		}
 		return {};
 	}
+
+	//第二次做，这次写了两个for循环，不如第一次写的简洁了。时间复杂度O(n)
+	vector<int> twoSum1(vector<int>& nums, int target) {
+		//vector<int> res;
+		unordered_map<int, int> umap;
+		for (int i = 0; i < nums.size(); i++) {
+			umap[nums[i]] = i;
+		}
+		for (int i = 0; i < nums.size(); i++) {
+			auto it = umap.find(target - nums[i]);
+			if (it != umap.end() && it->second != i) {
+				/*res.push_back(i);
+				res.push_back(it->second);
+				return res;*/
+				return { i,it->second };
+			}
+		}
+		return {};
+	}
 };
 
 int main() {

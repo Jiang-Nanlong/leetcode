@@ -24,6 +24,26 @@ public:
 			}
 		}
 	}
+
+	//第二次做
+	bool isHappy1(int n) {
+		unordered_set<int> uset;
+		long long sum = 0;
+		while (n != 1) {
+			while (n) {  //这个for循环用来求n的各位的平方和
+				sum += pow(n % 10, 2);
+				n /= 10;
+			}
+			if (uset.find(sum) != uset.end())
+				return false;
+			else {
+				uset.insert(sum);
+				n = sum;
+				sum = 0;
+			}
+		}
+		return true;
+	}
 private:
 	int getsum(int n) {
 		int sum = 0;
@@ -39,5 +59,7 @@ int main() {
 	Solution st;
 	cout << boolalpha << st.isHappy(19) << endl;
 	cout << st.isHappy(2) << noboolalpha << endl;
+	cout << boolalpha << st.isHappy1(19) << endl;
+	cout << st.isHappy1(2) << noboolalpha << endl;
 	return 0;
 }
