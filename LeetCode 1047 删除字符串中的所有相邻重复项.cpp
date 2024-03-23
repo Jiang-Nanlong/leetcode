@@ -47,6 +47,44 @@ public:
 		s.resize(top);
 		return s;
 	}
+
+	//这个题是真垃圾，我以为是要删除连续的重复项，结果是删除相邻的两个重复项就行
+	string removeDuplicates1(string s) {
+		stack<char> stk;
+		string res;
+		for (char& c : s) {
+			bool flag = false;
+			while (!stk.empty() && stk.top() == c) {  //这里删除所有连续的重复项，并用flag判断c是否和前边的重复，如果不重复就入栈
+				stk.pop();
+				flag = true;
+			}
+			if (flag == false)
+				stk.push(c);
+		}
+		while (!stk.empty()) {
+			res += stk.top();
+			stk.pop();
+		}
+		reverse(res.begin(), res.end());
+		return res;
+	}
+	//如果是仅删除相邻的两个，就不用while和flag了
+	string removeDuplicates2(string s) {
+		stack<char> stk;
+		string res;
+		for (char& c : s) {
+			if (!stk.empty() && stk.top() == c) 
+				stk.pop();
+			else
+				stk.push(c);
+		}
+		while (!stk.empty()) {
+			res += stk.top();
+			stk.pop();
+		}
+		reverse(res.begin(), res.end());
+		return res;
+	}
 };
 
 int main() {

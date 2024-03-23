@@ -88,6 +88,37 @@ private:
 	queue<int> que;
 };
 
+//第二次做，这个top()函数和之前写的一模一样
+class MyStack {
+public:
+	MyStack() {}
+
+	void push(int x) { que.push(x); }
+
+	int pop() {
+		int size = que.size();
+		while (size-- > 1) {
+			int temp = que.front();
+			que.pop();
+			que.push(temp);
+		}
+		int res = que.front();
+		que.pop();
+		return res;
+	}
+
+	int top() {
+		//int res = this->pop();
+		//que.push(res);
+		//return res;
+		return que.back();
+	}
+
+	bool empty() { return que.empty(); }
+
+private:
+	queue<int> que;
+};
 /**
  * Your MyStack object will be instantiated and called as such:
  * MyStack* obj = new MyStack();

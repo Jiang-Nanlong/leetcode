@@ -40,6 +40,27 @@ public:
 		return stk.empty();
 	}
 
+	//第二次做，不如第一回写的简洁
+	bool isValid1(string s) {
+		unordered_map<char, char> umap = { {')', '('}, {']', '['}, {'}', '{'} };
+		stack<char> stk;
+		for (char& c : s) {
+			if (c == '{' || c == '[' || c == '(')
+				stk.push(c);
+			else {
+				if (!stk.empty()) {
+					char temp = stk.top();
+					if (temp == umap[c])
+						stk.pop();
+					else
+						return false;
+				}
+				else
+					return false;
+			}
+		}
+		return stk.empty();
+	}
 };
 
 void main() {

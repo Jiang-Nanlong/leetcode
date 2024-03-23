@@ -41,6 +41,37 @@ private:
 	stack<int> instk, outstk;
 };
 
+
+//第二次做
+class MyQueue1 {
+public:
+	MyQueue1() {}
+
+	void push(int x) { inStk.push(x); }
+
+	int pop() {
+		if (outStk.empty()) {
+			while (!inStk.empty()) {
+				outStk.push(inStk.top());
+				inStk.pop();
+			}
+		}
+		int res = outStk.top();
+		outStk.pop();
+		return res;
+	}
+
+	int peek() {
+		int res = this->pop();
+		outStk.push(res);
+		return res;
+	}
+
+	bool empty() { return inStk.empty() && outStk.empty(); }
+
+private:
+	stack<int> inStk, outStk;
+};
 void main() {
 
 }

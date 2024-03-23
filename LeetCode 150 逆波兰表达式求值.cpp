@@ -2,6 +2,7 @@
 #include <string>
 #include <vector>
 #include <stack>
+#include <unordered_set>
 using namespace std;
 
 class Solution {
@@ -40,6 +41,32 @@ public:
 			}
 			else {
 				stk.push(stoll(s));   //在这一步换成longlong 就不用再对其他的数操作了。
+			}
+		}
+		return stk.top();
+	}
+
+	//第二次做
+	int evalRPN1(vector<string>& tokens) {
+		unordered_set<string> uset{ "+", "-", "*", "/" };
+		stack<int> stk;
+		for (string& s : tokens) {
+			if (uset.find(s) == uset.end()) {
+				stk.push(stoi(s));
+			}
+			else {
+				int num1 = stk.top();
+				stk.pop();
+				int num2 = stk.top();
+				stk.pop();
+				if (s == "+")
+					stk.push(num1 + num2);
+				if (s == "-")
+					stk.push(num2 - num1);
+				if (s == "*")
+					stk.push(num1 * num2);
+				if (s == "/")
+					stk.push(num2 / num1);
 			}
 		}
 		return stk.top();
