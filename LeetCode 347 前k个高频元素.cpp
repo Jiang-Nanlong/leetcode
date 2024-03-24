@@ -2,6 +2,7 @@
 #include <vector>
 #include <unordered_map>
 #include <algorithm>
+#include <queue>
 using namespace std;
 
 //统计数组中每个数出现的次数，返回次数最高的前k个数
@@ -28,6 +29,52 @@ public:
 
 	static bool compare(const pair<int, int>& a, const pair<int, int>& b) {
 		return a.second > b.second;
+	}
+
+	//第二次做
+	static bool cmp(const pair<int, int>& a, const pair<int, int>& b) {
+		return a.second > b.second;
+	}
+	vector<int> topKFrequent1(vector<int>& nums, int k) {
+		unordered_map<int, int> umap;
+		for (int& i : nums)
+			umap[i]++;
+
+		vector<pair<int, int>> vec(umap.begin(), umap.end());
+		sort(vec.begin(), vec.end(), cmp);
+		vector<int> res;
+		for (int i = 0; i < k; i++) {
+			res.push_back(vec[i].first);
+		}
+		return res;
+	}
+
+	//后来跟着答案写的小顶堆的写法。
+	//这里用小顶堆的话只需要维护k个元素就行，如果用大顶堆的话就得维护所有元素。注意，而且小顶堆的cmp函数的写法跟之前的都不一样。
+	class cmp1 {
+	public:
+		bool operator()(const pair<int, int>& a, const pair<int, int>& b) {
+			return a.second > b.second;
+		}
+	};
+
+	vector<int> topKFrequent(vector<int>& nums, int k) {
+		unordered_map<int, int> umap;
+		for (int& i : nums)
+			umap[i]++;
+
+		priority_queue<pair<int, int>, vector<pair<int, int>>, cmp1> priority_que;
+		for (auto& p : umap) {
+			priority_que.push(p);
+			if (priority_que.size() > k)
+				priority_que.pop();
+		}
+		vector<int> res(k);
+		for (int i = k - 1; i >= 0; i--) {
+			res[i] = priority_que.top().first;
+			priority_que.pop();
+		}
+		return res;
 	}
 };
 
