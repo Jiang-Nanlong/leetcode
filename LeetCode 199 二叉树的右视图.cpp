@@ -30,6 +30,29 @@ public:
 		}
 		return res;
 	}
+
+	//第二次做
+	vector<int> rightSideView1(TreeNode* root) {
+		if (root == nullptr)
+			return {};
+		queue<TreeNode*> que;
+		que.push(root);
+		vector<int> res;
+		while (!que.empty()) {
+			int size = que.size();
+			while (size--) {
+				TreeNode* cur = que.front();
+				que.pop();
+				if (size == 0)
+					res.push_back(cur->val);
+				if (cur->left)
+					que.push(cur->left);
+				if (cur->right)
+					que.push(cur->right);
+			}
+		}
+		return res;
+	}
 };
 
 void main() {}

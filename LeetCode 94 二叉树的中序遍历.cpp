@@ -15,25 +15,25 @@ struct TreeNode {
 class Solution {
 public:
 	//先把最左边的节点依次入栈，然后出栈，如果出栈的节点有右子树的话，右子树继续按上述流程入栈
-	//vector<int> inorderTraversal(TreeNode* root) {    //非递归中序遍历
-	//	if (root == nullptr) return {};
-	//	vector<int> res;
-	//	stack<TreeNode*> stk;
-	//	TreeNode* cur = root;
-	//	while (cur != nullptr || !stk.empty()) {
-	//		if (cur != nullptr) {
-	//			stk.push(cur);
-	//			cur = cur->left;
-	//		}
-	//		else {
-	//			cur = stk.top();
-	//			stk.pop();
-	//			res.push_back(cur->val);
-	//			cur = cur->right;
-	//		}
-	//	}
-	//	return res;
-	//}
+	vector<int> inorderTraversal1(TreeNode* root) {    //非递归中序遍历
+		if (root == nullptr) return {};
+		vector<int> res;
+		stack<TreeNode*> stk;
+		TreeNode* cur = root;
+		while (cur != nullptr || !stk.empty()) {
+			if (cur != nullptr) {
+				stk.push(cur);
+				cur = cur->left;
+			}
+			else {
+				cur = stk.top();
+				stk.pop();
+				res.push_back(cur->val);
+				cur = cur->right;
+			}
+		}
+		return res;
+	}
 
 	vector<int> inorderTraversal(TreeNode* root) {
 		vector<int> res;

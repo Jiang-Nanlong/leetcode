@@ -33,6 +33,32 @@ public:
 		}
 		return res;
 	}
+
+	//第二次做
+	vector<double> averageOfLevels1(TreeNode* root) {
+		if (root == nullptr)
+			return {};
+		queue<TreeNode*> que;
+		que.push(root);
+		vector<double> res;
+		while (!que.empty()) {
+			int size = que.size();
+			int count = size;
+			double sum = 0;
+			while (size--) {
+				TreeNode* cur = que.front();
+				que.pop();
+				sum += cur->val;
+				if (cur->left)
+					que.push(cur->left);
+				if (cur->right)
+					que.push(cur->right);
+			}
+			sum /= count;
+			res.push_back(sum);
+		}
+		return res;
+	}
 };
 
 void main() {}

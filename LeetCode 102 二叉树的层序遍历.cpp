@@ -35,6 +35,27 @@ public:
 		}
 		return res;
 	}
+
+	//第二次做
+	vector<vector<int>> levelOrder1(TreeNode* root) {
+		if (root == nullptr) return{};
+		queue<TreeNode*> que;
+		vector<vector<int>> res;
+		que.push(root);
+		while (!que.empty()) {
+			int size = que.size();
+			vector<int> temp;
+			while (size--) {
+				TreeNode* cur = que.front();
+				que.pop();
+				temp.push_back(cur->val);
+				if (cur->left) que.push(cur->left);
+				if (cur->right) que.push(cur->right);
+			}
+			res.push_back(temp);
+		}
+		return res;
+	}
 };
 
 int main() {
