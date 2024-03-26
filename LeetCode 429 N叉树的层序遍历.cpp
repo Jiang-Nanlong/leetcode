@@ -42,6 +42,29 @@ public:
 		}
 		return res;
 	}
+
+	//第二次做
+	vector<vector<int>> levelOrder1(Node* root) {
+		if (root == nullptr)
+			return {};
+		queue<Node*> que;
+		que.push(root);
+		vector<vector<int>> res;
+		while (!que.empty()) {
+			int size = que.size();
+			vector<int> temp;
+			while (size--) {
+				Node* cur = que.front();
+				que.pop();
+				temp.push_back(cur->val);
+				for (auto& p : cur->children) {
+					que.push(p);
+				}
+			}
+			res.push_back(temp);
+		}
+		return res;
+	}
 };
 
 void main() {}

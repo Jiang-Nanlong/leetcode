@@ -47,6 +47,32 @@ public:
 		}
 		return root;
 	}
+
+
+	//第二次做，这回再做感觉第一次写的太啰嗦了。
+	Node* connect(Node* root) {
+		if (root == nullptr)
+			return nullptr;
+		queue<Node*> que;
+		que.push(root);
+		while (!que.empty()) {
+			int size = que.size();
+			while (size-- > 1) {
+				Node* cur = que.front();
+				que.pop();
+				if (size != 0)
+					cur->next = que.front();
+				else
+					cur->next = nullptr;
+				if (cur->left)
+					que.push(cur->left);
+				if (cur->right)
+					que.push(cur->right);
+			}
+		}
+		return root;
+	}
+
 };
 
 void main() {}

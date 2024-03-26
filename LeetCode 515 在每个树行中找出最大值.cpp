@@ -33,6 +33,31 @@ public:
 		}
 		return res;
 	}
+
+	//第二次做
+	vector<int> largestValues1(TreeNode* root) {
+		if (root == nullptr)
+			return {};
+		queue<TreeNode*> que;
+		que.push(root);
+		vector<int> res;
+		while (!que.empty()) {
+			int size = que.size();
+			int maxVal = INT_MIN;
+			while (size--) {
+				TreeNode* cur = que.front();
+				que.pop();
+				maxVal = max(maxVal, cur->val);
+				if (cur->left)
+					que.push(cur->left);
+				if (cur->right)
+					que.push(cur->right);
+			}
+			res.push_back(maxVal);
+		}
+		return res;
+	}
+
 };
 
 void main() {}

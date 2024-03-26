@@ -71,6 +71,25 @@ public:
 	int minDepth2(TreeNode* root) {
 		return getDepth1(root);
 	}
+
+
+	//第二次做
+	int mindepth = INT_MAX;
+	int minDepth(TreeNode* root) {
+		if (root == nullptr) return 0;
+		backtrace(root, 0);
+		return mindepth;
+	}
+	void backtrace(TreeNode* root, int depth) {
+		if ((root->left == nullptr) && (root->right == nullptr)) {
+			mindepth = min(mindepth, depth + 1);
+			return;
+		}
+		if (root->left)
+			backtrace(root->left, depth + 1);
+		if (root->right)
+			backtrace(root->right, depth + 1);
+	}
 };
 
 void main() {}

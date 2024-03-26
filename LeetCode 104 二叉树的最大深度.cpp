@@ -74,6 +74,42 @@ public:
 		getDepth(root, 1);
 		return result;
 	}
+
+	//第二次做，层序遍历
+	int maxDepth(TreeNode* root) {
+		if (root == nullptr) return 0;
+		queue<TreeNode*>que;
+		que.push(root);
+		int depth = 0;
+		while (!que.empty()) {
+			int size = que.size();
+			while (size--) {
+				TreeNode* cur = que.front();
+				que.pop();
+				if (cur->left) que.push(cur->left);
+				if (cur->right) que.push(cur->right);
+			}
+			depth++;
+		}
+		return depth;
+	}
+
+	//第二次做，递归
+	int maxdepth = 0;
+	int maxDepth(TreeNode* root) {
+		backtrace(root, 0);
+		return maxdepth;
+	}
+
+private:
+	void backtrace(TreeNode* root, int depth) {
+		if (root == nullptr) {
+			maxdepth = max(depth, maxdepth);
+			return;
+		}
+		backtrace(root->left, depth + 1);
+		backtrace(root->right, depth + 1);
+	}
 };
 
 void main() {}
