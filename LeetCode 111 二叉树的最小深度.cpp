@@ -75,20 +75,37 @@ public:
 
 	//第二次做
 	int mindepth = INT_MAX;
-	int minDepth(TreeNode* root) {
+	int minDepth2(TreeNode* root) {
 		if (root == nullptr) return 0;
-		backtrace(root, 0);
+		backtrace1(root, 0);
 		return mindepth;
 	}
-	void backtrace(TreeNode* root, int depth) {
-		if ((root->left == nullptr) && (root->right == nullptr)) {
+	void backtrace1(TreeNode* root, int depth) {
+		if ((root->left == nullptr) && (root->right == nullptr)) {  //前序遍历，求的是深度，后序遍历求的是高度
 			mindepth = min(mindepth, depth + 1);
 			return;
 		}
 		if (root->left)
-			backtrace(root->left, depth + 1);
+			backtrace1(root->left, depth + 1);
 		if (root->right)
-			backtrace(root->right, depth + 1);
+			backtrace1(root->right, depth + 1);
+	}
+
+	int minDepth3(TreeNode* root) {
+		return getminDepth(root);
+	}
+
+	int getminDepth(TreeNode* root) {
+		if (root == nullptr) return 0;
+		int leftDepth = getminDepth(root->left);
+		int rightDepth = getminDepth(root->right);
+
+		if (root->left == nullptr && root->right)
+			return 1 + rightDepth;
+		if (root->left && root->right == nullptr)
+			return 1 + leftDepth;
+
+		return 1 + min(leftDepth, rightDepth);
 	}
 };
 

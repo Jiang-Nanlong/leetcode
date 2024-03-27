@@ -67,6 +67,39 @@ public:
 		}
 		return true;
 	}
+
+
+	//第二次做
+	bool isSymmetric(TreeNode* root) { return isSymmetricHelper(root, root); }
+	bool isSymmetricHelper(TreeNode* root1, TreeNode* root2) {
+		if (root1 == nullptr && root2 == nullptr)
+			return true;
+		if (root1 == nullptr || root2 == nullptr)
+			return false;
+		bool flag = root1->val == root2->val;
+		if (flag) {
+			bool flag1 = isSymmetricHelper(root1->left, root2->right);
+			bool flag2 = isSymmetricHelper(root1->right, root2->left);
+			return flag1 && flag2;
+		}
+		else
+			return false;
+	}
+	//isSymmetricHelper1没有简化之前的逻辑
+	bool isSymmetricHelper1(TreeNode* root1, TreeNode* root2) {
+		if (root1 == nullptr && root2 == nullptr)
+			return true;
+		else if (root1 == nullptr && root2 != nullptr)
+			return false;
+		else if (root1 != nullptr && root2 == nullptr)
+			return false;
+		else if (root1->val != root2->val)
+			return false;
+
+		bool flag1 = isSymmetricHelper(root1->left, root2->right);
+		bool flag2 = isSymmetricHelper(root1->right, root2->left);
+		return flag1 && flag2;
+	}
 };
 
 void main() {}

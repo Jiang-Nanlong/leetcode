@@ -40,6 +40,20 @@ public:
 		}
 		return count;
 	}
+
+
+	//第二次做
+	int maxDepth(Node* root) { return getMaxDepth(root); }
+
+	int getMaxDepth(Node* root) {
+		if (root == nullptr)
+			return 0;
+		int maxdepth = 0;  //一开始的时候这里写成INT_MIN，但是结果都是错的，不知道为啥，按说应该没问题啊
+		for (auto& p : root->children) {
+			maxdepth = max(maxdepth, getMaxDepth(p));
+		}
+		return 1 + maxdepth;
+	}
 };
 
 void main() {}

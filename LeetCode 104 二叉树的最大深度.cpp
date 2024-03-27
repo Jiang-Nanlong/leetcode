@@ -97,18 +97,32 @@ public:
 	//第二次做，递归
 	int maxdepth = 0;
 	int maxDepth(TreeNode* root) {
-		backtrace(root, 0);
+		backtrace1(root, 0);
 		return maxdepth;
 	}
 
 private:
-	void backtrace(TreeNode* root, int depth) {
+	void backtrace1(TreeNode* root, int depth) {  //前序遍历
 		if (root == nullptr) {
 			maxdepth = max(depth, maxdepth);
 			return;
 		}
-		backtrace(root->left, depth + 1);
-		backtrace(root->right, depth + 1);
+		backtrace1(root->left, depth + 1);
+		backtrace1(root->right, depth + 1);
+	}
+
+public:
+	int maxDepth(TreeNode* root) {
+		return backtrace2(root);
+	}
+
+private:
+	int backtrace2(TreeNode* root) {   //后序遍历
+		if (root == nullptr) return 0;
+
+		int leftdepth = backtrace2(root->left);
+		int rightdepth = backtrace2(root->right);
+		return 1 + max(leftdepth, rightdepth);
 	}
 };
 

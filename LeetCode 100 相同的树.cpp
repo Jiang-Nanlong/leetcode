@@ -73,6 +73,22 @@ public:
 			return false;
 		return true;
 	}
+
+	//第二次做
+	bool isSameTree1(TreeNode* p, TreeNode* q) { return isSameTreeHelper(p, q); }
+	bool isSameTreeHelper(TreeNode* p, TreeNode* q) {
+		if (p == nullptr && q == nullptr)
+			return true;
+		else if (p != nullptr && q == nullptr)
+			return false;
+		else if (p == nullptr && q != nullptr)
+			return false;
+		else if (p->val != q->val)
+			return false;
+
+		return isSameTreeHelper(p->left, q->left) &&
+			isSameTreeHelper(p->right, q->right);
+	}
 };
 
 void main() {}
