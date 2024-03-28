@@ -50,6 +50,32 @@ public:
 		if (root == nullptr) return 0;
 		return 1 + countNodes(root->left) + countNodes(root->right);
 	}*/
+
+	//下边是代码随想录的方法，这个方法比较巧妙
+	//如果一个树是完全二叉树，那么他的节点数会有两种情况：
+	//1.这是一棵满二叉树
+	//2.这是一个完全二叉树
+	//如果是满二叉树，就可以直接通过深度求节点数，如果不是满二叉树，就分别遍历他的左子树和右子树，如果子树是满二叉树就通过深度求节点数。
+	int countNodes1(TreeNode* root) {
+		if (root == nullptr)
+			return 0;
+		TreeNode* left = root->left;
+		TreeNode* right = root->right;
+		int leftdepth = 0, rightdepth = 0;
+		while (left) { //这两个while循环用来判断完全二叉树是不是满二叉树，因为已经是完全二叉树了，如果两边的深度相同的话，那么就是一棵满二叉树
+			leftdepth++;
+			left = left->left;
+		}
+		while (right) {
+			rightdepth++;
+			right = right->right;
+		}
+
+		if (rightdepth == leftdepth) {
+			return (2 << leftdepth) - 1;
+		}
+		return 1 + countNodes(root->left) + countNodes(root->right);
+	}
 };
 
 void main() {}

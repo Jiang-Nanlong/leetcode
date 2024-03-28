@@ -38,7 +38,7 @@ private:
 		}
 		if (cur->left) {
 			Helper(cur->left, path, res);
-			path.pop_back();
+			path.pop_back(); //因为刚进函数就把当前层节点入栈，所以最后的叶子结点也会入栈，然后在叶子结点的上一层弹出叶子节点，所以每个分支上都得弹出一次
 		}
 		if (cur->right) {
 			Helper(cur->right, path, res);
@@ -83,6 +83,35 @@ private:
 	//	}
 	//	return res;
 	//}
+
+	//第二遍做
+	vector<string> binaryTreePaths1(TreeNode* root) {
+		vector<string> res;
+		vector<int> path;
+		binaryTreePathsHelper(root, path, res);
+		return res;
+
+	}
+	void binaryTreePathsHelper(TreeNode* root, vector<int>& path, vector<string>& res) {
+		if (root->left == nullptr && root->right == nullptr) {
+			int size = path.size();
+			string s;
+			for (int i = 0; i < size; i++) {
+				s += to_string(path[i]);
+				s += "->";
+			}
+			s += to_string(root->val);
+			res.push_back(s);
+			return;
+		}
+		path.push_back(root->val);
+		if (root->left)
+			binaryTreePathsHelper(root->left, path, res);
+
+		if (root->right)
+			binaryTreePathsHelper(root->right, path, res);
+		path.pop_back();  //因为最后一个节点不加入数组，所以每一层只需要弹出每一层新加入的节点就行
+	}
 
 };
 

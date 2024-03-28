@@ -57,5 +57,35 @@ public:
 		}
 		return result;
 	}
+
+	//第二次做
+	int sumOfLeftLeaves3(TreeNode* root) {
+		int sum = 0;
+		getSum(root, sum);
+		return sum;
+	}
+
+	void getSum(TreeNode* root, int& sum) {
+		if (root->left && root->left->left == nullptr && root->left->right == 0) {
+			sum += root->left->val;
+		}
+		if (root->left)
+			getSum(root->left, sum);
+		if (root->right)
+			getSum(root->right, sum);
+	}
+
+	//这是代码随想录的程序，用的后序遍历，从没想过可以这样写
+	int sumOfLeftLeaves4(TreeNode* root) {
+		if (root == nullptr)
+			return 0;
+		if (root->left == nullptr && root->right == nullptr)
+			return 0;
+		int leftvalue = sumOfLeftLeaves(root->left);
+		if (root->left && root->left->left == nullptr && root->left->right == nullptr)  //左子树就是一个左叶子的情况
+			leftvalue = root->left->val;
+		int rightvalue = sumOfLeftLeaves(root->right);
+		return leftvalue + rightvalue;
+	}
 };
 void main() {}

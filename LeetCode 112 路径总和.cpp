@@ -31,6 +31,56 @@ public:
 		}
 		return false;
 	}
+
+	//第二次做，做错了
+	bool hasPathSum1(TreeNode* root, int targetSum) {
+		if (root == nullptr)
+			return false;
+		return hasPathSumHelper(root, targetSum, 0);
+	}
+	bool hasPathSumHelper(TreeNode* root, int targetSum, int sum) {
+		if (root == nullptr && sum == targetSum)  //这个地方不应该是root==nullptr，因为对于[1,2]，target=1，这种情况时，会直接在1的右子树返回true，
+			//而这个右子树为空，1也不是叶子结点。所以要修改判断条件，最后到叶子结点就行了，不用再往下了
+			return true;
+
+		if (root == nullptr && sum != targetSum)
+			return false;
+
+		bool leftflag =
+			hasPathSumHelper(root->left, targetSum, sum + root->val);
+		if (leftflag)
+			return true;
+		bool rightflag =
+			hasPathSumHelper(root->right, targetSum, sum + root->val);
+		if (rightflag)
+			return true;
+		return leftflag || rightflag;
+	}
+
+	//改完以后
+	bool hasPathSum2(TreeNode* root, int targetSum) {
+		if (root == nullptr)
+			return false;
+		return hasPathSumHelper(root, targetSum, 0);
+	}
+	bool hasPathSumHelper(TreeNode* root, int targetSum, int sum) {
+		if (root->left == nullptr && root->right == nullptr) {
+			if ((sum + root->val) == targetSum)
+				return true;
+			else
+				return false;
+		}
+
+		if (root->left)
+			if (hasPathSumHelper(root->left, targetSum, sum + root->val))
+				return true;
+
+		if (root->right)
+			if (hasPathSumHelper(root->right, targetSum, sum + root->val))
+				return true;
+
+		return false;  //这里也不用写成return leftflag || rightflag;，因为如果前边有true就直接返回了，根本到不了这里
+	}
 };
 
 void main() {}

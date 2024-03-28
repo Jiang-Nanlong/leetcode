@@ -95,7 +95,7 @@ public:
 		return getminDepth(root);
 	}
 
-	int getminDepth(TreeNode* root) {
+	int getminDepth(TreeNode* root) {   //ºóÐò±éÀú
 		if (root == nullptr) return 0;
 		int leftDepth = getminDepth(root->left);
 		int rightDepth = getminDepth(root->right);
