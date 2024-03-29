@@ -41,6 +41,27 @@ public:
 
 		return root;
 	}
+
+
+	//第二次做
+	TreeNode* constructMaximumBinaryTree1(vector<int>& nums) {
+		return constructMaximumBinaryTreeHelper(nums, 0, nums.size());
+	}
+
+	TreeNode* constructMaximumBinaryTreeHelper(vector<int>& nums, int begin, int end) {
+		if (end == begin) return nullptr;
+
+		int maxValueIndex = begin;
+		for (int i = begin; i < end; i++) {
+			if (nums[i] > nums[maxValueIndex])
+				maxValueIndex = i;
+		}
+
+		TreeNode* root = new TreeNode(nums[maxValueIndex]);
+		root->left = constructMaximumBinaryTreeHelper(nums, begin, maxValueIndex);
+		root->right = constructMaximumBinaryTreeHelper(nums, maxValueIndex + 1, end);
+		return root;
+	}
 };
 
 void main() {}

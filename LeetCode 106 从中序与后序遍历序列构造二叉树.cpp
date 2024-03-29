@@ -82,6 +82,63 @@ public:
 
 	}
 
+
+	//第二次做
+	TreeNode* buildTree(vector<int>& inorder, vector<int>& postorder) {
+		if (inorder.size() == 0)
+			return nullptr;
+
+		int rootvalue = postorder[postorder.size() - 1];
+		TreeNode* root = new TreeNode(rootvalue);
+
+		int rootIndexOfInorder = 0;
+		for (; rootIndexOfInorder < inorder.size(); rootIndexOfInorder++) {
+			if (inorder[rootIndexOfInorder] == rootvalue)
+				break;
+		}
+
+		vector<int> leftInorder(inorder.begin(),
+			inorder.begin() + rootIndexOfInorder);
+		vector<int> rightInorder(inorder.begin() + rootIndexOfInorder + 1,
+			inorder.end());
+
+		vector<int> leftPostorder(postorder.begin(),
+			postorder.begin() + leftInorder.size());
+		vector<int> rightPostorder(postorder.begin() + leftInorder.size(),
+			postorder.end() - 1);
+
+		root->left = buildTree(leftInorder, leftPostorder);
+		root->right = buildTree(rightInorder, rightPostorder);
+		return root;
+	}
+
+
+	//修改后，只传递两个数组的起点和终点
+	TreeNode* buildTree(vector<int>& inorder, vector<int>& postorder) {
+		return buildTreeHelper(inorder, 0, inorder.size(), postorder, 0, postorder.size());
+	}
+	TreeNode* buildTreeHelper(vector<int>& inorder, int inorderbegin, int inorderend, vector<int>& postorder, int postorderbegin, int postorderend) {
+		if (inorderbegin == inorderend) return nullptr;
+
+		int rootvalue = postorder[postorderend - 1];
+		TreeNode* root = new TreeNode(rootvalue);
+
+		int rootIndexOfInorder = inorderbegin;
+		for (; rootIndexOfInorder < inorderend; rootIndexOfInorder++) {
+			if (inorder[rootIndexOfInorder] == rootvalue)
+				break;
+		}
+
+		int leftInorderbegin = inorderbegin, leftInorderend = rootIndexOfInorder;
+		int leftPostorderbegin = postorderbegin, leftPostorderend = rootIndexOfInorder - inorderbegin + postorderbegin;
+
+		int rightInorderbegin = leftInorderend + 1, rightInorderend = inorderend;
+		int rightPostorderbegin = leftPostorderend, rightPostorderend = postorderend - 1;
+
+		root->left = buildTreeHelper(inorder, leftInorderbegin, leftInorderend, postorder, leftPostorderbegin, leftPostorderend);
+		root->right = buildTreeHelper(inorder, rightInorderbegin, rightInorderend, postorder, rightPostorderbegin, rightPostorderend);
+		return root;
+	}
 };
 
 void main() {}

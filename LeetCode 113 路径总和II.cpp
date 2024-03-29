@@ -41,5 +41,54 @@ public:
 		path.pop_back();   //其实这一句有没有都无所谓。因为函数传参是vector<int> path，当前一步不会对之前的函数调用产生影响。如果path是引用传参，就得严格回溯了。
 		//另外还可以把vector<vector<int>> res设置成类变量来减少函数传参。
 	}
+
+
+	//第二次做
+	vector<vector<int>> pathSum(TreeNode* root, int targetSum) {
+		if (root == nullptr) return {};
+		vector<int> path;
+		vector<vector<int>> res;
+		pathSumHelper(root, targetSum, 0, path, res);
+		return res;
+	}
+
+	void pathSumHelper(TreeNode* root, int targetSum, int sum, vector<int>& path, vector<vector<int>>& res) {
+		path.push_back(root->val);
+		sum += root->val;
+		if (root->left == nullptr && root->right == nullptr) {
+			if (sum == targetSum) {
+				res.push_back(path);
+				return;
+			}
+		}
+		if (root->left) {
+			pathSumHelper(root->left, targetSum, sum, path, res);
+			path.pop_back();  //这两个pop_back()都是当前节点层弹出下一层的数组内的节点
+			//这是因为终止条件中return了，最后一层直接return，这样在它的上一层弹出当前层节点。
+		}
+		if (root->right) {
+			pathSumHelper(root->right, targetSum, sum, path, res);
+			path.pop_back();
+		}
+	}
+
+	//或者这么写也行，终止条件中没有return，每一层都是刚开始加入数组，最后弹出当前层节点。
+	void pathSumHelper(TreeNode* root, int targetSum, int sum, vector<int>& path, vector<vector<int>>& res) {
+		path.push_back(root->val);
+		sum += root->val;
+		if (root->left == nullptr && root->right == nullptr) {
+			if (sum == targetSum) {
+				res.push_back(path);
+			}
+		}
+		if (root->left) {
+			pathSumHelper(root->left, targetSum, sum, path, res);
+		}
+		if (root->right) {
+			pathSumHelper(root->right, targetSum, sum, path, res);
+		}
+		path.pop_back();
+
+	}
 };
 void main() {}
