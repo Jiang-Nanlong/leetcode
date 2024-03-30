@@ -70,6 +70,54 @@ public:
 		}
 		return root1;
 	}
+
+	//第二次做	
+	TreeNode* mergeTrees3(TreeNode* root1, TreeNode* root2) {
+		if (root1 == nullptr && root2 == nullptr)
+			return nullptr;
+		if (root1 == nullptr)
+			return root2;
+		else if (root2 == nullptr)
+			return root1;
+
+		root1->val += root2->val;
+		root1->left = mergeTrees(root1->left, root2->left);
+		root1->right = mergeTrees(root1->right, root2->right);
+		return root1;
+	}
+
+	TreeNode* mergeTrees4(TreeNode* root1, TreeNode* root2) {
+		if (root1 == nullptr)
+			return root2;
+		if (root2 == nullptr)
+			return root1;
+		queue<TreeNode*> que;
+		que.push(root1);
+		que.push(root2);
+		while (!que.empty()) {
+			TreeNode* tree1 = que.front();
+			que.pop();
+			TreeNode* tree2 = que.front();
+			que.pop();
+
+			tree1->val += tree2->val;
+
+			if (tree1->left && tree2->left) {
+				que.push(tree1->left);
+				que.push(tree2->left);
+			}
+			if (tree1->right && tree2->right) {
+				que.push(tree1->right);
+				que.push(tree2->right);
+			}
+			if (tree1->left == nullptr && tree2->left != nullptr)
+				tree1->left = tree2->left;
+
+			if (tree1->right == nullptr && tree2->right != nullptr)
+				tree1->right = tree2->right;
+		}
+		return root1;
+	}
 };
 
 void main() {}

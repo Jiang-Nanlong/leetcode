@@ -57,6 +57,21 @@ public:
 		}
 		return result;
 	}
+
+	//第二次做，还是中序遍历，二叉搜索树中的最小绝对差一定是出现在中序遍历相邻的两个节点上
+	TreeNode* pre;
+	int res = INT_MAX;
+	int getMinimumDifference2(TreeNode* root) {
+		if (root == nullptr) return res;
+
+		int leftminres = getMinimumDifference2(root->left);
+		if (pre) {
+			res = min(res, abs(root->val - pre->val));
+		}
+		pre = root;
+		int rightminres = getMinimumDifference2(root->right);
+		return min(leftminres, min(res, rightminres));
+	}
 };
 
 void main() {}

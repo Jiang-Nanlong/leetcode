@@ -1,5 +1,6 @@
 #include <iostream>
 #include <stack>
+#include <vector>
 using namespace std;
 
 //验证一个树是不是二叉搜索树。下边这是用递归实现，感觉有点难理解。其实这个思路就是记录前一个节点的值，如果前一个节点比后一个节点的值还大，那肯定不是二叉搜索树
@@ -64,6 +65,55 @@ public:
 			}
 		}
 		return true;
+	}
+
+	//第二次做，首先想到的是用一个数组保存二叉树中序遍历的结构，看这个数组是不是单调递增的
+	bool isValidBST(TreeNode* root) {
+		if (root->left == nullptr && root->right == nullptr) return true;
+		vector<int> rootlist;
+		inorder(root, rootlist);
+		for (int i = 1; i < rootlist.size(); i++)
+			if (rootlist[i] <= rootlist[i - 1]) return false;
+		return true;
+	}
+
+	void inorder(TreeNode* root, vector<int>& res) {
+		if (root == nullptr) return;
+		inorder(root->left, res);
+		res.push_back(root->val);
+		inorder(root->right, res);
+	}
+
+	//后来看了以前的代码，发现只要是中序遍历即可，用一个数保存上一个中序遍历的点的值就行，不用一下子把所有的都遍历出来
+	long long prevalue = LONG_MIN;
+	bool isValidBST(TreeNode* root) {
+		if (root == nullptr)
+			return true;
+
+		bool leftflag = isValidBST(root->left);
+		if (root->val > prevalue) {
+			prevalue = root->val;
+		}
+		else
+			return false;
+		bool rightflag = isValidBST(root->right);
+		return leftflag && rightflag;
+	}
+
+	//或者还可以只保存前一个节点的指针
+	TreeNode* pre;
+	bool isValidBST(TreeNode* root) {
+		if (root == nullptr)
+			return true;
+
+		bool leftflag = isValidBST(root->left);
+		if (pre && root->val <= pre->val) {
+			return false;
+		}
+		else
+			pre = root;
+		bool rightflag = isValidBST(root->right);
+		return leftflag && rightflag;
 	}
 };
 
