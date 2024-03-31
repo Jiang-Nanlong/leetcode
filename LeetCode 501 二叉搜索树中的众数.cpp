@@ -1,6 +1,8 @@
 #include <iostream>
 #include <vector>
 #include <stack>
+#include <unordered_map>
+#include <algorithm>
 using namespace std;
 
 //要求找出二叉搜索树中的众数。众数可能有好几个
@@ -87,6 +89,60 @@ public:
 			}
 		}
 		return res;
+	}
+
+	//第二次做，还是直接用的笨方法，没有用到二叉搜索树这个重要信息。
+	unordered_map<int, int> umap;
+	vector<int> findMode2(TreeNode* root) {
+		inordered(root);
+		vector<pair<int, int>> vec(umap.begin(), umap.end());
+		sort(vec.begin(), vec.end(), cmp);
+		vector<int> res;
+		for (int i = 0; i < vec.size(); i++) {
+			if (vec[i].second == vec[0].second)
+				res.push_back(vec[i].first);
+		}
+		return res;
+	}
+	static bool cmp(pair<int, int>& a, pair<int, int>& b) {
+		return a.second > b.second;
+	}
+	void inordered(TreeNode* root) {
+		if (root == nullptr) return;
+		inordered(root->left);
+		umap[root->val]++;
+		inordered(root->right);
+	}
+
+	//后来看了答案才知道
+	vector<int> findMode3(TreeNode* root) {
+		inordered1(root);
+		return res;
+	}
+	TreeNode* pre = nullptr;
+	int count = 0, maxcount = 0;
+	vector<int> res;
+	void inordered1(TreeNode* root) {
+		if (root == nullptr) return;
+		inordered1(root->left);
+
+		if (pre == nullptr)
+			count = 1;
+		else if (root->val == pre->val)
+			count++;
+		else
+			count = 1;
+
+		pre = root;
+		if (count == maxcount)
+			res.push_back(root->val);
+		else if (count > maxcount) {
+			maxcount = count;
+			res.clear();
+			res.push_back(root->val);
+		}
+
+		inordered1(root->right);
 	}
 };
 

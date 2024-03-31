@@ -60,6 +60,27 @@ public:
 		path.pop_back();       //这个地方的pop和LeetCode 257 二叉树的所有路径中的pop不太一样，我一直弄不清，后来手动算了一下才知道，257这个题到叶节点就结束了，return了，然后在叶节点的上一层弹出叶节点。
 		//而这里是可以到叶节点的下一层，然后下一层为空就return，然后在叶节点本层就可以弹出叶节点。所以，257中要分开pop，而这里可以一起pop。
 	}
+
+	//第二遍做，还是没做出来，只想到了用后序遍历，还是没写出代码
+	TreeNode* lowestCommonAncestor2(TreeNode* root, TreeNode* p, TreeNode* q) {
+		if (root == NULL)
+			return NULL;
+		if (root == p || root == q)
+			return root;
+		TreeNode* left = lowestCommonAncestor2(root->left, p, q);
+		TreeNode* right = lowestCommonAncestor2(root->right, p, q);
+
+		if (left && right)
+			return root;
+		else if (left == NULL && right)
+			return right;
+		else if (left && right == NULL)
+			return left;
+		else
+			return NULL;
+	}
+
+	//又看了一下第一次做的时候用的前序遍历的方法，这个方法还挺巧
 };
 
 void main() {}
