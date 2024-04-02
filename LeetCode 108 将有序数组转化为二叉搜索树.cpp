@@ -37,6 +37,38 @@ public:
 
 		return temp;
 	}
+
+	//第二次做
+	TreeNode* sortedArrayToBST1(vector<int>& nums) {
+		return sortedArrayToBSTHelper(nums, 0, nums.size());
+	}
+
+	TreeNode* sortedArrayToBSTHelper(vector<int>& nums, int begin, int end) {  //左闭右开区间
+		if (begin == end)
+			return nullptr;
+		int size = end - begin;
+
+		TreeNode* root = new TreeNode(nums[begin + size / 2]);
+		root->right = sortedArrayToBSTHelper(nums, begin + size / 2 + 1, end);
+		root->left = sortedArrayToBSTHelper(nums, begin, begin + size / 2);
+		return root;
+	}
+
+	//稍微调整一下
+	TreeNode* sortedArrayToBST2(vector<int>& nums) {
+		return sortedArrayToBSTHelper(nums, 0, nums.size());
+	}
+
+	TreeNode* sortedArrayToBSTHelper(vector<int>& nums, int begin, int end) {
+		if (begin == end)
+			return nullptr;
+		int mid = begin + (end - begin) / 2;
+
+		TreeNode* root = new TreeNode(nums[mid]);
+		root->right = sortedArrayToBSTHelper(nums, mid + 1, end);
+		root->left = sortedArrayToBSTHelper(nums, begin, mid);
+		return root;
+	}
 };
 
 void main() {}

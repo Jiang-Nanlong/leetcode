@@ -52,7 +52,24 @@ public:
 		root->left = trimBST(root->left, low, high);
 		root->right = trimBST(root->right, low, high);
 		return root;
+	}
 
+	//这个题我第一次做的时候竟然能写出个差不多，我擦
+	//第二次做，还是没有做出来
+	TreeNode* trimBST1(TreeNode* root, int low, int high) {
+		if (root == nullptr)
+			return nullptr;
+		if (root->val < low) {
+			TreeNode* temp = trimBST1(root->right, low, high);  //当前节点的右子树可能符合条件，然后修剪右子树
+			return temp;
+		}
+		else if (root->val > high) {
+			TreeNode* temp = trimBST1(root->left, low, high);   //当前节点的左孩子可能符合条件，继续修剪左子树
+			return temp;
+		}
+		root->left = trimBST1(root->left, low, high);
+		root->right = trimBST1(root->right, low, high);
+		return root;
 	}
 };
 
