@@ -40,6 +40,39 @@ public:
 		}
 		return true;
 	}
+
+
+	//第二遍做，还是没想出怎么做
+	vector<vector<string>> res;
+	vector<string> path;
+
+	vector<vector<string>> partition1(string s) {
+		backtracking(s, 0);
+		return res;
+	}
+
+	void backtracking(string& s, int startIndex) {
+		if (startIndex == s.size()) {
+			res.push_back(path);
+			return;
+		}
+
+		for (int i = startIndex; i < s.size(); i++) {  // [startIndex,i]表示要截取的子串
+			if (isPalindrome1(s, startIndex, i)) {
+				path.push_back(s.substr(startIndex, i - startIndex + 1));
+				backtracking(s, i + 1);
+				path.pop_back();
+			}		
+		}
+	}
+
+	bool isPalindrome1(string& s, int begin, int end) {
+		while (begin <= end) {
+			if (s[begin++] != s[end--])
+				return false;
+		}
+		return true;
+	}
 };
 
 void main() {

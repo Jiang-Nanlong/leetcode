@@ -33,6 +33,31 @@ public:
 			used[10 + nums[i]] = false;
 		}
 	}
+
+	//第二次做，只是感觉应该用一个used数组来标识每一个元素是不是被使用过了
+	vector<int> path;
+	vector<vector<int>> res;
+	vector<vector<int>> permute1(vector<int>& nums) {
+		vector<bool> used(nums.size(), false);
+		backtracking(nums, used);
+		return res;
+	}
+	void backtracking(vector<int>& nums, vector<bool>& used) {
+		if (path.size() == nums.size()) {
+			res.push_back(path);
+			return;
+		}
+
+		for (int i = 0; i < nums.size(); i++) {
+			if (used[i])
+				continue;
+			used[i] = true;
+			path.push_back(nums[i]);
+			backtracking(nums, used);
+			path.pop_back();
+			used[i] = false;
+		}
+	}
 };
 
 void main() {

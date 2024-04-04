@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <unordered_set>
 using namespace std;
 
 //给定一个整数数组，找出该数组中不同的递增子序列，子序列中至少有两个元素，解集中不能有重复项
@@ -25,6 +26,58 @@ public:
 			cb.push_back(nums[i]);
 			Helper(nums, i + 1, cb, res);
 			cb.pop_back();
+		}
+	}
+
+	//第二遍做，没做出来，这个题好像只能使用uset树层去重，而且原数组不能重新排序。
+	vector<vector<int>> res;
+	vector<int> path;
+	vector<vector<int>> findSubsequences1(vector<int>& nums) {
+		backtracking(nums, 0);
+		return res;
+	}
+
+	void backtracking(vector<int>& nums, int startIndex) {
+		if (path.size() >= 2)
+			res.push_back(path);
+		if (startIndex == nums.size()) {
+			return;
+		}
+		unordered_set<int> uset;
+		for (int i = startIndex; i < nums.size(); i++) {
+			if (uset.find(nums[i]) != uset.end()) continue;
+
+			if (path.empty() || path.back() <= nums[i]) {
+				uset.insert(nums[i]);
+				path.push_back(nums[i]);
+				backtracking(nums, i + 1);
+				path.pop_back();
+			}
+		}
+	}
+
+	//因为这里知道了nums[i]的范围，所以可以直接使用数组来代替uset
+	vector<vector<int>> findSubsequences2(vector<int>& nums) {
+		backtracking1(nums, 0);
+		return res;
+	}
+
+	void backtracking1(vector<int>& nums, int startIndex) {
+		if (path.size() >= 2)
+			res.push_back(path);
+		if (startIndex == nums.size()) {
+			return;
+		}
+		int used[201] = { 0 };  //或者可以把int换为bool
+		for (int i = startIndex; i < nums.size(); i++) {
+			if (used[nums[i] + 100]) continue;
+
+			if (path.empty() || path.back() <= nums[i]) {
+				used[nums[i] + 100]++;
+				path.push_back(nums[i]);
+				backtracking1(nums, i + 1);
+				path.pop_back();
+			}
 		}
 	}
 };

@@ -44,6 +44,47 @@ public:
 		}
 		return true;
 	}
+
+	//第二次做，虽说这个和LeetCode 131 分割回文串差不多，但是这个题的细节更多，还是没有做出来
+	//这个题是把所有的ip地址的规格判断都放在了一个函数去处理
+	vector<string> res;
+
+	vector<string> restoreIpAddresses1(string s) {
+		backtracking(s, 0, 0);
+		return res;
+	}
+
+	void backtracking(string& s, int startIndex, int pointNum) {
+		if (pointNum == 3 && startIndex != s.size()) {  //startIndex!=s.size()这个条件是用来为了防止已经加了三个点，而第三个点加在s最后的情况出现。
+			if (isValid1(s, startIndex, s.size() - 1))
+				res.push_back(s);
+			return;
+		}
+
+		for (int i = startIndex; i < s.size(); i++) {
+			if (isValid1(s, startIndex, i)) {
+				s.insert(s.begin() + i + 1, '.');
+				backtracking(s, i + 2, pointNum + 1);
+				s.erase(s.begin() + i + 1);
+			}
+		}
+	}
+
+	bool isValid1(string& s, int begin, int end) {
+		if (end - begin + 1 > 3) //还可以加个判断，如果位数超过3就直接返回false
+			return false;
+
+		if (s[begin] == '0' && begin != end)  //判断前导0
+			return false;
+
+		int num = 0;
+		for (int i = begin; i <= end; i++) {
+			num = num * 10 + (s[i] - '0');
+			if (num > 255)
+				return false;
+		}
+		return true;
+	}
 };
 
 void main() {

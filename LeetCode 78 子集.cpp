@@ -39,6 +39,27 @@ public:
 		Helper1(nums, 0, cb, res);
 		return res;
 	}
+
+	//第二次做，现在再做就已经很简单了
+	vector<vector<int>> res;
+	vector<int> path;
+	vector<vector<int>> subsets2(vector<int>& nums) {
+		backtracking(nums, 0);
+		return res;
+	}
+
+	void backtracking(vector<int>& nums, int startIndex) {
+		res.push_back(path);
+		if (startIndex == nums.size()) {
+			return;
+		}
+
+		for (int i = startIndex; i < nums.size(); i++) {
+			path.push_back(nums[i]);
+			backtracking(nums, i + 1);
+			path.pop_back();
+		}
+	}
 };
 
 void main() {
