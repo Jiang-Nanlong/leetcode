@@ -41,6 +41,35 @@ public:
 		}
 		return false;
 	}
+
+	//第二次做，还是没有做出来，这个题最难想的是数据结构，既可以对终点站排序，又可以记录哪张票是否已经被使用过
+	unordered_map<string, map<string, int>> targets;
+	vector<string> res;
+	bool backtracking(int ticketsNum) {
+		if (res.size() == ticketsNum + 1) {
+			return true;
+		}
+
+		for (pair<const string, int>& target : targets[res[res.size() - 1]]) {
+			if (target.second > 0) {
+				res.push_back(target.first);
+				target.second--;
+				if (backtracking(ticketsNum))
+					return true;
+				target.second++;
+				res.pop_back();
+			}
+		}
+		return false;
+	}
+	vector<string> findItinerary1(vector<vector<string>>& tickets) {
+		for (const vector<string>& ticket : tickets) {
+			targets[ticket[0]][ticket[1]]++;
+		}
+		res.push_back("JFK");
+		backtracking(tickets.size());
+		return res;
+	}
 };
 
 void main() {
