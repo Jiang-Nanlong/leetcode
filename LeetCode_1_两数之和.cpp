@@ -3,7 +3,7 @@
 #include <unordered_map>
 using namespace std;
 
-//ÌâÄ¿ÖĞÓĞÒ»¸ö¼ÙÉèÊÇÖ»»á´æÔÚÒ»¸öÓĞĞ§´ğ°¸
+//é¢˜ç›®ä¸­æœ‰ä¸€ä¸ªå‡è®¾æ˜¯åªä¼šå­˜åœ¨ä¸€ä¸ªæœ‰æ•ˆç­”æ¡ˆ
 
 class Solution {
 public:
@@ -20,7 +20,7 @@ public:
 		return {};
 	}
 
-	//µÚ¶ş´Î×ö£¬Õâ´ÎĞ´ÁËÁ½¸öforÑ­»·£¬²»ÈçµÚÒ»´ÎĞ´µÄ¼ò½àÁË¡£Ê±¼ä¸´ÔÓ¶ÈO(n)
+	//ç¬¬äºŒæ¬¡åšï¼Œè¿™æ¬¡å†™äº†ä¸¤ä¸ªforå¾ªç¯ï¼Œä¸å¦‚ç¬¬ä¸€æ¬¡å†™çš„ç®€æ´äº†ã€‚æ—¶é—´å¤æ‚åº¦O(n)
 	vector<int> twoSum1(vector<int>& nums, int target) {
 		//vector<int> res;
 		unordered_map<int, int> umap;
