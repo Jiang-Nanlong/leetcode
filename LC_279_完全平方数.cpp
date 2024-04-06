@@ -2,8 +2,8 @@
 #include <vector>
 using namespace std;
 
-//����һ����������ƽ�����ĺͱ�ʾ����������С��ƽ�����ĸ���
-//����ƽ���ĵط�֮�⣬����Ķ���LeetCode 322 ��Ǯ�һ�һ��
+//给定一个整数，用平方数的和表示它，返回最小的平方数的个数
+//除了平方的地方之外，其余的都和LeetCode 322 零钱兑换一样
 class Solution {
 public:
 	int numSquares(int n) {
