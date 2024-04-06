@@ -2,7 +2,7 @@
 #include <vector>
 using namespace std;
 
-//ºÍÂòÂô¹ÉÆ±µÄ×î¼ÑÊ±»úIIIÏà±È£¬Õâ¸öÌâ¸üÒ»°ã»¯£¬ÕâÀï×î¶àÂòÂôk´Î¡£
+//å’Œä¹°å–è‚¡ç¥¨çš„æœ€ä½³æ—¶æœºIIIç›¸æ¯”ï¼Œè¿™ä¸ªé¢˜æ›´ä¸€èˆ¬åŒ–ï¼Œè¿™é‡Œæœ€å¤šä¹°å–kæ¬¡ã€‚
 
 class Solution {
 public:
@@ -33,7 +33,7 @@ public:
 		return dp[prices.size() - 1][2 * k - 1];
 	}
 
-	//dpÊı×éÓÅ»¯¿Õ¼ä
+	//dpæ•°ç»„ä¼˜åŒ–ç©ºé—´
 	int maxProfit1(int k, vector<int>& prices) {
 		vector<vector<int>> dp(2, vector<int>(2 * k, 0));
 		for (int i = 0; i < 2 * k; i++)
