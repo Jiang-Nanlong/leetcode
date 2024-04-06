@@ -12,7 +12,7 @@ struct ListNode {
 class Solution {
 public:
 	ListNode* removeNthFromEnd(ListNode* head, int n) {
-		ListNode* preHead = new ListNode(-1, head);  //为了防止删除的是链表中的第一个，所以加了一个头结点
+		ListNode* preHead = new ListNode(-1, head);  //涓轰簡闃叉鍒犻櫎鐨勬槸閾捐〃涓殑绗竴涓紝鎵�浠ュ姞浜嗕竴涓ご缁撶偣
 		ListNode* fast = preHead, * slow = preHead;
 		while (n--) {
 			fast = fast->next;
@@ -28,7 +28,7 @@ public:
 		return preHead->next;
 	}
 
-	//第二回做
+	//绗簩鍥炲仛
 	ListNode* removeNthFromEnd(ListNode* head, int n) {
 		ListNode* phead = new ListNode(-1, head);
 		ListNode* p = phead, * q = phead;
