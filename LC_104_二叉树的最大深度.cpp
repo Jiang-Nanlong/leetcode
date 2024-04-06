@@ -32,7 +32,7 @@ public:
 		return count;
 	}*/
 
-	int maxDepth(TreeNode* root) {   //Õâ¸öÌâÒ²¿ÉÒÔÓÃÉî¶ÈÓÅÏÈËÑË÷À´×ö
+	int maxDepth(TreeNode* root) {   //è¿™ä¸ªé¢˜ä¹Ÿå¯ä»¥ç”¨æ·±åº¦ä¼˜å…ˆæœç´¢æ¥åš
 		return dfs(root);
 	}
 private:
@@ -42,26 +42,26 @@ private:
 	}
 };
 
-//»¹¿ÉÒÔÊ¹ÓÃÇ°Ğò±éÀúÀ´ÇóÊ÷µÄÉî¶È,»¹ÊÇÓÃÁË»ØËİ£¬ÕâÒ»½â·¨ÓëLeetCode 257 ¶ş²æÊ÷µÄËùÓĞÂ·¾¶Ò»Ñù
+//è¿˜å¯ä»¥ä½¿ç”¨å‰åºéå†æ¥æ±‚æ ‘çš„æ·±åº¦,è¿˜æ˜¯ç”¨äº†å›æº¯ï¼Œè¿™ä¸€è§£æ³•ä¸LeetCode 257 äºŒå‰æ ‘çš„æ‰€æœ‰è·¯å¾„ä¸€æ ·
 class Solution1 {
 public:
 	int result;
 	void getDepth(TreeNode* node, int depth) {
-		result = depth > result ? depth : result;  //ÖĞ
+		result = depth > result ? depth : result;  //ä¸­
 		if (node->left == nullptr && node->right == nullptr) return;
-		if (node->left) {   //×ó
+		if (node->left) {   //å·¦
 			depth++;
 			getDepth(node->left, depth);
 			depth--;
 		}
-		if (node->right) {   //ÓÒ
+		if (node->right) {   //å³
 			depth++;
 			getDepth(node->right, depth);
 			depth--;
 		}
 	}
 
-	//ÉÏÊö´úÂë»¹¿ÉÒÔÔÙ¾«¼òÒ»ÏÂ£¬Òş²Ø»ØËİ
+	//ä¸Šè¿°ä»£ç è¿˜å¯ä»¥å†ç²¾ç®€ä¸€ä¸‹ï¼Œéšè—å›æº¯
 	void getDepth1(TreeNode* node, int depth) {
 		result = depth > result ? depth : result;
 		if (node->left == nullptr && node->right == nullptr) return;
@@ -75,7 +75,7 @@ public:
 		return result;
 	}
 
-	//µÚ¶ş´Î×ö£¬²ãĞò±éÀú
+	//ç¬¬äºŒæ¬¡åšï¼Œå±‚åºéå†
 	int maxDepth(TreeNode* root) {
 		if (root == nullptr) return 0;
 		queue<TreeNode*>que;
@@ -94,7 +94,7 @@ public:
 		return depth;
 	}
 
-	//µÚ¶ş´Î×ö£¬µİ¹é
+	//ç¬¬äºŒæ¬¡åšï¼Œé€’å½’
 	int maxdepth = 0;
 	int maxDepth(TreeNode* root) {
 		backtrace1(root, 0);
@@ -102,7 +102,7 @@ public:
 	}
 
 private:
-	void backtrace1(TreeNode* root, int depth) {  //Ç°Ğò±éÀú
+	void backtrace1(TreeNode* root, int depth) {  //å‰åºéå†
 		if (root == nullptr) {
 			maxdepth = max(depth, maxdepth);
 			return;
@@ -117,7 +117,7 @@ public:
 	}
 
 private:
-	int backtrace2(TreeNode* root) {   //ºóĞò±éÀú
+	int backtrace2(TreeNode* root) {   //ååºéå†
 		if (root == nullptr) return 0;
 
 		int leftdepth = backtrace2(root->left);
