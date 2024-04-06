@@ -2,7 +2,7 @@
 #include <string>
 using namespace std;
 
-//��path�е�.�滻�ɿո�
+//把path中的.替换成空格
 class Solution {
 public:
 	string pathEncryption(string path) {
@@ -13,11 +13,11 @@ public:
 		return s;
 	}
 
-	//����������չһ�£�����һ���ַ���s����s�еĿո��滻��%20
-	//�����ڿռ临�Ӷ�O(1)��ʱ�临�Ӷ�O(n)����ɣ������Ȱ��ַ����Ĵ�С�ĳɺ��ʵĴ�С��Ȼ��ʹ��˫ָ�룬�Ӻ���ǰ��һ��ָ��ָ����ַ�����ĩβ��һ��ָ�����ַ�����ĩβ��
-	//Ϊʲô�ǴӺ���ǰ�أ������ǰ����Ļ�����Ҫ�ƶ���ߵ�һ���ַ���������ʱ�临�Ӷ���O(n^2)������ǴӺ���ǰ����O(n)
+	//这个题可以扩展一下，给定一个字符串s，把s中的空格替换成%20
+	//可以在空间复杂度O(1)，时间复杂度O(n)内完成，就是先把字符串的大小改成合适的大小，然后使用双指针，从后往前，一个指针指向旧字符串的末尾，一个指向新字符串的末尾。
+	//为什么是从后往前呢，如果从前往后的话，需要移动后边的一大串字符，这样的时间复杂度是O(n^2)，如果是从后往前就是O(n)
 	string replaceSpace(string s) {
-		//��ͳ���ַ���s�пո�ĸ���
+		//先统计字符串s中空格的个数
 		int countSpace = 0;
 		for (char c : s)
 			if (c == ' ')
@@ -33,7 +33,7 @@ public:
 				s[j] = '0';
 				s[j - 1] = '2';
 				s[j - 2] = '%';
-				j -= 2; //��Ϊforѭ���ڻ���һ��j--�������������-=2
+				j -= 2; //因为for循环内还有一个j--，所以这里就先-=2
 			}
 		}
 		return s;
