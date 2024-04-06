@@ -22,7 +22,7 @@ public:
 		else return false;
 	}
 
-	//第二次做
+	//碌脷露镁麓脦脳枚
 	bool isAnagram1(string s, string t) {
 		if (s.size() != t.size())
 			return false;
