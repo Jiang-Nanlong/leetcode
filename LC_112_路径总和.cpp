@@ -1,7 +1,7 @@
 #include <iostream>
 using namespace std;
 
-//ÅĞ¶ÏÒ»¸öÊ÷ÖĞÊÇ·ñ´æÔÚÒ»¸ö´Ó¸ù½Úµãµ½Ò¶×Ó½áµãµÄÂ·¾¶£¬Â·¾¶ÉÏ½ÚµãµÄºÍµÈÓÚtargetSum£¬Èç¹ûÓĞ£¬·µ»Øtrue£¬Èç¹ûÃ»ÓĞ£¬·µ»Øfalse¡£
+//åˆ¤æ–­ä¸€ä¸ªæ ‘ä¸­æ˜¯å¦å­˜åœ¨ä¸€ä¸ªä»æ ¹èŠ‚ç‚¹åˆ°å¶å­ç»“ç‚¹çš„è·¯å¾„ï¼Œè·¯å¾„ä¸ŠèŠ‚ç‚¹çš„å’Œç­‰äºtargetSumï¼Œå¦‚æœæœ‰ï¼Œè¿”å›trueï¼Œå¦‚æœæ²¡æœ‰ï¼Œè¿”å›falseã€‚
 struct TreeNode {
 	int val;
 	TreeNode* left;
@@ -32,15 +32,15 @@ public:
 		return false;
 	}
 
-	//µÚ¶ş´Î×ö£¬×ö´íÁË
+	//ç¬¬äºŒæ¬¡åšï¼Œåšé”™äº†
 	bool hasPathSum1(TreeNode* root, int targetSum) {
 		if (root == nullptr)
 			return false;
 		return hasPathSumHelper(root, targetSum, 0);
 	}
 	bool hasPathSumHelper(TreeNode* root, int targetSum, int sum) {
-		if (root == nullptr && sum == targetSum)  //Õâ¸öµØ·½²»Ó¦¸ÃÊÇroot==nullptr£¬ÒòÎª¶ÔÓÚ[1,2]£¬target=1£¬ÕâÖÖÇé¿öÊ±£¬»áÖ±½ÓÔÚ1µÄÓÒ×ÓÊ÷·µ»Øtrue£¬
-			//¶øÕâ¸öÓÒ×ÓÊ÷Îª¿Õ£¬1Ò²²»ÊÇÒ¶×Ó½áµã¡£ËùÒÔÒªĞŞ¸ÄÅĞ¶ÏÌõ¼ş£¬×îºóµ½Ò¶×Ó½áµã¾ÍĞĞÁË£¬²»ÓÃÔÙÍùÏÂÁË
+		if (root == nullptr && sum == targetSum)  //è¿™ä¸ªåœ°æ–¹ä¸åº”è¯¥æ˜¯root==nullptrï¼Œå› ä¸ºå¯¹äº[1,2]ï¼Œtarget=1ï¼Œè¿™ç§æƒ…å†µæ—¶ï¼Œä¼šç›´æ¥åœ¨1çš„å³å­æ ‘è¿”å›trueï¼Œ
+			//è€Œè¿™ä¸ªå³å­æ ‘ä¸ºç©ºï¼Œ1ä¹Ÿä¸æ˜¯å¶å­ç»“ç‚¹ã€‚æ‰€ä»¥è¦ä¿®æ”¹åˆ¤æ–­æ¡ä»¶ï¼Œæœ€ååˆ°å¶å­ç»“ç‚¹å°±è¡Œäº†ï¼Œä¸ç”¨å†å¾€ä¸‹äº†
 			return true;
 
 		if (root == nullptr && sum != targetSum)
@@ -57,7 +57,7 @@ public:
 		return leftflag || rightflag;
 	}
 
-	//¸ÄÍêÒÔºó
+	//æ”¹å®Œä»¥å
 	bool hasPathSum2(TreeNode* root, int targetSum) {
 		if (root == nullptr)
 			return false;
@@ -79,7 +79,7 @@ public:
 			if (hasPathSumHelper(root->right, targetSum, sum + root->val))
 				return true;
 
-		return false;  //ÕâÀïÒ²²»ÓÃĞ´³Éreturn leftflag || rightflag;£¬ÒòÎªÈç¹ûÇ°±ßÓĞtrue¾ÍÖ±½Ó·µ»ØÁË£¬¸ù±¾µ½²»ÁËÕâÀï
+		return false;  //è¿™é‡Œä¹Ÿä¸ç”¨å†™æˆreturn leftflag || rightflag;ï¼Œå› ä¸ºå¦‚æœå‰è¾¹æœ‰trueå°±ç›´æ¥è¿”å›äº†ï¼Œæ ¹æœ¬åˆ°ä¸äº†è¿™é‡Œ
 	}
 };
 
