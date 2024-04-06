@@ -17,7 +17,7 @@ public:
 		return count;
 	}
 
-	//下边第二次做
+	//脧脗卤脽碌脷露镁麓脦脳枚
 	int removeElement1(vector<int>& nums, int val) {
 		int i = 0, j = 0;
 		for (; j < nums.size(); j++) {
