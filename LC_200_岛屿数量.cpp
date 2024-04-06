@@ -3,8 +3,8 @@
 #include <queue>
 using namespace std;
 
-//¸ø¶¨Ò»¸ö¶þÎ¬Êý×égrid£¬ÆäÖÐ1±íÊ¾µºÓì£¬0±íÊ¾Ë®£¬µºÓìÖ»ÄÜÊÇÓÉË®Æ½»òÊúÖ±·½ÏòÉÏÏàÁÚµÄ1×é³É£¬·µ»ØÕû¸öÊý×éÖÐµºÓìµÄÊýÁ¿¡£
-//Õâ¸öÌâµÄË¼Â·ºÍÎÒÏëµÄÒ»Ñù£¬¾ÍÊÇÉèÖÃÒ»¸öÏàÍ¬µÄboolÐÍµÄÊý×é£¬ÅÐ¶ÏÊÇ·ñÃ¿¸öÎ»ÖÃ¶¼±éÀú¹ýÁË£¬Èç¹ûÄ³¸öÎ»ÖÃ£¬Ã»ÓÐ±»±éÀú¹ý£¬¶øÕâ¸öµØ·½Ç¡ºÃÓÖÊÇ1µÄ»°£¬¾ÍËµÃ÷Õâ¸öµºÓìºÍÖ®Ç°µÄ²»ÏàÁ¬£¬½á¹û+1
+//ç»™å®šä¸€ä¸ªäºŒç»´æ•°ç»„gridï¼Œå…¶ä¸­1è¡¨ç¤ºå²›å±¿ï¼Œ0è¡¨ç¤ºæ°´ï¼Œå²›å±¿åªèƒ½æ˜¯ç”±æ°´å¹³æˆ–ç«–ç›´æ–¹å‘ä¸Šç›¸é‚»çš„1ç»„æˆï¼Œè¿”å›žæ•´ä¸ªæ•°ç»„ä¸­å²›å±¿çš„æ•°é‡ã€‚
+//è¿™ä¸ªé¢˜çš„æ€è·¯å’Œæˆ‘æƒ³çš„ä¸€æ ·ï¼Œå°±æ˜¯è®¾ç½®ä¸€ä¸ªç›¸åŒçš„boolåž‹çš„æ•°ç»„ï¼Œåˆ¤æ–­æ˜¯å¦æ¯ä¸ªä½ç½®éƒ½éåŽ†è¿‡äº†ï¼Œå¦‚æžœæŸä¸ªä½ç½®ï¼Œæ²¡æœ‰è¢«éåŽ†è¿‡ï¼Œè€Œè¿™ä¸ªåœ°æ–¹æ°å¥½åˆæ˜¯1çš„è¯ï¼Œå°±è¯´æ˜Žè¿™ä¸ªå²›å±¿å’Œä¹‹å‰çš„ä¸ç›¸è¿žï¼Œç»“æžœ+1
 
 class Solution {
 public:
@@ -38,7 +38,7 @@ public:
 	}
 
 private:
-	int dir[4][2] = { 0,1,1,0,-1,0,0,-1 };  //ÕâÀï±íÊ¾ËÄ¸ö·½ÏòµÄ·½·¨ºÍÎÒÖ®Ç°Ð´µÄ²»Ì«Ò»Ñù£¬µ«ÎÒÍüÁËÖ®Ç°ÊÇÔõÃ´Ð´µÄÁË
+	int dir[4][2] = { 0,1,1,0,-1,0,0,-1 };  //è¿™é‡Œè¡¨ç¤ºå››ä¸ªæ–¹å‘çš„æ–¹æ³•å’Œæˆ‘ä¹‹å‰å†™çš„ä¸å¤ªä¸€æ ·ï¼Œä½†æˆ‘å¿˜äº†ä¹‹å‰æ˜¯æ€Žä¹ˆå†™çš„äº†
 	void dfs(vector<vector<char>>& grid, vector<vector<bool>>& visited, int x, int y) {
 		for (int i = 0; i < 4; i++) {
 			int next_x = x + dir[i][0];
