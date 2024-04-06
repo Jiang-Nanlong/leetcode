@@ -2,9 +2,9 @@
 #include <vector>
 using namespace std;
 
-//·µ»ØÊý×éÖÐ×î³¤µÝÔö×ÓÐòÁÐµÄ³¤¶È£¬Õâ¸ö×ÓÐòÁÐ²»Ò»¶¨ÊÇÁ¬ÐøµÄ
-//Õâ¸öÌâµÄ´ð°¸¿´µÄÃÔÃÔºýºýµÄ
-//²»¹ý×öÍêLeetCode 674 ×î³¤Á¬ÐøµÝÔöÐòÁÐÒÔºóÔÙ»ØÀ´¿´Õâ¸öÌâ£¬¾ÍÓÖ¶®ÁË
+//è¿”å›žæ•°ç»„ä¸­æœ€é•¿é€’å¢žå­åºåˆ—çš„é•¿åº¦ï¼Œè¿™ä¸ªå­åºåˆ—ä¸ä¸€å®šæ˜¯è¿žç»­çš„
+//è¿™ä¸ªé¢˜çš„ç­”æ¡ˆçœ‹çš„è¿·è¿·ç³Šç³Šçš„
+//ä¸è¿‡åšå®ŒLeetCode 674 æœ€é•¿è¿žç»­é€’å¢žåºåˆ—ä»¥åŽå†å›žæ¥çœ‹è¿™ä¸ªé¢˜ï¼Œå°±åˆæ‡‚äº†
 
 class Solution {
 public:
