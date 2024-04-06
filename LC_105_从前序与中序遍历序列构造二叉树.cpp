@@ -2,7 +2,7 @@
 #include <vector>
 using namespace std;
 
-//Õâ¸öÌâºÍLeetCode 106 Ò»Ñù£¬¶¼ÊÇÖØµãÔÚÓÚÈ·¶¨¸ù½Úµã£¬È»ºó·Ö¸îÁ½¸ö±éÀúµÄĞòÁĞ¡£
+//è¿™ä¸ªé¢˜å’ŒLeetCode 106 ä¸€æ ·ï¼Œéƒ½æ˜¯é‡ç‚¹åœ¨äºç¡®å®šæ ¹èŠ‚ç‚¹ï¼Œç„¶ååˆ†å‰²ä¸¤ä¸ªéå†çš„åºåˆ—ã€‚
 
 struct TreeNode {
 	int val;
@@ -51,7 +51,7 @@ public:
 		return root;
 	}
 
-	//µÚ¶ş´Î×ö£¬Ö±½ÓÊ¹ÓÃÓÅ»¯ºóµÄ³ÌĞò
+	//ç¬¬äºŒæ¬¡åšï¼Œç›´æ¥ä½¿ç”¨ä¼˜åŒ–åçš„ç¨‹åº
 	TreeNode* buildTree1(vector<int>& preorder, vector<int>& inorder) {
 		return buildTreeHelper(preorder, 0, preorder.size(), inorder, 0,
 			inorder.size());
