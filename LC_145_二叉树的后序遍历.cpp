@@ -15,8 +15,8 @@ struct TreeNode {
 
 class Solution {
 public:
-	//Ç°Ðò±éÀúµÄË³ÐòÊÇÖÐ×óÓÒ£¬È»ºóÔÚº¯ÊýÌåÄÚµ÷»»Ò»ÏÂ×óÓÒ½ÚµãµÄË³Ðò£¬¾Í³ÉÁËÖÐÓÒ×óÁË¡£¶øºóÐò±éÀúÊÇ×óÓÒÖÐ£¬ËùÒÔÖ»ÐèÒª°ÑÖÐÓÒ×óµÄË³Ðò¶Ôµ÷Ò»ÏÂ¾ÍÐÐÁË×óÓÒÖÐÁË¡£
-	vector<int> postorderTraversal1(TreeNode* root) {     //·ÇµÝ¹éºóÐò±éÀú
+	//å‰åºéåŽ†çš„é¡ºåºæ˜¯ä¸­å·¦å³ï¼Œç„¶åŽåœ¨å‡½æ•°ä½“å†…è°ƒæ¢ä¸€ä¸‹å·¦å³èŠ‚ç‚¹çš„é¡ºåºï¼Œå°±æˆäº†ä¸­å³å·¦äº†ã€‚è€ŒåŽåºéåŽ†æ˜¯å·¦å³ä¸­ï¼Œæ‰€ä»¥åªéœ€è¦æŠŠä¸­å³å·¦çš„é¡ºåºå¯¹è°ƒä¸€ä¸‹å°±è¡Œäº†å·¦å³ä¸­äº†ã€‚
+	vector<int> postorderTraversal1(TreeNode* root) {     //éžé€’å½’åŽåºéåŽ†
 		if (root == nullptr) return {};
 		vector<int>res;
 		stack<TreeNode*> stk;
