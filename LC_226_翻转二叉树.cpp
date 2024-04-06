@@ -15,7 +15,7 @@ struct TreeNode {
 
 class Solution {
 public:
-	TreeNode* invertTree(TreeNode* root) {  //ֱ�ӵݹ�
+	TreeNode* invertTree(TreeNode* root) {  //直接递归
 		if (root == nullptr)
 			return root;
 		swap(root->left, root->right);
@@ -26,19 +26,19 @@ public:
 	}
 
 
-	//�ڶ�����
+	//第二次做
 	TreeNode* invertTree1(TreeNode* root) {
 		backtrace(root);
 		return root;
 	}
 	void backtrace(TreeNode* root) {
 		if (root == nullptr) return;
-		swap(root->left, root->right);  //��
-		backtrace(root->left);  //��
-		backtrace(root->right);  //��
+		swap(root->left, root->right);  //中
+		backtrace(root->left);  //左
+		backtrace(root->right);  //右
 	}
 
-	//�ϱߵݹ黹������ǰ�����������Ҳ������ǰ������ķǵݹ�д��
+	//上边递归还是用来前序遍历，所以也可以用前序遍历的非递归写法
 	TreeNode* invertTree2(TreeNode* root) {
 		if (root == nullptr) return root;
 		stack<TreeNode*>stk;
@@ -54,7 +54,7 @@ public:
 	}
 
 
-	//�������û�뵽�������ò������
+	//这个题我没想到还可以用层序遍历
 	TreeNode* invertTree3(TreeNode* root) {
         if(root==nullptr) return root;
         queue<TreeNode*>que;
