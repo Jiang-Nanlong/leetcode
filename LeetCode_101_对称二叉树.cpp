@@ -3,9 +3,9 @@
 #include <queue>
 using namespace std;
 
-//±È½ÏÒ»¸ö¶ş²æÊ÷ÊÇ²»ÊÇÖá¶Ô³Æ
-//Õâ¸öÎÊÌâµÄ¹Ø¼üÊÇ±È½ÏÁ½¸ö¶Ô³ÆÎ»ÖÃÊÇ·ñÏàµÈ,¼È¿ÉÒÔÓÃµİ¹éÊµÏÖ£¬Ò²¿ÉÒÔÓÃÕ»»ò¶ÓÁĞÊµÏÖ¡£
-//ÔÚÊ¹ÓÃÕ»»ò¶ÓÁĞÊ±£¬Ã¿´Î¶¼ÊÇ³ö¶Ó»ò³öÕ»Ç°Á½¸ö½øĞĞ±È½Ï£¬ËùÒÔÔÚÈëÕ»»òÈë¶ÓµÄÊ±ºòÒ²¶¼ÊÇÁ½Á½¶Ô³ÆµÄÈëÕ»£¬ÕâÑùÔÚ³öµÄÊ±ºòÒ²ÊÇÁ½Á½µÄ³ö£¬½øĞĞ±È½Ï
+//æ¯”è¾ƒä¸€ä¸ªäºŒå‰æ ‘æ˜¯ä¸æ˜¯è½´å¯¹ç§°
+//è¿™ä¸ªé—®é¢˜çš„å…³é”®æ˜¯æ¯”è¾ƒä¸¤ä¸ªå¯¹ç§°ä½ç½®æ˜¯å¦ç›¸ç­‰,æ—¢å¯ä»¥ç”¨é€’å½’å®ç°ï¼Œä¹Ÿå¯ä»¥ç”¨æ ˆæˆ–é˜Ÿåˆ—å®ç°ã€‚
+//åœ¨ä½¿ç”¨æ ˆæˆ–é˜Ÿåˆ—æ—¶ï¼Œæ¯æ¬¡éƒ½æ˜¯å‡ºé˜Ÿæˆ–å‡ºæ ˆå‰ä¸¤ä¸ªè¿›è¡Œæ¯”è¾ƒï¼Œæ‰€ä»¥åœ¨å…¥æ ˆæˆ–å…¥é˜Ÿçš„æ—¶å€™ä¹Ÿéƒ½æ˜¯ä¸¤ä¸¤å¯¹ç§°çš„å…¥æ ˆï¼Œè¿™æ ·åœ¨å‡ºçš„æ—¶å€™ä¹Ÿæ˜¯ä¸¤ä¸¤çš„å‡ºï¼Œè¿›è¡Œæ¯”è¾ƒ
 
 struct TreeNode {
 	int val;
@@ -21,7 +21,7 @@ public:
 		return Helper(root, root);
 	}
 private:
-	bool Helper(TreeNode* n1, TreeNode* n2) {   //µİ¹é´¦Àí
+	bool Helper(TreeNode* n1, TreeNode* n2) {   //é€’å½’å¤„ç†
 		if (n1 == nullptr && n2 == nullptr) return true;
 		if (n1 == nullptr || n2 == nullptr) return false;
 		return (n1->val == n2->val) && Helper(n1->left, n2->right) && Helper(n1->right, n2->left);
@@ -69,7 +69,7 @@ public:
 	}
 
 
-	//µÚ¶ş´Î×ö
+	//ç¬¬äºŒæ¬¡åš
 	bool isSymmetric(TreeNode* root) { return isSymmetricHelper(root, root); }
 	bool isSymmetricHelper(TreeNode* root1, TreeNode* root2) {
 		if (root1 == nullptr && root2 == nullptr)
@@ -85,7 +85,7 @@ public:
 		else
 			return false;
 	}
-	//isSymmetricHelper1Ã»ÓĞ¼ò»¯Ö®Ç°µÄÂß¼­
+	//isSymmetricHelper1æ²¡æœ‰ç®€åŒ–ä¹‹å‰çš„é€»è¾‘
 	bool isSymmetricHelper1(TreeNode* root1, TreeNode* root2) {
 		if (root1 == nullptr && root2 == nullptr)
 			return true;
