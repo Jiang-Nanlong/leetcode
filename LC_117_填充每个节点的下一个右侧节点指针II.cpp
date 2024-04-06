@@ -2,8 +2,8 @@
 #include <queue>
 using namespace std;
 
-//��ĿҪ����ÿ���ڵ㶼��һ��nextָ�룬Ҫ��ÿһ���nextָ�붼��������ָ�������Ҳ�ڵ㡣��ʼ״̬�£�ÿ���ڵ��nextָ�붼��nullptr
-//������LeetCode 116 ��ȫһ��
+//题目要求是每个节点都有一个next指针，要把每一层的next指针都串起来，指向他的右侧节点。初始状态下，每个节点的next指针都是nullptr
+//这个题跟LeetCode 116 完全一样
 
 class Node {
 public:
@@ -50,15 +50,15 @@ public:
 	}
 
 
-	//�ڶ�����
+	//第二次做
 	Node* connect(Node* root) {
 		if (root == nullptr) return root;
 		queue<Node*> que;
 		que.push(root);
 		while (!que.empty()) {
 			int size = que.size();
-			while (size--) {  //һ��ʼ�Ұ�����д��while(size-->1)�ˣ�����һֱ����ʱ�Ĵ��󣬿�ʼ���벻����ֻ���ſ�ʼÿ���ڵ��nextָ�붼�Ѿ���ʼ��Ϊnull�ˣ�
-				//���ø����һ���ڵ�Ūnextָ������ˡ������������д��size-->1�Ļ����Ͳ��������ÿһ�е����һ����Ҳ�Ͳ���������������ӽڵ���ڶ��У����Գ�ʱ�ˡ�
+			while (size--) {  //一开始我把这里写成while(size-->1)了，但是一直报超时的错误，开始还想不懂，只想着开始每个节点的next指针都已经初始化为null了，
+				//不用给最后一个节点弄next指针就行了。后来发现如果写成size-->1的话，就不会遍历到每一行的最后一个，也就不会把他的两个孩子节点存在队列，所以超时了。
 				Node* cur = que.front();
 				que.pop();
 				if (size) cur->next = que.front();
