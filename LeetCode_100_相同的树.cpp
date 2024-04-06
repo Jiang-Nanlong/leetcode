@@ -3,7 +3,7 @@
 #include <stack>
 using namespace std;
 
-//和LeetCode 101 一样，不过这里比较的是相同位置，也可以使用栈或队列来实现，不过比较的是相同位置
+//鍜孡eetCode 101 涓�鏍凤紝涓嶈繃杩欓噷姣旇緝鐨勬槸鐩稿悓浣嶇疆锛屼篃鍙互浣跨敤鏍堟垨闃熷垪鏉ュ疄鐜帮紝涓嶈繃姣旇緝鐨勬槸鐩稿悓浣嶇疆
 
 struct TreeNode {
 	int val;
@@ -74,7 +74,7 @@ public:
 		return true;
 	}
 
-	//第二次做
+	//绗簩娆″仛
 	bool isSameTree1(TreeNode* p, TreeNode* q) { return isSameTreeHelper(p, q); }
 	bool isSameTreeHelper(TreeNode* p, TreeNode* q) {
 		if (p == nullptr && q == nullptr)
