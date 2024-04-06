@@ -2,7 +2,7 @@
 #include <algorithm>
 using namespace std;
 
-//�ж�һ�����ǲ���ƽ�������
+//判断一个数是不是平衡二叉树
 
 struct TreeNode {
 	int val;
@@ -18,7 +18,7 @@ public:
 	bool isBalanced(TreeNode* root) {
 		return Height(root) == -1 ? false : true;
 	}
-	int Height(TreeNode* node) {  //ע��ݹ���Ҫ��
+	int Height(TreeNode* node) {  //注意递归三要素
 		if (node == nullptr) return 0;
 
 		int leftHeight = Height(node->left);
@@ -29,8 +29,8 @@ public:
 	}
 
 
-	//�ڶ�����������û�������������һ���Ƚ���Ҫ�ĵط��ǵ��ú����������һ������ʱ��û������ΪɶҪ�ú��������Ҳû��ע
-	//���ڵڶ������������о�ȷʵ��ֻ���ú����������Ϊ��ǰ����Ļ�����ÿһ����û���Ƚ�����������������Ȳ
+	//第二遍做，还是没做出来，这个题一个比较重要的地方是得用后序遍历。第一遍做的时候没体会出来为啥要用后序遍历，也没关注
+	//现在第二遍再来做，感觉确实是只能用后序遍历，因为用前序求的话，在每一层内没法比较左右两颗子树的深度差。
 	bool isBalanced1(TreeNode* root) {
 		return getHeight(root) == -1 ? false : true;
 	}
