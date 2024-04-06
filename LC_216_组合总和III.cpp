@@ -2,7 +2,7 @@
 #include <vector>
 using namespace std;
 
-//ÔÚ1-9Ö®¼äÑ¡Ôñk¸öÊı£¬Ïà¼Ó×ÜºÍÎªn
+//åœ¨1-9ä¹‹é—´é€‰æ‹©kä¸ªæ•°ï¼Œç›¸åŠ æ€»å’Œä¸ºn
 
 class Solution {
 public:
@@ -13,16 +13,16 @@ public:
 		return res;
 	}
 	void Helper(int k, int n, int startindex, long long sum, vector<int>& cb, vector<vector<int>>& res) {
-		if (sum > n) return;  //¼ôÖ¦²Ù×÷
+		if (sum > n) return;  //å‰ªææ“ä½œ
 
-		if (cb.size() == k) {  //ÕâÀï²»ÄÜ°ÑÁ½¸öÌõ¼şĞ´µ½Ò»Æğ£¬Èç¹ûĞ´µ½Ò»Æğ£¬¼´±ãÊÇµ±ÔªËØÊıÁ¿µÈÓÚkÊ±£¬µ«ÊÇsum!=n£¬ÄÇÃ´³ÌĞòÒ²²»»áreturn£¬¾Í»á³¬Ê±
+		if (cb.size() == k) {  //è¿™é‡Œä¸èƒ½æŠŠä¸¤ä¸ªæ¡ä»¶å†™åˆ°ä¸€èµ·ï¼Œå¦‚æœå†™åˆ°ä¸€èµ·ï¼Œå³ä¾¿æ˜¯å½“å…ƒç´ æ•°é‡ç­‰äºkæ—¶ï¼Œä½†æ˜¯sum!=nï¼Œé‚£ä¹ˆç¨‹åºä¹Ÿä¸ä¼šreturnï¼Œå°±ä¼šè¶…æ—¶
 			if (sum == n) res.push_back(cb);
 			return;
 		}
 
-		for (int i = startindex; i <= 9 - (k - cb.size()) + 1; i++) {   //i<= 9 - (k - cb.size()) + 1 ¼ôÖ¦²Ù×÷
+		for (int i = startindex; i <= 9 - (k - cb.size()) + 1; i++) {   //i<= 9 - (k - cb.size()) + 1 å‰ªææ“ä½œ
 			cb.push_back(i);
-			Helper(k, n, i + 1, sum + i, cb, res);  //Ö®¼ä´«²Îsum+i£¬´Ó¶ø±ÜÃâsum»ØËİ£¬Ö»¶Ôcb½øĞĞ»ØËİ
+			Helper(k, n, i + 1, sum + i, cb, res);  //ä¹‹é—´ä¼ å‚sum+iï¼Œä»è€Œé¿å…sumå›æº¯ï¼Œåªå¯¹cbè¿›è¡Œå›æº¯
 			cb.pop_back();
 		}
 	}
