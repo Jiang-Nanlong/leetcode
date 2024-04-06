@@ -2,13 +2,13 @@
 #include <vector>
 using namespace std;
 
-//¸ø¶¨Ò»¸ö¶þÎ¬Êý×éedges£¬edges[i]={u,v}±íÊ¾½ÚµãuºÍ½ÚµãvÖ®¼ä´æÔÚÒ»Ìõ±ß£¬¶øÇÒÊÇË«Ïò±ß£¬¶øÇÒÃ¿¸ö¶¥µãÃ»ÓÐÖ¸Ïò×ÔÉíµÄ±ß
-//·µ»ØsourceºÍdestinationÖ®¼äÊÇ·ñ´æÔÚÂ·¾¶
-//Õâ¸öÌâÊÇÓÃ²¢²é¼¯×ö
+//ç»™å®šä¸€ä¸ªäºŒç»´æ•°ç»„edgesï¼Œedges[i]={u,v}è¡¨ç¤ºèŠ‚ç‚¹uå’ŒèŠ‚ç‚¹vä¹‹é—´å­˜åœ¨ä¸€æ¡è¾¹ï¼Œè€Œä¸”æ˜¯åŒå‘è¾¹ï¼Œè€Œä¸”æ¯ä¸ªé¡¶ç‚¹æ²¡æœ‰æŒ‡å‘è‡ªèº«çš„è¾¹
+//è¿”å›žsourceå’Œdestinationä¹‹é—´æ˜¯å¦å­˜åœ¨è·¯å¾„
+//è¿™ä¸ªé¢˜æ˜¯ç”¨å¹¶æŸ¥é›†åš
 
 class Solution {
 public:
-	//ÏÂ±ßÕâ¸öÊÇÒ»¿ªÊ¼ÎÒÐ´µÄ´úÂë£¬µ«ÊÇ²»ÐÐ£¬ÒòÎªÒ»¿ªÊ¼ÎÒÒÔÎªedges[i]¾ÍÊÇ´ÓiÒý³öµÄÒ»Ìõ±ß£¬ÕâÑù¾ÍÄÜË³×ÅÕâÌõ±ßÒ»Ö±ÕÒÏÂÈ¥£¬ºóÀ´³ö´íÁË²ÅÃ÷°×²»ÊÇÕâÑù¡£edgesÊý×éÀï¾ÍÊÇ´æµÄËùÓÐ±ß¡£
+	//ä¸‹è¾¹è¿™ä¸ªæ˜¯ä¸€å¼€å§‹æˆ‘å†™çš„ä»£ç ï¼Œä½†æ˜¯ä¸è¡Œï¼Œå› ä¸ºä¸€å¼€å§‹æˆ‘ä»¥ä¸ºedges[i]å°±æ˜¯ä»Žiå¼•å‡ºçš„ä¸€æ¡è¾¹ï¼Œè¿™æ ·å°±èƒ½é¡ºç€è¿™æ¡è¾¹ä¸€ç›´æ‰¾ä¸‹åŽ»ï¼ŒåŽæ¥å‡ºé”™äº†æ‰æ˜Žç™½ä¸æ˜¯è¿™æ ·ã€‚edgesæ•°ç»„é‡Œå°±æ˜¯å­˜çš„æ‰€æœ‰è¾¹ã€‚
 	/*bool validPath(int n, vector<vector<int>>& edges, int source, int destination) {
 		int begin = source;
 		for (int i = 0; i < edges.size(); i++) {
