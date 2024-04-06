@@ -1,4 +1,0 @@
-﻿  FileName.cpp
-D:\Microsoft Visual Studio\Projectcode\Leetcode 63 Unique Paths II\FileName.cpp(11,9): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
-D:\Microsoft Visual Studio\Projectcode\Leetcode 63 Unique Paths II\FileName.cpp(11,34): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
-  Leetcode 63 Unique Paths II.vcxproj -> D:\Microsoft Visual Studio\Projectcode\Leetcode 63 Unique Paths II\x64\Debug\Leetcode 63 Unique Paths II.exe
