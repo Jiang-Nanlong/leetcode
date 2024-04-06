@@ -42,7 +42,7 @@ private:
 };
 
 
-//第二次做
+//碌脷露镁麓脦脳枚
 class MyQueue1 {
 public:
 	MyQueue1() {}
