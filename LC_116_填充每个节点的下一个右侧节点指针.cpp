@@ -2,7 +2,7 @@
 #include <queue>
 using namespace std;
 
-//��ĿҪ����ÿ���ڵ㶼��һ��nextָ�룬Ҫ��ÿһ���nextָ�붼��������ָ�������Ҳ�ڵ㡣��ʼ״̬�£�ÿ���ڵ��nextָ�붼��nullptr
+//题目要求是每个节点都有一个next指针，要把每一层的next指针都串起来，指向他的右侧节点。初始状态下，每个节点的next指针都是nullptr
 
 class Node {
 public:
@@ -49,7 +49,7 @@ public:
 	}
 
 
-	//�ڶ���������������о���һ��д��̫�����ˡ�
+	//第二次做，这回再做感觉第一次写的太啰嗦了。
 	Node* connect(Node* root) {
 		if (root == nullptr)
 			return nullptr;
