@@ -2,14 +2,14 @@
 #include <vector>
 using namespace std;
 
-//�ҳ���������������������еĳ��ȣ��������е���ĸ��һ���������ġ�
-//��ʼ����Ϊ��LeetCode 300��718�������ϣ����Ǻ������ֵ��ƹ�ʽд���ˡ�
-//������dp����ͺ��廹�ǱȽϺ���
-//�����ĵ��ƹ�ʽ�Ƚ�����
+//找出两个数组中最长公共子序列的长度，子序列中的字母不一定是连续的。
+//开始我以为是LeetCode 300和718两个题结合，但是后来发现递推公式写不了。
+//这个题的dp数组和含义还是比较好想
+//这个题的递推公式比较难想
 
 class Solution {
 public:
-	//����ǰ���������¼�Ĵ���д�ã������ʼ��
+	//这个是按代码随想录的代码写得，方便初始化
 	int longestCommonSubsequence(string text1, string text2) {
 		vector<vector<int>> dp(text1.size() + 1, vector<int>(text2.size() + 1, 0));
 		for (int i = 1; i <= text1.size(); i++) {
@@ -23,10 +23,10 @@ public:
 		return dp[text1.size()][text2.size()];
 	}
 
-	//�����Լ�д�ģ���ʼ���鷳��һ�㣬���ǿ�����˼·������
+	//这是自己写的，初始化麻烦了一点，但是看起来思路更清晰
 	int longestCommonSubsequence1(string text1, string text2) {
 		vector<vector<int>> dp(text1.size(), vector<int>(text2.size(), 0));
-		if (text1[0] == text2[0]) dp[0][0] = 1;  //��һ����Ϊ�˷�ֹ��һ����ĸ��һ�������±�������ʼ����ʱ��i��0��ʼ���������Խ�������
+		if (text1[0] == text2[0]) dp[0][0] = 1;  //这一句是为了防止第一个字母不一样，在下边两个初始化的时候i从0开始会出现数组越界的问题
 
 		for (int i = 1; i < text1.size(); i++) {
 			if (text1[i] == text2[0]) dp[i][0] = 1;
