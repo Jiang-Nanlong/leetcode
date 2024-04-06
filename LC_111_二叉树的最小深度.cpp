@@ -24,7 +24,7 @@ public:
 			for (int i = 0; i < size; i++) {
 				TreeNode* cur = que.front();
 				que.pop();
-				if (cur->left == nullptr && cur->right == nullptr) return count;   //µ½´ïµÚÒ»¸öÒ¶×Ó½áµãµÄÊ±ºò¾Í·µ»Ø
+				if (cur->left == nullptr && cur->right == nullptr) return count;   //åˆ°è¾¾ç¬¬ä¸€ä¸ªå¶å­ç»“ç‚¹çš„æ—¶å€™å°±è¿”å›ž
 				if (cur->left) que.push(cur->left);
 				if (cur->right) que.push(cur->right);
 			}
@@ -36,15 +36,15 @@ public:
 class Solution {
 public:
 	int result;
-	void getDepth(TreeNode* node, int depth) {   //Ç°Ðò±éÀúµÄ·½Ê½
+	void getDepth(TreeNode* node, int depth) {   //å‰åºéåŽ†çš„æ–¹å¼
 		if (node == nullptr) return;
-		if (node->left == nullptr && node->right == nullptr) {		//ÖÐ
+		if (node->left == nullptr && node->right == nullptr) {		//ä¸­
 			result = min(result, depth);
 		}
-		if (node->left) {   //×ó
+		if (node->left) {   //å·¦
 			getDepth(node->left, depth + 1);
 		}
-		if (node->right) {	//ÓÒ
+		if (node->right) {	//å³
 			getDepth(node->right, depth + 1);
 		}
 	}
@@ -56,7 +56,7 @@ public:
 		return result;
 	}
 
-	int getDepth1(TreeNode* node) {        //ºóÐò±éÀú
+	int getDepth1(TreeNode* node) {        //åŽåºéåŽ†
 		if (node == nullptr) return 0;
 		int leftDepth = getDepth1(node->left);
 		int rightDepth = getDepth1(node->right);
@@ -73,7 +73,7 @@ public:
 	}
 
 
-	//µÚ¶þ´Î×ö
+	//ç¬¬äºŒæ¬¡åš
 	int mindepth = INT_MAX;
 	int minDepth2(TreeNode* root) {
 		if (root == nullptr) return 0;
@@ -81,7 +81,7 @@ public:
 		return mindepth;
 	}
 	void backtrace1(TreeNode* root, int depth) {
-		if ((root->left == nullptr) && (root->right == nullptr)) {  //Ç°Ðò±éÀú£¬ÇóµÄÊÇÉî¶È£¬ºóÐò±éÀúÇóµÄÊÇ¸ß¶È
+		if ((root->left == nullptr) && (root->right == nullptr)) {  //å‰åºéåŽ†ï¼Œæ±‚çš„æ˜¯æ·±åº¦ï¼ŒåŽåºéåŽ†æ±‚çš„æ˜¯é«˜åº¦
 			mindepth = min(mindepth, depth + 1);
 			return;
 		}
@@ -95,7 +95,7 @@ public:
 		return getminDepth(root);
 	}
 
-	int getminDepth(TreeNode* root) {   //ºóÐò±éÀú
+	int getminDepth(TreeNode* root) {   //åŽåºéåŽ†
 		if (root == nullptr) return 0;
 		int leftDepth = getminDepth(root->left);
 		int rightDepth = getminDepth(root->right);
