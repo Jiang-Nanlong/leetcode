@@ -40,13 +40,13 @@ public:
 				if (s == "/") stk.push(num2 / num1);
 			}
 			else {
-				stk.push(stoll(s));   //ÔÚÕâÒ»²½»»³Élonglong ¾Í²»ÓÃÔÙ¶ÔÆäËûµÄÊı²Ù×÷ÁË¡£
+				stk.push(stoll(s));   //åœ¨è¿™ä¸€æ­¥æ¢æˆlonglong å°±ä¸ç”¨å†å¯¹å…¶ä»–çš„æ•°æ“ä½œäº†ã€‚
 			}
 		}
 		return stk.top();
 	}
 
-	//µÚ¶ş´Î×ö
+	//ç¬¬äºŒæ¬¡åš
 	int evalRPN1(vector<string>& tokens) {
 		unordered_set<string> uset{ "+", "-", "*", "/" };
 		stack<int> stk;
