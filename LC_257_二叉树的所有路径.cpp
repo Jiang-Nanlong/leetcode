@@ -24,7 +24,7 @@ public:
 	}
 
 private:
-	void Helper(TreeNode* cur, vector<int>& path, vector<string>& res) {  //Ê¹ÓÃÇ°Ğò±éÀú£¬ÕâÑù²ÅÄÜÊÇ´Ó¸ù½Úµãµ½Ò¶×Ó½ÚµãµÄÂ·¾¶
+	void Helper(TreeNode* cur, vector<int>& path, vector<string>& res) {  //ä½¿ç”¨å‰åºéå†ï¼Œè¿™æ ·æ‰èƒ½æ˜¯ä»æ ¹èŠ‚ç‚¹åˆ°å¶å­èŠ‚ç‚¹çš„è·¯å¾„
 		path.push_back(cur->val);
 		if (cur->left == nullptr && cur->right == nullptr) {
 			string Paths;
@@ -38,7 +38,7 @@ private:
 		}
 		if (cur->left) {
 			Helper(cur->left, path, res);
-			path.pop_back(); //ÒòÎª¸Õ½øº¯Êı¾Í°Ñµ±Ç°²ã½ÚµãÈëÕ»£¬ËùÒÔ×îºóµÄÒ¶×Ó½áµãÒ²»áÈëÕ»£¬È»ºóÔÚÒ¶×Ó½áµãµÄÉÏÒ»²ãµ¯³öÒ¶×Ó½Úµã£¬ËùÒÔÃ¿¸ö·ÖÖ§ÉÏ¶¼µÃµ¯³öÒ»´Î
+			path.pop_back(); //å› ä¸ºåˆšè¿›å‡½æ•°å°±æŠŠå½“å‰å±‚èŠ‚ç‚¹å…¥æ ˆï¼Œæ‰€ä»¥æœ€åçš„å¶å­ç»“ç‚¹ä¹Ÿä¼šå…¥æ ˆï¼Œç„¶ååœ¨å¶å­ç»“ç‚¹çš„ä¸Šä¸€å±‚å¼¹å‡ºå¶å­èŠ‚ç‚¹ï¼Œæ‰€ä»¥æ¯ä¸ªåˆ†æ”¯ä¸Šéƒ½å¾—å¼¹å‡ºä¸€æ¬¡
 		}
 		if (cur->right) {
 			Helper(cur->right, path, res);
@@ -46,7 +46,7 @@ private:
 		}
 	}
 
-	//ÒÔÉÏ´úÂë¿ÉÒÔ¾«¼ò³ÉÏÂ±ßÕâÑù£¬¿ÉÒÔÓÃstring path´úÌævector<int> & path£¬ÕâÑù»ØËİ¹ı³Ì¾Í±»Òş²ØÆğÀ´ÁË£¬ÒòÎªÕâÀïÊÇ¿½±´¸³Öµ¶ø²»ÊÇÒıÓÃ
+	//ä»¥ä¸Šä»£ç å¯ä»¥ç²¾ç®€æˆä¸‹è¾¹è¿™æ ·ï¼Œå¯ä»¥ç”¨string pathä»£æ›¿vector<int> & pathï¼Œè¿™æ ·å›æº¯è¿‡ç¨‹å°±è¢«éšè—èµ·æ¥äº†ï¼Œå› ä¸ºè¿™é‡Œæ˜¯æ‹·è´èµ‹å€¼è€Œä¸æ˜¯å¼•ç”¨
 	/*void Helper(TreeNode* cur, string path, vector<string>& res) {
 		path += to_string(cur->val);
 		if (cur->left == nullptr && cur->right == nullptr) {
@@ -57,7 +57,7 @@ private:
 		if (cur->right) Helper(cur->right, path + "->", res);
 	}*/
 
-	//¼ÈÈ»ÊÇÍ¨¹ıµİ¹éµÄÇ°Ğò±éÀú£¬ÄÇÃ´µü´úµÄÇ°Ğò±éÀúÒ²ÄÜ×öµ½
+	//æ—¢ç„¶æ˜¯é€šè¿‡é€’å½’çš„å‰åºéå†ï¼Œé‚£ä¹ˆè¿­ä»£çš„å‰åºéå†ä¹Ÿèƒ½åšåˆ°
 	//vector<string> binaryTreePaths(TreeNode* root) {
 	//	vector<string> res;
 	//	if (root == nullptr) return res;
@@ -66,17 +66,17 @@ private:
 	//	treeStk.push(root);
 	//	pathStk.push(to_string(root->val));
 	//	while (!treeStk.empty()) {
-	//		TreeNode* cur = treeStk.top(); treeStk.pop();	//ÕâÁ½²½ÊÇÖĞ
+	//		TreeNode* cur = treeStk.top(); treeStk.pop();	//è¿™ä¸¤æ­¥æ˜¯ä¸­
 	//		string path = pathStk.top(); pathStk.pop();
 	//		if (cur->left == nullptr && cur->right == nullptr) {
 	//			res.push_back(path);
 	//			continue;
 	//		}
-	//		if (cur->left) {  //ÕâÁ½²½£¬Ë­ÔÚÇ°Ë­ÔÚºó¶¼ÎŞËùÎ½£¬×ó
+	//		if (cur->left) {  //è¿™ä¸¤æ­¥ï¼Œè°åœ¨å‰è°åœ¨åéƒ½æ— æ‰€è°“ï¼Œå·¦
 	//			treeStk.push(cur->left);
 	//			pathStk.push(path + "->" + to_string(cur->left->val));
 	//		}
-	//		if (cur->right) {   //ÓÒ
+	//		if (cur->right) {   //å³
 	//			treeStk.push(cur->right);
 	//			pathStk.push(path + "->" + to_string(cur->right->val));
 	//		}
@@ -84,7 +84,7 @@ private:
 	//	return res;
 	//}
 
-	//µÚ¶ş±é×ö
+	//ç¬¬äºŒéåš
 	vector<string> binaryTreePaths1(TreeNode* root) {
 		vector<string> res;
 		vector<int> path;
@@ -110,7 +110,7 @@ private:
 
 		if (root->right)
 			binaryTreePathsHelper(root->right, path, res);
-		path.pop_back();  //ÒòÎª×îºóÒ»¸ö½Úµã²»¼ÓÈëÊı×é£¬ËùÒÔÃ¿Ò»²ãÖ»ĞèÒªµ¯³öÃ¿Ò»²ãĞÂ¼ÓÈëµÄ½Úµã¾ÍĞĞ
+		path.pop_back();  //å› ä¸ºæœ€åä¸€ä¸ªèŠ‚ç‚¹ä¸åŠ å…¥æ•°ç»„ï¼Œæ‰€ä»¥æ¯ä¸€å±‚åªéœ€è¦å¼¹å‡ºæ¯ä¸€å±‚æ–°åŠ å…¥çš„èŠ‚ç‚¹å°±è¡Œ
 	}
 
 };
