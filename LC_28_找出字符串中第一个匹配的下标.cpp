@@ -5,7 +5,7 @@ using namespace std;
 class Solution {
 public:
 	int strStr(string haystack, string needle) {
-		/*int n = haystack.size(), m = needle.size();   //暴力做法 时间复杂度是O(m*n)
+		/*int n = haystack.size(), m = needle.size();   //鏆村姏鍋氭硶 鏃堕棿澶嶆潅搴︽槸O(m*n)
 		for (int i = 0; i < n - m + 1; i++) {
 			bool flag = true;
 			for (int j = 0; j < m; j++) {
@@ -20,7 +20,7 @@ public:
 		return -1;*/
 
 
-		//KMP做法  时间复杂度是O(m+n)
+		//KMP鍋氭硶  鏃堕棿澶嶆潅搴︽槸O(m+n)
 		if (needle.size() == 0)
 			return 0;
 		int* next = new int[needle.size()];
