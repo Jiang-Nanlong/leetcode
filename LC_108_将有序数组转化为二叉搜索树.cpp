@@ -2,7 +2,7 @@
 #include <vector>
 using namespace std;
 
-//ÓĞÒ»¸öÉıĞòÊı×é£¬½«¸ÄÊı×é×ª»¯ÎªÒ»¸ö¸ß¶ÈÆ½ºâµÄ¶ş²æËÑË÷Ê÷
+//æœ‰ä¸€ä¸ªå‡åºæ•°ç»„ï¼Œå°†æ”¹æ•°ç»„è½¬åŒ–ä¸ºä¸€ä¸ªé«˜åº¦å¹³è¡¡çš„äºŒå‰æœç´¢æ ‘
 
 struct TreeNode {
 	int val;
@@ -13,8 +13,8 @@ struct TreeNode {
 	TreeNode(int x, TreeNode* left, TreeNode* right) : val(x), left(left), right(right) {}
 };
 
-//ÆäÊµÕâ¸öÌâ¸úÓÃÇ°ĞòºÍÖĞĞò¹¹Ôì¶ş²æÊ÷£¬ºóĞòºÍÖĞĞò¹¹Ôì¶ş²æÊ÷µÄÌâÒ»Ñù¡£´«Èë²ÎÊıÊ±£¬Ê¹ÓÃ±ÕÇø¼ä»òÕß×ó±ÕÓÒ¿ªÇø¼ä¶¼ĞĞ¡£
-//¶øÇÒ¹¹ÔìµÄÊ±ºò£¬½Úµã¶¼ÊÇÈ¡Êı×éµÄÖĞ¼äÎ»ÖÃ£¬ËùÒÔ×óÓÒ×ÓÊ÷µÄ¸ß¶ÈÆ½ºâ¶¼ÊÇ×ÔÈ»¶øÈ»µÄÊÂ
+//å…¶å®è¿™ä¸ªé¢˜è·Ÿç”¨å‰åºå’Œä¸­åºæ„é€ äºŒå‰æ ‘ï¼Œååºå’Œä¸­åºæ„é€ äºŒå‰æ ‘çš„é¢˜ä¸€æ ·ã€‚ä¼ å…¥å‚æ•°æ—¶ï¼Œä½¿ç”¨é—­åŒºé—´æˆ–è€…å·¦é—­å³å¼€åŒºé—´éƒ½è¡Œã€‚
+//è€Œä¸”æ„é€ çš„æ—¶å€™ï¼ŒèŠ‚ç‚¹éƒ½æ˜¯å–æ•°ç»„çš„ä¸­é—´ä½ç½®ï¼Œæ‰€ä»¥å·¦å³å­æ ‘çš„é«˜åº¦å¹³è¡¡éƒ½æ˜¯è‡ªç„¶è€Œç„¶çš„äº‹
 class Solution {
 public:
 	TreeNode* sortedArrayToBST(vector<int>& nums) {
@@ -38,12 +38,12 @@ public:
 		return temp;
 	}
 
-	//µÚ¶ş´Î×ö
+	//ç¬¬äºŒæ¬¡åš
 	TreeNode* sortedArrayToBST1(vector<int>& nums) {
 		return sortedArrayToBSTHelper(nums, 0, nums.size());
 	}
 
-	TreeNode* sortedArrayToBSTHelper(vector<int>& nums, int begin, int end) {  //×ó±ÕÓÒ¿ªÇø¼ä
+	TreeNode* sortedArrayToBSTHelper(vector<int>& nums, int begin, int end) {  //å·¦é—­å³å¼€åŒºé—´
 		if (begin == end)
 			return nullptr;
 		int size = end - begin;
@@ -54,7 +54,7 @@ public:
 		return root;
 	}
 
-	//ÉÔÎ¢µ÷ÕûÒ»ÏÂ
+	//ç¨å¾®è°ƒæ•´ä¸€ä¸‹
 	TreeNode* sortedArrayToBST2(vector<int>& nums) {
 		return sortedArrayToBSTHelper(nums, 0, nums.size());
 	}
