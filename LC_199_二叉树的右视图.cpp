@@ -3,7 +3,7 @@
 #include <queue>
 using namespace std;
 
-//ÏÖÔÚ¼ÙÉèÄãÕ¾ÔÚÕû¿ÃÊ÷µÄÓÒ±ß£¬Êä³öÍù×ó¿´ÄÜ¿´µ½µÄËùÓĞ½Úµã
+//ç°åœ¨å‡è®¾ä½ ç«™åœ¨æ•´æ£µæ ‘çš„å³è¾¹ï¼Œè¾“å‡ºå¾€å·¦çœ‹èƒ½çœ‹åˆ°çš„æ‰€æœ‰èŠ‚ç‚¹
 struct TreeNode {
 	int val;
 	TreeNode* left, * right;
@@ -13,7 +13,7 @@ struct TreeNode {
 };
 class Solution {
 public:
-	vector<int> rightSideView(TreeNode* root) {    //ÆäÊµ¾ÍÊÇ²ãĞò±éÀú£¬ÔÚ±éÀúµÄÊ±ºòÖ»ÓĞÃ¿Ò»²ã×îÓÒ±ßµÄ½Úµã²Å¼ÓÈëµ½½á¹û¼¯
+	vector<int> rightSideView(TreeNode* root) {    //å…¶å®å°±æ˜¯å±‚åºéå†ï¼Œåœ¨éå†çš„æ—¶å€™åªæœ‰æ¯ä¸€å±‚æœ€å³è¾¹çš„èŠ‚ç‚¹æ‰åŠ å…¥åˆ°ç»“æœé›†
 		if (root == nullptr) return {};
 		queue<TreeNode*> que;
 		vector<int> res;
@@ -31,7 +31,7 @@ public:
 		return res;
 	}
 
-	//µÚ¶ş´Î×ö
+	//ç¬¬äºŒæ¬¡åš
 	vector<int> rightSideView1(TreeNode* root) {
 		if (root == nullptr)
 			return {};
