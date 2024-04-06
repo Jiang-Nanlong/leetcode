@@ -28,7 +28,7 @@ public:
 		return h->next;
 	}
 
-	//µÚ¶þ»ØÐ´µÄ´úÂë
+	//ç¬¬äºŒå›žå†™çš„ä»£ç 
 	ListNode* removeElements1(ListNode* head, int val) {
 		if (head == nullptr)
 			return nullptr;
@@ -43,7 +43,7 @@ public:
 				delete temp;
 			}
 			else
-				p = p->next;   //¿ªÊ¼µÄÊ±ºòÕâÀïµÄÂß¼­Ð´´íÁË£¬Ã»ÓÐÐ´else£¬Ò»Ö±±¨³¬Ê±µÄ´íÎó£¬ºóÀ´ÊÖ¶¯ÑÝÊ¾ÁËÒ»±é²ÅÖªµÀ
+				p = p->next;   //å¼€å§‹çš„æ—¶å€™è¿™é‡Œçš„é€»è¾‘å†™é”™äº†ï¼Œæ²¡æœ‰å†™elseï¼Œä¸€ç›´æŠ¥è¶…æ—¶çš„é”™è¯¯ï¼ŒåŽæ¥æ‰‹åŠ¨æ¼”ç¤ºäº†ä¸€éæ‰çŸ¥é“
 		}
 		return phead->next;
 	}
