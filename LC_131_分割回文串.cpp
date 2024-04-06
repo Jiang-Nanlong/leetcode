@@ -3,9 +3,9 @@
 #include <vector>
 using namespace std;
 
-//����һ���ַ���s����s�ָ��һЩ�Ӵ���ʹ��ÿ���Ӵ����ǻ����Ӵ�������s�����зָ�������Ĵ��������Ŷ��ͷ��Ŷ�����һ�����ַ�����
-//��ʼ��ʱ����������˫ָ���ж�һ���Ӵ��ǲ��ǻ��Ĵ��������ֵ����ǲ��ǻ��и�����ķ���������һ���ŷ��ֻ�������ôŪ��
-//��������ת�������νṹ�����Բ����û��ݡ�
+//给定一个字符串s，将s分割成一些子串，使得每个子串都是回文子串，返回s的所有分割方案。回文串就是正着读和反着读都是一样的字符串。
+//开始的时候我想着用双指针判断一个子串是不是回文串，但是又担心是不是还有更巧妙的方法，后来一看才发现还真是这么弄。
+//这个题可以转化成树形结构，所以才能用回溯。
 
 class Solution {
 public:
@@ -23,7 +23,7 @@ public:
 
 		for (int i = startindex; i < s.size(); i++) {
 			if (isPalindrome(s, startindex, i)) {
-				string temp = s.substr(startindex, i - startindex + 1);  //��һ�������γ���Ĺؼ�
+				string temp = s.substr(startindex, i - startindex + 1);  //这一句是整段程序的关键
 				cb.push_back(temp);
 			}
 			else {
@@ -42,7 +42,7 @@ public:
 	}
 
 
-	//�ڶ�����������û�����ô��
+	//第二遍做，还是没想出怎么做
 	vector<vector<string>> res;
 	vector<string> path;
 
@@ -57,7 +57,7 @@ public:
 			return;
 		}
 
-		for (int i = startIndex; i < s.size(); i++) {  // [startIndex,i]��ʾҪ��ȡ���Ӵ�
+		for (int i = startIndex; i < s.size(); i++) {  // [startIndex,i]表示要截取的子串
 			if (isPalindrome1(s, startIndex, i)) {
 				path.push_back(s.substr(startIndex, i - startIndex + 1));
 				backtracking(s, i + 1);
