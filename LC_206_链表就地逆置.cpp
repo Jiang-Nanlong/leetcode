@@ -12,7 +12,7 @@ struct ListNode {
 class Solution {
 public:
 	ListNode* reverseList(ListNode* head) {
-		ListNode* preHead = new ListNode(-1); //´´½¨Ò»¸öÁÙÊ±Í·½áµã£¬Ê¹ÓÃÍ·²å·¨²åÈëºóĞø½Úµã¡£	
+		ListNode* preHead = new ListNode(-1); //åˆ›å»ºä¸€ä¸ªä¸´æ—¶å¤´ç»“ç‚¹ï¼Œä½¿ç”¨å¤´æ’æ³•æ’å…¥åç»­èŠ‚ç‚¹ã€‚	
 		ListNode* ptr = head;
 		while (ptr) {
 			ListNode* temp = preHead->next;
@@ -23,7 +23,7 @@ public:
 		return preHead->next;
 	}
 
-	//µÚ¶ş´Î×ö£¬»¹ÊÇÅª¸öÍ·½áµã£¬È»ºóÍ·²å·¨¾ÍµØÄæÖÃ
+	//ç¬¬äºŒæ¬¡åšï¼Œè¿˜æ˜¯å¼„ä¸ªå¤´ç»“ç‚¹ï¼Œç„¶åå¤´æ’æ³•å°±åœ°é€†ç½®
 	ListNode* reverseList1(ListNode* head) {
 		ListNode* phead = new ListNode(-1);
 		ListNode* p = head;
