@@ -2,15 +2,15 @@
 #include <vector>
 using namespace std;
 
-//�������Ҫ���ǴӺ������е����һ���ڵ��ȡ��ǰ�����ĸ��ڵ㣬Ȼ��ָ��������кͺ������С�Ȼ��ݹ鴦������������������
+//这个题重要的是从后序序列的最后一个节点获取当前子树的根节点，然后分割中序序列和后序序列。然后递归处理左子树和右子树。
 /*
-* ����ɷ�Ϊ������
-* 1������������Ϊ0���򷵻ؿ�
-* 2��������������һ��Ԫ��Ϊ��ǰ�����ĸ��ڵ�
-* 3��Ѱ�Ҹ��ڵ������������е�λ�ã���Ϊ�и��
-* 4���и���������
-* 5���и��������
-* 6���ݹ鴦����������������
+* 该题可分为六部：
+* 1、若后序数组为0，则返回空
+* 2、后序数组的最后一个元素为当前子树的根节点
+* 3、寻找根节点在中序数组中的位置，作为切割点
+* 4、切割中序数组
+* 5、切割后序数组
+* 6、递归处理左子树和右子树
 */
 
 struct TreeNode {
@@ -47,7 +47,7 @@ public:
 		return root;
 	}
 
-	//��Ϊ��������һֱ�ڷָ����飬�������飬���Ժܷ�ʱ�䣬��ʵֻҪ��ס��������˾��У��������������롣
+	//因为上述代码一直在分割数组，构造数组，所以很费时间，其实只要记住区间的两端就行，所以有下述代码。
 	TreeNode* buildTree1(vector<int>& inorder, vector<int>& postorder) {
 		if (postorder.size() == 0 || inorder.size() == 0) return nullptr;
 		return Helper(inorder, 0, inorder.size(), postorder, 0, postorder.size());
@@ -83,7 +83,7 @@ public:
 	}
 
 
-	//�ڶ�����
+	//第二次做
 	TreeNode* buildTree(vector<int>& inorder, vector<int>& postorder) {
 		if (inorder.size() == 0)
 			return nullptr;
@@ -113,7 +113,7 @@ public:
 	}
 
 
-	//�޸ĺ�ֻ������������������յ�
+	//修改后，只传递两个数组的起点和终点
 	TreeNode* buildTree(vector<int>& inorder, vector<int>& postorder) {
 		return buildTreeHelper(inorder, 0, inorder.size(), postorder, 0, postorder.size());
 	}
