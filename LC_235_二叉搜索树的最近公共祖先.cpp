@@ -1,8 +1,8 @@
 #include <iostream>
 using namespace std;
 
-//����һ������ü򵥣���������û�����
-//��
+//这题一看代码好简单，可是我又没想出来
+//唉
 
 struct TreeNode {
 	int val;
@@ -35,7 +35,7 @@ public:
 		return nullptr;
 	}
 
-	//�ڶ���������û��������������˼·��ʵ�ܼ򵥣�����ڱ����Ĺ����У���ǰ�ڵ��ֵ��һ�γ�����p��q֮�䣬��ô��ǰ�ڵ��һ���������������
+	//第二遍做还是没做出来，这个题的思路其实很简单，如果在遍历的过程中，当前节点的值第一次出现在p和q之间，那么当前节点就一定是最近公共祖先
 
 	TreeNode* lowestCommonAncestor2(TreeNode* root, TreeNode* p, TreeNode* q) {
 		if (root == NULL) return NULL;
