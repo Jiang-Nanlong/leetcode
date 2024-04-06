@@ -3,7 +3,7 @@
 #include <vector>
 using namespace std;
 
-//Õâ¸öÌâË¼Â·»¹ÊÇÍ¦¼òµ¥µÄ£¬¼ôÖ¦Ò»¿ªÊ¼Ã»Ïëµ½
+//è¿™ä¸ªé¢˜æ€è·¯è¿˜æ˜¯æŒºç®€å•çš„ï¼Œå‰ªæä¸€å¼€å§‹æ²¡æƒ³åˆ°
 class Solution {
 public:
 	vector<vector<int>> fourSum(vector<int>& nums, int target) {
@@ -12,14 +12,14 @@ public:
 		vector<vector<int>> res;
 		sort(nums.begin(), nums.end());
 		for (int i = 0; i < length - 3; i++) {
-			//if(nums[i]>=target) break;  ¿ªÊ¼ÏëµÄ¼ôÖ¦£¬µ«ÊÇÓöµ½{0,0,0,0} target=0µÄÇé¿ö¾Í»á±¨´íÁË
+			//if(nums[i]>=target) break;  å¼€å§‹æƒ³çš„å‰ªæï¼Œä½†æ˜¯é‡åˆ°{0,0,0,0} target=0çš„æƒ…å†µå°±ä¼šæŠ¥é”™äº†
 			if (i > 0 && nums[i] == nums[i - 1]) continue;
-			if ((long)nums[i] + nums[i + 1] + nums[i + 2] + nums[i + 3] > target) break;  //¿ªÊ¼Ã»Ïëµ½Õâ¸ö¼ôÖ¦£¬ÔËĞĞÊ±¼äÓĞµã³¤
-			if ((long)nums[i] + nums[length - 1] + nums[length - 2] + nums[length - 3] < target) continue;  //¿ªÊ¼Ã»Ïëµ½Õâ¸ö¼ôÖ¦£¬ÔËĞĞÊ±¼äÓĞµã³¤
+			if ((long)nums[i] + nums[i + 1] + nums[i + 2] + nums[i + 3] > target) break;  //å¼€å§‹æ²¡æƒ³åˆ°è¿™ä¸ªå‰ªæï¼Œè¿è¡Œæ—¶é—´æœ‰ç‚¹é•¿
+			if ((long)nums[i] + nums[length - 1] + nums[length - 2] + nums[length - 3] < target) continue;  //å¼€å§‹æ²¡æƒ³åˆ°è¿™ä¸ªå‰ªæï¼Œè¿è¡Œæ—¶é—´æœ‰ç‚¹é•¿
 			for (int j = i + 1; j < length - 2; j++) {
 				if (j > i + 1 && nums[j] == nums[j - 1]) continue;
-				if ((long)nums[i] + nums[j] + nums[j + 1] + nums[j + 2] > target) break;   //¿ªÊ¼Ã»Ïëµ½Õâ¸ö¼ôÖ¦£¬ÔËĞĞÊ±¼äÓĞµã³¤
-				if ((long)nums[i] + nums[j] + nums[length - 1] + nums[length - 2] < target) continue;      //¿ªÊ¼Ã»Ïëµ½Õâ¸ö¼ôÖ¦£¬ÔËĞĞÊ±¼äÓĞµã³¤
+				if ((long)nums[i] + nums[j] + nums[j + 1] + nums[j + 2] > target) break;   //å¼€å§‹æ²¡æƒ³åˆ°è¿™ä¸ªå‰ªæï¼Œè¿è¡Œæ—¶é—´æœ‰ç‚¹é•¿
+				if ((long)nums[i] + nums[j] + nums[length - 1] + nums[length - 2] < target) continue;      //å¼€å§‹æ²¡æƒ³åˆ°è¿™ä¸ªå‰ªæï¼Œè¿è¡Œæ—¶é—´æœ‰ç‚¹é•¿
 				int left = j + 1, right = length - 1;
 				while (left < right) {
 					long sum = (long)nums[i] + nums[j] + nums[left] + nums[right];
@@ -40,7 +40,7 @@ public:
 		return res;
 	}
 
-	//µÚ¶ş»Ø×ö£¬Õâ´ÎµÄ¼ôÖ¦²»ÈçÖ®Ç°µÄºÃ£¬ÔËĞĞÊ±¼ä³¤ºÜ¶à
+	//ç¬¬äºŒå›åšï¼Œè¿™æ¬¡çš„å‰ªæä¸å¦‚ä¹‹å‰çš„å¥½ï¼Œè¿è¡Œæ—¶é—´é•¿å¾ˆå¤š
 	vector<vector<int>> fourSum(vector<int>& nums, int target) {
 		vector<vector<int>> res;
 		if (nums.size() < 4)
@@ -81,7 +81,7 @@ public:
 		}
 		return res;
 	}
-	//ÓÖÖØĞÂĞŞ¸Ä¹ıÒÔºó£¬Õâ´ÎÔËĞĞ½á¹û¼«ºÃ
+	//åˆé‡æ–°ä¿®æ”¹è¿‡ä»¥åï¼Œè¿™æ¬¡è¿è¡Œç»“æœæå¥½
 	vector<vector<int>> fourSum(vector<int>& nums, int target) {
 		vector<vector<int>> res;
 		int length = nums.size();
