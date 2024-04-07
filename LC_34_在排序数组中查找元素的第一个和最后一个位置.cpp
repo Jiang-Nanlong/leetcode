@@ -10,13 +10,13 @@ public:
 			return { -1, -1 };
 		else {
 			int left = index, right = index;
-			for (; left >= 0 && nums[left] == target; left--);  //¿ªÊ¼µÄÊ±ºòÕâÁ½¸öforÑ­»·µÄÅĞ¶ÏÌõ¼şĞ´·´ÁË£¬Ò²¾ÍÊÇÏÈÅĞ¶ÏÊÇ·ñÏàµÈ£¬ÔÙÅĞ¶ÏÊÇ·ñÔ½½çÁË£¬½á¹ûµ±Êı×éÖĞÖ»ÓĞÒ»¸öÔªËØÊ±¾Í±¨Ô½½çµÄ´íÎó¡£
+			for (; left >= 0 && nums[left] == target; left--);  //å¼€å§‹çš„æ—¶å€™è¿™ä¸¤ä¸ªforå¾ªç¯çš„åˆ¤æ–­æ¡ä»¶å†™åäº†ï¼Œä¹Ÿå°±æ˜¯å…ˆåˆ¤æ–­æ˜¯å¦ç›¸ç­‰ï¼Œå†åˆ¤æ–­æ˜¯å¦è¶Šç•Œäº†ï¼Œç»“æœå½“æ•°ç»„ä¸­åªæœ‰ä¸€ä¸ªå…ƒç´ æ—¶å°±æŠ¥è¶Šç•Œçš„é”™è¯¯ã€‚
 			for (; right < nums.size() && nums[right] == target; right++);
 			return { left + 1, right - 1 };
 		}
 	}
 
-	//ÏÂ±ßÕâÊÇµÚÒ»»Ø×öÕâ¸öÌâÊ±Ìá½»µÄ´úÂë
+	//ä¸‹è¾¹è¿™æ˜¯ç¬¬ä¸€å›åšè¿™ä¸ªé¢˜æ—¶æäº¤çš„ä»£ç 
 	vector<int> searchRange1(vector<int>& nums, int target) {
 		int left = 0, right = nums.size() - 1;
 		while (left <= right) {
