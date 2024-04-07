@@ -3,15 +3,15 @@
 #include <algorithm>
 using namespace std;
 
-//������Ҫ�ڸ�����candidates�������ҳ������������Щ���ֵĺ͵���target��Ȼ��ÿ�����ֿ����ظ�ʹ�á�
-//�ڼ�֦֮ǰ�������ǰֵ�Ѿ�����target�ˣ����������ȵ�ǰֵ�����������Ȼ�ʹ���target�ˣ��������ﻹ�ǻ���뵽��һ��ݹ飬����˷���ʱ�䡣
-//���Կ����ȸ���������ֻ�е�sum���ϵ�ǰֵС�ڵ���target��ʱ�򣬲Ż����ݹ飬����Ѿ������ˣ��Ͳ�Ҫ������һ��ݹ��ˡ�
+//这题是要在给定的candidates数组中找出任意个数，这些数字的和等于target，然后每个数字可以重复使用。
+//在剪枝之前，如果当前值已经等于target了，但是遇到比当前值还大的数，显然就大于target了，但是这里还是会进入到下一层递归，这就浪费了时间。
+//所以可以先给数组排序，只有当sum加上当前值小于等于target的时候，才会进入递归，如果已经大于了，就不要再走下一层递归了。
 class Solution {
 public:
 	vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
 		vector<int> cb;
 		vector<vector<int>> res;
-		sort(candidates.begin(), candidates.end());  //�����֦����
+		sort(candidates.begin(), candidates.end());  //搭配剪枝操作
 		Helper(candidates, target, 0, 0, cb, res);
 		return res;
 	}
@@ -21,9 +21,9 @@ public:
 			res.push_back(cb);
 			return;
 		}
-		//if (sum > target) return;  //��֦�Ժ�ȡ��
+		//if (sum > target) return;  //剪枝以后取消
 
-		for (int i = startindex; i < candidates.size() && sum + candidates[i] <= target; i++) {  //sum + candidates[i] <= target��֦
+		for (int i = startindex; i < candidates.size() && sum + candidates[i] <= target; i++) {  //sum + candidates[i] <= target剪枝
 			cb.push_back(candidates[i]);
 			Helper(candidates, target, sum + candidates[i], i, cb, res);
 			cb.pop_back();
