@@ -4,9 +4,9 @@
 #include <unordered_set>
 using namespace std;
 
-//¸ø¶¨Ò»¸öcandidatesÊı×é£¬ÕÒ³öÊı×éÖĞºÍÎªtargetµÄ×éºÏ¡£Õâ¸öÌâºÍLeetCode 39²»Ò»ÑùµÄµØ·½ÔÚÓÚÊı×éÖĞ¿ÉÄÜÓĞÖØ¸´µÄÊı£¬µ«ÊÇ½â¼¯ÖĞ²»ÄÜ°üº¬ÖØ¸´×éºÏ
-//»ØËİ½â¾öµÄÎÊÌâ¶¼¿ÉÒÔ³éÏó³ÉÊ÷ĞÎ½á¹¹¡£
-//Õâ¸öÌâ¾ÍÃæÁÙ×ÅÈ¥ÖØµÄÎÊÌâ£¬Ò»¸ö½âÖĞ¿ÉÒÔ°üº¬ÖØ¸´ÔªËØ£¬µ«ÊÇ½â¼¯ÖĞ²»ÄÜ°üº¬ÖØ¸´½â£¬ËùÒÔÕâÀïµÄÈ¥ÖØÊÇÔÚÊ÷²ãÈ¥ÖØ£¬¶ø²»ÊÇÔÚÊ÷Ö¦È¥ÖØ¡£
+//ç»™å®šä¸€ä¸ªcandidatesæ•°ç»„ï¼Œæ‰¾å‡ºæ•°ç»„ä¸­å’Œä¸ºtargetçš„ç»„åˆã€‚è¿™ä¸ªé¢˜å’ŒLeetCode 39ä¸ä¸€æ ·çš„åœ°æ–¹åœ¨äºæ•°ç»„ä¸­å¯èƒ½æœ‰é‡å¤çš„æ•°ï¼Œä½†æ˜¯è§£é›†ä¸­ä¸èƒ½åŒ…å«é‡å¤ç»„åˆ
+//å›æº¯è§£å†³çš„é—®é¢˜éƒ½å¯ä»¥æŠ½è±¡æˆæ ‘å½¢ç»“æ„ã€‚
+//è¿™ä¸ªé¢˜å°±é¢ä¸´ç€å»é‡çš„é—®é¢˜ï¼Œä¸€ä¸ªè§£ä¸­å¯ä»¥åŒ…å«é‡å¤å…ƒç´ ï¼Œä½†æ˜¯è§£é›†ä¸­ä¸èƒ½åŒ…å«é‡å¤è§£ï¼Œæ‰€ä»¥è¿™é‡Œçš„å»é‡æ˜¯åœ¨æ ‘å±‚å»é‡ï¼Œè€Œä¸æ˜¯åœ¨æ ‘æå»é‡ã€‚
 
 
 class Solution {
@@ -26,15 +26,15 @@ public:
 		}
 
 		for (int i = startindex; i < candidates.size() && sum + candidates[i] <= target; i++) {
-			if (i > startindex && candidates[i] == candidates[i - 1]) continue;   //ÕâÒ»ĞĞÎÒ¿ªÊ¼°Ñi>startindexĞ´³Éi>0ÁË£¬Èç¹ûĞ´³Éi>0µÄ»°£¬¾Í»áÌø¹ıËùÓĞÒ»ÑùµÄÊı£¬ÔÚÊ÷²ãºÍÊ÷Ö¦Ö®¼ä¶¼È¥µôÁË¡£
-			//Õâ¸öÊ÷²ãÈ¥ÖØÊÇÕâ¸öÌâµÄ¹Ø¼ü¡£
+			if (i > startindex && candidates[i] == candidates[i - 1]) continue;   //è¿™ä¸€è¡Œæˆ‘å¼€å§‹æŠŠi>startindexå†™æˆi>0äº†ï¼Œå¦‚æœå†™æˆi>0çš„è¯ï¼Œå°±ä¼šè·³è¿‡æ‰€æœ‰ä¸€æ ·çš„æ•°ï¼Œåœ¨æ ‘å±‚å’Œæ ‘æä¹‹é—´éƒ½å»æ‰äº†ã€‚
+			//è¿™ä¸ªæ ‘å±‚å»é‡æ˜¯è¿™ä¸ªé¢˜çš„å…³é”®ã€‚
 			cb.push_back(candidates[i]);
 			Helper(candidates, target, sum + candidates[i], i + 1, cb, res);
 			cb.pop_back();
 		}
 	}
 
-	//Ê¹ÓÃusedÊı×éÀ´È¥ÖØ
+	//ä½¿ç”¨usedæ•°ç»„æ¥å»é‡
 	void Helper1(vector<int>& candidates, int target, int sum, int startindex, vector<bool>& used, vector<int>& cb, vector<vector<int>>& res) {
 		if (sum == target) {
 			res.push_back(cb);
@@ -43,9 +43,9 @@ public:
 
 		for (int i = startindex; i < candidates.size() && sum + candidates[i] <= target; i++) {
 			if (i > 0 && candidates[i] == candidates[i - 1] && used[i - 1] == false)
-				//usedÓÃÀ´ÔÚÊ÷²ãÈ¥ÖØ£¬Èç¹ûÔÚÊ÷²ãÖĞ£¬µ±Ç°½ÚµãµÄÖµºÍÉÏÒ»¸öÖµÒ»Ñù£¬ÄÇÃ´used[i-1]==false£¬ÒòÎªÉÏÒ»¸ö½ÚµãÒÑ¾­»ØËİ»ØÀ´ÁË£¬
-				//Ö»ÓĞµ±ÔÚÊ÷Ö¦ÉÏÊ±£¬used[i-1]²Å»áÊÇtrue
-				//used[i-1]==falseÊÇÔÚÊ÷²ãÈ¥ÖØ£¬used[i-1]==trueÊÇÔÚÊ÷Ö¦È¥ÖØ£¬ÓĞĞ©ÎÊÌâÊ¹ÓÃÊ÷²ãÈ¥ÖØºÍÊ÷Ö¦È¥ÖØ¶¼ÄÜ×ö£¬µ«ÊÇÊ÷²ãÈ¥ÖØµÄĞ§ÂÊ»á¸ü¸ßÒ»Ğ©¡£
+				//usedç”¨æ¥åœ¨æ ‘å±‚å»é‡ï¼Œå¦‚æœåœ¨æ ‘å±‚ä¸­ï¼Œå½“å‰èŠ‚ç‚¹çš„å€¼å’Œä¸Šä¸€ä¸ªå€¼ä¸€æ ·ï¼Œé‚£ä¹ˆused[i-1]==falseï¼Œå› ä¸ºä¸Šä¸€ä¸ªèŠ‚ç‚¹å·²ç»å›æº¯å›æ¥äº†ï¼Œ
+				//åªæœ‰å½“åœ¨æ ‘æä¸Šæ—¶ï¼Œused[i-1]æ‰ä¼šæ˜¯true
+				//used[i-1]==falseæ˜¯åœ¨æ ‘å±‚å»é‡ï¼Œused[i-1]==trueæ˜¯åœ¨æ ‘æå»é‡ï¼Œæœ‰äº›é—®é¢˜ä½¿ç”¨æ ‘å±‚å»é‡å’Œæ ‘æå»é‡éƒ½èƒ½åšï¼Œä½†æ˜¯æ ‘å±‚å»é‡çš„æ•ˆç‡ä¼šæ›´é«˜ä¸€äº›ã€‚
 				continue;
 			cb.push_back(candidates[i]);
 			used[i] = true;
@@ -63,7 +63,7 @@ public:
 		return res;
 	}
 
-	//»¹¿ÉÒÔÔÚÃ¿²ãÎ¬»¤usetÊı×éÀ´ÔÚ²ãÄÚÈ¥ÖØ
+	//è¿˜å¯ä»¥åœ¨æ¯å±‚ç»´æŠ¤usetæ•°ç»„æ¥åœ¨å±‚å†…å»é‡
 	void Helper2(vector<int>& candidates, int target, int sum, int startindex, vector<int>& cb, vector<vector<int>>& res) {
 		if (sum == target) {
 			res.push_back(cb);
@@ -74,7 +74,7 @@ public:
 		for (int i = startindex; i < candidates.size() && sum + candidates[i] <= target; i++) {
 			if (uset.find(candidates[i]) != uset.end()) continue;
 
-			uset.insert(candidates[i]);  //Ö»ÔÚ²ãÄÚÈ¥ÖØ£¬²»ÓÃ»ØËİ
+			uset.insert(candidates[i]);  //åªåœ¨å±‚å†…å»é‡ï¼Œä¸ç”¨å›æº¯
 			cb.push_back(candidates[i]);
 			Helper2(candidates, target, sum + candidates[i], i + 1, cb, res);
 			cb.pop_back();
