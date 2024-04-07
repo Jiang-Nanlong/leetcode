@@ -4,8 +4,8 @@
 #include <string>
 using namespace std;
 
-//���Ǵ�ҽ�����⣬������ط��ӵ�����˳���ɶ������ˣ����ǵݹ�Ͷ�̬�滮��ϵ�һ���⣬��Ŀ�е�dp���鲻���Ǹ����еĽڵ�ͳһ���䣬���ǵݹ��ÿһ�㣬Ҳ����ÿһ���ڵ㶼��һ���Լ���dp����
-//dp[0]��ʾ��͵��ǰ�ڵ�����ֵ��dp[1]��ʾ͵��ǰ�ڵ�����ֵ
+//还是打家劫舍的题，不过这回房子的排列顺序变成二叉树了，这是递归和动态规划结合的一道题，题目中的dp数组不再是给所有的节点统一分配，而是递归的每一层，也就是每一个节点都有一个自己的dp数组
+//dp[0]表示不偷当前节点的最大值，dp[1]表示偷当前节点的最大值
 
 struct TreeNode {
 	int val;
@@ -26,11 +26,11 @@ public:
 	vector<int> robRange(TreeNode* root) {
 		if (root == nullptr) return { 0,0 };
 
-		vector<int> leftdp = robRange(root->left);  //������������dp����
-		vector<int> rightdp = robRange(root->right);  //������������dp����
+		vector<int> leftdp = robRange(root->left);  //返回左子树的dp数组
+		vector<int> rightdp = robRange(root->right);  //返回右子树的dp数组
 
-		int val1 = max(leftdp[0], leftdp[1]) + max(rightdp[0], rightdp[1]);   //��͵��ǰ�ڵ�����ֵ
-		int val2 = root->val + leftdp[0] + rightdp[0];   //͵��ǰ�ڵ�����ֵ
+		int val1 = max(leftdp[0], leftdp[1]) + max(rightdp[0], rightdp[1]);   //不偷当前节点的最大值
+		int val2 = root->val + leftdp[0] + rightdp[0];   //偷当前节点的最大值
 		return { val1,val2 };
 	}
 
