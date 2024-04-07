@@ -2,9 +2,9 @@
 #include <vector>
 using namespace std;
 
-//�����������Ļ����ⲻһ����û����ֹ��������ʼû��������ô�����������ſ������ڵݹ�ı����һ��'.'��Ϊ���֣�Ȼ�������һ�㣬��һ���ֻ�����̵����Ͻǿ�ʼ���ҵ���һ����'.'�Ľڵ㣬Ȼ���޸�����ֵ��
-//����ôһ���ĵݹ飬Ȼ���ҳ����еĽڵ㣬����Ѿ�û�нڵ�ɹ��޸��ˣ��ͷ���true��Ȼ��ͻ�һ����ֱ�ӷ���true�����ҵ�������Ҫ��
-//�о��������Щ�ѣ��벻ͨ
+//这个题跟以往的回溯题不一样，没有终止条件，开始没看明白怎么结束。后来才看懂，在递归的本层把一个'.'改为数字，然后进入下一层，下一层又会从棋盘的左上角开始，找到第一个是'.'的节点，然后修改它的值。
+//就这么一层层的递归，然后找出所有的节点，如果已经没有节点可供修改了，就返回true，然后就会一层层的直接返回true，就找到了我们要的
+//感觉这个题有些难，想不通
 
 class Solution {
 public:
@@ -51,9 +51,9 @@ public:
 		return true;
 	}
 
-	//�ڶ����������������˼·û�����⡣�����������ط�ûע�⵽���ҿ�ʼ�����ÿ��ݹ鶼����һ��ڵ�����������ֲ�֪������Ӧ�������һ������£��������˴𰸲�֪����ÿ��ݹ鶼�Ǵ����Ͻǿ�ʼ��
-	//�پ����ҵ�backtracking����û�з���ֵ�������ҿ�ʼ�뵽�ǲ���Ӧ�ø��ݹ����������һ���ߵ�д��һ������һ������ֵ���������ʵĽ����ֱ�ӷ��ء�����û��д��Ҳ��֪���ݹ����ֹ������ôд��
-	//�������˴�֪��Ҫ�ӷ���ֵ�ˣ�Ȼ��֪����Ҫ���ļӷ���ֵ��Ҳ�Ͳ���Ҫ��ֹ�����ˡ�
+	//第二次做，这次做总体思路没有问题。不过有两个地方没注意到，我开始想的是每层递归都从上一层节点继续，但是又不知道具体应该是往右还是往下，后来看了答案才知道，每层递归都是从左上角开始。
+	//再就是我的backtracking函数没有返回值，这里我开始想到是不是应该跟递归二叉树搜索一条边的写法一样，有一个返回值，遇到合适的结果就直接返回。但是没有写，也不知道递归的终止条件怎么写，
+	//后来看了答案知道要加返回值了，然后知道了要在哪加返回值，也就不需要终止条件了。
 	void solveSudoku1(vector<vector<char>>& board) { backtracking(board); }
 
 	bool backtracking(vector<vector<char>>& board) {
@@ -65,14 +65,14 @@ public:
 					if (isValid1(board, i, j, k)) {
 						board[i][j] = k;
 						if (backtracking(board))
-							return true;  //�ҵ����ʵ����̣�ֱ�ӷ���true
+							return true;  //找到合适的棋盘，直接返回true
 						board[i][j] = '.';
 					}
 				}
-				return false;  //���9�����������ˣ������У�ֱ�ӷ���false
+				return false;  //如果9个数都遍历了，都不行，直接返回false
 			}
 		}
-		return true; //�������̶�������һ�飬���е�����˵��ǰ��û�з���false��˵���Ѿ��ҵ��˺��ʵ����̣�ֱ�ӷ���true
+		return true; //整个棋盘都遍历了一遍，运行到这里说明前边没有返回false，说民已经找到了合适的棋盘，直接返回true
 	}
 
 	bool isValid1(vector<vector<char>>& board, int row, int col, char key) {
