@@ -1,7 +1,7 @@
 #include <iostream>
 using namespace std;
 
-//做过LeetCode 69 x的平方根那题之后，这个题就很简单了
+//鍋氳繃LeetCode 69 x鐨勫钩鏂规牴閭ｉ涔嬪悗锛岃繖涓灏卞緢绠�鍗曚簡
 
 class Solution {
 public:
