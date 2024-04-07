@@ -2,8 +2,8 @@
 #include <stack>
 using namespace std;
 
-//×¢ÒâÊÇ×óÒ¶×ÓÖ®ºÍ£¬²»ÊÇ×ó×ÓÊ÷Ö®ºÍ
-//Ê¹ÓÃµİ¹éµÄÇ°Ğò±éÀú
+//æ³¨æ„æ˜¯å·¦å¶å­ä¹‹å’Œï¼Œä¸æ˜¯å·¦å­æ ‘ä¹‹å’Œ
+//ä½¿ç”¨é€’å½’çš„å‰åºéå†
 
 struct TreeNode {
 	int val;
@@ -24,7 +24,7 @@ public:
 	}
 	void pretraversal(TreeNode* root) {
 		if (root == nullptr) return;
-		if (root->left && root->left->left == nullptr && root->left->right == nullptr) { //ÅĞ¶Ïroot->leftÊÇ²»ÊÇ×óÒ¶×Ó 
+		if (root->left && root->left->left == nullptr && root->left->right == nullptr) { //åˆ¤æ–­root->leftæ˜¯ä¸æ˜¯å·¦å¶å­ 
 			result += root->left->val;
 		}
 		pretraversal(root->left);
@@ -32,16 +32,16 @@ public:
 
 	}
 
-	//Ò»ÏÂ´úÂëÊÇ¾«¼òºóµÄ½á¹û
+	//ä¸€ä¸‹ä»£ç æ˜¯ç²¾ç®€åçš„ç»“æœ
 	int sumOfLeftLeaves1(TreeNode* root) {
 		if (root == nullptr) return 0;
 		int result = 0;
-		if (root->left && root->left->left == nullptr && root->left->right == nullptr)   //ÅĞ¶ÏÊÇ·ñÎª×óÒ¶×Ó
+		if (root->left && root->left->left == nullptr && root->left->right == nullptr)   //åˆ¤æ–­æ˜¯å¦ä¸ºå·¦å¶å­
 			result = root->left->val;
 		return result + sumOfLeftLeaves1(root->left) + sumOfLeftLeaves1(root->right);
 	}
 
-	//»¹¿ÉÒÔÊ¹ÓÃµü´ú·¨£¬µü´ú·¨Ê¹ÓÃÇ°ÖĞºóĞò¶¼¿ÉÒÔ
+	//è¿˜å¯ä»¥ä½¿ç”¨è¿­ä»£æ³•ï¼Œè¿­ä»£æ³•ä½¿ç”¨å‰ä¸­ååºéƒ½å¯ä»¥
 	int sumOfLeftLeaves2(TreeNode* root) {
 		if (root == nullptr) return 0;
 		stack<TreeNode*> stk;
@@ -58,7 +58,7 @@ public:
 		return result;
 	}
 
-	//µÚ¶ş´Î×ö
+	//ç¬¬äºŒæ¬¡åš
 	int sumOfLeftLeaves3(TreeNode* root) {
 		int sum = 0;
 		getSum(root, sum);
@@ -75,14 +75,14 @@ public:
 			getSum(root->right, sum);
 	}
 
-	//ÕâÊÇ´úÂëËæÏëÂ¼µÄ³ÌĞò£¬ÓÃµÄºóĞò±éÀú£¬´ÓÃ»Ïë¹ı¿ÉÒÔÕâÑùĞ´
+	//è¿™æ˜¯ä»£ç éšæƒ³å½•çš„ç¨‹åºï¼Œç”¨çš„ååºéå†ï¼Œä»æ²¡æƒ³è¿‡å¯ä»¥è¿™æ ·å†™
 	int sumOfLeftLeaves4(TreeNode* root) {
 		if (root == nullptr)
 			return 0;
 		if (root->left == nullptr && root->right == nullptr)
 			return 0;
 		int leftvalue = sumOfLeftLeaves(root->left);
-		if (root->left && root->left->left == nullptr && root->left->right == nullptr)  //×ó×ÓÊ÷¾ÍÊÇÒ»¸ö×óÒ¶×ÓµÄÇé¿ö
+		if (root->left && root->left->left == nullptr && root->left->right == nullptr)  //å·¦å­æ ‘å°±æ˜¯ä¸€ä¸ªå·¦å¶å­çš„æƒ…å†µ
 			leftvalue = root->left->val;
 		int rightvalue = sumOfLeftLeaves(root->right);
 		return leftvalue + rightvalue;
