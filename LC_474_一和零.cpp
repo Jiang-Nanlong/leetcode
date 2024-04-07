@@ -2,13 +2,13 @@
 #include <vector>
 using namespace std;
 
-//¸ø¶¨Ò»¸ö×Ö·ûÊı×é£¬Êı×éÖĞµÄÃ¿Ò»¸öÔªËØ¶¼ÊÇÒ»¸ö¶ş½øÖÆ´®£¬×îºó·µ»ØÒ»¸öÊı×éµÄ×Ó¼¯£¬×Ó¼¯ÖĞµÄÔªËØÖĞµÄ0µÄ¸öÊı²»³¬¹ım£¬1µÄ¸öÊı²»³¬¹ın
+//ç»™å®šä¸€ä¸ªå­—ç¬¦æ•°ç»„ï¼Œæ•°ç»„ä¸­çš„æ¯ä¸€ä¸ªå…ƒç´ éƒ½æ˜¯ä¸€ä¸ªäºŒè¿›åˆ¶ä¸²ï¼Œæœ€åè¿”å›ä¸€ä¸ªæ•°ç»„çš„å­é›†ï¼Œå­é›†ä¸­çš„å…ƒç´ ä¸­çš„0çš„ä¸ªæ•°ä¸è¶…è¿‡mï¼Œ1çš„ä¸ªæ•°ä¸è¶…è¿‡n
 
 class Solution {
 public:
 	int findMaxForm(vector<string>& strs, int m, int n) {
 		vector<vector<int>> dp(m + 1, vector<int>(n + 1, 0));
-		for (string& s : strs) {   //ÕâÀïÏàµ±ÓÚ±éÀúÎïÆ·
+		for (string& s : strs) {   //è¿™é‡Œç›¸å½“äºéå†ç‰©å“
 			int zeroNum = 0, oneNum = 0;
 			for (char& c : s) {
 				if (c == '0') zeroNum++;
