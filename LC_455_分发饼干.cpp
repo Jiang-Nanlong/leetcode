@@ -3,16 +3,16 @@
 #include <algorithm>
 using namespace std;
 
-//������̰���㷨�ˣ��ϴ�����Щ�⻹�����˳��ϰ��ʱ��ˮ͵͵��
+//又来到贪心算法了，上次做这些题还是在浪潮上班的时候划水偷偷做
 
-//�±�ע�͵��ⲿ����֮ǰ����
+//下边注释的这部分是之前做的
 /*
-����һ������̰���㷨�ļ���
-��ĿҪ��ÿ�����Ӷ���һ��θ��ֵ�������д�С��������ɵĴ�С���ڵ��ں��ӵ�θ��ֵ��˵�����ɿ����ú��ӳԱ�����������ö��ٸ����ӳԱ�
+这是一道关于贪心算法的简单题
+题目要求每个孩子都有一个胃口值，饼干有大小，如果饼干的大小大于等于孩子的胃口值，说明饼干可以让孩子吃饱，问最多能让多少个孩子吃饱
 */
 
 /*
-�����������һ��Ӧ���ȰѺ�������ͱ������鶼���д�С���������Ȼ��ѭ���������飬���Ӧ�ı�������ÿ�ζ�����һ�εĽ����������
+看到这道题后第一反应是先把孩子数组和饼干数组都进行从小到大的排序，然后循环孩子数组，相对应的饼干数组每次都从上一次的结果继续向下
 */
 /*
 class Solution {
@@ -22,14 +22,14 @@ public:
 		sort(cookie.begin(), cookie.end());
 		int children = 0, cookies = 0;
 		while (children < child.size() && cookies < cookie.size()) {
-			if (child[children] <= cookie[cookies])   //���ԳԱ�
+			if (child[children] <= cookie[cookies])   //可以吃饱
 				children++;
 			cookies++;
 		}
 		return children;
 	}
 };
-//������˼·�Ƚϼ򵥣�����˵�ǲ���Ҫ�κε��㷨˼·��������������
+//这道题的思路比较简单，可以说是不需要任何的算法思路都可以做出来。
 
 int main() {
 	vector<int> child1 = { 1,2,3 }, cookie1 = { 1,1 };
@@ -49,14 +49,14 @@ public:
 		sort(g.begin(), g.end());
 		sort(s.begin(), s.end());
 		int children = 0;
-		for (int i = 0; i < s.size(); i++) {  //��С����ѭ������
-			if (children < g.size() && g[children] <= s[i])   //�������С��θ�ھ�С��+1
+		for (int i = 0; i < s.size(); i++) {  //从小到大循环饼干
+			if (children < g.size() && g[children] <= s[i])   //如果满足小孩胃口就小孩+1
 				children++;
 		}
 		return children;
 	}
 
-	//�ڶ�����
+	//第二次做
 	int findContentChildren(vector<int>& g, vector<int>& s) {
 		sort(g.begin(), g.end());
 		sort(s.begin(), s.end());
