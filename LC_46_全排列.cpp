@@ -2,9 +2,9 @@
 #include <vector>
 using namespace std;
 
-//�����е�ÿ��������һ��������nums[i]��-10��10֮�䣬�����Ҫ������������ȫ���У�
-//��ô��ÿ����֦��ÿһ�㶼�ð����е��������Ǳ飬����forѭ����0��ʼ��
-//������ص�ȥ�ز����������ϣ���������֦��ȥ���Ѿ�ʹ�ù���Ԫ�أ�����ʹ��used������Ϊ����������֦��ÿһ��ʹ��
+//数组中的每个数都不一样，而且nums[i]在-10到10之间，这个题要返回所有数的全排列，
+//那么在每个树枝的每一层都得把所有的数都考虑遍，所以for循环从0开始。
+//而且这回的去重不是在树层上，而是在树枝上去掉已经使用过的元素，所以使用used数组作为参数，在树枝的每一层使用
 
 class Solution {
 public:
@@ -34,7 +34,7 @@ public:
 		}
 	}
 
-	//�ڶ�������ֻ�Ǹо�Ӧ����һ��used��������ʶÿһ��Ԫ���ǲ��Ǳ�ʹ�ù���
+	//第二次做，只是感觉应该用一个used数组来标识每一个元素是不是被使用过了
 	vector<int> path;
 	vector<vector<int>> res;
 	vector<vector<int>> permute1(vector<int>& nums) {
