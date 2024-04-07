@@ -3,8 +3,8 @@
 #include <queue>
 using namespace std;
 
-//����һ�����飬�����е�1��ʾ½�أ�0��ʾˮ���������ҽ���һ����½����ɵĵ��죬��õ�����ܳ���
-//ͬ��Ҳ��Ϊbfs��dfs���ְ汾���������е�ÿһ��Ԫ�ض�count+=4������ÿ�½�ص��ĸ��ٱߣ���һ���ǵ���Ļ���count--��������Ǳ߽�Ļ��Ͳ��ùܡ�
+//给定一个数组，数组中的1表示陆地，0表示水。其中有且仅有一块由陆地组成的岛屿，求该岛屿的周长。
+//同样也分为bfs和dfs两种版本，给队列中的每一个元素都count+=4，如果该块陆地的四个临边，有一个是岛屿的话就count--，而如果是边界的话就不用管。
 
 class Solution {
 public:
@@ -34,20 +34,20 @@ public:
 		return count;
 	}
 
-	//����Ҳ���Բ���bfs��dfs���ͱ�������Ϊ1�Ľڵ㣬Ȼ������ĸ����򣬶�ÿ�����򵥶��ж�
+	//或者也可以不用bfs和dfs，就遍历所有为1的节点，然后遍历四个方向，对每个方向单独判断
 	int islandPerimeter2(vector<vector<int>>& grid) {
 		int result = 0;
 		for (int i = 0; i < grid.size(); i++) {
 			for (int j = 0; j < grid[0].size(); j++) {
 				if (grid[i][j] == 1) {
-					for (int k = 0; k < 4; k++) {       // ���������ĸ�����
+					for (int k = 0; k < 4; k++) {       // 上下左右四个方向
 						int x = i + dir[k][0];
-						int y = j + dir[k][1];    // �����ܱ�����x,y
-						if (x < 0                       // i�ڱ߽���
-							|| x >= grid.size()     // i�ڱ߽���
-							|| y < 0                // j�ڱ߽���
-							|| y >= grid[0].size()  // j�ڱ߽���
-							|| grid[x][y] == 0) {   // x,yλ����ˮ��
+						int y = j + dir[k][1];    // 计算周边坐标x,y
+						if (x < 0                       // i在边界上
+							|| x >= grid.size()     // i在边界上
+							|| y < 0                // j在边界上
+							|| y >= grid[0].size()  // j在边界上
+							|| grid[x][y] == 0) {   // x,y位置是水域
 							result++;
 						}
 					}
@@ -57,19 +57,19 @@ public:
 		return result;
 	}
 
-	//���Ǵ�������¼�����һ�ַ�����ֻҪ������½�ذ��ţ������͵ü�2���ͷֿ�ͳ���ж��ٿ�½�غͶ��ٸ����ŵġ�
+	//这是代码随想录提的另一种方法，只要有两个陆地挨着，边数就得减2。就分开统计有多少块陆地和多少个挨着的。
 	int islandPerimeter3(vector<vector<int>>& grid) {
-		int sum = 0;    // ½������
-		int cover = 0;  // ��������
+		int sum = 0;    // 陆地数量
+		int cover = 0;  // 相邻数量
 		for (int i = 0; i < grid.size(); i++) {
 			for (int j = 0; j < grid[0].size(); j++) {
 				if (grid[i][j] == 1) {
 					sum++;
-					// ͳ���ϱ�����½��
+					// 统计上边相邻陆地
 					if (i - 1 >= 0 && grid[i - 1][j] == 1) cover++;
-					// ͳ���������½��
+					// 统计左边相邻陆地
 					if (j - 1 >= 0 && grid[i][j - 1] == 1) cover++;
-					// Ϊʲôûͳ���±ߺ��ұߣ� ��Ϊ�����ظ����㣬�����µĽڵ���ұߺ��±߿϶��ǲ����а��ŵģ����в��ÿ���
+					// 为什么没统计下边和右边？ 因为避免重复计算，最右下的节点的右边和下边肯定是不会有挨着的，所有不用考虑
 				}
 			}
 		}
