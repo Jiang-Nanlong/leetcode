@@ -23,7 +23,7 @@ public:
 
 class Solution {
 public:
-	vector<vector<int>> levelOrder(Node* root) {   //ÆäÊµ¾ÍÊÇ¸ú¶ş²æÊ÷µÄ²ãĞò±éÀúÒ»Ñù
+	vector<vector<int>> levelOrder(Node* root) {   //å…¶å®å°±æ˜¯è·ŸäºŒå‰æ ‘çš„å±‚åºéå†ä¸€æ ·
 		vector<vector<int>> res;
 		if (root == nullptr) return res;
 		queue<Node*> que;
@@ -43,7 +43,7 @@ public:
 		return res;
 	}
 
-	//µÚ¶ş´Î×ö
+	//ç¬¬äºŒæ¬¡åš
 	vector<vector<int>> levelOrder1(Node* root) {
 		if (root == nullptr)
 			return {};
