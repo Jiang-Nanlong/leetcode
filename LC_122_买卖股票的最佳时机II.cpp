@@ -2,12 +2,12 @@
 #include <vector>
 using namespace std;
 
-//整数数组prices中的prices[i]表示某只股票第i天的价格，每天都可以买卖股票，返回最大利润
-//这个题用贪心算法还算比较简单，只有有钱就赚，不一定非得把股票在手上攒好几天，遇到高价才卖。
-//只要今天的价格相对于买价有得赚就卖
-//从贪心算法的角度也好理解，局部最优：每天都有钱赚  全局最优：获得最大利润
+//��������prices�е�prices[i]��ʾĳֻ��Ʊ��i��ļ۸�ÿ�춼����������Ʊ�������������
+//�������̰���㷨����Ƚϼ򵥣�ֻ����Ǯ��׬����һ���ǵðѹ�Ʊ�������ܺü��죬�����߼۲�����
+//ֻҪ����ļ۸����������е�׬����
+//��̰���㷨�ĽǶ�Ҳ�����⣬�ֲ����ţ�ÿ�춼��Ǯ׬  ȫ�����ţ�����������
 
-//这个题和LeetCode 121 买卖股票的最佳时机的区别就是这个题可以买卖多次，而121题只能买卖一次
+//������LeetCode 121 ������Ʊ�����ʱ�������������������������Σ���121��ֻ������һ��
 
 class Solution {
 public:
@@ -25,7 +25,7 @@ public:
 		return result;
 	}
 
-	//简化成一下代码
+	//�򻯳�һ�´���
 	int maxProfit1(vector<int>& prices) {
 		int buy = prices[0];
 		int result = 0;
@@ -37,7 +37,7 @@ public:
 		return result;
 	}
 
-	//下边是代码随想录的代码，它是从第2天开始算起，好像他的更直观
+	//�±��Ǵ�������¼�Ĵ��룬���Ǵӵ�2�쿪ʼ���𣬺������ĸ�ֱ��
 	int maxProfit2(vector<int>& prices) {
 		int result = 0;
 		for (int i = 1; i < prices.size(); i++) {
@@ -46,19 +46,19 @@ public:
 		return result;
 	}
 
-	//动态规划做，dp[i][0]表示第i天持有股票的最大价值，dp[i][1]表示第i天不持有股票的最大价值
+	//��̬�滮����dp[i][0]��ʾ��i����й�Ʊ������ֵ��dp[i][1]��ʾ��i�첻���й�Ʊ������ֵ
 	int maxProfit3(vector<int>& prices) {
 		vector<vector<int>> dp(prices.size(), vector<int>(2, 0));
 		dp[0][0] = -prices[0];
 		dp[0][1] = 0;
 		for (int i = 1; i < prices.size(); i++) {
-			dp[i][0] = max(dp[i - 1][0], dp[i - 1][1] - prices[i]);  //这个题和上一题递推公式的唯一区别就在这，第i天买股票的时候，手头的最大价值不再是 -prices[i]，而是dp[i-1][1]-prices[i]
+			dp[i][0] = max(dp[i - 1][0], dp[i - 1][1] - prices[i]);  //��������һ����ƹ�ʽ��Ψһ��������⣬��i�����Ʊ��ʱ����ͷ������ֵ������ -prices[i]������dp[i-1][1]-prices[i]
 			dp[i][1] = max(dp[i - 1][1], dp[i - 1][0] + prices[i]);
 		}
 		return dp[prices.size() - 1][1];
 	}
 
-	//还和121题一样可以对dp数组进行优化
+	//����121��һ�����Զ�dp��������Ż�
 	int maxProfit4(vector<int>& prices) {
 		vector<vector<int>> dp(2, vector<int>(2, 0));
 		dp[0][0] = -prices[0];
@@ -68,6 +68,19 @@ public:
 			dp[i % 2][1] = max(dp[(i - 1) % 2][1], dp[(i - 1) % 2][0] + prices[i]);
 		}
 		return dp[(prices.size() - 1) % 2][1];
+	}
+
+	//�ڶ���������̰���㷨�½ڣ�ֱ���õĶ�̬�滮����
+	int maxProfit5(vector<int>& prices) {
+		vector<vector<int>> dp(prices.size(), vector<int>(2, 0));
+		//dp[i][0]���й�Ʊ������Ǯ��dp[i][1]�����й�Ʊ������Ǯ
+		dp[0][0] = -prices[0];
+		dp[0][1] = 0;
+		for (int i = 1; i < prices.size(); i++) {
+			dp[i][0] = max(dp[i - 1][0], dp[i - 1][1] - prices[i]);
+			dp[i][1] = max(dp[i - 1][1], dp[i - 1][0] + prices[i]);
+		}
+		return dp[prices.size() - 1][1];
 	}
 };
 

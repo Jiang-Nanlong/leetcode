@@ -19,6 +19,18 @@ public:
 		}
 		return false;
 	}
+
+	//第二次做，记得覆盖范围这个点，这个题还是挺好做的
+	bool canJump1(vector<int>& nums) {
+		if (nums.size() == 1) return true;
+		int length = nums[0];
+		for (int i = 1; i < nums.size() && i <= length; i++) {
+			if (length >= nums.size() - 1) return true;
+			length = max(length, i + nums[i]);
+		}
+		return false;
+	}
+
 };
 
 void main() {

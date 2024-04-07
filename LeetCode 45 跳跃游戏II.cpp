@@ -48,6 +48,28 @@ public:
 		}
 		return count;
 	}
+
+	//第二次在做，还是不会
+	//在当前覆盖范围内找下一个覆盖范围的最大值，当前覆盖范围内的点都是一步可以到达的。在当前一步可以到达的范围内，寻找下一个可以通过当前点再一步到达的最大值。
+	//如果当前覆盖范围已经到头了，结果还没到终点，那就只能再迈一步了。
+	//这就是贪心所在。这个地方从第一步开始想会比较好想，
+	int jump2(vector<int>& nums) {
+		if (nums.size() == 1)
+			return 0;
+		int curcover = 0;
+		int count = 0;
+		int nextcover = 0;
+		for (int i = 0; i < nums.size(); i++) {
+			nextcover = max(nextcover, i + nums[i]);
+			if (i == curcover) {
+				count++;
+				curcover = nextcover;
+				if (curcover >= nums.size() - 1)
+					break;
+			}
+		}
+		return count;
+	}
 };
 
 int main() {
