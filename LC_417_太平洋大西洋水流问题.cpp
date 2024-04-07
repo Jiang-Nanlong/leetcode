@@ -3,15 +3,15 @@
 #include <queue>
 using namespace std;
 
-//ˮֻ����С�ڻ���ڵ�ǰֵ�ĵط�������ĿҪ�����ҳ����������е�����꣬��Щ���ˮ�ȿ�������̫ƽ���ֿ�����������󣬴����������·���̫ƽ�������Ϸ�
-//�о������dfs��Ҫ����ֵ�������������bool�Ļ�������ôȷ���ǵ�����̫ƽ���Ǵ����󣬻��Ƕ�������
-//����д��������ֻ�ܿ���������¼����������һ���������ϵķ��������Ǵ�̫ƽ����ʹ��������������ϣ���������visited����
-//���Ƚ������������ͬ�㣬��Щ����Ǽȿ��Ե�̫ƽ���ֿ��Ե�������ĵ㡣
-//���Ƿ�Ϊdfs��bfs���ְ汾
-//��������ⷨ��ʱ�临�Ӷ���O(m*n)����Ϊdfs��ʱ�临�Ӷ���O(m*n)��Ȼ�����������ͷ����forѭ����������ÿ����߱���������dfs��ʱ�临�Ӷ��� n * (n * m) + m * (n * m)��
-//������Ϊ��visited����Ĵ��ڣ�ÿ��λ��ֻ�����һ�Σ���������forѭ�����dfs(heights, visited_pacific, i, 0)��dfs(heights, visited_pacific, 0, i)���Կ���һ�飬һ������һ������
-//dfs(heights, visited_attlantic, i, heights[0].size() - 1)��dfs(heights, visited_attlantic, heights.size() - 1, i)���Կ���һ�飬һ������һ�����飬����ͷ����forѭ����ʱ�临�Ӷ���ʵ��2*m*n��
-//����˫��forѭ����ʱ�临�Ӷ���m*n����������ܵ�ʱ�临�Ӷ���O(m*n)��
+//水只能往小于或等于当前值的地方流，题目要求是找出数组中所有点的坐标，这些点的水既可以流向太平洋，又可以流向大西洋，大西洋在右下方，太平洋在左上方
+//感觉这里的dfs需要返回值，但是如果返回bool的话，那怎么确定是到达了太平洋还是大西洋，还是都到达了
+//还是写不出来，只能看代码随想录的了他讲了一种逆流而上的方法，就是从太平洋方向和大西洋方向逆流而上，创建两个visited数组
+//最后比较两个数组的相同点，这些点就是既可以到太平洋，又可以到大西洋的点。
+//还是分为dfs和bfs两种版本
+//另外这个解法的时间复杂度是O(m*n)，因为dfs的时间复杂度是O(m*n)，然后主函数里的头两个for循环看起来是每个里边遍历了两遍dfs，时间复杂度是 n * (n * m) + m * (n * m)。
+//但是因为有visited数组的存在，每个位置只会遍历一次，所以两个for循环里的dfs(heights, visited_pacific, i, 0)和dfs(heights, visited_pacific, 0, i)可以看做一组，一共遍历一遍数组
+//dfs(heights, visited_attlantic, i, heights[0].size() - 1)和dfs(heights, visited_attlantic, heights.size() - 1, i)可以看做一组，一共遍历一遍数组，所以头两个for循环的时间复杂度其实是2*m*n。
+//最后的双层for循环的时间复杂度是m*n，所以最后总的时间复杂度是O(m*n)。
 
 class Solution {
 public:
