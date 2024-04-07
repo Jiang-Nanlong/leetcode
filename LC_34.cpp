@@ -20,8 +20,8 @@ public:
 private:
 	vector<int> searchHelper(vector<int>& nums, int target, int i) {
 		int left = i, right = i;
-		for (; left >= 0 && nums[left] == target; left--);  //×î¿ªÊ¼µÄÊ±ºò°ÑÕâÁ½¸öforÑ­»·ÀïµÄÌõ¼þÐ´·´ÁË£¬Ð´³Énums[left] == target && left >= 0ÁË£¬
-		//ÕâÑù¾ÍÏÈÅÐ¶ÏÊÇ²»ÊÇµÈÓÚtarget£¬Èç¹ûleftÐ¡ÓÚ0£¬ÕâÀï¾Í»á±¨´í¡£·´¹ýÀ´ÏÈÅÐ¶ÏÊÇ²»ÊÇ>=¾ÍÐÐÁË£¬Èç¹û<0¾Í²»»á¼ÌÐøÍùºó×ßÁË 
+		for (; left >= 0 && nums[left] == target; left--);  //æœ€å¼€å§‹çš„æ—¶å€™æŠŠè¿™ä¸¤ä¸ªforå¾ªçŽ¯é‡Œçš„æ¡ä»¶å†™åäº†ï¼Œå†™æˆnums[left] == target && left >= 0äº†ï¼Œ
+		//è¿™æ ·å°±å…ˆåˆ¤æ–­æ˜¯ä¸æ˜¯ç­‰äºŽtargetï¼Œå¦‚æžœleftå°äºŽ0ï¼Œè¿™é‡Œå°±ä¼šæŠ¥é”™ã€‚åè¿‡æ¥å…ˆåˆ¤æ–­æ˜¯ä¸æ˜¯>=å°±è¡Œäº†ï¼Œå¦‚æžœ<0å°±ä¸ä¼šç»§ç»­å¾€åŽèµ°äº† 
 		for (; right <= nums.size() - 1 && nums[right] == target; right++);
 		return vector<int>{++left, --right};
 	}
