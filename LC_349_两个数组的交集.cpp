@@ -6,7 +6,7 @@ using namespace std;
 class Solution {
 public:
 	vector<int> intersection(vector<int>& nums1, vector<int>& nums2) {
-		//Ô­À´Ã»ËµÒªÁ¬Ğø£¬àê,¶øÇÒÊä³ö½á¹ûÖĞµÄÃ¿Ò»¸öÔªËØ¶¼ÊÇÎ¨Ò»µÄ£¬»¹²»ÓÃ¿¼ÂÇÊä³ö½á¹ûµÄË³Ğò¡£
+		//åŸæ¥æ²¡è¯´è¦è¿ç»­ï¼Œåš“,è€Œä¸”è¾“å‡ºç»“æœä¸­çš„æ¯ä¸€ä¸ªå…ƒç´ éƒ½æ˜¯å”¯ä¸€çš„ï¼Œè¿˜ä¸ç”¨è€ƒè™‘è¾“å‡ºç»“æœçš„é¡ºåºã€‚
 		unordered_set<int> uset;
 		int a[1001] = { 0 };
 		for (auto& c : nums1) a[c] = 1;
@@ -17,13 +17,13 @@ public:
 		return vector<int>(uset.begin(), uset.end());
 	}
 
-	//µÚ¶ş´Î×ö
+	//ç¬¬äºŒæ¬¡åš
 	vector<int> intersection(vector<int>& nums1, vector<int>& nums2) {
 		unordered_set<int> res;
 		//unordered_set<int> uset;
 		//for(int &i:nums1)
 		//    uset.insert(i);
-		unordered_set<int> uset(nums1.begin(), nums1.end());  //¿ÉÒÔÖ±½ÓÓÃÕâÖÖ·½·¨³õÊ¼»¯£¬¶ø²»ÓÃforÑ­»·
+		unordered_set<int> uset(nums1.begin(), nums1.end());  //å¯ä»¥ç›´æ¥ç”¨è¿™ç§æ–¹æ³•åˆå§‹åŒ–ï¼Œè€Œä¸ç”¨forå¾ªç¯
 		for (int& i : nums2) {
 			if (uset.find(i) != uset.end()) {
 				res.insert(i);
