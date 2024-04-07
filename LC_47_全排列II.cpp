@@ -4,10 +4,10 @@
 #include <unordered_set>
 using namespace std;
 
-//Õâ¸öÌâÏà½ÏÓÚÉÏ¸öÌâ£¬ÓĞÒ»¸ö²»Í¬µã£¬¾ÍÊÇnumsÊı×éÖĞ¿ÉÄÜÓĞÖØ¸´Êı×Ö£¬½â¼¯ÖĞ²»ÄÜ°üº¬ÖØ¸´½â
-//ÆäÊµÕâÃ´¿´À´ËûÔÚÊ÷Ö¦ÉÏµÄÂß¼­Óë46ÌâÒ»Ñù£¬µ«ÊÇÔÚÊ÷²ãÉÏÒªÈ¥ÖØ£¬Ò»¿ªÊ¼Ã»ÏëÆğÀ´ÔõÃ´Ğ´
-//ºóÀ´¿´ÁË´úÂë²ÅÖªµÀ£¬Ô­À´¿ÉÒÔÓÃºÍLeetCode 40 ×éºÏ×ÜºÍIIµÄÂß¼­Ò»ÑùÀ´ÔÚÊ÷²ãÈ¥ÖØ
-//ÕâÃ´Ïë£¬usedÊı×é»¹Í¦À÷º¦£¬¼È¿ÉÒÔÔÚÊ÷Ö¦ÉÏ±íÊ¾ÄÄ¸öÒÑ¾­Ê¹ÓÃ£¬»¹¿ÉÒÔÔÚÊ÷²ãÉÏÈ¥ÖØ¡£
+//è¿™ä¸ªé¢˜ç›¸è¾ƒäºä¸Šä¸ªé¢˜ï¼Œæœ‰ä¸€ä¸ªä¸åŒç‚¹ï¼Œå°±æ˜¯numsæ•°ç»„ä¸­å¯èƒ½æœ‰é‡å¤æ•°å­—ï¼Œè§£é›†ä¸­ä¸èƒ½åŒ…å«é‡å¤è§£
+//å…¶å®è¿™ä¹ˆçœ‹æ¥ä»–åœ¨æ ‘æä¸Šçš„é€»è¾‘ä¸46é¢˜ä¸€æ ·ï¼Œä½†æ˜¯åœ¨æ ‘å±‚ä¸Šè¦å»é‡ï¼Œä¸€å¼€å§‹æ²¡æƒ³èµ·æ¥æ€ä¹ˆå†™
+//åæ¥çœ‹äº†ä»£ç æ‰çŸ¥é“ï¼ŒåŸæ¥å¯ä»¥ç”¨å’ŒLeetCode 40 ç»„åˆæ€»å’ŒIIçš„é€»è¾‘ä¸€æ ·æ¥åœ¨æ ‘å±‚å»é‡
+//è¿™ä¹ˆæƒ³ï¼Œusedæ•°ç»„è¿˜æŒºå‰å®³ï¼Œæ—¢å¯ä»¥åœ¨æ ‘æä¸Šè¡¨ç¤ºå“ªä¸ªå·²ç»ä½¿ç”¨ï¼Œè¿˜å¯ä»¥åœ¨æ ‘å±‚ä¸Šå»é‡ã€‚
 
 class Solution {
 public:
@@ -15,7 +15,7 @@ public:
 		vector<int> cb;
 		vector<vector<int>> res;
 		vector<bool> used(nums.size(), false);
-		sort(nums.begin(), nums.end());  //ĞèÒªÅÅĞò£¬ÈÃÏàÍ¬µÄÊı×Ö¿¿ÔÚÒ»Æğ
+		sort(nums.begin(), nums.end());  //éœ€è¦æ’åºï¼Œè®©ç›¸åŒçš„æ•°å­—é åœ¨ä¸€èµ·
 		Helper(nums, cb, res, used);
 		return res;
 	}
@@ -39,7 +39,7 @@ public:
 		}
 	}
 
-	//Ò²¿ÉÒÔÊ¹ÓÃusetÊı×éÔÚ²ãÄÚÈ¥ÖØ
+	//ä¹Ÿå¯ä»¥ä½¿ç”¨usetæ•°ç»„åœ¨å±‚å†…å»é‡
 	void Helper1(vector<int>& nums, vector<int>& cb, vector<vector<int>>& res, vector<bool>& used) {
 		if (cb.size() == nums.size()) {
 			res.push_back(cb);
@@ -48,8 +48,8 @@ public:
 
 		unordered_set<int> uset;
 		for (int i = 0; i < nums.size(); i++) {
-			if (uset.find(nums[i]) != uset.end()) continue;//usetÓÃÀ´ÔÚÊ÷²ãÈ¥ÖØ
-			if (used[i] == false) {			//usedÓÃÀ´ÔÚÊ÷Ö¦È¥ÖØ
+			if (uset.find(nums[i]) != uset.end()) continue;//usetç”¨æ¥åœ¨æ ‘å±‚å»é‡
+			if (used[i] == false) {			//usedç”¨æ¥åœ¨æ ‘æå»é‡
 				uset.insert(nums[i]);
 				used[i] == true;
 				cb.push_back(nums[i]);
@@ -60,7 +60,7 @@ public:
 		}
 	}
 
-	//µÚ¶ş±é×ö£¬Ê¹ÓÃusedÊı×éÊ÷²ãÊ÷Ö¦È¥ÖØ 
+	//ç¬¬äºŒéåšï¼Œä½¿ç”¨usedæ•°ç»„æ ‘å±‚æ ‘æå»é‡ 
 	vector<int> path;
 	vector<vector<int>> res;
 	vector<vector<int>> permuteUnique(vector<int>& nums) {
@@ -89,7 +89,7 @@ public:
 		}
 	}
 
-	//»òÕßÊ¹ÓÃusetÊ÷²ãÈ¥ÖØ£¬usedÊ÷Ö¦È¥ÖØ
+	//æˆ–è€…ä½¿ç”¨usetæ ‘å±‚å»é‡ï¼Œusedæ ‘æå»é‡
 	void backtracking1(vector<int>& nums, vector<bool>& used) {
 		if (path.size() == nums.size()) {
 			res.push_back(path);
