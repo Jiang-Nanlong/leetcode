@@ -4,8 +4,8 @@
 using namespace std;
 
 /*
-* Õâ¸öÌâÊÇÒªÅĞ¶ÏransomNoteÄÜ²»ÄÜÓÃmagazineÖĞµÄ×Ö·û±íÊ¾³öÀ´£¬¶øÇÒmagazineÖĞµÄÃ¿¸ö×Ö·ûÖ»ÄÜÓÃÒ»´Î
-* Õâ¸öÌâ±È½Ï¼òµ¥£¬¿ªÊ¼ÓÃµÄÊÇunordered_map·¢ÏÖ½á¹û²»ÊÇºÜ¿ì£¬È»ºó»»³ÉÊı×é¾ÍÌØ±ğ¿ìÁË¡£
+* è¿™ä¸ªé¢˜æ˜¯è¦åˆ¤æ–­ransomNoteèƒ½ä¸èƒ½ç”¨magazineä¸­çš„å­—ç¬¦è¡¨ç¤ºå‡ºæ¥ï¼Œè€Œä¸”magazineä¸­çš„æ¯ä¸ªå­—ç¬¦åªèƒ½ç”¨ä¸€æ¬¡
+* è¿™ä¸ªé¢˜æ¯”è¾ƒç®€å•ï¼Œå¼€å§‹ç”¨çš„æ˜¯unordered_mapå‘ç°ç»“æœä¸æ˜¯å¾ˆå¿«ï¼Œç„¶åæ¢æˆæ•°ç»„å°±ç‰¹åˆ«å¿«äº†ã€‚
 */
 
 class Solution {
@@ -28,7 +28,7 @@ public:
 		return true;
 	}
 
-	//µÚ¶ş´Î×ö
+	//ç¬¬äºŒæ¬¡åš
 	bool canConstruct1(string ransomNote, string magazine) {
 		if (ransomNote.size() > magazine.size())
 			return false;
