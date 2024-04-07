@@ -4,8 +4,8 @@
 using namespace std;
 
 /*
-* �����ĸ��ȳ������飬�ҳ��ж�������Ϸ�ʽʹ���ĸ������е�Ԫ�ؼ�һ�����0��
-* ��������������һ��ͷ��Ҳû�У�Ҳû�뵽�͹�ϣ������ʲô��ϵ�����˴𰸲�֪����
+* 给出四个等长的数组，找出有多少种组合方式使得四个数组中的元素加一块等于0。
+* 刚做这个题真的是一点头绪也没有，也没想到和哈希表能有什么联系。看了答案才知道。
 */
 
 class Solution {
@@ -23,7 +23,7 @@ public:
 		return count;
 	}
 
-	//�ڶ���������û��������ô��
+	//第二回做，真没想起来怎么做
 	int fourSumCount1(vector<int>& nums1, vector<int>& nums2, vector<int>& nums3,
 		vector<int>& nums4) {
 		unordered_map<int, int> umap;
