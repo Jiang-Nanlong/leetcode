@@ -4,13 +4,13 @@
 using namespace std;
 
 /*
-* ÌâÄ¿ÒªÇóÕÒ³öÁ½¸öÊı×éµÄ½»¼¯£¬Õâ´ÎºÍ349Ìâ²»Ò»Ñù£¬Õâ»ØÒªÇó½á¹ûÖĞµÄÊı¾İ±ØĞë¸úÔ­Êı×éÖĞµÄÊı×Ö¸öÊıÏàÍ¬
+* é¢˜ç›®è¦æ±‚æ‰¾å‡ºä¸¤ä¸ªæ•°ç»„çš„äº¤é›†ï¼Œè¿™æ¬¡å’Œ349é¢˜ä¸ä¸€æ ·ï¼Œè¿™å›è¦æ±‚ç»“æœä¸­çš„æ•°æ®å¿…é¡»è·ŸåŸæ•°ç»„ä¸­çš„æ•°å­—ä¸ªæ•°ç›¸åŒ
 */
 class Solution {
 public:
 	vector<int> intersect(vector<int>& nums1, vector<int>& nums2) {
 		/*
-		unordered_multiset<int> umset;    //ÕâÊÇÎÒ×Ô¼ºĞ´µÄ£¬Ïë×ÅÓÃunordered_multisetÀ´±£´æ½á¹û£¬ÓÃÊı×éÀ´±£´ænums1ÖĞµÄÃ¿¸ö×ÖÄ¸µÄ¸öÊı
+		unordered_multiset<int> umset;    //è¿™æ˜¯æˆ‘è‡ªå·±å†™çš„ï¼Œæƒ³ç€ç”¨unordered_multisetæ¥ä¿å­˜ç»“æœï¼Œç”¨æ•°ç»„æ¥ä¿å­˜nums1ä¸­çš„æ¯ä¸ªå­—æ¯çš„ä¸ªæ•°
 		int hash[1001] = {0};
 		for(auto &c:nums1) hash[c]++;
 		for(auto &c:nums2){
@@ -20,8 +20,8 @@ public:
 		return vector<int>(umset.begin(),umset.end());
 		*/
 		vector<int> res;
-		unordered_map<int, int> ump;       //ÕâÊÇ±ğÈËµÄ´úÂë£¬ÓÃvector±£´æ½á¹û£¬unordered_map±£´ænums1ÖĞµÄÃ¿¸ö×Ö·ûµÄ¸öÊı£¬ÆäÊµÒ²¿ÉÒÔÓÃÊı×é£¬Êı×éµÄÊ±¼ä»á¸ü¶ÌÒ»Ğ©¡£
-		//int hash[1001] = {0};  //¿ÉÒÔÓÃÊı×é±£´ænums1ÖĞµÄÃ¿¸ö×Ö·û³öÏÖµÄ´ÎÊı£¬Ğ§¹û¸üºÃ
+		unordered_map<int, int> ump;       //è¿™æ˜¯åˆ«äººçš„ä»£ç ï¼Œç”¨vectorä¿å­˜ç»“æœï¼Œunordered_mapä¿å­˜nums1ä¸­çš„æ¯ä¸ªå­—ç¬¦çš„ä¸ªæ•°ï¼Œå…¶å®ä¹Ÿå¯ä»¥ç”¨æ•°ç»„ï¼Œæ•°ç»„çš„æ—¶é—´ä¼šæ›´çŸ­ä¸€äº›ã€‚
+		//int hash[1001] = {0};  //å¯ä»¥ç”¨æ•°ç»„ä¿å­˜nums1ä¸­çš„æ¯ä¸ªå­—ç¬¦å‡ºç°çš„æ¬¡æ•°ï¼Œæ•ˆæœæ›´å¥½
 		for (auto& c : nums1) ump[c]++;
 		for (auto& c : nums2) {
 			if (ump[c]-- > 0)
@@ -30,7 +30,7 @@ public:
 		return res;
 	}
 
-	//µÚ¶ş´Î×ö
+	//ç¬¬äºŒæ¬¡åš
 	vector<int> intersect1(vector<int>& nums1, vector<int>& nums2) {
 		vector<int> res;
 		unordered_map<int, int> umap;
