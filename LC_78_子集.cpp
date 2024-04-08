@@ -2,7 +2,7 @@
 #include <vector>
 using namespace std;
 
-//¸ø¶¨Ò»¸öÕûÊıÊı×énums£¬Êı×éÖĞµÄÔªËØ»¥²»ÏàÍ¬£¬·µ»Ø¸ÃÊı×éµÄËùÓĞ×Ó¼¯¡£
+//ç»™å®šä¸€ä¸ªæ•´æ•°æ•°ç»„numsï¼Œæ•°ç»„ä¸­çš„å…ƒç´ äº’ä¸ç›¸åŒï¼Œè¿”å›è¯¥æ•°ç»„çš„æ‰€æœ‰å­é›†ã€‚
 class Solution {
 public:
 	vector<vector<int>> subsets(vector<int>& nums) {
@@ -20,12 +20,12 @@ public:
 			cb.pop_back();
 		}
 	}
-	//ÉÏ±ßÊÇÎÒ×Ô¼ºĞ´µÄ´úÂë£¬ÔÚÃ¿²ãÃ¿´Î½øÈëÊ÷Ö¦Ö®Ç°£¬¶¼±£´æÒ»ÏÂ½á¹û£¬µ«ÊÇÕâÑùÃ»·¨±£´æ¿Õ¼¯¡£
+	//ä¸Šè¾¹æ˜¯æˆ‘è‡ªå·±å†™çš„ä»£ç ï¼Œåœ¨æ¯å±‚æ¯æ¬¡è¿›å…¥æ ‘æä¹‹å‰ï¼Œéƒ½ä¿å­˜ä¸€ä¸‹ç»“æœï¼Œä½†æ˜¯è¿™æ ·æ²¡æ³•ä¿å­˜ç©ºé›†ã€‚
 
-	//ÏÂ±ßÕâÊÇ´úÂëËæÏëÂ¼µÄ´úÂë£¬ËûÕâ¸öËäËµÖ»ÊÇ»»ÁËres.push_back(cb);µÄÎ»ÖÃ£¬µ«ÊÇ¿´ÆğÀ´¸üºÏÀí£¬Ò²¿ÉÒÔ×Ô¼º°Ñ¿Õ¼¯¼Ó½øÈ¥
+	//ä¸‹è¾¹è¿™æ˜¯ä»£ç éšæƒ³å½•çš„ä»£ç ï¼Œä»–è¿™ä¸ªè™½è¯´åªæ˜¯æ¢äº†res.push_back(cb);çš„ä½ç½®ï¼Œä½†æ˜¯çœ‹èµ·æ¥æ›´åˆç†ï¼Œä¹Ÿå¯ä»¥è‡ªå·±æŠŠç©ºé›†åŠ è¿›å»
 	void Helper1(vector<int>& nums, int startindex, vector<int>& cb, vector<vector<int>>& res) {
 		res.push_back(cb);
-		if (startindex == nums.size()) return;   //ÖÕÖ¹Óï¾äÓĞÃ»ÓĞ¶¼¿ÉÒÔ
+		if (startindex == nums.size()) return;   //ç»ˆæ­¢è¯­å¥æœ‰æ²¡æœ‰éƒ½å¯ä»¥
 
 		for (int i = startindex; i < nums.size(); i++) {
 			cb.push_back(nums[i]);
@@ -40,7 +40,7 @@ public:
 		return res;
 	}
 
-	//µÚ¶ş´Î×ö£¬ÏÖÔÚÔÙ×ö¾ÍÒÑ¾­ºÜ¼òµ¥ÁË
+	//ç¬¬äºŒæ¬¡åšï¼Œç°åœ¨å†åšå°±å·²ç»å¾ˆç®€å•äº†
 	vector<vector<int>> res;
 	vector<int> path;
 	vector<vector<int>> subsets2(vector<int>& nums) {
