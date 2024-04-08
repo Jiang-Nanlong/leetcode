@@ -2,8 +2,8 @@
 #include <vector>
 using namespace std;
 
-//¸ø¶¨Ò»¸öÓÐÏòÎÞ»·Í¼£¬ÕÒ³ö0µ½µÚn-1¸ö½ÚµãµÄËùÓÐÂ·¾¶
-//ÓÃdfs£¬ÆäÊµ¾ÍÊÇÒ»¸ö¼òµ¥µÄ»ØËÝÌâ
+//ç»™å®šä¸€ä¸ªæœ‰å‘æ— çŽ¯å›¾ï¼Œæ‰¾å‡º0åˆ°ç¬¬n-1ä¸ªèŠ‚ç‚¹çš„æ‰€æœ‰è·¯å¾„
+//ç”¨dfsï¼Œå…¶å®žå°±æ˜¯ä¸€ä¸ªç®€å•çš„å›žæº¯é¢˜
 
 class Solution {
 public:
