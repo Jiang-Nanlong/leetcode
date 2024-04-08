@@ -5,10 +5,10 @@
 #include <algorithm>
 using namespace std;
 
-//ÒªÇóÕÒ³ö¶ş²æËÑË÷Ê÷ÖĞµÄÖÚÊı¡£ÖÚÊı¿ÉÄÜÓĞºÃ¼¸¸ö
-//×î¿ªÊ¼Ïëµ½µÄ¾ÍÊÇÏÈ±éÀúÒ»±é¶ş²æËÑË÷Ê÷£¬È»ºóÓÃunordered_map±£´æÃ¿Ò»¸ö½ÚµãÖµµÄ³öÏÖ´ÎÊı£¬×îºóÔÙÅÅĞò£¬·µ»Ø³öÏÖ´ÎÊı×î¶àµÄ¼¸¸öÊı¡£ÕâÖÖ·½·¨ÊÇ×îÈİÒ×Ïëµ½µÄ£¬µ«ÊÇÃ»ÓĞÀûÓÃµ½¶ş²æËÑË÷Ê÷ÕâÒ»ÌØµã¡£
-//ÕâÀï»¹ÊÇÓÃÖĞĞò±éÀú£¬Èç¹ûpreÖ¸ÏòµÄ½ÚµãÎª¿Õ£¬ËµÃ÷ÊÇµÚÒ»¸ö½Úµã£¬count=1£»Èç¹ûpreÖ¸ÏòµÄ½ÚµãºÍµ±Ç°½ÚµãÖµÒ»Ñù£¬count++£»Èç¹ûpreÖ¸ÏòµÄ½ÚµãµÄÖµºÍµ±Ç°µÄ²»Ò»Ñù£¬ÄÇÃ´count=1.
-//È»ºóÓÃmaxcount¼ÇÂ¼×î´óµÄcount£¬Èç¹ûcount==maxcountµÄ»°£¬½ÚµãµÄÖµ¾ÍÈë¶Ó£»Èç¹ûmaxcount¸üĞÂµÄ»°£¬½á¹ûÊı×é¾ÍÇå¿Õ£¬È»ºó°Ñµ±Ç°½Úµã¼ÓÈë½øÈ¥¡£
+//è¦æ±‚æ‰¾å‡ºäºŒå‰æœç´¢æ ‘ä¸­çš„ä¼—æ•°ã€‚ä¼—æ•°å¯èƒ½æœ‰å¥½å‡ ä¸ª
+//æœ€å¼€å§‹æƒ³åˆ°çš„å°±æ˜¯å…ˆéå†ä¸€éäºŒå‰æœç´¢æ ‘ï¼Œç„¶åç”¨unordered_mapä¿å­˜æ¯ä¸€ä¸ªèŠ‚ç‚¹å€¼çš„å‡ºç°æ¬¡æ•°ï¼Œæœ€åå†æ’åºï¼Œè¿”å›å‡ºç°æ¬¡æ•°æœ€å¤šçš„å‡ ä¸ªæ•°ã€‚è¿™ç§æ–¹æ³•æ˜¯æœ€å®¹æ˜“æƒ³åˆ°çš„ï¼Œä½†æ˜¯æ²¡æœ‰åˆ©ç”¨åˆ°äºŒå‰æœç´¢æ ‘è¿™ä¸€ç‰¹ç‚¹ã€‚
+//è¿™é‡Œè¿˜æ˜¯ç”¨ä¸­åºéå†ï¼Œå¦‚æœpreæŒ‡å‘çš„èŠ‚ç‚¹ä¸ºç©ºï¼Œè¯´æ˜æ˜¯ç¬¬ä¸€ä¸ªèŠ‚ç‚¹ï¼Œcount=1ï¼›å¦‚æœpreæŒ‡å‘çš„èŠ‚ç‚¹å’Œå½“å‰èŠ‚ç‚¹å€¼ä¸€æ ·ï¼Œcount++ï¼›å¦‚æœpreæŒ‡å‘çš„èŠ‚ç‚¹çš„å€¼å’Œå½“å‰çš„ä¸ä¸€æ ·ï¼Œé‚£ä¹ˆcount=1.
+//ç„¶åç”¨maxcountè®°å½•æœ€å¤§çš„countï¼Œå¦‚æœcount==maxcountçš„è¯ï¼ŒèŠ‚ç‚¹çš„å€¼å°±å…¥é˜Ÿï¼›å¦‚æœmaxcountæ›´æ–°çš„è¯ï¼Œç»“æœæ•°ç»„å°±æ¸…ç©ºï¼Œç„¶åæŠŠå½“å‰èŠ‚ç‚¹åŠ å…¥è¿›å»ã€‚
 
 struct TreeNode {
 	int val;
@@ -31,13 +31,13 @@ public:
 	TreeNode* pre = nullptr;
 	void Helper(TreeNode* root) {
 		if (root == nullptr) return;
-		Helper(root->left);   //×ó
+		Helper(root->left);   //å·¦
 
-		if (pre == nullptr)   //ÖĞ
+		if (pre == nullptr)   //ä¸­
 			count = 1;
 		else if (pre->val == root->val)
 			count++;
-		else  //pre->valºÍroot->val²»ÏàÍ¬
+		else  //pre->valå’Œroot->valä¸ç›¸åŒ
 			count = 1;
 
 		if (count == maxcount)
@@ -50,10 +50,10 @@ public:
 		}
 
 		pre = root;
-		Helper(root->right); //ÓÒ
+		Helper(root->right); //å³
 	}
 
-	//Ç°±ßÊÇÓÃµİ¹é×öµÄ£¬µİ¹éÄÜ×öµÄµü´úÒ²ÄÜ×ö
+	//å‰è¾¹æ˜¯ç”¨é€’å½’åšçš„ï¼Œé€’å½’èƒ½åšçš„è¿­ä»£ä¹Ÿèƒ½åš
 	vector<int> findMode1(TreeNode* root) {
 		stack<TreeNode*> stk;
 		vector<int> res;
@@ -63,10 +63,10 @@ public:
 		while (cur || !stk.empty()) {
 			if (cur) {
 				stk.push(cur);
-				cur = cur->left;  //×ó
+				cur = cur->left;  //å·¦
 			}
 			else {
-				cur = stk.top();  //ÖĞ
+				cur = stk.top();  //ä¸­
 				stk.pop();
 				if (pre == nullptr)
 					count = 1;
@@ -84,14 +84,14 @@ public:
 				}
 
 				pre = cur;
-				cur = cur->right;  //ÓÒ
+				cur = cur->right;  //å³
 
 			}
 		}
 		return res;
 	}
 
-	//µÚ¶ş´Î×ö£¬»¹ÊÇÖ±½ÓÓÃµÄ±¿·½·¨£¬Ã»ÓĞÓÃµ½¶ş²æËÑË÷Ê÷Õâ¸öÖØÒªĞÅÏ¢¡£
+	//ç¬¬äºŒæ¬¡åšï¼Œè¿˜æ˜¯ç›´æ¥ç”¨çš„ç¬¨æ–¹æ³•ï¼Œæ²¡æœ‰ç”¨åˆ°äºŒå‰æœç´¢æ ‘è¿™ä¸ªé‡è¦ä¿¡æ¯ã€‚
 	unordered_map<int, int> umap;
 	vector<int> findMode2(TreeNode* root) {
 		inordered(root);
@@ -114,7 +114,7 @@ public:
 		inordered(root->right);
 	}
 
-	//ºóÀ´¿´ÁË´ğ°¸²ÅÖªµÀ
+	//åæ¥çœ‹äº†ç­”æ¡ˆæ‰çŸ¥é“
 	vector<int> findMode3(TreeNode* root) {
 		inordered1(root);
 		return res;
