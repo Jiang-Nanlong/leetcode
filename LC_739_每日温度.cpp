@@ -3,8 +3,8 @@
 #include <stack>
 using namespace std;
 
-//����һ����������temperatures������һ������res��res[i]��ʾtemperatures[i]֮��ĵڼ�����¶Ȼ���ڽ��죬���û�и��ߵģ�res[i]=0��
-//���������һ�ֽ�������ջ���·����������������򵥣�ջ�ڱ������������¶ȣ���ջ����ջ��������Ӧ�����µ�������Ϊֻ���������������¶ȸ���֮ǰĳ����¶�ʱ�Żᱻ��¼��
+//给定一个整数数组temperatures，返回一个数组res，res[i]表示temperatures[i]之后的第几天的温度会高于今天，如果没有更高的，res[i]=0；
+//这里介绍了一种叫做单调栈的新方法，这个方法还算简单，栈内保存天数而非温度，从栈顶到栈底天数对应的气温递增，因为只有这样，当今天温度高于之前某天的温度时才会被记录。
 
 class Solution {
 public:
