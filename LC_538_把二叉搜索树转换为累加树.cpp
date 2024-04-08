@@ -1,8 +1,8 @@
 #include <iostream>
 using namespace std;
 
-//�������Ҫ��ÿ���ڵ��ֵ��Ϊ���ڻ���ڸý���ֵ�����нڵ�ֵ�ĺ͡�
-//��Ϊ���Ƕ�������������Ȼ�����������½ǣ����Դ��ڵ��ڸý��ֵ�Ľ�㶼�����ұߣ�����ֻҪ�����������˳����С����������������������
+//这个题是要把每个节点的值换为大于或等于该结点的值的所有节点值的和。
+//因为这是二叉搜索树，显然最大的数在右下角，所以大于等于该结点值的结点都在其右边，所以只要按着右中左的顺序就行。这正好是中序遍历的逆序。
 
 struct TreeNode {
 	int val;
@@ -26,11 +26,11 @@ public:
 		return root;
 	}
 
-	//�ڶ�����
+	//第二次做
     int sum = 0;
     TreeNode* convertBST1(TreeNode* root) {
-        //�ȱ���һ�����������ýڵ�ֵ�ĺͣ�����������������sum�ݼ�ǰһ���ڵ��ֵ
-        //����Ҳ������һ��ֵ����ǰһ���ڵ��ֵ��Ȼ���ڵ�ǰ������м�ȥǰһ���ڵ��ֵ
+        //先遍历一遍二叉树，获得节点值的和，最后中序遍历依次用sum递减前一个节点的值
+        //或者也可以用一个值保存前一个节点的值，然后在当前层遍历中减去前一个节点的值
 
         if (root == nullptr) return nullptr;
 
@@ -56,7 +56,7 @@ public:
         convertBSTHelper(root->right);
     }
 
-    //���˴𰸲ŷ��ֿ�����������ı���˳��sum��ʾ��ǰ�ڵ��ǰһ���ڵ��ֵ��Ҳ���ǵ�ǰ�ڵ��ұߵ����нڵ�ֵ�ĺ�
+    //看了答案才发现可以用右中左的遍历顺序，sum表示当前节点的前一个节点的值，也就是当前节点右边的所有节点值的和
     int sum = 0;
     TreeNode* convertBST2(TreeNode* root) {
         if (root == nullptr) return nullptr;
