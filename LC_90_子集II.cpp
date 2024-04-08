@@ -4,7 +4,7 @@
 #include <unordered_set>
 using namespace std;
 
-//Õâ¸öÌâºÍLeetCode 78 ×Ó¼¯ÓĞÒ»µã²»Ò»Ñù£¬Õâ¸öÌâµÄnumsÊı×éÖĞ¿ÉÄÜÓĞÖØ¸´ÔªËØ£¬µ«ÊÇ½â¼¯ÖĞ²»ÄÜ°üº¬ÖØ¸´½â
+//è¿™ä¸ªé¢˜å’ŒLeetCode 78 å­é›†æœ‰ä¸€ç‚¹ä¸ä¸€æ ·ï¼Œè¿™ä¸ªé¢˜çš„numsæ•°ç»„ä¸­å¯èƒ½æœ‰é‡å¤å…ƒç´ ï¼Œä½†æ˜¯è§£é›†ä¸­ä¸èƒ½åŒ…å«é‡å¤è§£
 
 class Solution {
 public:
@@ -18,15 +18,15 @@ public:
 	void Helper(vector<int>& nums, int startindex, vector<int>& cb, vector<vector<int>>& res) {
 		res.push_back(cb);
 		for (int i = startindex; i < nums.size(); i++) {
-			if (i > startindex && nums[i] == nums[i - 1]) continue;   //Ê÷²ãÌø¹ıÖØ¸´½â
-			//Õâ¸öµØ·½¸úLeetCode 40 ×éºÏ×ÜºÍIIÀïµÄÒ»Ñù
+			if (i > startindex && nums[i] == nums[i - 1]) continue;   //æ ‘å±‚è·³è¿‡é‡å¤è§£
+			//è¿™ä¸ªåœ°æ–¹è·ŸLeetCode 40 ç»„åˆæ€»å’ŒIIé‡Œçš„ä¸€æ ·
 			cb.push_back(nums[i]);
 			Helper(nums, i + 1, cb, res);
 			cb.pop_back();
 		}
 	}
 
-	//»¹¿ÉÒÔÊ¹ÓÃusedÊı×éÈ¥ÖØ
+	//è¿˜å¯ä»¥ä½¿ç”¨usedæ•°ç»„å»é‡
 	void Helper1(vector<int>& nums, int startindex, vector<int>& cb, vector<vector<int>>& res, vector<bool>& used) {
 		res.push_back(cb);
 		for (int i = startindex; i < nums.size(); i++) {
@@ -39,7 +39,7 @@ public:
 		}
 	}
 
-	//»¹¿ÉÒÔÄ£·ÂLeetCode 491 ·Çµİ¼õ×ÓĞòÁĞ£¬ÔÚÃ¿Ò»²ã´´½¨Ò»¸öunordered_setÀ´ÔÚ²ãÄÚÈ¥ÖØ
+	//è¿˜å¯ä»¥æ¨¡ä»¿LeetCode 491 éé€’å‡å­åºåˆ—ï¼Œåœ¨æ¯ä¸€å±‚åˆ›å»ºä¸€ä¸ªunordered_setæ¥åœ¨å±‚å†…å»é‡
 	void Helper2(vector<int>& nums, int startIndex, vector<int>& cb, vector<vector<int>>& res) {
 		res.push_back(cb);
 		unordered_set<int> uset;
@@ -47,14 +47,14 @@ public:
 			if (uset.find(nums[i]) != uset.end()) {
 				continue;
 			}
-			uset.insert(nums[i]);  //ÒòÎªÖ»ÔÚÃ¿Ò»²ãÎ¬³ÖÕâ¸öusetÊı×é£¬ËùÒÔ²»ÓÃ¸øËü»ØËİ¾ÍĞĞ
+			uset.insert(nums[i]);  //å› ä¸ºåªåœ¨æ¯ä¸€å±‚ç»´æŒè¿™ä¸ªusetæ•°ç»„ï¼Œæ‰€ä»¥ä¸ç”¨ç»™å®ƒå›æº¯å°±è¡Œ
 			cb.push_back(nums[i]);
 			Helper2(nums, i + 1, cb, res);
 			cb.pop_back();
 		}
 	}
 
-	//µÚ¶ş´Î×ö
+	//ç¬¬äºŒæ¬¡åš
 	vector<int> path;
 	vector<vector<int>> res;
 
@@ -70,7 +70,7 @@ public:
 			return;
 
 		for (int i = startIndex; i < nums.size(); i++) {
-			if (i > startIndex && nums[i] == nums[i - 1])  //Ê÷²ãÈ¥ÖØ
+			if (i > startIndex && nums[i] == nums[i - 1])  //æ ‘å±‚å»é‡
 				continue;
 			path.push_back(nums[i]);
 			backtracking(nums, i + 1);
@@ -78,7 +78,7 @@ public:
 		}
 	}
 
-	//Ê¹ÓÃusedÊı×éÊ÷²ãÈ¥ÖØ
+	//ä½¿ç”¨usedæ•°ç»„æ ‘å±‚å»é‡
 	vector<vector<int>> subsetsWithDup2(vector<int>& nums) {
 		vector<bool> used(nums.size(), false);
 		sort(nums.begin(), nums.end());
@@ -102,7 +102,7 @@ public:
 		}
 	}
 
-	//Ê¹ÓÃusetÊ÷²ãÈ¥ÖØ
+	//ä½¿ç”¨usetæ ‘å±‚å»é‡
 	vector<vector<int>> subsetsWithDup3(vector<int>& nums) {
 		sort(nums.begin(), nums.end());
 		backtracking2(nums, 0);
