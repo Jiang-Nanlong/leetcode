@@ -3,7 +3,7 @@
 #include <stack>
 using namespace std;
 
-//»¹ÊÇÇóÏÂÒ»¸ö¸ü´óµÄÔªËØ£¬µ«ÊÇÕâÀïµÄnumsÊÇÒ»¸öÑ­»·Êý×é£¬ÕâÑùµÄ»°Ö»ÐèÒª±éÀúÁ½±éÊý×é¾ÍÄÜ¸øÇó³öËùÓÐµÄÏÂÒ»¸ö¸ü´óÔªËØÁË¡£
+//è¿˜æ˜¯æ±‚ä¸‹ä¸€ä¸ªæ›´å¤§çš„å…ƒç´ ï¼Œä½†æ˜¯è¿™é‡Œçš„numsæ˜¯ä¸€ä¸ªå¾ªçŽ¯æ•°ç»„ï¼Œè¿™æ ·çš„è¯åªéœ€è¦éåŽ†ä¸¤éæ•°ç»„å°±èƒ½ç»™æ±‚å‡ºæ‰€æœ‰çš„ä¸‹ä¸€ä¸ªæ›´å¤§å…ƒç´ äº†ã€‚
 
 class Solution {
 public:
