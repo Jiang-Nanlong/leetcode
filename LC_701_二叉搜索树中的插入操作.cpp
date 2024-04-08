@@ -13,7 +13,7 @@ struct TreeNode {
 
 class Solution {
 public:
-	TreeNode* insertIntoBST(TreeNode* root, int val) {  //µİ¹é
+	TreeNode* insertIntoBST(TreeNode* root, int val) {  //é€’å½’
 		if (root == nullptr) {
 			TreeNode* temp = new TreeNode(val);
 			return temp;
@@ -25,7 +25,7 @@ public:
 		return root;
 	}
 
-	//µİ¹éº¯ÊıÒ²¿ÉÒÔÃ»ÓĞ·µ»ØÖµ£¬²»¹ıÒª¼ÇÂ¼Ç°Ò»¸ö½Úµã
+	//é€’å½’å‡½æ•°ä¹Ÿå¯ä»¥æ²¡æœ‰è¿”å›å€¼ï¼Œä¸è¿‡è¦è®°å½•å‰ä¸€ä¸ªèŠ‚ç‚¹
 	TreeNode* parent;
 	void Helper(TreeNode* cur, int val) {
 		if (cur == nullptr) {
@@ -50,7 +50,7 @@ public:
 
 	}
 
-	//µü´ú
+	//è¿­ä»£
 	TreeNode* insertIntoBST1(TreeNode* root, int val) {
 		if (root == nullptr) {
 			root = new TreeNode(val);
@@ -72,7 +72,7 @@ public:
 		return root;
 	}
 
-	//µÚ¶ş´Î×ö
+	//ç¬¬äºŒæ¬¡åš
 	TreeNode* insertIntoBST3(TreeNode* root, int val) {
 		TreeNode* insertNode = new TreeNode(val);
 
@@ -98,7 +98,7 @@ public:
 		return root;
 	}
 
-	//Õâ¸ö´úÂë»¹ÊÇÍ¦ÇÉµÄ£¬µ«ÊÇÎÒÖ»Ğ´µÃÁË´ø¶îÍâvoid·µ»ØÖµµÄº¯Êı
+	//è¿™ä¸ªä»£ç è¿˜æ˜¯æŒºå·§çš„ï¼Œä½†æ˜¯æˆ‘åªå†™å¾—äº†å¸¦é¢å¤–voidè¿”å›å€¼çš„å‡½æ•°
 	TreeNode* insertIntoBST4(TreeNode* root, int val) {
 		if (root == nullptr) {
 			return new TreeNode(val);
@@ -109,7 +109,7 @@ public:
 			root->right = insertIntoBST(root->right, val);
 		return root;
 	}
-	//ÎÒÖ»»áĞ´ÏÂ±ßÕâÖÖµİ¹é
+	//æˆ‘åªä¼šå†™ä¸‹è¾¹è¿™ç§é€’å½’
 	TreeNode* insertIntoBST5(TreeNode* root, int val) {
 		if (root == nullptr)
 			return new TreeNode(val);
