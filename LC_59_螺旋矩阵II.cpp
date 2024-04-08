@@ -3,9 +3,9 @@
 using namespace std;
 
 /*
-* ¸øÒ»¸öÕýÕûÊý n £¬Éú³ÉÒ»¸ö°üº¬ 1 µ½ n·½µÄËùÓÐÔªËØ£¬ÇÒÔªËØ°´Ë³Ê±ÕëË³ÐòÂÝÐýÅÅÁÐµÄ n x n Õý·½ÐÎ¾ØÕó
+* ç»™ä¸€ä¸ªæ­£æ•´æ•° n ï¼Œç”Ÿæˆä¸€ä¸ªåŒ…å« 1 åˆ° næ–¹çš„æ‰€æœ‰å…ƒç´ ï¼Œä¸”å…ƒç´ æŒ‰é¡ºæ—¶é’ˆé¡ºåºèžºæ—‹æŽ’åˆ—çš„ n x n æ­£æ–¹å½¢çŸ©é˜µ
 */
-//Õâ¸öÌâ¾ÍÊÇ¿¼²ì´úÂë£¬²»¿¼Ëã·¨¡£
+//è¿™ä¸ªé¢˜å°±æ˜¯è€ƒå¯Ÿä»£ç ï¼Œä¸è€ƒç®—æ³•ã€‚
 class Solution {
 public:
 	vector<vector<int>> generateMatrix(int n) {
