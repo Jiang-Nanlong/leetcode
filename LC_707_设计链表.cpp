@@ -11,7 +11,7 @@ public:
 		ListedNode(int x, ListedNode* p) :val(x), next(p) {}
 	};
 	MyLinkedList() {
-		ListHead = new ListedNode();  //¶¨ÒåÒ»¸öÍ·½áµã
+		ListHead = new ListedNode();  //å®šä¹‰ä¸€ä¸ªå¤´ç»“ç‚¹
 		sizeofList = 0;
 	}
 
@@ -68,7 +68,7 @@ private:
 	int sizeofList;
 };
 
-//ÏÂ±ßÊÇµÚ¶ş±é×ö
+//ä¸‹è¾¹æ˜¯ç¬¬äºŒéåš
 class MyLinkedList1 {
 public:
 	struct ListedNode {
@@ -87,8 +87,8 @@ public:
 	int get(int index) {
 		if (index >= nodeNum || index < 0)
 			return -1;
-		ListedNode* p = NodeList->next;   //×¢ÒâÕâÀïµÄindexÊÇ´ÓNodeList->next¿ªÊ¼ËãµÄ£¬µ«ÊÇÏÂ±ßµÄaddAtIndexºÍdeleteAtIndex¶¼ÊÇ´ÓNodeList¿ªÊ¼ËãµÄ£¬ÒòÎªÕâÀïµÄget×îºó¾ÍÊÇÒªÈÃÖ¸ÕëÖ¸Ïòindex´¦£¬¶øÁíÍâÁ½¸ö¶¼ÊÇÒªÖ¸ÏòindexµÄÇ°Ò»¸ö
-		for (int i = 0; i < index; i++)   //ÕâÀïÑ­»·index´Î£¬Ö¸Ïòindex£¬´ÓµÚ0¸öÔªËØ¿ªÊ¼£¬ÒÆ¶¯Ò»ÏÂ£¬Ö¸ÏòµÚÒ»¸öÔªËØ£»ÒÆ¶¯Á½ÏÂ£¬Ö¸ÏòµÚ¶ş¸öÔªËØ£¬ÒÔ´ËÀàÍÆ
+		ListedNode* p = NodeList->next;   //æ³¨æ„è¿™é‡Œçš„indexæ˜¯ä»NodeList->nextå¼€å§‹ç®—çš„ï¼Œä½†æ˜¯ä¸‹è¾¹çš„addAtIndexå’ŒdeleteAtIndexéƒ½æ˜¯ä»NodeListå¼€å§‹ç®—çš„ï¼Œå› ä¸ºè¿™é‡Œçš„getæœ€åå°±æ˜¯è¦è®©æŒ‡é’ˆæŒ‡å‘indexå¤„ï¼Œè€Œå¦å¤–ä¸¤ä¸ªéƒ½æ˜¯è¦æŒ‡å‘indexçš„å‰ä¸€ä¸ª
+		for (int i = 0; i < index; i++)   //è¿™é‡Œå¾ªç¯indexæ¬¡ï¼ŒæŒ‡å‘indexï¼Œä»ç¬¬0ä¸ªå…ƒç´ å¼€å§‹ï¼Œç§»åŠ¨ä¸€ä¸‹ï¼ŒæŒ‡å‘ç¬¬ä¸€ä¸ªå…ƒç´ ï¼›ç§»åŠ¨ä¸¤ä¸‹ï¼ŒæŒ‡å‘ç¬¬äºŒä¸ªå…ƒç´ ï¼Œä»¥æ­¤ç±»æ¨
 			p = p->next;
 		return p->val;
 	}
