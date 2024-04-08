@@ -5,15 +5,15 @@
 #include <queue>
 using namespace std;
 
-//����һ��n*n�����֣������е�1��ʾ½�أ�0��ʾˮ������ֻһ�ΰ�0����1���������ĵ��������
-//��ʼ��ֻ�뵽���ñ����Ľⷨ�����Ƕ���ÿһ����0�ĵ�Ϊ��㣬��ִ��һ��dfs�������ܱ�������½�ص������������������ֻ���������������
-//һ����0���1֮��ȡ���ֵ���ڶ����ǵ�ͼ��û��0��ȫ��1.
+//给定一个n*n的数字，数组中的1表示陆地，0表示水，尝试只一次把0换成1，返回最大的岛屿的数量
+//开始我只想到了用暴力的解法，就是对于每一个是0的点为起点，都执行一遍dfs，返回能遍历到的陆地的数量，最后最大的数量只可能是两种情况：
+//一种是0变成1之后取最大值，第二种是地图中没有0，全是1.
 
-//�����ⷨ������������ⷨ��ʱ�ˣ�ʱ�临�Ӷ���O(n^4)����߿϶��кö��ظ����㣬���������벻����ô�Ż�
+//暴力解法，很明显这个解法超时了，时间复杂度是O(n^4)，里边肯定有好多重复计算，但是我又想不出怎么优化
 class Solution {
 public:
 	int largestIsland(vector<vector<int>>& grid) {
-		int sum = 0, res = 0, count0 = 0, count1 = 0;  //count0��count1����ͳ�Ƶ�ͼ��0��1�����������û��0.��ֱ�ӷ���1�����������򣬾ͷ���res
+		int sum = 0, res = 0, count0 = 0, count1 = 0;  //count0和count1用来统计地图中0和1的数量，如果没有0.就直接返回1的数量。否则，就返回res
 		res = 0;
 		for (int i = 0; i < grid.size(); i++) {
 			for (int j = 0; j < grid.size(); j++) {
@@ -35,9 +35,9 @@ public:
 		return res;
 	}
 
-	//��������¼�Ľⷨ�ر���������ȱ���������ͼ����ÿ�����춼���Ϻţ�����һ�鵺��ȫ���2��һ��ȫ���3...��Ȼ����һ��map����ÿ����Ŷ�Ӧ�ĵ��������
-	//Ȼ������ͷ��ʼ���������԰�ÿһ��0���1��Ȼ����ͳ�������1���ڵĵ���ı�ţ�Ȼ��ͨ����Ż�ȡ��������ˣ�ʱ�临�Ӷ���O(n^2)
-	//��ʵ����Ҳ���Բ�����visited���飬grid[i][j]==1�������visited����Ĺ���
+	//代码随想录的解法特别巧妙，就是先遍历整个地图，把每个岛屿都标上号，比如一块岛屿全标成2，一块全标成3...，然后用一个map保存每个标号对应的岛屿面积。
+	//然后再重头开始遍历，尝试把每一个0变成1，然后再统计与这个1相邻的岛屿的标号，然后通过标号获取面积就行了，时间复杂度是O(n^2)
+	//其实这里也可以不设置visited数组，grid[i][j]==1就替代了visited数组的功能
 	int largestIsland1(vector<vector<int>>& grid) {
 		vector<vector<bool>> visited(grid.size(), vector<bool>(grid.size(), false));
 		unordered_map<int, int> ump;
@@ -65,11 +65,11 @@ public:
 		if (isAllIsland) return grid.size() * grid.size();
 
 		int res = 0;
-		unordered_set<int> ust; //��ǰ������ܿ���������ͬ�ĵ��죬�������¶��ǵ���2������set���ж�ĳ�����������Ƿ��Ѿ�����������
+		unordered_set<int> ust; //当前点的四周可能是有相同的岛屿，比如上下都是岛屿2，引入set来判断某个岛屿的面积是否已经计算在内了
 		for (int i = 0; i < grid.size(); i++) {
 			for (int j = 0; j < grid.size(); j++) {
 				if (grid[i][j] == 0) {
-					count = 1;  //�����ϵ�ǰ�ڵ�
+					count = 1;  //计算上当前节点
 					ust.clear();
 					for (int k = 0; k < 4; k++) {
 						int next_i = i + dir[k][0];
@@ -114,11 +114,11 @@ public:
 		if (isAllIsland) return grid.size() * grid.size();
 
 		int res = 0;
-		unordered_set<int> ust; //��ǰ������ܿ���������ͬ�ĵ��죬�������¶��ǵ���2������set���ж�ĳ�����������Ƿ��Ѿ�����������
+		unordered_set<int> ust; //当前点的四周可能是有相同的岛屿，比如上下都是岛屿2，引入set来判断某个岛屿的面积是否已经计算在内了
 		for (int i = 0; i < grid.size(); i++) {
 			for (int j = 0; j < grid.size(); j++) {
 				if (grid[i][j] == 0) {
-					count = 1;  //�����ϵ�ǰ�ڵ�
+					count = 1;  //计算上当前节点
 					ust.clear();
 					for (int k = 0; k < 4; k++) {
 						int next_i = i + dir[k][0];
@@ -186,7 +186,7 @@ private:
 		}
 	}
 
-	//ȥ��visited�����Ժ��bfs����
+	//去掉visited数组以后的bfs代码
 	void bfs1(vector<vector<int>>& grid, int x, int y, int& count, int mark) {
 		queue<pair<int, int>> que;
 		que.push({ x,y });
@@ -204,7 +204,7 @@ private:
 				int next_y = cur_y + dir[i][1];
 				if (next_x < 0 || next_x >= grid.size() || next_y < 0 || next_y >= grid.size()) continue;
 				if (grid[next_x][next_y] == 1) {
-					grid[next_x][next_y] = mark;   //����ط������˺ó�ʱ�䣬��ʼ�Ƿŵ�count++;�ϱߣ����ǽ�����ԣ����Թ���������Ϊû�м�ʱ�޸�Ϊmark�����µ�ǰ�ڵ㱻�ظ�����
+					grid[next_x][next_y] = mark;   //这个地方调试了好长时间，开始是放到count++;上边，但是结果不对，调试过后发现是因为没有及时修改为mark，导致当前节点被重复添加
 					que.push({ next_x,next_y });
 				}
 			}
