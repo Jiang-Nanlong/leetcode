@@ -31,7 +31,7 @@ public:
 		return (s == t);
 	}
 
-	//�ڶ������Ĵ���>>  ����һ�ε��߼�һ����ֻ�����ظ�����ûд�ɺ���
+	//第二次做的代码>>  跟第一次的逻辑一样，只不过重复部分没写成函数
 	bool backspaceCompare1(string s, string t) {
 		int i = 0, j = 0;
 		for (; i < s.size(); i++) {
@@ -40,7 +40,7 @@ public:
 				j++;
 			}
 			else {
-				j = j - 1 > 0 ? j - 1 : 0;  //��ʼ����ط�ûд�ԣ�û�뵽�кü��������˸�ʹ����ָ��С��0�����
+				j = j - 1 > 0 ? j - 1 : 0;  //开始这个地方没写对，没想到有好几个连续退格使得慢指针小于0的情况
 			}
 		}
 		s.resize(j);
@@ -58,7 +58,7 @@ public:
 		t.resize(j);
 		return s == t;
 	}
-	//�ڶ������Ĵ���<<
+	//第二次做的代码<<
 
 
 private:
@@ -72,11 +72,11 @@ private:
 				slow = slow - 1 > 0 ? slow - 1 : 0;
 			}
 		}
-		//return slow;   //���Բ�����slow������ʹ��resize��������string����slow��С�������Ͳ��ÿ��ⷵ��slow��Ȼ��Ƚ���
+		//return slow;   //可以不返回slow，而是使用resize函数，把string换成slow大小，这样就不用刻意返回slow，然后比较了
 		s.resize(slow);
 	}
 };
-//�����ķ������ǱȽ������뵽�ģ��ÿ���ָ�룬�����ָ��������#���Ͱ���ָ���˸�һ��
+//这个题的方法还是比较容易想到的，用快慢指针，如果快指针遇到了#，就把慢指针退格一个
 
 int main() {
 	Solution st;
