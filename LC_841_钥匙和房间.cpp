@@ -3,9 +3,9 @@
 #include <queue>
 using namespace std;
 
-//����һ����ά���飬�����е�ÿһ�д���һ�����䣬�����ڵ�Ԫ�������������Կ�ף����Դ����������������ʼֻ�е�0�ŷ����ſ���
-//����ܴ����з�����žͷ���true�����򷵻�false��
-//ͬ�����Է�Ϊbfs��dfs�棬���������dfs��Ϊ�����汾����Ҫ�������ڵ�ǰ�㴦����ǰ���visited���黹����һ���visited����
+//给定一个二维数组，数组中的每一行代表一个房间，房间内的元素是其他房间的钥匙，可以打开其他房间的锁，开始只有第0号房间门开着
+//如果能打开所有房间的门就返回true，否则返回false。
+//同样可以分为bfs和dfs版，不过这里的dfs分为两个版本，主要区别是在当前层处理当前层的visited数组还是下一层的visited数组
 
 class Solution {
 public:
