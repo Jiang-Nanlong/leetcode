@@ -3,7 +3,7 @@
 using namespace std;
 
 /*
-* ����һ�� m �� n �еľ��� matrix ���밴�� ˳ʱ������˳�� �����ؾ����е�����Ԫ�ء�
+* 给你一个 m 行 n 列的矩阵 matrix ，请按照 顺时针螺旋顺序 ，返回矩阵中的所有元素。
 *
 */
 class Solution {
@@ -35,8 +35,8 @@ public:
 		return res;
 	}
 };
-//��������㷨�޹أ���������
-//��������count����Ϊ������һ�㲻��һȦ�Ļ������û��count��ΪԼ�������д��󣬼�Ȼ֪���˾���Ĵ�С����ֱ��Ū��count������������ٸ���
+//这个题与算法无关，纯考代码
+//这里引入count是因为如果最后一层不够一圈的话，如果没有count作为约束，会有错误，既然知道了矩阵的大小，就直接弄个count控制它输出多少个数
 
 int main() {
 	Solution st;
