@@ -2,14 +2,14 @@
 #include <vector>
 using namespace std;
 
-//è¿™ä¸ªé¢˜æˆ‘æƒ³åˆ°æŠŠgaså’Œcostæ•°ç»„çš„å¯¹åº”ä½ç½®ç›¸å‡ï¼ŒèŽ·å¾—æ¯ä¸ªåŠ æ²¹ç«™æ²¹é‡çš„å‡€æ”¶ç›Šã€‚å¦‚æžœæ‰€æœ‰çš„å‡€æ”¶ç›ŠåŠ ä¸€èµ·å°äºŽ0ï¼Œè¯´æ˜Žä¸å¯èƒ½å¼€ä¸€åœˆï¼Œ
-//ä½†æ˜¯ä»Žå“ªä¸ªä½ç½®å¼€å§‹ï¼Œæˆ‘è¿˜æ˜¯åªèƒ½æƒ³åˆ°ç”¨æš´åŠ›çš„è§£æ³•ï¼Œä»Žå„ä¸ªä½ç½®å¾ªçŽ¯ä¸€éï¼Œç„¶åŽåŠ ä¸Šæ¯ä¸ªä½ç½®çš„å‡€æ²¹é‡ï¼Œå¦‚æžœèƒ½åˆ°è¾¾èµ·å§‹ä½ç½®çš„å‰ä¸€ä¸ªè¯´æ˜Žå¯ä»¥å¼€ä¸€åœˆï¼Œå¦åˆ™ä¸èƒ½ã€‚
-//ä½†æ˜¯çœ‹äº†ä¸€ä¸‹ä»£ç éšæƒ³å½•çš„pdfä¸Šè¯´äº†ä¸€ä¸ªæ—¶é—´å¤æ‚åº¦O(n)çš„æ–¹æ³•ï¼Œæƒ³äº†ä¸€é˜µå­æƒ³ä¸å‡ºã€‚
-//ç„¶åŽçœ‹äº†è§†é¢‘æ‰çŸ¥é“ï¼Œä»–çš„æ„æ€ä¹Ÿæ˜¯ç®—æ¯ä¸ªä½ç½®çš„å‡€æ²¹é‡ï¼Œå¦‚æžœä»Ž0åˆ°æŸä¸ªç‚¹æ—¶ï¼Œå‡€æ²¹é‡å’Œä¸ºè´Ÿæ•°ï¼Œè¯´æ˜Žè¿™ä¸ªåŒºé—´é€‰æ‹©ä»»ä½•ä¸€ä¸ªä½ç½®ä½œä¸ºèµ·ç‚¹éƒ½ä¼šæ–­æ²¹ï¼Œ
-//ç„¶åŽå°±ä»Žå½“å‰èŠ‚ç‚¹çš„ä¸‹ä¸€ä¸ªä½ç½®é‡æ–°å¼€å§‹è®¡ç®—ã€‚
-//è¿™é‡Œçš„å±€éƒ¨æœ€ä¼˜æ˜¯å½“æŸç‚¹å¤„çš„å‡€æ²¹é‡å°äºŽ0æ—¶ï¼Œèµ·å§‹ä½ç½®è‡³å°‘æ˜¯i+1ï¼Œå› ä¸ºiä¹‹å‰å¼€å§‹çš„éƒ½ä¸è¡Œã€‚
-//å…¨å±€æœ€ä¼˜å°±æ˜¯æ‰¾åˆ°ä¸€ä¸ªå¯ä»¥è·‘ä¸€åœˆçš„ä½ç½®ã€‚
-//ä½†æ˜¯è¿™ä¸ªé¢˜è®©æˆ‘è‡ªå·±æƒ³ï¼Œæˆ‘è‚¯å®šè¿˜æ˜¯æƒ³ä¸å‡ºï¼Œæˆ‘æƒ³å¯èƒ½éœ€è¦ä¸€äº›æ•°å­¦è¯æ˜Ž
+//Õâ¸öÌâÎÒÏëµ½°ÑgasºÍcostÊý×éµÄ¶ÔÓ¦Î»ÖÃÏà¼õ£¬»ñµÃÃ¿¸ö¼ÓÓÍÕ¾ÓÍÁ¿µÄ¾»ÊÕÒæ¡£Èç¹ûËùÓÐµÄ¾»ÊÕÒæ¼ÓÒ»ÆðÐ¡ÓÚ0£¬ËµÃ÷²»¿ÉÄÜ¿ªÒ»È¦£¬
+//µ«ÊÇ´ÓÄÄ¸öÎ»ÖÃ¿ªÊ¼£¬ÎÒ»¹ÊÇÖ»ÄÜÏëµ½ÓÃ±©Á¦µÄ½â·¨£¬´Ó¸÷¸öÎ»ÖÃÑ­»·Ò»±é£¬È»ºó¼ÓÉÏÃ¿¸öÎ»ÖÃµÄ¾»ÓÍÁ¿£¬Èç¹ûÄÜµ½´ïÆðÊ¼Î»ÖÃµÄÇ°Ò»¸öËµÃ÷¿ÉÒÔ¿ªÒ»È¦£¬·ñÔò²»ÄÜ¡£
+//µ«ÊÇ¿´ÁËÒ»ÏÂ´úÂëËæÏëÂ¼µÄpdfÉÏËµÁËÒ»¸öÊ±¼ä¸´ÔÓ¶ÈO(n)µÄ·½·¨£¬ÏëÁËÒ»Õó×ÓÏë²»³ö¡£
+//È»ºó¿´ÁËÊÓÆµ²ÅÖªµÀ£¬ËûµÄÒâË¼Ò²ÊÇËãÃ¿¸öÎ»ÖÃµÄ¾»ÓÍÁ¿£¬Èç¹û´Ó0µ½Ä³¸öµãÊ±£¬¾»ÓÍÁ¿ºÍÎª¸ºÊý£¬ËµÃ÷Õâ¸öÇø¼äÑ¡ÔñÈÎºÎÒ»¸öÎ»ÖÃ×÷ÎªÆðµã¶¼»á¶ÏÓÍ£¬
+//È»ºó¾Í´Óµ±Ç°½ÚµãµÄÏÂÒ»¸öÎ»ÖÃÖØÐÂ¿ªÊ¼¼ÆËã¡£
+//ÕâÀïµÄ¾Ö²¿×îÓÅÊÇµ±Ä³µã´¦µÄ¾»ÓÍÁ¿Ð¡ÓÚ0Ê±£¬ÆðÊ¼Î»ÖÃÖÁÉÙÊÇi+1£¬ÒòÎªiÖ®Ç°¿ªÊ¼µÄ¶¼²»ÐÐ¡£
+//È«¾Ö×îÓÅ¾ÍÊÇÕÒµ½Ò»¸ö¿ÉÒÔÅÜÒ»È¦µÄÎ»ÖÃ¡£
+//µ«ÊÇÕâ¸öÌâÈÃÎÒ×Ô¼ºÏë£¬ÎÒ¿Ï¶¨»¹ÊÇÏë²»³ö£¬ÎÒÏë¿ÉÄÜÐèÒªÒ»Ð©ÊýÑ§Ö¤Ã÷
 
 class Solution {
 public:
@@ -19,11 +19,30 @@ public:
 			cursum += gas[i] - cost[i];
 			totalsum += gas[i] - cost[i];
 			if (cursum < 0) {
-				start = i + 1;   //ä¸ºä»€ä¹ˆè¿™é‡Œä¸å†™æˆstart=iï¼Œç„¶åŽæœ€åŽè¿”å›žstart+1ã€‚å› ä¸ºæœ‰å¯èƒ½0å°±æ˜¯æœ€åŽçš„èµ·å§‹ä½ç½®ï¼Œæ•´ä¸ªè¿‡ç¨‹éƒ½ä¸ä¼šæ¶‰åŠä¿®æ”¹èµ·ç‚¹çš„äº‹ã€‚
+				start = i + 1;   //ÎªÊ²Ã´ÕâÀï²»Ð´³Éstart=i£¬È»ºó×îºó·µ»Østart+1¡£ÒòÎªÓÐ¿ÉÄÜ0¾ÍÊÇ×îºóµÄÆðÊ¼Î»ÖÃ£¬Õû¸ö¹ý³Ì¶¼²»»áÉæ¼°ÐÞ¸ÄÆðµãµÄÊÂ¡£
 				cursum = 0;
 			}
 		}
 		if (totalsum < 0) return -1;
+		return start;
+	}
+
+	//µÚ¶þ´Î×ö£¬»¹ÊÇÃ»ÓÐ×ö³öÀ´£¬µ«ÊÇÎÒÒÑ¾­ÓÐÐ©Àí½âÕâ¸öË¼Â·ÁË
+	//¾ÍÊÇËµÈç¹ûÒ»¸öÇø¼äÄÚµÄrest[i]µÄºÍÊÇÐ¡ÓÚ0µÄ»°£¬Õâ¸öÇø¼äÄÚµÄËùÓÐµã¶¼ÊÇ²»ÄÜ×÷ÎªÆðµãµÄ£¬ÒòÎªÈÎºÎÒ»¸öµã×÷ÎªÆðµã×ßµ½Çø¼äÄ©¶ËµÄÊ±ºò£¬ÓÍÁ¿¶¼»áÐ¡ÓÚ0£¬
+	//ËùÒÔÆðµãÖ»ÄÜÔÚÏÂÒ»¸öÇø¼äÄÚ
+	int canCompleteCircuit1(vector<int>& gas, vector<int>& cost) {
+		int curSum = 0;
+		int totalSum = 0;  //ÓÃÓÚ×îºó¼ÆËãÕû¸öÂ·³ÌµÄ¾»ÓÍÁ¿ÊÇ·ñ´óÓÚ0
+		int start = 0;
+		for (int i = 0; i < gas.size(); i++) {
+			curSum += gas[i] - cost[i];
+			totalSum += gas[i] - cost[i];
+			if (curSum < 0) {
+				start = i + 1;
+				curSum = 0;
+			}
+		}
+		if (totalSum < 0) return -1;
 		return start;
 	}
 };

@@ -1,14 +1,15 @@
 #include <iostream>
 #include <vector>
+#include <numeric>
 using namespace std;
 
-//ä¸‹è¾¹æ˜¯æˆ‘ä¹‹å‰åœ¨æµªæ½®çš„æ—¶å€™åšçš„
+//ÏÂ±ßÊÇÎÒÖ®Ç°ÔÚÀË³±µÄÊ±ºò×öµÄ
 /*
-nä¸ªå­©å­ç«™æˆä¸€æŽ’ï¼Œæ¯ä¸ªå­©å­æœ€å°‘åˆ†é…ä¸€ä¸ªç³–æžœï¼Œç›¸é‚»çš„ä¸¤ä¸ªå­©å­è¯„åˆ†æ›´é«˜çš„å­©å­èŽ·å¾—æ›´å¤šçš„ç³–æžœï¼Œè¿”å›žæœ€å°‘çš„ç³–æžœæ•°ç›®ã€‚
-æœ€å¼€å§‹çš„æ—¶å€™æˆ‘ä»¥ä¸ºç”¨æŽ’åºçš„æ–¹æ³•ï¼Œä»Žä½Žåˆ°é«˜ï¼Œè¯„åˆ†æœ€ä½Žçš„äººåˆ†ä¸€ä¸ªï¼Œç„¶åŽä¾æ¬¡é€’å¢žï¼Œä¸è¿‡è¿™æ ·å°±è¿åäº†ä¹‹å‰æ¯ä¸ªäººçš„ä½ç½®ï¼Œå°±æ”¹å˜ç»™å®šçš„æ¡ä»¶äº†
-åŒæ—¶çœ‹åˆ°å®žä¾‹[1,0,2]æœ€å°‘éœ€è¦2ã€1ã€2ï¼Œä¸€å…±5ä¸ªç³–æžœï¼Œç„¶åŽçœ‹äº†LeetCode101ï¼Œä¹¦ä¸­ç»™äº†ä¸€ä¸ªç‰¹å¤‡å·§å¦™çš„ç®—æ³•ï¼Œ
-å› ä¸ºæ¯ä¸ªå­©å­éƒ½è‡³å°‘è¦èŽ·å¾—ä¸€ä¸ªç³–æžœï¼Œç„¶åŽæœ€åˆå°±æŠŠæ¯ä¸ªäººçš„ç³–æžœè®¾æˆ1ï¼Œç„¶åŽä»Žå·¦å¾€å³éåŽ†ï¼Œå¦‚æžœå³è¾¹å­©å­å¤§äºŽå·¦è¾¹ï¼Œåˆ™å³è¾¹å­©å­çš„ç³–æžœæ•°ç­‰äºŽå·¦è¾¹å­©å­ç³–æžœæ•°+1ï¼Œ
-ç„¶åŽä»Žå³å‘å·¦éåŽ†ï¼Œå¦‚æžœå·¦è¾¹å­©å­è¯„åˆ†å¤§äºŽå³è¾¹å­©å­ï¼Œä¸”ç³–æžœæ•°ä½ŽäºŽæˆ–ç­‰äºŽå³è¾¹ï¼Œåˆ™å·¦è¾¹å­©å­çš„ç³–æžœæ•°ç­‰äºŽå³è¾¹çš„+1
+n¸öº¢×ÓÕ¾³ÉÒ»ÅÅ£¬Ã¿¸öº¢×Ó×îÉÙ·ÖÅäÒ»¸öÌÇ¹û£¬ÏàÁÚµÄÁ½¸öº¢×ÓÆÀ·Ö¸ü¸ßµÄº¢×Ó»ñµÃ¸ü¶àµÄÌÇ¹û£¬·µ»Ø×îÉÙµÄÌÇ¹ûÊýÄ¿¡£
+×î¿ªÊ¼µÄÊ±ºòÎÒÒÔÎªÓÃÅÅÐòµÄ·½·¨£¬´ÓµÍµ½¸ß£¬ÆÀ·Ö×îµÍµÄÈË·ÖÒ»¸ö£¬È»ºóÒÀ´ÎµÝÔö£¬²»¹ýÕâÑù¾ÍÎ¥·´ÁËÖ®Ç°Ã¿¸öÈËµÄÎ»ÖÃ£¬¾Í¸Ä±ä¸ø¶¨µÄÌõ¼þÁË
+Í¬Ê±¿´µ½ÊµÀý[1,0,2]×îÉÙÐèÒª2¡¢1¡¢2£¬Ò»¹²5¸öÌÇ¹û£¬È»ºó¿´ÁËLeetCode101£¬ÊéÖÐ¸øÁËÒ»¸öÌØ±¸ÇÉÃîµÄËã·¨£¬
+ÒòÎªÃ¿¸öº¢×Ó¶¼ÖÁÉÙÒª»ñµÃÒ»¸öÌÇ¹û£¬È»ºó×î³õ¾Í°ÑÃ¿¸öÈËµÄÌÇ¹ûÉè³É1£¬È»ºó´Ó×óÍùÓÒ±éÀú£¬Èç¹ûÓÒ±ßº¢×Ó´óÓÚ×ó±ß£¬ÔòÓÒ±ßº¢×ÓµÄÌÇ¹ûÊýµÈÓÚ×ó±ßº¢×ÓÌÇ¹ûÊý+1£¬
+È»ºó´ÓÓÒÏò×ó±éÀú£¬Èç¹û×ó±ßº¢×ÓÆÀ·Ö´óÓÚÓÒ±ßº¢×Ó£¬ÇÒÌÇ¹ûÊýµÍÓÚ»òµÈÓÚÓÒ±ß£¬Ôò×ó±ßº¢×ÓµÄÌÇ¹ûÊýµÈÓÚÓÒ±ßµÄ+1
 */
 /*
 #include <iostream>
@@ -20,7 +21,7 @@ class Solution {
 public:
 	int candy(vector<int>& ratings) {
 		int m = ratings.size();
-		if (m < 2) return m;     //çœ‹äº†LeetCode101è¡¥å……çš„ï¼Œå¯ä»¥åŠ å¿«é€Ÿåº¦
+		if (m < 2) return m;     //¿´ÁËLeetCode101²¹³äµÄ£¬¿ÉÒÔ¼Ó¿ìËÙ¶È
 		vector<int> sweets(m, 1);
 		for (int i = 0; i + 1 < m; i++) {
 			if (ratings[i] < ratings[i + 1])
@@ -37,7 +38,7 @@ public:
 			sweet += i;
 		return sweet;*/
 		/*
-				return accumulate(sweets.begin(), sweets.end(), 0);  //è¿˜å¯ä»¥è¿™æ ·å†™
+				return accumulate(sweets.begin(), sweets.end(), 0);  //»¹¿ÉÒÔÕâÑùÐ´
 			}
 		};
 
@@ -51,7 +52,7 @@ public:
 		}
 		*/
 
-		//è¿™æ¬¡æ˜¯çœ‹çš„ä»£ç éšæƒ³å½•çš„ä»£ç ï¼Œæ€è·¯è·Ÿä¹‹å‰æ˜¯ä¸€æ ·çš„ï¼Œè¿™ä¹Ÿå¤ªéš¾æƒ³äº†ï¼Œçº¯çº¯è„‘ç­‹æ€¥è½¬å¼¯
+		//Õâ´ÎÊÇ¿´µÄ´úÂëËæÏëÂ¼µÄ´úÂë£¬Ë¼Â·¸úÖ®Ç°ÊÇÒ»ÑùµÄ£¬ÕâÒ²Ì«ÄÑÏëÁË£¬´¿´¿ÄÔ½î¼±×ªÍä
 class Solution {
 public:
 	int candy(vector<int>& ratings) {
@@ -69,12 +70,46 @@ public:
 			sum += i;
 		return sum;
 	}
+
+	//µÚ¶þ´Î×ö
+	//Õâ¸öË¼Â·²»ÐÐ£¬½á¹û»á´óÓÚÕýÈ·µÄ´ð°¸£¬ÒòÎªÔÚ´ÓÓÒÏò×ó±éÀúÊ±£¬ÓÐÊ±ºòÊÇcount[i]ÒÑ¾­ÊÇ´óÓÚcount[i+1]µÄÁË£¬Ò²¾Í²»ÐèÒª¸Ä¶¯ÁË
+	int candy1(vector<int>& ratings) {  //Ë¼Â·´íÁË
+		if (ratings.size() == 1) return 1;
+		int count = ratings.size();
+		for (int i = 1; i < ratings.size(); i++) {
+			if (ratings[i] > ratings[i - 1])
+				count++;
+		}
+		for (int i = ratings.size() - 2; i >= 0; i--) {
+			if (ratings[i] > ratings[i + 1])
+				count++;
+		}
+		return count;
+	}
+
+	//Õâ²ÅÊÇÕýÈ·µÄ´ð°¸
+	int candy2(vector<int>& ratings) {
+		if (ratings.size() == 1) return 1;
+		vector<int> count(ratings.size(), 1);
+
+		for (int i = 1; i < ratings.size(); i++) {
+			if (ratings[i] > ratings[i - 1]) {
+				count[i] = count[i - 1] + 1;
+			}
+		}
+		for (int i = ratings.size() - 2; i >= 0; i--) {
+			if (ratings[i] > ratings[i + 1])
+				count[i] = max(count[i], count[i + 1] + 1);
+		}
+		return accumulate(count.begin(), count.end(), 0);
+	}
 };
 
 int main() {
 	Solution st;
-	vector<int> ratings{ 1,3,4,5,2 };
+	vector<int> ratings{ 1,3,2,2,1 };
 	int sum = st.candy(ratings);
 	cout << sum << endl;
+	cout << st.candy2(ratings) << endl;
 	return 0;
 }
