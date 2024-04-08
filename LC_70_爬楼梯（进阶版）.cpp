@@ -2,9 +2,9 @@
 #include <vector>
 using namespace std;
 
-//����LeetCode 70 ��¥�ݵĽ��װ棬ԭ����һ��������1��2��̨�ף������Ϊһ��������1��̨�ף�2��̨�ף�3��̨�ס�����ֱ��m��̨�ף�
-//���ж����ֲ�ͬ�ķ�������¥��
-//��һ������һ����ȫ�������⣬���һ���һ�������е�����
+//这是LeetCode 70 爬楼梯的进阶版，原题是一步可以走1或2个台阶，这里改为一步可以走1个台阶，2个台阶，3个台阶。。。直到m个台阶，
+//问有多少种不同的方法爬到楼顶
+//这一看就是一个完全背包问题，而且还是一个求排列的问题
 class Solution {
 public:
 	int climbStairs(int n, int m) {
@@ -22,7 +22,7 @@ public:
 
 int main() {
 	Solution st;
-	int n = 3, m = 2;  //m=2ʱ���ԭ��
+	int n = 3, m = 2;  //m=2时变成原题
 	cout << st.climbStairs(n, m) << endl;
 	return 0;
 }
