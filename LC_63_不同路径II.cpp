@@ -2,8 +2,8 @@
 #include <vector>
 using namespace std;
 
-//��������һ������������һ��Ķ�ά���������ϰ���ҿ�ʼ�������ϰ����Ӱ�쵽��������λ�ú����ұߺ��±ߵ�λ�ã�����ô�����������
-//��������ֻͨҪ���ϰ���λ�õ�dp����д��0���У�
+//这个题和上一个的区别是这一题的二维数组中有障碍物，我开始在想有障碍物会影响到它本身的位置和它右边和下边的位置，该怎么处理这个问题
+//后来才想通只要把障碍物位置的dp数组写成0就行，
 class Solution {
 public:
 	int uniquePathsWithObstacles(vector<vector<int>>& obstacleGrid) {
