@@ -2,8 +2,8 @@
 #include <vector>
 using namespace std;
 
-//¿ÉÒÔ½øÐÐ¶à´Î½»Ò×£¬²»¹ýÃ¿´Î½»Ò×µÄÊ±ºò¶¼ÐèÒª½»ÊÖÐø·Ñfee¡£
-//Õâ¸öÌâºÍLeetCode 122 ÂòÂô¹ÉÆ±µÄ×î¼ÑÊ±»úII Ò»Ñù£¬Ö»ÒªÔÚÂô³öµÄÊ±ºò¼õÈ¥ÊÖÐø·Ñ¾ÍÐÐ
+//å¯ä»¥è¿›è¡Œå¤šæ¬¡äº¤æ˜“ï¼Œä¸è¿‡æ¯æ¬¡äº¤æ˜“çš„æ—¶å€™éƒ½éœ€è¦äº¤æ‰‹ç»­è´¹feeã€‚
+//è¿™ä¸ªé¢˜å’ŒLeetCode 122 ä¹°å–è‚¡ç¥¨çš„æœ€ä½³æ—¶æœºII ä¸€æ ·ï¼Œåªè¦åœ¨å–å‡ºçš„æ—¶å€™å‡åŽ»æ‰‹ç»­è´¹å°±è¡Œ
 class Solution {
 public:
 	int maxProfit(vector<int>& prices, int fee) {
@@ -16,7 +16,7 @@ public:
 		return dp[prices.size() - 1][1];
 	}
 
-	//ÓÅ»¯dpÊý×é
+	//ä¼˜åŒ–dpæ•°ç»„
 	int maxProfit1(vector<int>& prices, int fee) {
 		vector<vector<int>> dp(2, vector<int>(2, 0));
 		dp[0][0] = -prices[0];
