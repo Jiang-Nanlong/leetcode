@@ -1,7 +1,7 @@
 #include <iostream>
 using namespace std;
 
-//ÔÚÒ»¸ö¶þ²æËÑË÷Ê÷ÖÐÕÒ³öÄ³¸öÖµµÈÓÚvalµÄ½Úµã£¬Èç¹ûÕÒµ½¾Í·µ»Ø½ÚµãÖ¸Õë£¬ÕÒ²»µ½¾Í·µ»Ønull
+//åœ¨ä¸€ä¸ªäºŒå‰æœç´¢æ ‘ä¸­æ‰¾å‡ºæŸä¸ªå€¼ç­‰äºŽvalçš„èŠ‚ç‚¹ï¼Œå¦‚æžœæ‰¾åˆ°å°±è¿”å›žèŠ‚ç‚¹æŒ‡é’ˆï¼Œæ‰¾ä¸åˆ°å°±è¿”å›žnull
 
 struct TreeNode {
 	int val;
@@ -26,7 +26,7 @@ public:
 		return nullptr;
 	}
 
-	//´úÂë»¹¿ÉÒÔ¼ò»¯Ò»ÏÂ
+	//ä»£ç è¿˜å¯ä»¥ç®€åŒ–ä¸€ä¸‹
 	TreeNode* searchBST1(TreeNode* root, int val) {
 		if (root == nullptr || root->val == val) return root;
 
@@ -36,7 +36,7 @@ public:
 			return searchBST1(root->right, val);
 	}
 
-	//µü´ú·¨Ò²ÄÜ×ö£¬ÕâÊÇ×î¼òµ¥µÄµü´úÁË°É
+	//è¿­ä»£æ³•ä¹Ÿèƒ½åšï¼Œè¿™æ˜¯æœ€ç®€å•çš„è¿­ä»£äº†å§
 	TreeNode* searchBST2(TreeNode* root, int val) {
 		while (root) {
 			if (root->val > val)
@@ -49,7 +49,7 @@ public:
 		return nullptr;
 	}
 
-	//µÚ¶þ±éÔÙ×öÊ×ÏÈÏëµ½µÄ»¹ÊÇµü´ú·¨£¬Õâ¸öµÝ¹éÒ»ÏÂ×ÓÃ»ÏëÆðÀ´¡£
+	//ç¬¬äºŒéå†åšé¦–å…ˆæƒ³åˆ°çš„è¿˜æ˜¯è¿­ä»£æ³•ï¼Œè¿™ä¸ªé€’å½’ä¸€ä¸‹å­æ²¡æƒ³èµ·æ¥ã€‚
 	TreeNode* searchBST3(TreeNode* root, int val) {
 		if (root == nullptr || root->val == val)
 			return root;
