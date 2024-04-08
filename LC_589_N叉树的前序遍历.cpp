@@ -28,7 +28,7 @@ public:
 		return res;
 	}
 private:
-	void preorderHelper(vector<int>& res, Node* root) {  //ֱ�ӵݹ�
+	void preorderHelper(vector<int>& res, Node* root) {  //Ö±½ÓµÝ¹é
 		if (root == nullptr) return;
 		res.push_back(root->val);
 		for (auto& c : root->children) {
