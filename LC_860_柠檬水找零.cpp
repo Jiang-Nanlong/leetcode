@@ -2,12 +2,12 @@
 #include <vector>
 using namespace std;
 
-//åˆ†ä¸‰ç§æƒ…å†µï¼š1.ç»™äº”å—é’±åªæ¥å—ä¸‹ï¼›2.ç»™åå—é’±æ‰¾äº”å—ï¼›3.ç»™äºŒåï¼Œä¼˜å…ˆæ‰¾å›åå—+äº”å—ï¼Œä¸è¡Œçš„è¯å†æ‰¾ä¸‰å¼ äº”å—ã€‚
+//·ÖÈıÖÖÇé¿ö£º1.¸øÎå¿éÇ®Ö»½ÓÊÜÏÂ£»2.¸øÊ®¿éÇ®ÕÒÎå¿é£»3.¸ø¶şÊ®£¬ÓÅÏÈÕÒ»ØÊ®¿é+Îå¿é£¬²»ĞĞµÄ»°ÔÙÕÒÈıÕÅÎå¿é¡£
 
 class Solution {
 public:
 	bool lemonadeChange(vector<int>& bills) {
-		int count[2] = { 0 };   //æ”¶é›†äº”å—æˆ–åå—çš„é’±æ•°
+		int count[2] = { 0 };   //ÊÕ¼¯Îå¿é»òÊ®¿éµÄÇ®Êı
 		for (int i = 0; i < bills.size(); i++) {
 			if (bills[i] == 5)
 				count[0]++;
@@ -26,6 +26,32 @@ public:
 					count[0] -= 3;
 				}
 				else return false;
+			}
+		}
+		return true;
+	}
+
+	//µÚ¶ş´Î×ö
+	bool lemonadeChange1(vector<int>& bills) {
+		int count_5 = 0, count_10 = 0;
+		for (auto& bill : bills) {
+			if (bill == 5)
+				count_5++;
+			if (bill == 10) {
+				if (count_5 == 0) return false;
+				count_5--;
+				count_10++;
+			}
+			else if (bill == 20) {
+				if (count_10 > 0 && count_5 > 0) {
+					count_10--;
+					count_5--;
+				}
+				else if (count_10 == 0 && count_5 >= 3) {
+					count_5 -= 3;
+				}
+				else
+					return false;
 			}
 		}
 		return true;
