@@ -2,7 +2,7 @@
 #include <queue>
 using namespace std;
 
-//�������������ص�����λ�ڵ��ֵ��һ��
+//将两个二叉树重叠，对位节点的值加一起
 
 struct TreeNode {
 	int val;
@@ -16,7 +16,7 @@ struct TreeNode {
 class Solution {
 public:
 	TreeNode* mergeTrees(TreeNode* root1, TreeNode* root2) {
-		//if (root1 == nullptr && root2 == nullptr) return nullptr;   //��ʼ�Ұ���ֹ����д����
+		//if (root1 == nullptr && root2 == nullptr) return nullptr;   //开始我把终止条件写错了
 		if (root1 == nullptr) return root2;
 		if (root2 == nullptr) return root1;
 
@@ -29,13 +29,13 @@ public:
 		return root;
 	}
 
-	//�������پ���һ�£�ֱ����root1�Ͻ����޸�
+	//还可以再精简一下，直接在root1上进行修改
 	TreeNode* mergeTrees1(TreeNode* root1, TreeNode* root2) {
 		if (root1 == nullptr) return root2;
 		if (root2 == nullptr) return root1;
 
-		//�ߵ���һ��˵���������ĸý�㶼��Ϊ��
-		root1->val += root2->val;  //��һ���λ�����⣬������ǰ�����������޸���仰��λ�ã�����������������Ҳ������
+		//走到这一步说明两棵树的该结点都不为空
+		root1->val += root2->val;  //这一句的位置任意，现在是前序遍历，如果修改这句话的位置，后序遍历和中序遍历也都可以
 
 		root1->left = mergeTrees(root1->left, root2->left);
 		root1->right = mergeTrees(root1->right, root2->right);
@@ -61,17 +61,17 @@ public:
 				que.push(cur1->right);
 				que.push(cur2->right);
 			}
-			if (cur1->left == nullptr && cur2->left != nullptr) //��root1����ڵ�Ϊ�գ�root2����ڵ㲻Ϊ��ʱ
+			if (cur1->left == nullptr && cur2->left != nullptr) //当root1的左节点为空，root2的左节点不为空时
 				cur1->left = cur2->left;
-			if (cur1->right == nullptr && cur2->right != nullptr)  //��root1���ҽڵ�Ϊ�գ�root2�ҽڵ㲻Ϊ��ʱ
+			if (cur1->right == nullptr && cur2->right != nullptr)  //当root1的右节点为空，root2右节点不为空时
 				cur1->right = cur2->right;
-			//�����ʱ����һֱ�������root1����ڵ���ҽڵ㲻Ϊ�գ���root2����ڵ���ҽڵ�Ϊ�գ���ô����ô�죿
-			//�����ŷ��֣����root2����ڵ���ҽڵ�Ϊ�յĻ�����������Ҫ��ʲô���У���Ϊ������root1���޸ģ����������޸ľ����ˡ�
+			//到这的时候我一直在想如果root1的左节点或右节点不为空，而root2的左节点或右节点为空，那么该怎么办？
+			//后来才发现，如果root2的左节点或右节点为空的话，根本不需要做什么就行，因为这是在root1上修改，这样不用修改就行了。
 		}
 		return root1;
 	}
 
-	//�ڶ�����	
+	//第二次做	
 	TreeNode* mergeTrees3(TreeNode* root1, TreeNode* root2) {
 		if (root1 == nullptr && root2 == nullptr)
 			return nullptr;
