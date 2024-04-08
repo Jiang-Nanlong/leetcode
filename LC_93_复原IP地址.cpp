@@ -2,10 +2,10 @@
 #include <string>
 #include <vector>
 using namespace std;
-//Õâ¸öÌâÒª·Ö¸îÕýÈ·µÄIPµØÖ·£¬±ÈLeetCode 131·Ö¸î»ØÎÄ×Ó´®ÄÑ£¬Õâ¸öµØ·½Òª²åÈë'.'£¬¶øÇÒ»¹²»ÄÜÊÇÇ°µ¼0µÄ£¬¸úÖ®Ç°µÄÌâÔÚÌ×Â·ÉÏ»¹²»Ì«Ò»Ñù¡£
-//Õâ¸öÌâÊÇ¿´µÄ´úÂëËæÏëÂ¼µÄ´úÂë£¬ÓÐÁ½¸öµØ·½²»Ì«Ã÷°×£¬µÚÒ»¸ö¾ÍÊÇÖÕÖ¹Ìõ¼þÕâÀï£¬ÎªÊ²Ã´ÒªÓÃpointnum£¬
-// ÔÙ¾ÍÊÇforÑ­»·ÀïµÄbreakÕâÀï£¬°´ËµforÑ­»·ÊÇÔÚÊ÷²ãÖ®¼ä£¬Èç¹ûµ±Ç°·Ö¸îµÄ²»ºÏÀí£¬ºó±ßµÄ¿ÉÄÜºÏÀí¡£°Â £¬ÕâÀïÎÒºÃÏñÃ÷°×ÁË£¬isvalidÀï±ßÅÐ¶ÏµÄÊÇÇ°µ¼0£¬´óÓÚ255µÄ£¬Èç¹ûµ±Ç°ÕâÁ½¸ö²»Âú×ã£¬ÄÇÃ´ÔÙÍùºó»¹ÊÇ»á²»Âú×ã£¬ËùÒÔÕâ¸ö·Ö¸î²»ºÏÀí£¬¾Í²»¿¼ÂÇ±¾²ãÖ®ºóµÄ·Ö¸îÁË¡£
-//¸Ð¾õÕâÀïÓÐµãÈÆ
+//è¿™ä¸ªé¢˜è¦åˆ†å‰²æ­£ç¡®çš„IPåœ°å€ï¼Œæ¯”LeetCode 131åˆ†å‰²å›žæ–‡å­ä¸²éš¾ï¼Œè¿™ä¸ªåœ°æ–¹è¦æ’å…¥'.'ï¼Œè€Œä¸”è¿˜ä¸èƒ½æ˜¯å‰å¯¼0çš„ï¼Œè·Ÿä¹‹å‰çš„é¢˜åœ¨å¥—è·¯ä¸Šè¿˜ä¸å¤ªä¸€æ ·ã€‚
+//è¿™ä¸ªé¢˜æ˜¯çœ‹çš„ä»£ç éšæƒ³å½•çš„ä»£ç ï¼Œæœ‰ä¸¤ä¸ªåœ°æ–¹ä¸å¤ªæ˜Žç™½ï¼Œç¬¬ä¸€ä¸ªå°±æ˜¯ç»ˆæ­¢æ¡ä»¶è¿™é‡Œï¼Œä¸ºä»€ä¹ˆè¦ç”¨pointnumï¼Œ
+// å†å°±æ˜¯forå¾ªçŽ¯é‡Œçš„breakè¿™é‡Œï¼ŒæŒ‰è¯´forå¾ªçŽ¯æ˜¯åœ¨æ ‘å±‚ä¹‹é—´ï¼Œå¦‚æžœå½“å‰åˆ†å‰²çš„ä¸åˆç†ï¼ŒåŽè¾¹çš„å¯èƒ½åˆç†ã€‚å¥¥ ï¼Œè¿™é‡Œæˆ‘å¥½åƒæ˜Žç™½äº†ï¼Œisvalidé‡Œè¾¹åˆ¤æ–­çš„æ˜¯å‰å¯¼0ï¼Œå¤§äºŽ255çš„ï¼Œå¦‚æžœå½“å‰è¿™ä¸¤ä¸ªä¸æ»¡è¶³ï¼Œé‚£ä¹ˆå†å¾€åŽè¿˜æ˜¯ä¼šä¸æ»¡è¶³ï¼Œæ‰€ä»¥è¿™ä¸ªåˆ†å‰²ä¸åˆç†ï¼Œå°±ä¸è€ƒè™‘æœ¬å±‚ä¹‹åŽçš„åˆ†å‰²äº†ã€‚
+//æ„Ÿè§‰è¿™é‡Œæœ‰ç‚¹ç»•
 
 class Solution {
 public:
@@ -21,7 +21,7 @@ public:
 			return;
 		}
 
-		for (int i = startindex; i < s.size() && i < startindex + 3; i++) {  //¿ÉÒÔ¼ÓÒ»¸öi < startindex + 3Ìõ¼þ£¬ÕâÑù¾Í²»»áÒòÎª³¬¹ýÈýÎ»Êý¶ø³¬¹ý255¶ø½øisValidÁË
+		for (int i = startindex; i < s.size() && i < startindex + 3; i++) {  //å¯ä»¥åŠ ä¸€ä¸ªi < startindex + 3æ¡ä»¶ï¼Œè¿™æ ·å°±ä¸ä¼šå› ä¸ºè¶…è¿‡ä¸‰ä½æ•°è€Œè¶…è¿‡255è€Œè¿›isValidäº†
 			if (isValid(s, startindex, i)) {
 				s.insert(s.begin() + i + 1, '.');
 				pointnum++;
@@ -33,7 +33,7 @@ public:
 		}
 	}
 
-	bool isValid(string& s, int begin, int end) {  //Ö÷ÒªÅÐ¶ÏÇ°µ¼0ºÍÊÇ·ñ´óÓÚ255
+	bool isValid(string& s, int begin, int end) {  //ä¸»è¦åˆ¤æ–­å‰å¯¼0å’Œæ˜¯å¦å¤§äºŽ255
 		if (begin > end) return false;
 		if (s[begin] == '0' && begin != end) return false;
 		int num = 0;
@@ -45,8 +45,8 @@ public:
 		return true;
 	}
 
-	//µÚ¶þ´Î×ö£¬ËäËµÕâ¸öºÍLeetCode 131 ·Ö¸î»ØÎÄ´®²î²»¶à£¬µ«ÊÇÕâ¸öÌâµÄÏ¸½Ú¸ü¶à£¬»¹ÊÇÃ»ÓÐ×ö³öÀ´
-	//Õâ¸öÌâÊÇ°ÑËùÓÐµÄipµØÖ·µÄ¹æ¸ñÅÐ¶Ï¶¼·ÅÔÚÁËÒ»¸öº¯ÊýÈ¥´¦Àí
+	//ç¬¬äºŒæ¬¡åšï¼Œè™½è¯´è¿™ä¸ªå’ŒLeetCode 131 åˆ†å‰²å›žæ–‡ä¸²å·®ä¸å¤šï¼Œä½†æ˜¯è¿™ä¸ªé¢˜çš„ç»†èŠ‚æ›´å¤šï¼Œè¿˜æ˜¯æ²¡æœ‰åšå‡ºæ¥
+	//è¿™ä¸ªé¢˜æ˜¯æŠŠæ‰€æœ‰çš„ipåœ°å€çš„è§„æ ¼åˆ¤æ–­éƒ½æ”¾åœ¨äº†ä¸€ä¸ªå‡½æ•°åŽ»å¤„ç†
 	vector<string> res;
 
 	vector<string> restoreIpAddresses1(string s) {
@@ -55,7 +55,7 @@ public:
 	}
 
 	void backtracking(string& s, int startIndex, int pointNum) {
-		if (pointNum == 3 && startIndex != s.size()) {  //startIndex!=s.size()Õâ¸öÌõ¼þÊÇÓÃÀ´ÎªÁË·ÀÖ¹ÒÑ¾­¼ÓÁËÈý¸öµã£¬¶øµÚÈý¸öµã¼ÓÔÚs×îºóµÄÇé¿ö³öÏÖ¡£
+		if (pointNum == 3 && startIndex != s.size()) {  //startIndex!=s.size()è¿™ä¸ªæ¡ä»¶æ˜¯ç”¨æ¥ä¸ºäº†é˜²æ­¢å·²ç»åŠ äº†ä¸‰ä¸ªç‚¹ï¼Œè€Œç¬¬ä¸‰ä¸ªç‚¹åŠ åœ¨sæœ€åŽçš„æƒ…å†µå‡ºçŽ°ã€‚
 			if (isValid1(s, startIndex, s.size() - 1))
 				res.push_back(s);
 			return;
@@ -71,10 +71,10 @@ public:
 	}
 
 	bool isValid1(string& s, int begin, int end) {
-		if (end - begin + 1 > 3) //»¹¿ÉÒÔ¼Ó¸öÅÐ¶Ï£¬Èç¹ûÎ»Êý³¬¹ý3¾ÍÖ±½Ó·µ»Øfalse
+		if (end - begin + 1 > 3) //è¿˜å¯ä»¥åŠ ä¸ªåˆ¤æ–­ï¼Œå¦‚æžœä½æ•°è¶…è¿‡3å°±ç›´æŽ¥è¿”å›žfalse
 			return false;
 
-		if (s[begin] == '0' && begin != end)  //ÅÐ¶ÏÇ°µ¼0
+		if (s[begin] == '0' && begin != end)  //åˆ¤æ–­å‰å¯¼0
 			return false;
 
 		int num = 0;
