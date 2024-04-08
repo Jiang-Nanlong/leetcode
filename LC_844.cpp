@@ -41,11 +41,11 @@ private:
 				slow = slow - 1 > 0 ? slow - 1 : 0;
 			}
 		}
-		//return slow;   //¿ÉÒÔ²»·µ»Øslow£¬¶øÊÇÊ¹ÓÃresizeº¯Êý£¬°Ñstring»»³Éslow´óÐ¡£¬ÕâÑù¾Í²»ÓÃ¿ÌÒâ·µ»Øslow£¬È»ºó±È½ÏÁË
+		//return slow;   //å¯ä»¥ä¸è¿”å›žslowï¼Œè€Œæ˜¯ä½¿ç”¨resizeå‡½æ•°ï¼ŒæŠŠstringæ¢æˆslowå¤§å°ï¼Œè¿™æ ·å°±ä¸ç”¨åˆ»æ„è¿”å›žslowï¼Œç„¶åŽæ¯”è¾ƒäº†
 		s.resize(slow);
 	}
 };
-//Õâ¸öÌâµÄ·½·¨»¹ÊÇ±È½ÏÈÝÒ×Ïëµ½µÄ£¬ÓÃ¿ìÂýÖ¸Õë£¬Èç¹û¿ìÖ¸ÕëÓöµ½ÁË#£¬¾Í°ÑÂýÖ¸ÕëÍË¸ñÒ»¸ö
+//è¿™ä¸ªé¢˜çš„æ–¹æ³•è¿˜æ˜¯æ¯”è¾ƒå®¹æ˜“æƒ³åˆ°çš„ï¼Œç”¨å¿«æ…¢æŒ‡é’ˆï¼Œå¦‚æžœå¿«æŒ‡é’ˆé‡åˆ°äº†#ï¼Œå°±æŠŠæ…¢æŒ‡é’ˆé€€æ ¼ä¸€ä¸ª
 
 int main() {
 	Solution st;
