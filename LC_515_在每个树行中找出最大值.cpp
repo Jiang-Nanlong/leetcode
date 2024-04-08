@@ -21,7 +21,7 @@ public:
 		que.push(root);
 		while (!que.empty()) {
 			int size = que.size();
-			int maxVal = INT_MIN;        //ÕâÀïmaxValµÄ³õÊ¼Öµ²»ÄÜÊÇ0£¬ÒòÎªÊ÷ÖĞµÄÊı×Ö¿ÉÄÜÊÇ¸ºÊı¡£
+			int maxVal = INT_MIN;        //è¿™é‡ŒmaxValçš„åˆå§‹å€¼ä¸èƒ½æ˜¯0ï¼Œå› ä¸ºæ ‘ä¸­çš„æ•°å­—å¯èƒ½æ˜¯è´Ÿæ•°ã€‚
 			for (int i = 0; i < size; i++) {
 				TreeNode* cur = que.front();
 				que.pop();
@@ -34,7 +34,7 @@ public:
 		return res;
 	}
 
-	//µÚ¶ş´Î×ö
+	//ç¬¬äºŒæ¬¡åš
 	vector<int> largestValues1(TreeNode* root) {
 		if (root == nullptr)
 			return {};
