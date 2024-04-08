@@ -1,11 +1,11 @@
 /*
-����һ����������nums���ҳ�һ���������͵����������飨���������ٰ���һ��Ԫ�أ������غ͵����ֵ
+给定一个整数数组nums，找出一个具有最大和的连续子数组（子数组最少包含一个元素），返回和的最大值
 */
 #include <iostream>
 #include <vector>
 using namespace std;
 
-//֮ǰ�ö�̬�滮����������ѧ�˶�̬�滮����������򵥣���������̰����һ�£�̰�����Ļ��������ǰ�����к�Ϊ�����ˣ���ô����ֹ������һ������ʼ���¼���
+//之前用动态规划做过，现在学了动态规划再来看还算简单，现在再用贪心做一下，贪心做的话，如果当前的序列和为负数了，那么就终止，从下一个数开始重新计算
 class Solution {
 public:
 	int maxSubArray(vector<int>& nums) {
