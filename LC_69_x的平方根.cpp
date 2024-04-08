@@ -1,14 +1,14 @@
 #include <iostream>
 using namespace std;
 
-//¼ÆËãÒ»¸öÊ÷µÄÆ½·½¸ù£¬µÚ¶ş±é×öÁË£¬»¹ÊÇÃ»Ïëµ½ÔõÃ´ÓÃ¶ş·Ö²éÕÒÀ´×ö¡£
+//è®¡ç®—ä¸€ä¸ªæ ‘çš„å¹³æ–¹æ ¹ï¼Œç¬¬äºŒéåšäº†ï¼Œè¿˜æ˜¯æ²¡æƒ³åˆ°æ€ä¹ˆç”¨äºŒåˆ†æŸ¥æ‰¾æ¥åšã€‚
 
 class Solution {
 public:
 	int mySqrt(int x) {
 		int left = 0, right = x;
 		while (left <= right) {
-			long long mid = left + (right - left) / 2; //ÕâÀïÉè³ÉlonglongÊÇÒòÎªÓÃÀıÖĞ»áÓĞintÔ½½ç
+			long long mid = left + (right - left) / 2; //è¿™é‡Œè®¾æˆlonglongæ˜¯å› ä¸ºç”¨ä¾‹ä¸­ä¼šæœ‰intè¶Šç•Œ
 			long long product = mid * mid;
 			if (product > x)
 				right = mid - 1;
@@ -17,7 +17,7 @@ public:
 			else
 				return mid;
 		}
-		return left - 1;   //Èç¹ûÆ½·½¸ùÊÇ¸öĞ¡Êı£¬¾Í²»»áÏÔÊ¾³öÕûÊı£¬È»ºóleft¾ÍÊÇµÚÒ»¸öÆ½·½´óÓÚxµÄÊı£¬ËùÒÔleft-1¾ÍÊÇµÚÒ»¸öÆ½·½Ğ¡ÓÚxµÄÊı
+		return left - 1;   //å¦‚æœå¹³æ–¹æ ¹æ˜¯ä¸ªå°æ•°ï¼Œå°±ä¸ä¼šæ˜¾ç¤ºå‡ºæ•´æ•°ï¼Œç„¶åleftå°±æ˜¯ç¬¬ä¸€ä¸ªå¹³æ–¹å¤§äºxçš„æ•°ï¼Œæ‰€ä»¥left-1å°±æ˜¯ç¬¬ä¸€ä¸ªå¹³æ–¹å°äºxçš„æ•°
 	}
 };
 
