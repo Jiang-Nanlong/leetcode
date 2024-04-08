@@ -14,8 +14,8 @@ struct TreeNode {
 
 class Solution {
 public:
-	//ÏÈ°Ñ×î×ó±ßµÄ½ÚµãÒÀ´ÎÈëÕ»£¬È»ºó³öÕ»£¬Èç¹û³öÕ»µÄ½ÚµãÓĞÓÒ×ÓÊ÷µÄ»°£¬ÓÒ×ÓÊ÷¼ÌĞø°´ÉÏÊöÁ÷³ÌÈëÕ»
-	vector<int> inorderTraversal1(TreeNode* root) {    //·Çµİ¹éÖĞĞò±éÀú
+	//å…ˆæŠŠæœ€å·¦è¾¹çš„èŠ‚ç‚¹ä¾æ¬¡å…¥æ ˆï¼Œç„¶åå‡ºæ ˆï¼Œå¦‚æœå‡ºæ ˆçš„èŠ‚ç‚¹æœ‰å³å­æ ‘çš„è¯ï¼Œå³å­æ ‘ç»§ç»­æŒ‰ä¸Šè¿°æµç¨‹å…¥æ ˆ
+	vector<int> inorderTraversal1(TreeNode* root) {    //éé€’å½’ä¸­åºéå†
 		if (root == nullptr) return {};
 		vector<int> res;
 		stack<TreeNode*> stk;
