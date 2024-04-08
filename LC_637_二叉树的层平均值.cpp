@@ -2,7 +2,7 @@
 #include <queue>
 using namespace std;
 
-//·µ»Ø¶ş²æÊ÷µÄÃ¿Ò»²ãµÄÆ½¾ùÖµ
+//è¿”å›äºŒå‰æ ‘çš„æ¯ä¸€å±‚çš„å¹³å‡å€¼
 
 struct TreeNode {
 	int val;
@@ -34,7 +34,7 @@ public:
 		return res;
 	}
 
-	//µÚ¶ş´Î×ö
+	//ç¬¬äºŒæ¬¡åš
 	vector<double> averageOfLevels1(TreeNode* root) {
 		if (root == nullptr)
 			return {};
