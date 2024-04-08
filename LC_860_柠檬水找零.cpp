@@ -2,12 +2,12 @@
 #include <vector>
 using namespace std;
 
-//�����������1.�����Ǯֻ�����£�2.��ʮ��Ǯ����飻3.����ʮ�������һ�ʮ��+��飬���еĻ�����������顣
+//分三种情况：1.给五块钱只接受下；2.给十块钱找五块；3.给二十，优先找回十块+五块，不行的话再找三张五块。
 
 class Solution {
 public:
 	bool lemonadeChange(vector<int>& bills) {
-		int count[2] = { 0 };   //�ռ�����ʮ���Ǯ��
+		int count[2] = { 0 };   //收集五块或十块的钱数
 		for (int i = 0; i < bills.size(); i++) {
 			if (bills[i] == 5)
 				count[0]++;
