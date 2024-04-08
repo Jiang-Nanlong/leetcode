@@ -2,13 +2,13 @@
 #include <vector>
 using namespace std;
 
-//���������ַ���������ʹ�������ַ�����ͬ����ɾ������С�ַ���
-//��һ�ַ����ǰ���������¼��д�ģ�dp[i][j]��ʾ��i-1Ϊ��β���ַ���word1������j-1Ϊ��β���ַ���word2��Ҫ��ﵽ��ȣ�����Ҫɾ��Ԫ�ص���С����
-//word1[i - 1] == word2[j - 1]ʱ�ĵ��ƹ�ʽ���룬���ǲ����ʱ�ĵ��ƹ�ʽ�е����룬
-// ���Դ����������:
-// һ�ǿ���ɾ��word1[i-1]����С��������dp[i-1][j]+1;
-// ���ǿ���ɾ��word2[j-1]����С��������dp[i][j-1]+1;
-// ����ͬʱɾ��word1[i-1]��word2[j-1]����С��������dp[i-1][j-1]+2
+//给定两个字符串，返回使得两个字符串相同所需删除的最小字符数
+//第一种方法是按代码随想录的写的，dp[i][j]表示以i-1为结尾的字符串word1，和以j-1为结尾的字符串word2，要想达到相等，所需要删除元素的最小次数
+//word1[i - 1] == word2[j - 1]时的递推公式好想，但是不相等时的递推公式有点难想，
+// 可以从三个方向过:
+// 一是可以删除word1[i-1]，最小操作数是dp[i-1][j]+1;
+// 二是可以删除word2[j-1]，最小操作数是dp[i][j-1]+1;
+// 三是同时删除word1[i-1]和word2[j-1]，最小操作数是dp[i-1][j-1]+2
 
 class Solution {
 public:
@@ -28,7 +28,7 @@ public:
 		return dp[word1.size()][word2.size()];
 	}
 
-	//��ʼ�����±����ַ������ģ��������ҳ������ַ����е�������Ӵ���Ȼ���������ַ����ĸ���ɾȥ������Ӵ��ĳ��Ⱦ���
+	//开始我用下边这种方法做的，就是先找出两个字符串中的最长公共子串，然后用两个字符串的个数删去最长公共子串的长度就行
 	int minDistance1(string word1, string word2) {
 		vector<vector<int>> dp(word1.size() + 1, vector<int>(word2.size() + 1, 0));
 		for (int i = 1; i <= word1.size(); i++) {
