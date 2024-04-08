@@ -3,14 +3,14 @@
 #include <string>
 using namespace std;
 
-//´«ËµÖĞµÄN»ÊºóÎÊÌâ
-//ÆäÊµÕâ¸öÌâÖ»Òª»­³öÊ÷ĞÎ½á¹¹£¬¸úÒÔÍùµÄ»ØËİÌâµÄË¼Â·Ò»Ñù
+//ä¼ è¯´ä¸­çš„Nçš‡åé—®é¢˜
+//å…¶å®è¿™ä¸ªé¢˜åªè¦ç”»å‡ºæ ‘å½¢ç»“æ„ï¼Œè·Ÿä»¥å¾€çš„å›æº¯é¢˜çš„æ€è·¯ä¸€æ ·
 
 class Solution {
 public:
 	vector<vector<string>> solveNQueens(int n) {
 		vector<vector<string>> res;
-		vector<string> chessboard(n, string(n, '.')); //Õâ¸öµØ·½Ò»¿ªÊ¼²»ÒªÍüÁË³õÊ¼»¯ÆåÅÌ
+		vector<string> chessboard(n, string(n, '.')); //è¿™ä¸ªåœ°æ–¹ä¸€å¼€å§‹ä¸è¦å¿˜äº†åˆå§‹åŒ–æ£‹ç›˜
 		Helper(n, 0, chessboard, res);
 		return res;
 	}
@@ -43,7 +43,7 @@ public:
 		return true;
 	}
 
-	//µÚ¶ş´Î×ö£¬¸Ğ¾õÕûÌåË¼Â·Ã»ÎÊÌâ£¬²»¹ı¾ÍÊÇĞ´µÄ¿Ä¿Ä°Í°Í£¬Ã»ÓĞĞÅĞÄ
+	//ç¬¬äºŒæ¬¡åšï¼Œæ„Ÿè§‰æ•´ä½“æ€è·¯æ²¡é—®é¢˜ï¼Œä¸è¿‡å°±æ˜¯å†™çš„ç£•ç£•å·´å·´ï¼Œæ²¡æœ‰ä¿¡å¿ƒ
 	vector<vector<string>> res;
 
 	vector<vector<string>> solveNQueens1(int n) {
@@ -84,7 +84,7 @@ public:
 	}
 
 	vector<vector<string>> res;
-	//´ÓÆåÅÌÏÂ±ßÍùÉÏ±éÀú£¬ÓÃn±íÊ¾µ±Ç°ËùÔÚµÄĞĞ
+	//ä»æ£‹ç›˜ä¸‹è¾¹å¾€ä¸Šéå†ï¼Œç”¨nè¡¨ç¤ºå½“å‰æ‰€åœ¨çš„è¡Œ
 	vector<vector<string>> solveNQueens2(int n) {
 		string s(n, '.');
 		vector<string> chessboard(n, s);
