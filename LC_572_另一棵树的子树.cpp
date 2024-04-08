@@ -24,7 +24,7 @@ private:
 	}
 
 public:
-	//第二次做
+	//碌脷露镁麓脦脳枚
 	bool isSubtree1(TreeNode* root, TreeNode* subRoot) {
 		if (root == nullptr) return false;
 		return isSubtreeHelper(root, subRoot) || isSubtree(root->left, subRoot) || isSubtree(root->right, subRoot);
