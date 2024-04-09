@@ -3,7 +3,7 @@
 #include <algorithm>
 using namespace std;
 
-//åˆå¹¶é‡å çš„åŒºé—´ï¼Œè¿™ä¸ªè¿˜æ˜¯åŒºé—´é—®é¢˜ï¼Œè·Ÿå°„ç®­ï¼Œæ— é‡å åŒºé—´ï¼Œåˆ’åˆ†å­—æ¯ä¸€æ ·
+//ºÏ²¢ÖØµşµÄÇø¼ä£¬Õâ¸ö»¹ÊÇÇø¼äÎÊÌâ£¬¸úÉä¼ı£¬ÎŞÖØµşÇø¼ä£¬»®·Ö×ÖÄ¸Ò»Ñù
 
 class Solution {
 public:
@@ -27,6 +27,25 @@ public:
 		res.push_back({ left,right });
 		return res;
 	}
+
+	//µÚ¶ş´Î×ö
+	static bool cmp1(vector<int>& a, vector<int>& b) { return a[0] < b[0]; }
+	vector<vector<int>> merge1(vector<vector<int>>& intervals) {
+		sort(intervals.begin(), intervals.end(), cmp1);
+		vector<vector<int>> res;
+		int leftboard = intervals[0][0], rightboard = intervals[0][1];
+		for (int i = 1; i < intervals.size(); i++) {
+			if (intervals[i][0] <= rightboard)
+				rightboard = max(rightboard, intervals[i][1]);
+			else {
+				res.push_back({ leftboard, rightboard });
+				leftboard = intervals[i][0];
+				rightboard = intervals[i][1];
+			}
+		}
+		res.push_back({ leftboard, rightboard });
+		return res;
+	}
 };
 
 int main() {
@@ -42,9 +61,9 @@ int main() {
 	return 0;
 }
 
-//ä»¥ä¸‹æ˜¯æˆ‘ä¹‹å‰å†™çš„ä»£ç 
+//ÒÔÏÂÊÇÎÒÖ®Ç°Ğ´µÄ´úÂë
 /*
-* ç»™å®šä¸€ä¸ªåŒºé—´çš„é›†åˆï¼Œåˆå¹¶æ‰€æœ‰é‡å çš„åŒºé—´ã€‚
+* ¸ø¶¨Ò»¸öÇø¼äµÄ¼¯ºÏ£¬ºÏ²¢ËùÓĞÖØµşµÄÇø¼ä¡£
 */
 /*
 class Solution {
@@ -52,7 +71,7 @@ public:
 	vector<vector<int>> merge(vector<vector<int>>& intervals) {
 		vector<vector<int>> res;
 		if (intervals.size() == 0) return res;
-		sort(intervals.begin(), intervals.end(), [](vector<int>& a, vector<int>& b) {return a[1] > b[1]; });  //æˆ‘ä»Šå¤©æ‰çŸ¥é“ï¼Œè¿™ç§å†™æ³•ä¼šæ›´å¿«
+		sort(intervals.begin(), intervals.end(), [](vector<int>& a, vector<int>& b) {return a[1] > b[1]; });  //ÎÒ½ñÌì²ÅÖªµÀ£¬ÕâÖÖĞ´·¨»á¸ü¿ì
 		int left = intervals[0][0], right = intervals[0][1];
 		for (int i = 1; i < intervals.size(); i++) {
 			if (left <= intervals[i][1] && right >= intervals[i][0]) {
