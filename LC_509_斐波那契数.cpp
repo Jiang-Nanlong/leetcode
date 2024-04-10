@@ -2,12 +2,12 @@
 #include <vector>
 using namespace std;
 
-//è¿™ä¸ªé¢˜ä¸ç”¨åŠ¨æ€è§„åˆ’ä¹Ÿèƒ½åšï¼Œä¸»è¦æ˜¯ç”¨æ¥ç†Ÿæ‚‰åŠ¨æ€è§„åˆ’çš„äº”ä¸ªæ­¥éª¤
-//1ã€ç¡®è®¤dpæ•°ç»„ä»¥åŠä¸‹æ ‡çš„å«ä¹‰
-//2ã€ç¡®å®šé€’æŽ¨å…¬å¼
-//3ã€dpæ•°ç»„å¦‚ä½•åˆå§‹åŒ–
-//4ã€ç¡®å®šéåŽ†é¡ºåº
-//5ã€è·ç¦»æŽ¨å¯¼dpæ•°ç»„
+//Õâ¸öÌâ²»ÓÃ¶¯Ì¬¹æ»®Ò²ÄÜ×ö£¬Ö÷ÒªÊÇÓÃÀ´ÊìÏ¤¶¯Ì¬¹æ»®µÄÎå¸ö²½Öè
+//1¡¢È·ÈÏdpÊý×éÒÔ¼°ÏÂ±êµÄº¬Òå
+//2¡¢È·¶¨µÝÍÆ¹«Ê½
+//3¡¢dpÊý×éÈçºÎ³õÊ¼»¯
+//4¡¢È·¶¨±éÀúË³Ðò
+//5¡¢¾àÀëÍÆµ¼dpÊý×é
 
 class Solution {
 public:
@@ -21,7 +21,7 @@ public:
 		return dp[n];
 	}
 
-	//å…¶å®žè¿™é‡Œä¸ç”¨å£°æ˜Žnä¸ªå¤§å°çš„æ•°ç»„å°±è¡Œï¼Œå¯ä»¥çœ‹åˆ°æ¯ä¸ªä½ç½®çš„æ–æ³¢é‚£å¥‘æ•°åªä¸Žå®ƒä¹‹å‰çš„ä¸¤ä¸ªæ•°æœ‰å…³
+	//ÆäÊµÕâÀï²»ÓÃÉùÃ÷n¸ö´óÐ¡µÄÊý×é¾ÍÐÐ£¬¿ÉÒÔ¿´µ½Ã¿¸öÎ»ÖÃµÄì³²¨ÄÇÆõÊýÖ»ÓëËüÖ®Ç°µÄÁ½¸öÊýÓÐ¹Ø
 	int fib1(int n) {
 		if (n <= 1) return n;
 		int dp[2];
@@ -32,6 +32,31 @@ public:
 			dp[1] = sum;
 		}
 		return dp[1];
+	}
+
+	//µÚ¶þ´Î×ö
+	int fib2(int n) {
+		if (n < 2) return n;
+		int x = 0, y = 1;
+		int res;
+		for (int i = 2; i <= n; i++) {
+			res = x + y;
+			x = y;
+			y = res;
+		}
+		return res;
+	}
+
+	int fib3(int n) {
+		if (n < 2) return n;
+		vector<int> dp(n + 1, 0);
+		dp[0] = 0, dp[1] = 1;
+		int i = 2;
+		while (i <= n) {
+			dp[i] = dp[i - 1] + dp[i - 2];
+			i++;
+		}
+		return dp[n];
 	}
 };
 

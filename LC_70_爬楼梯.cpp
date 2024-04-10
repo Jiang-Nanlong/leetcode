@@ -2,8 +2,8 @@
 #include <vector>
 using namespace std;
 
-//è¿™ä¸ªé¢˜åˆšå¼€å§‹æŽ¥è§¦æ¯”è¾ƒéš¾æƒ³å‡ºé€’æŽ¨å…¬å¼ã€‚ä½†æ˜¯è½¬å˜æ€è·¯ä¸€æƒ³ï¼Œæ¯æ¬¡å¯ä»¥è·³1æˆ–2ä¸ªå°é˜¶ï¼Œé‚£ä¹ˆä¹Ÿå°±æ˜¯å¯ä»¥ä»Ži-1è·³ä¸€ä¸ªå°é˜¶ä¸Šæ¥ï¼Œæˆ–è€…æ˜¯ä»Ži-2è·³ä¸¤ä¸ªå°é˜¶ä¸Šæ¥ï¼Œ
-//è¿™æ ·é€’æŽ¨å…¬å¼å°±å¾ˆæ˜Žäº†äº†ï¼Œdp[i]=dp[i-1]+dp[i-2]
+//Õâ¸öÌâ¸Õ¿ªÊ¼½Ó´¥±È½ÏÄÑÏë³öµÝÍÆ¹«Ê½¡£µ«ÊÇ×ª±äË¼Â·Ò»Ïë£¬Ã¿´Î¿ÉÒÔÌø1»ò2¸öÌ¨½×£¬ÄÇÃ´Ò²¾ÍÊÇ¿ÉÒÔ´Ói-1ÌøÒ»¸öÌ¨½×ÉÏÀ´£¬»òÕßÊÇ´Ói-2ÌøÁ½¸öÌ¨½×ÉÏÀ´£¬
+//ÕâÑùµÝÍÆ¹«Ê½¾ÍºÜÃ÷ÁËÁË£¬dp[i]=dp[i-1]+dp[i-2]
 class Solution {
 public:
 	int climbStairs(int n) {
@@ -13,6 +13,16 @@ public:
 		for (int i = 3; i <= n; i++) {
 			dp[i] = dp[i - 1] + dp[i - 2];
 		}
+		return dp[n];
+	}
+
+	//µÚ¶þ´Î×ö£¬ÏÖÔÚ¿´À´ÒÑ¾­ÊÇ±È½Ï¼òµ¥ºÃÀí½âµÄÁË
+	int climbStairs1(int n) {
+		vector<int> dp(n + 1, 0);
+		dp[0] = 1;
+		dp[1] = 1;
+		for (int i = 2; i <= n; i++)
+			dp[i] = dp[i - 1] + dp[i - 2];
 		return dp[n];
 	}
 };

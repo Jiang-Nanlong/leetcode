@@ -2,10 +2,10 @@
 #include <vector>
 using namespace std;
 
-//è¿™ä¸ªé¢˜åˆšå¼€å§‹çœ‹çš„æ—¶å€™ï¼Œæˆ‘è¿˜æ˜¯æƒ³ä¸å‡ºæ€Žä¹ˆç”¨åŠ¨æ€è§„åˆ’åšï¼Œä½†æ˜¯çœ‹ç€è§†é¢‘é‡Œçš„åˆ†æžï¼Œæˆ‘æ…¢æ…¢æ‡‚äº†
-//dp[i]ä»£è¡¨åˆ°è¾¾ç¬¬iä¸ªå°é˜¶çš„æœ€å°èŠ±è´¹ï¼Œé‚£ä¹ˆç¬¬iä¸ªå°é˜¶å¯ä»¥ä»Žç¬¬i-1ä¸ªå°é˜¶çˆ¬ä¸€æ­¥ä¸Šæ¥ï¼Œä¹Ÿå¯ä»¥ä»Žç¬¬i-2ä¸ªå°é˜¶çˆ¬ä¸¤æ­¥ä¸Šæ¥ï¼Œè¿™æ ·å°±å¾ˆå®¹æ˜“ç¡®å®šé€’æŽ¨å…¬å¼ã€‚
-//å› ä¸ºæœ€å¼€å§‹å¯ä»¥ä»Žç¬¬0ä¸ªå°é˜¶æˆ–è€…ç¬¬1ä¸ªå°é˜¶å¾€ä¸Šè·³ï¼Œæ‰€ä»¥è¿™é‡Œçš„dp[0]å’Œdp[1]éƒ½åˆå§‹åŒ–ä¸º0.
-//æœ¬é¢˜è¿˜æœ‰ä¸€ä¸ªåœ°æ–¹éœ€è¦æ³¨æ„ï¼Œå°±æ˜¯æ¥¼æ¢¯çš„é¡¶ç«¯æ˜¯åœ¨æœ€åŽä¸€ä¸ªå°é˜¶ä¹‹åŽã€‚ç„¶åŽé¢˜ç›®ä¸­æ¯ä¸ªå°é˜¶çš„èŠ±è´¹å…¶å®žæ˜¯è¡¨ç¤ºä»Žå½“å‰å°é˜¶èµ·è·³çš„èŠ±è´¹ï¼Œè€Œä¸æ˜¯è·³åˆ°è¿™ä¸ªå°é˜¶çš„èŠ±è´¹ã€‚
+//Õâ¸öÌâ¸Õ¿ªÊ¼¿´µÄÊ±ºò£¬ÎÒ»¹ÊÇÏë²»³öÔõÃ´ÓÃ¶¯Ì¬¹æ»®×ö£¬µ«ÊÇ¿´×ÅÊÓÆµÀïµÄ·ÖÎö£¬ÎÒÂýÂý¶®ÁË
+//dp[i]´ú±íµ½´ïµÚi¸öÌ¨½×µÄ×îÐ¡»¨·Ñ£¬ÄÇÃ´µÚi¸öÌ¨½×¿ÉÒÔ´ÓµÚi-1¸öÌ¨½×ÅÀÒ»²½ÉÏÀ´£¬Ò²¿ÉÒÔ´ÓµÚi-2¸öÌ¨½×ÅÀÁ½²½ÉÏÀ´£¬ÕâÑù¾ÍºÜÈÝÒ×È·¶¨µÝÍÆ¹«Ê½¡£
+//ÒòÎª×î¿ªÊ¼¿ÉÒÔ´ÓµÚ0¸öÌ¨½×»òÕßµÚ1¸öÌ¨½×ÍùÉÏÌø£¬ËùÒÔÕâÀïµÄdp[0]ºÍdp[1]¶¼³õÊ¼»¯Îª0.
+//±¾Ìâ»¹ÓÐÒ»¸öµØ·½ÐèÒª×¢Òâ£¬¾ÍÊÇÂ¥ÌÝµÄ¶¥¶ËÊÇÔÚ×îºóÒ»¸öÌ¨½×Ö®ºó¡£È»ºóÌâÄ¿ÖÐÃ¿¸öÌ¨½×µÄ»¨·ÑÆäÊµÊÇ±íÊ¾´Óµ±Ç°Ì¨½×ÆðÌøµÄ»¨·Ñ£¬¶ø²»ÊÇÌøµ½Õâ¸öÌ¨½×µÄ»¨·Ñ¡£
 class Solution {
 public:
 	int minCostClimbingStairs(vector<int>& cost) {
@@ -15,6 +15,28 @@ public:
 		}
 		return dp[cost.size()];
 	}
+
+	//µÚ¶þ´Î×ö£¬Õâ´ÎµÄdp[i]±íÊ¾µÄÊÇ´ÓµÚi¼¶Ì¨½×ÆðÌøËùÐèÒª»¨·ÑµÄ×îÐ¡Ç®Êý¡£È»ºóÃ¿Ò»²½ÄÜÌø1»ò2¸öÌ¨½×£¬ÄÇÃ´Ìøµ½×î¶¥ÉÏ¿ÉÒÔÍ¨¹ýn-1ºÍn-2Ò»²½ÌøÉÏÈ¥£¬È¡×îÐ¡Öµ¾ÍÐÐ
+	int minCostClimbingStairs1(vector<int>& cost) {
+		int n = cost.size();
+		vector<int> dp(n, 0);
+		dp[0] = cost[0], dp[1] = cost[1];
+		for (int i = 2; i < n; i++) {
+			dp[i] = min(dp[i - 1], dp[i - 2]) + cost[i];
+		}
+		return min(dp[n - 1], dp[n - 2]);
+	}
+
+	//ÁíÒ»ÖÖÐ´·¨£¬dp[i]±íÊ¾Ìøµ½µÚi¼¶Ì¨½×ËùÐèÒªµÄ×îÐ¡»¨·Ñ
+	int minCostClimbingStairs2(vector<int>& cost) {
+		int n = cost.size();
+		vector<int> dp(n + 1, 0);
+		for (int i = 2; i <= n; i++) {
+			dp[i] = min(dp[i - 1] + cost[i - 1], dp[i - 2] + cost[i - 2]);
+		}
+		return dp[n];
+	}
+
 };
 
 int main() {
