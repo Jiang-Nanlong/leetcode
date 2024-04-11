@@ -2,29 +2,87 @@
 #include <vector>
 using namespace std;
 
-//è¿™ä¸ªé¢˜å’Œä¸Šä¸€ä¸ªçš„åŒºåˆ«æ˜¯è¿™ä¸€é¢˜çš„äºŒç»´æ•°ç»„ä¸­æœ‰éšœç¢ç‰©ï¼Œæˆ‘å¼€å§‹åœ¨æƒ³æœ‰éšœç¢ç‰©ä¼šå½±å“åˆ°å®ƒæœ¬èº«çš„ä½ç½®å’Œå®ƒå³è¾¹å’Œä¸‹è¾¹çš„ä½ç½®ï¼Œè¯¥æ€ä¹ˆå¤„ç†è¿™ä¸ªé—®é¢˜
-//åæ¥æ‰æƒ³é€šåªè¦æŠŠéšœç¢ç‰©ä½ç½®çš„dpæ•°ç»„å†™æˆ0å°±è¡Œï¼Œ
+//Õâ¸öÌâºÍÉÏÒ»¸öµÄÇø±ğÊÇÕâÒ»ÌâµÄ¶şÎ¬Êı×éÖĞÓĞÕÏ°­Îï£¬ÎÒ¿ªÊ¼ÔÚÏëÓĞÕÏ°­Îï»áÓ°Ïìµ½Ëü±¾ÉíµÄÎ»ÖÃºÍËüÓÒ±ßºÍÏÂ±ßµÄÎ»ÖÃ£¬¸ÃÔõÃ´´¦ÀíÕâ¸öÎÊÌâ
+//ºóÀ´²ÅÏëÍ¨Ö»Òª°ÑÕÏ°­ÎïÎ»ÖÃµÄdpÊı×éĞ´³É0¾ÍĞĞ£¬
 class Solution {
 public:
-	int uniquePathsWithObstacles(vector<vector<int>>& obstacleGrid) {
-		int m = obstacleGrid.size(), n = obstacleGrid[0].size();
-		if (obstacleGrid[m - 1][n - 1] == 1 || obstacleGrid[0][0] == 1) return 0;
-		vector<vector<int>> dp(m, vector<int>(n, 0));
-		for (int i = 0; i < n && obstacleGrid[0][i] == 0; i++) dp[0][i] = 1;
-		for (int i = 0; i < m && obstacleGrid[i][0] == 0; i++) dp[i][0] = 1;
-		for (int i = 1; i < m; i++) {
-			for (int j = 1; j < n; j++) {
-				if (obstacleGrid[i][j] == 1) continue;
-				dp[i][j] = dp[i - 1][j] + dp[i][j - 1];
-			}
-		}
-		return dp[m - 1][n - 1];
-	}
+    int uniquePathsWithObstacles(vector<vector<int>>& obstacleGrid) {
+        int m = obstacleGrid.size(), n = obstacleGrid[0].size();
+        if (obstacleGrid[m - 1][n - 1] == 1 || obstacleGrid[0][0] == 1) return 0;
+        vector<vector<int>> dp(m, vector<int>(n, 0));
+        for (int i = 0; i < n && obstacleGrid[0][i] == 0; i++) dp[0][i] = 1;
+        for (int i = 0; i < m && obstacleGrid[i][0] == 0; i++) dp[i][0] = 1;
+        for (int i = 1; i < m; i++) {
+            for (int j = 1; j < n; j++) {
+                if (obstacleGrid[i][j] == 1) continue;
+                dp[i][j] = dp[i - 1][j] + dp[i][j - 1];
+            }
+        }
+        return dp[m - 1][n - 1];
+    }
+
+    //µÚ¶ş´Î×ö
+    int uniquePathsWithObstacles1(vector<vector<int>>& obstacleGrid) {
+        int m = obstacleGrid.size(), n = obstacleGrid[0].size();
+        vector<vector<int>> dp(m, vector<int>(n, 1));
+        if (obstacleGrid[0][0] == 1 || obstacleGrid[m - 1][n - 1] == 1) return 0;
+
+        bool flag = false;
+        for (int i = 0; i < m; i++) {
+            if (obstacleGrid[i][0] == 1)
+                flag = true;
+            if (flag) dp[i][0] = 0;
+        }
+
+        flag = false;
+        for (int i = 0; i < n; i++) {
+            if (obstacleGrid[0][i] == 1)
+                flag = true;
+            if (flag) dp[0][i] = 0;
+        }
+
+        for (int i = 1; i < m; i++) {
+            for (int j = 1; j < n; j++) {
+                if (obstacleGrid[i][j] == 1)
+                    dp[i][j] = 0;
+                else
+                    dp[i][j] = dp[i - 1][j] + dp[i][j - 1];
+            }
+        }
+        return dp[m - 1][n - 1];
+    }
+
+    //ÓÅ»¯dpÊı×éÒÔºóµÄ
+    int uniquePathsWithObstacles2(vector<vector<int>>& obstacleGrid) {
+        int m = obstacleGrid.size(), n = obstacleGrid[0].size();
+        if (obstacleGrid[0][0] == 1 || obstacleGrid[m - 1][n - 1] == 1) return 0;
+
+        vector<int> dp(n);
+        for (int i = 0; i < n; i++) {
+            if (i == 0)
+                dp[i] = 1;
+            else if (obstacleGrid[0][i] == 1)
+                dp[i] = 0;
+            else
+                dp[i] = dp[i - 1];
+        }
+
+        for (int i = 1; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                //Õâ¸öÑ­»·Àï±ß²»ÓÃ¿¼ÂÇµÚ0¸öÎ»ÖÃÊÇÊ²Ã´£¬µÚ0¸öÎ»ÖÃÖ±½ÓÓÉÉÏÒ»¸öÎ»ÖÃ¹ö¶¯¹ıÀ´£¬ÕâÀïÖ»ĞèÒªÅĞ¶ÏÊÇ²»ÊÇÕÏ°­Îï»òÕßÊÇ²»ÊÇµÚ0¸öÔªËØ¾ÍĞĞ
+                if (obstacleGrid[i][j] == 1)
+                    dp[j] = 0;
+                else if (j != 0)
+                    dp[j] += dp[j - 1];
+            }
+        }
+        return dp[n - 1];
+    }
 };
 
 int main() {
-	Solution st;
-	vector<vector<int>> obstacleGrid{ {0,0,0},{0,1,0},{0,0,0} };
-	cout << st.uniquePathsWithObstacles(obstacleGrid) << endl;
-	return 0;
+    Solution st;
+    vector<vector<int>> obstacleGrid{ {0,0,0},{0,1,0},{0,0,0} };
+    cout << st.uniquePathsWithObstacles(obstacleGrid) << endl;
+    return 0;
 }

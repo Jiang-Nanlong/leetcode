@@ -2,13 +2,25 @@
 #include <vector>
 using namespace std;
 
-//è¿™ä¸ªé¢˜çš„dpæ•°ç»„ä»¥åŠä¸‹æ ‡çš„å«ä¹‰æ¯”è¾ƒå¥½æƒ³ï¼Œä½†æ˜¯é€’æŽ¨å…¬å¼éš¾å¼„ï¼Œçœ‹äº†ä»£ç éšæƒ³å½•çš„pdfæ‰æ…¢æ…¢ç†è§£ï¼Œæƒ³è¦è‡ªå·±æŽ¨ç®—å‡ºæ¥æ¯”è¾ƒå›°éš¾
-//æ²¡æƒ³åˆ°æœ€åŽçš„ä»£ç ä¼šè¿™ä¹ˆç®€çŸ­
+//Õâ¸öÌâµÄdpÊý×éÒÔ¼°ÏÂ±êµÄº¬Òå±È½ÏºÃÏë£¬µ«ÊÇµÝÍÆ¹«Ê½ÄÑÅª£¬¿´ÁË´úÂëËæÏëÂ¼µÄpdf²ÅÂýÂýÀí½â£¬ÏëÒª×Ô¼ºÍÆËã³öÀ´±È½ÏÀ§ÄÑ
+//Ã»Ïëµ½×îºóµÄ´úÂë»áÕâÃ´¼ò¶Ì
 
 class Solution {
 public:
 	int numTrees(int n) {
 		vector<int> dp(n + 1, 0);
+		dp[0] = 1;
+		for (int i = 1; i <= n; i++) {
+			for (int j = 0; j < i; j++) {
+				dp[i] += dp[j] * dp[i - j - 1];
+			}
+		}
+		return dp[n];
+	}
+
+	//µÚ¶þ±é×ö£¬»¹ÊÇÃ»ÓÐ×ö³öÀ´£¬ÕÒ²»³öµÝÍÆ¹ØÏµ£¬¸üÃ»×¢Òâµ½×óÓÒ×ÓÊ÷ÐÎ×´ÉÏµÄÁªÏµ
+	int numTrees1(int n) {
+		vector<int> dp(n + 1);
 		dp[0] = 1;
 		for (int i = 1; i <= n; i++) {
 			for (int j = 0; j < i; j++) {

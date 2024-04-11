@@ -2,9 +2,9 @@
 #include <vector>
 using namespace std;
 
-//è¿™ä¸ªé¢˜è¿˜æ˜¯æ¯”è¾ƒç®€å•çš„ï¼Œdpæ•°ç»„æ˜¯ä¸ªäºŒç»´æ•°ç»„ï¼Œdp[i][j]è¡¨ç¤ºåˆ°è¾¾ç¬¬iè¡Œç¬¬jä¸ªä½ç½®çš„è·¯å¾„æ•°ï¼Œå¯¹äºŽç¬¬ä¸€æŽ’çš„èŠ‚ç‚¹åªèƒ½åˆå·¦è¾¹çš„èŠ‚ç‚¹è¿‡åŽ»ï¼Œå³åªæœ‰ä¸€æ¡è·¯å¾„
-//ç¬¬ä¸€åˆ—çš„èŠ‚ç‚¹åªèƒ½ç”±ä¸Šè¾¹çš„èŠ‚ç‚¹è¿‡æ¥ï¼Œå…¶ä»–çš„èŠ‚ç‚¹åˆ™æ—¢å¯ä»¥ä»Žä¸Šè¾¹è¿‡æ¥ï¼Œä¹Ÿå¯ä»¥ä»Žå·¦è¾¹è¿‡æ¥ã€‚
-//æ‰€ä»¥åˆ°è¿™é‡Œdpæ•°ç»„å’Œé€’æŽ¨å…¬å¼éƒ½å¾ˆæ¸…æ™°äº†ã€‚
+//Õâ¸öÌâ»¹ÊÇ±È½Ï¼òµ¥µÄ£¬dpÊý×éÊÇ¸ö¶þÎ¬Êý×é£¬dp[i][j]±íÊ¾µ½´ïµÚiÐÐµÚj¸öÎ»ÖÃµÄÂ·¾¶Êý£¬¶ÔÓÚµÚÒ»ÅÅµÄ½ÚµãÖ»ÄÜÓÖ×ó±ßµÄ½Úµã¹ýÈ¥£¬¼´Ö»ÓÐÒ»ÌõÂ·¾¶
+//µÚÒ»ÁÐµÄ½ÚµãÖ»ÄÜÓÉÉÏ±ßµÄ½Úµã¹ýÀ´£¬ÆäËûµÄ½ÚµãÔò¼È¿ÉÒÔ´ÓÉÏ±ß¹ýÀ´£¬Ò²¿ÉÒÔ´Ó×ó±ß¹ýÀ´¡£
+//ËùÒÔµ½ÕâÀïdpÊý×éºÍµÝÍÆ¹«Ê½¶¼ºÜÇåÎúÁË¡£
 
 class Solution {
 public:
@@ -12,7 +12,7 @@ public:
 		vector<vector<int>> dp(m, vector<int>(n, 0));
 		dp[0][0] = 1;
 		for (int i = 0; i < m; i++) {
-			for (int j = 0; j < n; j++) {  //å½“ç„¶è¿™é‡Œçš„äºŒé‡forå¾ªçŽ¯ä¸­çš„åˆ¤æ–­æ¡ä»¶ä¹Ÿå¯ä»¥ä¸ç”¨å†™çš„è¿™ä¹ˆå¤æ‚ï¼Œä¹Ÿå¯ä»¥æŠŠç¬¬ä¸€è¡Œå’Œç¬¬ä¸€åˆ—å•ç‹¬æ‹¿å‡ºæ¥ï¼Œåˆ†åˆ«ç”¨ä¸€ä¸ªforå¾ªçŽ¯å®Œæˆ
+			for (int j = 0; j < n; j++) {  //µ±È»ÕâÀïµÄ¶þÖØforÑ­»·ÖÐµÄÅÐ¶ÏÌõ¼þÒ²¿ÉÒÔ²»ÓÃÐ´µÄÕâÃ´¸´ÔÓ£¬Ò²¿ÉÒÔ°ÑµÚÒ»ÐÐºÍµÚÒ»ÁÐµ¥¶ÀÄÃ³öÀ´£¬·Ö±ðÓÃÒ»¸öforÑ­»·Íê³É
 				if (i == 0 && j == 0)
 					continue;
 				else if (i == 0) {
@@ -28,9 +28,37 @@ public:
 		}
 		return dp[m - 1][n - 1];
 	}
+
+	//µÚ¶þ´Î×ö
+	int uniquePaths1(int m, int n) {
+		vector<vector<int>> dp(m, vector<int>(n, 0));
+		for (int i = 0; i < m; i++)
+			dp[i][0] = 1;
+		for (int i = 0; i < n; i++)
+			dp[0][i] = 1;
+
+		for (int i = 1; i < m; i++)
+			for (int j = 1; j < n; j++)
+				dp[i][j] = dp[i - 1][j] + dp[i][j - 1];
+
+		return dp[m - 1][n - 1];
+	}
+
+	//Õâ¸öÊ¹ÓÃÒ»Î¬Êý×éÓÅ»¯µÄÎÒ¶®ÁË£¬¶þÎ¬Êý×éµÄµÝÍÆ¹«Ê½ÊÇdp[i][j] = dp[i - 1][j] + dp[i][j - 1]£¬µ±Ç°½ÚµãÓÉ×ó±ßºÍÉÏ±ßÍÆ³ö
+	//Ê¹ÓÃ¹ö¶¯Êý×éÒÔºóµ±Ç°Î»ÖÃµÄÔªËØÆäÊµ¾ÍµÈÓÚËüÉÏ·½µÄÔªËØµÄÖµ£¬ËùÒÔµÝÍÆ¹«Ê½¾Í±ä³Édp[i]+=dp[i-1];
+	int uniquePaths2(int m, int n) {
+		vector<int> dp(n,1);
+
+		for (int i = 1; i < m; i++)
+			for (int j = 1; j < n; j++)  //Ã¿¸öÔªËØ¶¼ÓÉËüÇ°Ò»¸öÖµÍÆµ¼³ö£¬ËùÒÔµÚ0¸ö¾ÍµÃÓÐÖµ£¬ÕâºÍ¶þÎ¬Êý×é×î¿ªÊ¼µÄ³õÊ¼»¯ÊÇÒ»ÑùµÄ
+				dp[j] += dp[j - 1];
+
+		return dp[n - 1];
+	}
+	
 };
 
-//è¿™ä¸ªé¢˜ä»£ç éšæƒ³å½•pdfä¸Šè¿˜æœ‰ä¼˜åŒ–ç‰ˆï¼Œåªéœ€è¦ä¸€ä¸ªä¸€ç»´æ•°ç»„å°±è¡Œï¼Œä½†æ˜¯æˆ‘çœ‹ä¸å¤ªæ‡‚
+//Õâ¸öÌâ´úÂëËæÏëÂ¼pdfÉÏ»¹ÓÐÓÅ»¯°æ£¬Ö»ÐèÒªÒ»¸öÒ»Î¬Êý×é¾ÍÐÐ£¬µ«ÊÇÎÒ¿´²»Ì«¶®
 int main() {
 	Solution st;
 	cout << st.uniquePaths(3, 7) << endl;
