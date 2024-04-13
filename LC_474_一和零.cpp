@@ -2,13 +2,13 @@
 #include <vector>
 using namespace std;
 
-//ç»™å®šä¸€ä¸ªå­—ç¬¦æ•°ç»„ï¼Œæ•°ç»„ä¸­çš„æ¯ä¸€ä¸ªå…ƒç´ éƒ½æ˜¯ä¸€ä¸ªäºŒè¿›åˆ¶ä¸²ï¼Œæœ€åè¿”å›ä¸€ä¸ªæ•°ç»„çš„å­é›†ï¼Œå­é›†ä¸­çš„å…ƒç´ ä¸­çš„0çš„ä¸ªæ•°ä¸è¶…è¿‡mï¼Œ1çš„ä¸ªæ•°ä¸è¶…è¿‡n
+//¸ø¶¨Ò»¸ö×Ö·ûÊı×é£¬Êı×éÖĞµÄÃ¿Ò»¸öÔªËØ¶¼ÊÇÒ»¸ö¶ş½øÖÆ´®£¬×îºó·µ»ØÒ»¸öÊı×éµÄ×Ó¼¯£¬×Ó¼¯ÖĞµÄÔªËØÖĞµÄ0µÄ¸öÊı²»³¬¹ım£¬1µÄ¸öÊı²»³¬¹ın
 
 class Solution {
 public:
 	int findMaxForm(vector<string>& strs, int m, int n) {
 		vector<vector<int>> dp(m + 1, vector<int>(n + 1, 0));
-		for (string& s : strs) {   //è¿™é‡Œç›¸å½“äºéå†ç‰©å“
+		for (string& s : strs) {   //ÕâÀïÏàµ±ÓÚ±éÀúÎïÆ·
 			int zeroNum = 0, oneNum = 0;
 			for (char& c : s) {
 				if (c == '0') zeroNum++;
@@ -31,12 +31,53 @@ public:
 		}
 		return dp[m][n];
 	}
+
+	//µÚ¶ş´Î×ö£¬Õâ´Î´óÌåË¼Â·ÊÇ¶ÔµÄ£¬µİÍÆ¹«Ê½Ò²¶ÔÁË£¬µ«ÊÇ¾ÍÊÇ°Ñ±éÀúË³ĞòĞ´³ÉÕıĞò±éÀúÁË
+	int findMaxForm1(vector<string>& strs, int m, int n) {
+		//¸Ğ¾õÕâ»ØdpÊı×éµÃÊÇ¶şÎ¬µÄ
+		vector<vector<int>> dp(m + 1, vector<int>(n + 1, 0));
+		for (int i = 0; i < strs.size(); i++) {
+			string s = strs[i];
+			int count_0 = 0, count_1 = 0;
+			for (char& c : s) {
+				if (c == '0') count_0++;
+				else count_1++;
+			}
+
+			//¾­¹ıÊÖ¶¯ÑéËã£¬ÕâÀïÈ·ÊµÊÇÓ¦¸ÃÄæĞò±éÀú¡£ÕâÀï±éÀú¼¸¸öÎïÆ·£¬¶¼ÊÇÊ¹ÓÃÁËÏàÍ¬µÄdpÊı×é£¬¾ÍµÈÍ¬ÓÚÖ®Ç°Ò»Î¬µÄ¹ö¶¯Êı×é£¬ËùÒÔÓ¦¸ÃÊÇÄæĞò±éÀú
+			//ÄæĞò±éÀú
+			for (int j = m; j >= count_0; j--) {
+				for (int k = n; k >= count_1; k--) {
+					dp[j][k] = max(dp[j][k], dp[j - count_0][k - count_1] + 1);
+				}
+			}
+
+
+			//ÕıĞò±éÀúµÄ£¬»áÖØ¸´Ç°±ßµÄ¼ÆËã½á¹û
+			/*for (int j = count_0; j <= m; j++) {
+				for (int k = count_1; k <= n; k++) {
+					dp[j][k] = max(dp[j][k], dp[j - count_0][k - count_1] + 1);
+				}
+			}*/
+
+			//´òÓ¡dpÊı×é
+			for (int i = 0; i <= m; i++) {
+				for (int j = 0; j <= n; j++) {
+					cout << dp[i][j] << "   ";
+				}
+				cout << endl;
+			}
+			cout << "--------------------" << endl;
+		}
+		return dp[m][n];
+
+	}
 };
 
 int main() {
 	Solution st;
 	vector<string> strs{ "10", "0001", "111001", "1", "0" };
 	int m = 5, n = 3;
-	cout << st.findMaxForm(strs, m, n) << endl;
+	cout << st.findMaxForm1(strs, m, n) << endl;
 	return 0;
 }

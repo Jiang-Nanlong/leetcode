@@ -1,11 +1,12 @@
 #include <iostream>
 #include <vector>
+#include <numeric>
 using namespace std;
 
-//ç»™å®šä¸€ä¸ªæ­£æ•´æ•°æ•°ç»„å’Œä¸€ä¸ªtargetï¼Œåœ¨æ•°ç»„ä¸­çš„æ•°å­—å‰åŠ + -å·ï¼Œè®©æ•°ç»„å’Œç­‰äºtargetï¼Œè¿”å›æœ€åçš„ç»„åˆæ•°
-//å€’æ˜¯çœ‹å‡ºèƒ½ç”¨å›æº¯æ¥åšäº†ï¼Œä½†æ˜¯å®Œå…¨æ²¡çœ‹å‡ºæ˜¯èƒŒåŒ…é—®é¢˜
+//¸ø¶¨Ò»¸öÕıÕûÊıÊı×éºÍÒ»¸ötarget£¬ÔÚÊı×éÖĞµÄÊı×ÖÇ°¼Ó+ -ºÅ£¬ÈÃÊı×éºÍµÈÓÚtarget£¬·µ»Ø×îºóµÄ×éºÏÊı
+//µ¹ÊÇ¿´³öÄÜÓÃ»ØËİÀ´×öÁË£¬µ«ÊÇÍêÈ«Ã»¿´³öÊÇ±³°üÎÊÌâ
 // 
-//å›æº¯ï¼Œå›æº¯æ³•å†™èµ·æ¥æŒºç®€å•
+//»ØËİ£¬»ØËİ·¨Ğ´ÆğÀ´Í¦¼òµ¥
 class Solution {
 public:
 	int count = 0;
@@ -25,21 +26,21 @@ public:
 		}
 	}
 
-	//åŠ¨æ€è§„åˆ’ï¼Œè¿™ä¸ªæœ‰ç‚¹éš¾
-	//leftç»„åˆ-rightç»„åˆ=target  leftç»„åˆ+rightç»„åˆ=sumã€‚æ‰€ä»¥left=(sum+target)/2
-	//ä¹Ÿå°±æ˜¯åœ¨æ•°ç»„ä¸­æ‰¾å‡ ä¸ªæ•°çš„å’Œç­‰äºleftã€‚å°±å¯ä»¥è½¬åŒ–ä¸º01èƒŒåŒ…é—®é¢˜äº†ï¼Œè€Œä¸”è¿˜éƒ½æ˜¯æ­£æ•°ï¼Œä¸ç”¨è€ƒè™‘æ­£è´Ÿå·çš„é—®é¢˜ã€‚
+	//¶¯Ì¬¹æ»®£¬Õâ¸öÓĞµãÄÑ
+	//left×éºÏ-right×éºÏ=target  left×éºÏ+right×éºÏ=sum¡£ËùÒÔleft=(sum+target)/2
+	//Ò²¾ÍÊÇÔÚÊı×éÖĞÕÒ¼¸¸öÊıµÄºÍµÈÓÚleft¡£¾Í¿ÉÒÔ×ª»¯Îª01±³°üÎÊÌâÁË£¬¶øÇÒ»¹¶¼ÊÇÕıÊı£¬²»ÓÃ¿¼ÂÇÕı¸ººÅµÄÎÊÌâ¡£
 	int findTargetSumWays1(vector<int>& nums, int target) {
 		int sum = 0;
 		for (int& i : nums) sum += i;
 		if (abs(target) > sum) return 0;
-		if ((sum + target) % 2 == 1) return 0;  //å¦‚æœsum+targetæ˜¯å¥‡æ•°ï¼Œå°±è¿”å›0
+		if ((sum + target) % 2 == 1) return 0;  //Èç¹ûsum+targetÊÇÆæÊı£¬¾Í·µ»Ø0
 		int bagsize = (sum + target) / 2;
 
 		vector<int> dp(bagsize + 1, 0);
-		dp[0] = 1;  //è¿™é‡Œçš„åˆå§‹åŒ–ï¼Œæˆ‘æœ‰ç‚¹å¼„ä¸å¤ªæ¸…
+		dp[0] = 1;  //ÕâÀïµÄ³õÊ¼»¯£¬ÎÒÓĞµãÅª²»Ì«Çå
 		for (int i = 0; i < nums.size(); i++) {
 			for (int j = bagsize; j >= nums[i]; j--) {
-				dp[j] += dp[j - nums[i]];  //å†å°±æ˜¯é€’æ¨å…¬å¼ï¼Œæ„Ÿè§‰å’Œä¸Šæ¥¼æ¢¯çš„é‚£ä¸ªä¸€æ ·ï¼Œ
+				dp[j] += dp[j - nums[i]];  //ÔÙ¾ÍÊÇµİÍÆ¹«Ê½£¬¸Ğ¾õºÍÉÏÂ¥ÌİµÄÄÇ¸öÒ»Ñù£¬
 			}
 			for (int k : dp)
 				cout << k << "  ";
@@ -48,7 +49,7 @@ public:
 		return dp[bagsize];
 	}
 
-	int findTargetSumWays2(vector<int>& nums, int target) {  //ç”¨äºŒç»´æ•°ç»„å®ç°
+	int findTargetSumWays2(vector<int>& nums, int target) {  //ÓÃ¶şÎ¬Êı×éÊµÏÖ
 		int sum = 0;
 		for (int& i : nums) sum += i;
 		if (abs(target) > sum) return 0;
@@ -57,7 +58,7 @@ public:
 
 		vector<vector<int>> dp(nums.size(), vector<int>(bagsize + 1, 0));
 		dp[0][0] = 1;
-		if (nums[0] <= bagsize)  //è¿™ä¸ªåˆå§‹åŒ–çš„åœ°æ–¹æœ‰é—®é¢˜ï¼Œå¼€å§‹ä»£ç ç»“æœä¸å¯¹ï¼Œçœ‹äº†åˆ«äººçš„ä»£ç æ”¹çš„ï¼Œè¿™ä¸ªåˆå§‹åŒ–çš„åœ°æ–¹è¿˜æ˜¯æœ‰ç‚¹å¼„ä¸æ¸…ï¼Œæ‰“å°å‡ºdpæ•°ç»„æ„Ÿè§‰åçŸ¥åè§‰çš„æœ‰ç‚¹æ‡‚äº†
+		if (nums[0] <= bagsize)  //Õâ¸ö³õÊ¼»¯µÄµØ·½ÓĞÎÊÌâ£¬¿ªÊ¼´úÂë½á¹û²»¶Ô£¬¿´ÁË±ğÈËµÄ´úÂë¸ÄµÄ£¬Õâ¸ö³õÊ¼»¯µÄµØ·½»¹ÊÇÓĞµãÅª²»Çå£¬´òÓ¡³ödpÊı×é¸Ğ¾õºóÖªºó¾õµÄÓĞµã¶®ÁË
 			dp[0][nums[0]] += 1;
 		for (int i = 1; i < nums.size(); i++) {
 			for (int j = 0; j <= bagsize; j++) {
@@ -75,11 +76,26 @@ public:
 		}
 		return dp[nums.size() - 1][bagsize];
 	}
+
+	//µÚ¶ş´Î×ö£¬»¹ÊÇÃ»ÓĞÏëµ½ÔõÃ´»áÊÇ01±³°üµÄÎÊÌâ
+	int findTargetSumWays3(vector<int>& nums, int target) {
+		int sum = accumulate(nums.begin(), nums.end(), 0);
+		if ((sum + target) % 2) return 0;
+		if (abs(target) > sum) return 0;
+		int left = (sum + target) / 2;
+		vector<int> dp(left + 1, 0);
+		dp[0] = 1;
+		for (int i = 0; i < nums.size(); i++) {
+			for (int j = left; j >= nums[i]; j--)
+				dp[j] += dp[j - nums[i]];
+		}
+		return dp[left];
+	}
 };
 
-//è¿™ä¸ªé¢˜çš„å›æº¯æ–¹æ³•æ¯”è¾ƒç®€å•ï¼ŒåŠ¨æ€è§„åˆ’é—®é¢˜çœŸéš¾ã€‚æœ€åå¯¹ç€dpæ•°ç»„æ‰å‹‰å¼ºçœ‹æ˜ç™½
-//è¿™ä¸ªé¢˜çš„éš¾ç‚¹å°±æ˜¯æ€ä¹ˆæŠ½è±¡æˆèƒŒåŒ…é—®é¢˜ï¼Œç„¶åå°±æ˜¯é€’æ¨å…¬å¼äº†
-//å…¶ä½™çš„æŒ‰ç€æ¨¡ç‰ˆå†™å°±è¡Œ
+//Õâ¸öÌâµÄ»ØËİ·½·¨±È½Ï¼òµ¥£¬¶¯Ì¬¹æ»®ÎÊÌâÕæÄÑ¡£×îºó¶Ô×ÅdpÊı×é²ÅÃãÇ¿¿´Ã÷°×
+//Õâ¸öÌâµÄÄÑµã¾ÍÊÇÔõÃ´³éÏó³É±³°üÎÊÌâ£¬È»ºó¾ÍÊÇµİÍÆ¹«Ê½ÁË
+//ÆäÓàµÄ°´×ÅÄ£°æĞ´¾ÍĞĞ
 int main() {
 	Solution st;
 	vector<int> nums{ 1,1,1,1,1 };
