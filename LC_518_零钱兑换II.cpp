@@ -2,8 +2,8 @@
 #include <vector>
 using namespace std;
 
-//ç»™å®šä¸€ä¸ªæ­£æ•´æ•°amountï¼Œç”¨coinsæ•°ç»„ä¸­çš„å…ƒç´ å‡‘æˆamountï¼Œæ¯ä¸ªå…ƒç´ å¯ä»¥ä½¿ç”¨æ— é™æ¬¡ï¼Œè¿™æ˜æ˜¾æ˜¯ä¸ªå®Œå…¨èƒŒåŒ…é—®é¢˜ï¼Œæœ€åè¿”å›ç»„æˆamountçš„ç»„åˆæ•°
-//è¿™ä¸ªé¢˜å’ŒLeetCode 494 ç›®æ ‡å’Œ å¾ˆåƒï¼ŒåŒ…æ‹¬åˆå§‹åŒ–å’Œé€’æ¨å…¬å¼éƒ½ä¸€æ ·ã€‚
+//¸ø¶¨Ò»¸öÕıÕûÊıamount£¬ÓÃcoinsÊı×éÖĞµÄÔªËØ´Õ³Éamount£¬Ã¿¸öÔªËØ¿ÉÒÔÊ¹ÓÃÎŞÏŞ´Î£¬ÕâÃ÷ÏÔÊÇ¸öÍêÈ«±³°üÎÊÌâ£¬×îºó·µ»Ø×é³ÉamountµÄ×éºÏÊı
+//Õâ¸öÌâºÍLeetCode 494 Ä¿±êºÍ ºÜÏñ£¬°üÀ¨³õÊ¼»¯ºÍµİÍÆ¹«Ê½¶¼Ò»Ñù¡£
 
 class Solution {
 public:
@@ -12,7 +12,7 @@ public:
 		dp[0] = 1;
 		vector<int> dp1(amount + 1, 0);
 		dp1[0] = 1;
-		for (int i = 0; i < coins.size(); i++) { //å…ˆç‰©å“åèƒŒåŒ…ï¼Œæ±‚çš„æ˜¯ç»„åˆ
+		for (int i = 0; i < coins.size(); i++) { //ÏÈÎïÆ·ºó±³°ü£¬ÇóµÄÊÇ×éºÏ
 			for (int j = coins[i]; j <= amount; j++) {
 				dp[j] += dp[j - coins[i]];
 			}
@@ -21,7 +21,7 @@ public:
 			cout << endl;
 		}
 		cout << "------------------" << endl;
-		for (int j = 0; j <= amount; j++) {   //å…ˆèƒŒåŒ…åç‰©å“ï¼Œæ±‚çš„æ˜¯æ’åˆ—
+		for (int j = 0; j <= amount; j++) {   //ÏÈ±³°üºóÎïÆ·£¬ÇóµÄÊÇÅÅÁĞ
 			for (int i = 0; i < coins.size(); i++) {
 				if (j >= coins[i])
 					dp1[j] += dp1[j - coins[i]];
@@ -29,6 +29,18 @@ public:
 			for (int& i : dp1)
 				cout << i << "   ";
 			cout << endl;
+		}
+		return dp[amount];
+	}
+
+	//µÚ¶ş´Î×ö£¬ÍêÈ«±³°üµÚÒ»Ìâ
+	int change1(int amount, vector<int>& coins) {
+		vector<int> dp(amount + 1, 0);
+		dp[0] = 1;
+		for (int i = 0; i < coins.size(); i++) {
+			for (int j = coins[i]; j <= amount; j++) {
+				dp[j] += dp[j - coins[i]];
+			}
 		}
 		return dp[amount];
 	}
@@ -46,7 +58,7 @@ public:
 1   1   2   3   5   0
 1   1   2   3   5   9
 */
-//çœ‹j=3çš„æ—¶å€™å°±å¯ä»¥çŸ¥é“ï¼Œå…ˆèƒŒåŒ…åç‰©å“è¿™ç§æƒ…å†µï¼Œåˆ†åˆ«ç»Ÿè®¡äº†2+1,1+1+1å’Œ1+2ï¼Œè¿™ä¸‰ç§æƒ…å†µ
+//¿´j=3µÄÊ±ºò¾Í¿ÉÒÔÖªµÀ£¬ÏÈ±³°üºóÎïÆ·ÕâÖÖÇé¿ö£¬·Ö±ğÍ³¼ÆÁË2+1,1+1+1ºÍ1+2£¬ÕâÈıÖÖÇé¿ö
 
 int main() {
 	Solution st;

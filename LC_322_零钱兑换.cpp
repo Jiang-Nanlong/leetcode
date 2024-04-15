@@ -2,22 +2,38 @@
 #include <vector>
 using namespace std;
 
-//ä½¿ç”¨coinsæ•°ç»„è¡¨ç¤ºä¸åŒé¢é¢çš„ç¡¬å¸ï¼Œç”¨è¿™äº›å…ƒç´ å‡‘å‡ºamountï¼Œè¿”å›æœ€å°çš„ç¡¬å¸æ•°ï¼Œç¡¬å¸å¯ä»¥é‡å¤ä½¿ç”¨ï¼Œå¦‚æœå‡‘ä¸å‡ºè¿”å›-1
-//è¿™ä¸ªé¢˜è¿˜æ˜¯å¸¸è§„çš„å®Œå…¨èƒŒåŒ…é—®é¢˜
+//Ê¹ÓÃcoinsÊı×é±íÊ¾²»Í¬Ãæ¶îµÄÓ²±Ò£¬ÓÃÕâĞ©ÔªËØ´Õ³öamount£¬·µ»Ø×îĞ¡µÄÓ²±ÒÊı£¬Ó²±Ò¿ÉÒÔÖØ¸´Ê¹ÓÃ£¬Èç¹û´Õ²»³ö·µ»Ø-1
+//Õâ¸öÌâ»¹ÊÇ³£¹æµÄÍêÈ«±³°üÎÊÌâ
 
 class Solution {
 public:
 	int coinChange(vector<int>& coins, int amount) {
-		vector<int> dp(amount + 1, INT_MAX);  //è¡¨ç¤ºå‡‘å‡ºjæ‰€éœ€çš„æœ€å°ç¡¬å¸æ•°ä¸ºdp[j]
-		dp[0] = 0;  //å› ä¸ºé¢˜ç›®ä¸­æœ‰ä¸€ä¸ªç¤ºä¾‹å°±æ˜¯è¿™ä¸ª
-		for (int i = 0; i < coins.size(); i++) {   //å…ˆç‰©å“åèƒŒåŒ…
+		vector<int> dp(amount + 1, INT_MAX);  //±íÊ¾´Õ³öjËùĞèµÄ×îĞ¡Ó²±ÒÊıÎªdp[j]
+		dp[0] = 0;  //ÒòÎªÌâÄ¿ÖĞÓĞÒ»¸öÊ¾Àı¾ÍÊÇÕâ¸ö
+		for (int i = 0; i < coins.size(); i++) {   //ÏÈÎïÆ·ºó±³°ü
 			for (int j = coins[i]; j <= amount; j++) {
 				if (dp[j - coins[i]] != INT_MAX)
-					dp[j] = min(dp[j], dp[j - coins[i]] + 1);   //è¿™ä¸ªé¢˜ä¸»è¦æ˜¯é€’æ¨å…¬å¼éš¾å†™ï¼Œå‡‘å‡ºæ€»é¢ä¸ºj-coins[i]çš„æœ€å°ç¡¬å¸æ•°ä¸ºdp[j-coins[i]]ï¼Œ
-				//é‚£ä¹ˆå‡‘å‡ºæ€»é¢ä¸ºjçš„æœ€å°ç¡¬å¸æ•°å°±æ˜¯dp[j-coins[i]]+1ï¼Œæ‰€ä»¥é€’æ¨å…¬å¼å°±æ˜¯dp[j]=min(dp[j],dp[j]-coins[i]]+1);
+					dp[j] = min(dp[j], dp[j - coins[i]] + 1);   //Õâ¸öÌâÖ÷ÒªÊÇµİÍÆ¹«Ê½ÄÑĞ´£¬´Õ³ö×Ü¶îÎªj-coins[i]µÄ×îĞ¡Ó²±ÒÊıÎªdp[j-coins[i]]£¬
+				//ÄÇÃ´´Õ³ö×Ü¶îÎªjµÄ×îĞ¡Ó²±ÒÊı¾ÍÊÇdp[j-coins[i]]+1£¬ËùÒÔµİÍÆ¹«Ê½¾ÍÊÇdp[j]=min(dp[j],dp[j]-coins[i]]+1);
 			}
 		}
-		if (dp[amount] == INT_MAX) return -1;  //å¦‚æœå‡‘ä¸å‡ºï¼Œè¿”å›-1
+		if (dp[amount] == INT_MAX) return -1;  //Èç¹û´Õ²»³ö£¬·µ»Ø-1
+		return dp[amount];
+	}
+
+
+	//µÚ¶ş´Î×ö£¬Õâ¸öÌâÇó×éºÏºÍÇóÅÅÁĞ¶¼ĞĞ
+	int coinChange1(vector<int>& coins, int amount) {
+		vector<int> dp(amount + 1, INT_MAX);
+		dp[0] = 0;
+		for (int i = 0; i < coins.size(); i++) {
+			for (int j = coins[i]; j <= amount; j++) {
+				if (dp[j - coins[i]] != INT_MAX)
+					dp[j] = min(dp[j], dp[j - coins[i]] + 1);
+			}
+		}
+		if (dp[amount] == INT_MAX)
+			return -1;
 		return dp[amount];
 	}
 };

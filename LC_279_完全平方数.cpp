@@ -2,23 +2,56 @@
 #include <vector>
 using namespace std;
 
-//ç»™å®šä¸€ä¸ªæ•´æ•°ï¼Œç”¨å¹³æ–¹æ•°çš„å’Œè¡¨ç¤ºå®ƒï¼Œè¿”å›æœ€å°çš„å¹³æ–¹æ•°çš„ä¸ªæ•°
-//é™¤äº†å¹³æ–¹çš„åœ°æ–¹ä¹‹å¤–ï¼Œå…¶ä½™çš„éƒ½å’ŒLeetCode 322 é›¶é’±å…‘æ¢ä¸€æ ·
+//¸ø¶¨Ò»¸öÕûÊı£¬ÓÃÆ½·½ÊıµÄºÍ±íÊ¾Ëü£¬·µ»Ø×îĞ¡µÄÆ½·½ÊıµÄ¸öÊı
+//³ıÁËÆ½·½µÄµØ·½Ö®Íâ£¬ÆäÓàµÄ¶¼ºÍLeetCode 322 ÁãÇ®¶Ò»»Ò»Ñù
 class Solution {
 public:
-	int numSquares(int n) {
-		vector<int> dp(n + 1, INT_MAX);
-		dp[0] = 0;
-		for (int i = 1; i * i <= n; i++) {
-			for (int j = i * i; j <= n; j++)
-				dp[j] = min(dp[j], dp[j - i * i] + 1);
-		}
-		return dp[n];
-	}
+    int numSquares(int n) {
+        vector<int> dp(n + 1, INT_MAX);
+        dp[0] = 0;
+        for (int i = 1; i * i <= n; i++) {
+            for (int j = i * i; j <= n; j++)
+                dp[j] = min(dp[j], dp[j - i * i] + 1);
+        }
+        return dp[n];
+    }
+
+    //µÚ¶ş´Î×ö£¬ÏÈÇó³önÒÔÄÚµÄËùÓĞÍêÈ«Æ½·½Êı×÷ÎªÎïÆ·£¬À´ÌîÂú±³°ü¡£×öÍêÒÔºóÔÙ¿´ÒÔÇ°µÄ´úÂë£¬·¢ÏÖÖ®Ç°µÄ¸ü¼òµ¥¡£
+    int numSquares1(int n) {
+        vector<int> num;
+        for (int i = 1; i <= n; i++) {
+            if (sqrt(i) == (int)sqrt(i)) {
+                num.push_back(i);
+            }
+        }
+        int count = num.size();
+        vector<int> dp(n + 1, INT_MAX);
+        dp[0] = 0;
+        for (int i = 0; i < count; i++) {
+            for (int j = num[i]; j <= n; j++) {
+                dp[j] = min(dp[j], dp[j - num[i]] + 1);
+            }
+        }
+        return dp[n];
+    }
+
+    //»¹ÊÇÕâ¸ö·½·¨¸üÇÉÃî
+    int numSquares2(int n) {
+        vector<int> dp(n + 1, INT_MAX);
+        dp[0] = 0;
+        for (int i = 1; i * i <= n; i++) {
+            for (int j = i * i; j <= n; j++) {
+                dp[j] = min(dp[j], dp[j - i * i] + 1);
+            }
+        }
+        return dp[n];
+    }
 };
 
 int main() {
-	Solution st;
-	cout << st.numSquares(12) << endl;
-	return 0;
+    Solution st;
+    cout << st.numSquares(12) << endl;
+    cout << st.numSquares1(12) << endl;
+    cout << st.numSquares2(12) << endl;
+    return 0;
 }
