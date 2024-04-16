@@ -2,17 +2,30 @@
 #include <vector>
 using namespace std;
 
-//ä¸èƒ½æŠ¢ç›¸é‚»çš„ä¸¤å®¶ï¼Œè¿”å›æœ€åçš„èƒ½æŠ¢åˆ°é‡‘é¢çš„æœ€å¤§å€¼
+//²»ÄÜÇÀÏàÁÚµÄÁ½¼Ò£¬·µ»Ø×îºóµÄÄÜÇÀµ½½ğ¶îµÄ×î´óÖµ
 
 class Solution {
 public:
 	int rob(vector<int>& nums) {
 		if (nums.size() == 1) return nums[0];
-		vector<int> dp(nums.size(), 0);  //dp[i]è¡¨ç¤ºè€ƒè™‘ç¬¬iå®¶åœ¨å†…ï¼Œèƒ½æŠ¢åˆ°çš„é’±çš„æœ€å¤§å€¼
+		vector<int> dp(nums.size(), 0);  //dp[i]±íÊ¾¿¼ÂÇµÚi¼ÒÔÚÄÚ£¬ÄÜÇÀµ½µÄÇ®µÄ×î´óÖµ
 		dp[0] = nums[0];
 		dp[1] = max(nums[0], nums[1]);
 		for (int i = 2; i < nums.size(); i++) {
-			dp[i] = max(dp[i - 2] + nums[i], dp[i - 1]);  //dp[i]çš„æœ€å¤§å€¼æœ‰ä¸¤ç§æƒ…å†µï¼Œä¸€æ˜¯æŠ¢ç¬¬iå®¶ï¼Œé‚£ä¹ˆdp[i]=dp[i-2]+nums[i]ï¼›äºŒæ˜¯ä¸æŠ¢ç¬¬iå®¶ï¼Œé‚£ä¹ˆdp[i]=dp[i-1]
+			dp[i] = max(dp[i - 2] + nums[i], dp[i - 1]);  //dp[i]µÄ×î´óÖµÓĞÁ½ÖÖÇé¿ö£¬Ò»ÊÇÇÀµÚi¼Ò£¬ÄÇÃ´dp[i]=dp[i-2]+nums[i]£»¶şÊÇ²»ÇÀµÚi¼Ò£¬ÄÇÃ´dp[i]=dp[i-1]
+		}
+		return dp[nums.size() - 1];
+	}
+
+	//µÚ¶ş´Î×ö£¬»¹ÊÇÃ»ÓĞ×ö³öÀ´£¬µÚ¶ş´ÎÔÙ×öÕâ¸öÌâ¸Ğ¾õºÜÄ°Éú£¬ÏñÊÇÃ»×ö¹ıÒ»Ñù
+	int rob1(vector<int>& nums) {
+		if (nums.size() == 1)
+			return nums[0];
+		vector<int> dp(nums.size(), 0);
+		dp[0] = nums[0];
+		dp[1] = max(nums[0], nums[1]);
+		for (int i = 2; i < nums.size(); i++) {
+			dp[i] = max(dp[i - 2] + nums[i], dp[i - 1]);
 		}
 		return dp[nums.size() - 1];
 	}

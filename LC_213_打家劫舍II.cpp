@@ -2,9 +2,9 @@
 #include <vector>
 using namespace std;
 
-//è¿˜æ˜¯è·Ÿæ‰“å®¶åŠ«èˆé‚£é¢˜ä¸€æ ·ï¼Œä¸è¿‡è¿™é‡Œçš„æˆ¿å­ä¼šè¿æˆç¯
-//æ‰€ä»¥å°±åˆ†ä¸‰ç§æƒ…å†µï¼Œç¬¬ä¸€ç§å°±æ˜¯å¤´å°¾å…ƒç´ éƒ½ä¸å–ï¼›ç¬¬äºŒç§å°±æ˜¯ä¸å–å°¾å…ƒç´ ï¼›ç¬¬ä¸‰ç§å°±æ˜¯ä¸å–é¦–å…ƒç´ 
-//è·Ÿæˆ‘æƒ³åˆ°ä¹Ÿå·®ä¸å¤šå§ï¼Œé¦–å…ƒç´ å’Œå°¾å…ƒç´ ä¸èƒ½åŒæ—¶è€ƒè™‘ï¼Œæ¯ç§æƒ…å†µå¾ªç¯ä¸€éï¼Œä¸€å…±ä¸¤é
+//»¹ÊÇ¸ú´ò¼Ò½ÙÉáÄÇÌâÒ»Ñù£¬²»¹ıÕâÀïµÄ·¿×Ó»áÁ¬³É»·
+//ËùÒÔ¾Í·ÖÈıÖÖÇé¿ö£¬µÚÒ»ÖÖ¾ÍÊÇÍ·Î²ÔªËØ¶¼²»È¡£»µÚ¶şÖÖ¾ÍÊÇ²»È¡Î²ÔªËØ£»µÚÈıÖÖ¾ÍÊÇ²»È¡Ê×ÔªËØ
+//¸úÎÒÏëµ½Ò²²î²»¶à°É£¬Ê×ÔªËØºÍÎ²ÔªËØ²»ÄÜÍ¬Ê±¿¼ÂÇ£¬Ã¿ÖÖÇé¿öÑ­»·Ò»±é£¬Ò»¹²Á½±é
 
 class Solution {
 public:
@@ -24,11 +24,32 @@ public:
 		}
 		return dp[end];
 	}
+
+	//µÚ¶ş´Î×ö£¬¾ÍÊÇ·ÖÁ½ÖÖÇé¿ö£¬È¡µÚÒ»¸ö¾Í²»ÄÜÈ¡×îºóÒ»¸ö£¬È¡×îºóÒ»¸ö¾Í²»ÄÜÈ¡µÚÒ»¸ö
+	int rob1(vector<int>& nums) {
+		if (nums.size() == 1)
+			return nums[0];
+		int value1 = robHelper(nums, 0, nums.size() - 1);
+		int value2 = robHelper(nums, 1, nums.size());
+		return max(value1, value2);
+	}
+
+	int robHelper(vector<int>& nums, int begin, int end) { // ×ó±ÕÓÒ¿ª
+		if (end - begin == 1)
+			return nums[begin];
+		vector<int> dp(nums.size(), 0);
+		dp[begin] = nums[begin];
+		dp[begin + 1] = max(nums[begin], nums[begin + 1]);
+		for (int i = begin + 2; i < end; i++) {
+			dp[i] = max(dp[i - 2] + nums[i], dp[i - 1]);
+		}
+		return dp[end - 1];
+	}
 };
 
 int main() {
 	Solution st;
-	vector<int> nums{ 1,2,3,1 };
-	cout << st.rob(nums) << endl;
+	vector<int> nums{ 2,3,2 };
+	cout << st.rob1(nums) << endl;
 	return 0;
 }

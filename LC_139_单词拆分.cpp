@@ -1,11 +1,11 @@
-ï»¿#include <iostream>
+#include <iostream>
 #include <vector>
 #include <unordered_set>
 using namespace std;
 
-//ç»™å®šä¸€ä¸ªå­—ç¬¦ä¸²sï¼Œå’Œä¸€ä¸ªå­—å…¸wordDictï¼Œåˆ¤æ–­å­—ç¬¦ä¸²sèƒ½å¦ç”¨wordDictä¸­çš„å…ƒç´ æ‹¼æ¥æˆï¼ŒwordDictä¸­çš„å•è¯å¯ä»¥é‡å¤ä½¿ç”¨ï¼Œä¸è¦æ±‚å…¨éƒ¨éƒ½ä½¿ç”¨ï¼Œèƒ½çš„æ‹¼æ¥æˆçš„è¯è¿”å›trueï¼Œå¦åˆ™è¿”å›falseã€‚
-//è¿™ä¸ªé¢˜æ˜¯è¦æ±‚æ’åˆ—
-//æ„Ÿè§‰è¿™ä¸ªé¢˜æœ‰ç‚¹éš¾ï¼Œä¸å¤ªå®¹æ˜“æƒ³å‡ºæ˜¯èƒŒåŒ…é—®é¢˜
+//¸ø¶¨Ò»¸ö×Ö·û´®s£¬ºÍÒ»¸ö×ÖµäwordDict£¬ÅĞ¶Ï×Ö·û´®sÄÜ·ñÓÃwordDictÖĞµÄÔªËØÆ´½Ó³É£¬wordDictÖĞµÄµ¥´Ê¿ÉÒÔÖØ¸´Ê¹ÓÃ£¬²»ÒªÇóÈ«²¿¶¼Ê¹ÓÃ£¬ÄÜµÄÆ´½Ó³ÉµÄ»°·µ»Øtrue£¬·ñÔò·µ»Øfalse¡£
+//Õâ¸öÌâÊÇÒªÇóÅÅÁĞ
+//¸Ğ¾õÕâ¸öÌâÓĞµãÄÑ£¬²»Ì«ÈİÒ×Ïë³öÊÇ±³°üÎÊÌâ
 
 class Solution {
 public:
@@ -13,10 +13,10 @@ public:
 		unordered_set<string> wordSet(wordDict.begin(), wordDict.end());
 		vector<bool> dp(s.size() + 1, false);
 		dp[0] = true;
-		for (int i = 1; i <= s.size(); i++) {  //éå†èƒŒåŒ…ï¼Œå¯¹äºä¸€ä¸ªç»™å®šå®¹é‡çš„èƒŒåŒ…ï¼Œä»å¤´éå†è¿™äº›ç‰©å“ï¼Œå¦‚æœèƒŒåŒ…å¯ä»¥è¢«å•è¯è£…æ»¡ï¼Œå°±ä¸ºtrue
-			for (int j = 0; j < i; j++) {  //éå†ç‰©å“
+		for (int i = 1; i <= s.size(); i++) {  //±éÀú±³°ü£¬¶ÔÓÚÒ»¸ö¸ø¶¨ÈİÁ¿µÄ±³°ü£¬´ÓÍ·±éÀúÕâĞ©ÎïÆ·£¬Èç¹û±³°ü¿ÉÒÔ±»µ¥´Ê×°Âú£¬¾ÍÎªtrue
+			for (int j = 0; j < i; j++) {  //±éÀúÎïÆ·
 				string word = s.substr(j, i - j);
-				if (wordSet.find(word) != wordSet.end() && dp[j] == true) {  //æ„Ÿè§‰è¿™ä¸ªé€’æ¨å…¬å¼æœ‰ç‚¹éš¾æƒ³
+				if (wordSet.find(word) != wordSet.end() && dp[j] == true) {  //¸Ğ¾õÕâ¸öµİÍÆ¹«Ê½ÓĞµãÄÑÏë
 					dp[i] = true;
 				}
 			}
@@ -24,13 +24,13 @@ public:
 		return dp[s.size()];
 	}
 
-	//å…ˆéå†ç‰©å“å†éå†èƒŒåŒ…ï¼Œè¿™ç§ä¸è¡Œï¼Œä½†æˆ‘åˆæ²¡çœ‹æ‡‚æ˜¯å› ä¸ºä»€ä¹ˆä¸è¡Œ
+	//ÏÈ±éÀúÎïÆ·ÔÙ±éÀú±³°ü£¬ÕâÖÖ²»ĞĞ£¬µ«ÎÒÓÖÃ»¿´¶®ÊÇÒòÎªÊ²Ã´²»ĞĞ
 	bool wordBreak1(string s, vector<string>& wordDict) {
 		unordered_set<string> wordSet(wordDict.begin(), wordDict.end());
 		vector<bool> dp(s.size() + 1, false);
 		dp[0] = true;
-		for (int j = 0; j < wordDict.size(); j++) { // ç‰©å“
-			for (int i = wordDict[j].size(); i <= s.size(); i++) { // èƒŒåŒ…
+		for (int j = 0; j < wordDict.size(); j++) { // ÎïÆ·
+			for (int i = wordDict[j].size(); i <= s.size(); i++) { // ±³°ü
 				string word = s.substr(i - wordDict[j].size(), wordDict[j].size());
 				cout << word << endl;
 				if (word == wordDict[j] && dp[i - wordDict[j].size()]) {
@@ -39,6 +39,21 @@ public:
 				for (int k = 0; k <= s.size(); k++)
 					cout << dp[k] << " ";
 				cout << "---------------------" << endl;
+			}
+		}
+		return dp[s.size()];
+	}
+
+	//µÚ¶ş´Î×ö£¬»¹ÊÇÃ»ÓĞ×ö³öÀ´£¬Ã»Ïë³öÕâ¸öÌâµÄµİÍÆ¹«Ê½À´£¬¶øÇÒÕâ¸öÌâ±éÀúÎïÆ·µÄÊ±ºòºÍÖ®Ç°Ò²²»Ò»Ñù
+	bool wordBreak2(string s, vector<string>& wordDict) {
+		unordered_set<string> uset(wordDict.begin(), wordDict.end());
+		vector<bool>dp(s.size() + 1, false);
+		dp[0] = true;
+		for (int i = 1; i <= s.size(); i++) {
+			for (int j = 0; j < i; j++) {
+				string word = s.substr(j, i - j);
+				if (uset.find(word) != uset.end() && dp[j] == true)
+					dp[i] = true;
 			}
 		}
 		return dp[s.size()];
