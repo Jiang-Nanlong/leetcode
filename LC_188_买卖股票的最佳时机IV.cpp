@@ -2,7 +2,7 @@
 #include <vector>
 using namespace std;
 
-//å’Œä¹°å–è‚¡ç¥¨çš„æœ€ä½³æ—¶æœºIIIç›¸æ¯”ï¼Œè¿™ä¸ªé¢˜æ›´ä¸€èˆ¬åŒ–ï¼Œè¿™é‡Œæœ€å¤šä¹°å–kæ¬¡ã€‚
+//ºÍÂòÂô¹ÉÆ±µÄ×î¼ÑÊ±»úIIIÏà±È£¬Õâ¸öÌâ¸üÒ»°ã»¯£¬ÕâÀï×î¶àÂòÂôk´Î¡£
 
 class Solution {
 public:
@@ -33,7 +33,7 @@ public:
 		return dp[prices.size() - 1][2 * k - 1];
 	}
 
-	//dpæ•°ç»„ä¼˜åŒ–ç©ºé—´
+	//dpÊı×éÓÅ»¯¿Õ¼ä
 	int maxProfit1(int k, vector<int>& prices) {
 		vector<vector<int>> dp(2, vector<int>(2 * k, 0));
 		for (int i = 0; i < 2 * k; i++)
@@ -52,6 +52,25 @@ public:
 			}
 		}
 		return dp[(prices.size() - 1) % 2][2 * k - 1];
+	}
+
+	//µÚ¶ş´Î×ö
+	int maxProfit2(int k, vector<int>& prices) {
+		vector<vector<int>> dp(prices.size(), vector<int>(2 * k, 0));
+		for (int i = 0; i < 2 * k; i++) {
+			if (i % 2 == 0)
+				dp[0][i] = -prices[0];
+		}
+
+		for (int i = 1; i < prices.size(); i++) {
+			dp[i][0] = max(dp[i - 1][0], -prices[i]);
+			for (int j = 1; j < 2 * k; j++) {
+				int flag = j % 2 == 0 ? -1 : 1;
+				dp[i][j] =
+					max(dp[i - 1][j], dp[i - 1][j - 1] + flag * prices[i]);
+			}
+		}
+		return dp[prices.size() - 1][2 * k - 1];
 	}
 };
 
