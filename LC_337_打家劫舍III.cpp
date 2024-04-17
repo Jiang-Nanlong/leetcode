@@ -4,8 +4,8 @@
 #include <string>
 using namespace std;
 
-//è¿˜æ˜¯æ‰“å®¶åŠ«èˆçš„é¢˜ï¼Œä¸è¿‡è¿™å›æˆ¿å­çš„æ’åˆ—é¡ºåºå˜æˆäºŒå‰æ ‘äº†ï¼Œè¿™æ˜¯é€’å½’å’ŒåŠ¨æ€è§„åˆ’ç»“åˆçš„ä¸€é“é¢˜ï¼Œé¢˜ç›®ä¸­çš„dpæ•°ç»„ä¸å†æ˜¯ç»™æ‰€æœ‰çš„èŠ‚ç‚¹ç»Ÿä¸€åˆ†é…ï¼Œè€Œæ˜¯é€’å½’çš„æ¯ä¸€å±‚ï¼Œä¹Ÿå°±æ˜¯æ¯ä¸€ä¸ªèŠ‚ç‚¹éƒ½æœ‰ä¸€ä¸ªè‡ªå·±çš„dpæ•°ç»„
-//dp[0]è¡¨ç¤ºä¸å·å½“å‰èŠ‚ç‚¹çš„æœ€å¤§å€¼ï¼Œdp[1]è¡¨ç¤ºå·å½“å‰èŠ‚ç‚¹çš„æœ€å¤§å€¼
+//»¹ÊÇ´ò¼Ò½ÙÉáµÄÌâ£¬²»¹ıÕâ»Ø·¿×ÓµÄÅÅÁĞË³Ğò±ä³É¶ş²æÊ÷ÁË£¬ÕâÊÇµİ¹éºÍ¶¯Ì¬¹æ»®½áºÏµÄÒ»µÀÌâ£¬ÌâÄ¿ÖĞµÄdpÊı×é²»ÔÙÊÇ¸øËùÓĞµÄ½ÚµãÍ³Ò»·ÖÅä£¬¶øÊÇµİ¹éµÄÃ¿Ò»²ã£¬Ò²¾ÍÊÇÃ¿Ò»¸ö½Úµã¶¼ÓĞÒ»¸ö×Ô¼ºµÄdpÊı×é
+//dp[0]±íÊ¾²»Íµµ±Ç°½ÚµãµÄ×î´óÖµ£¬dp[1]±íÊ¾Íµµ±Ç°½ÚµãµÄ×î´óÖµ
 
 struct TreeNode {
 	int val;
@@ -26,13 +26,32 @@ public:
 	vector<int> robRange(TreeNode* root) {
 		if (root == nullptr) return { 0,0 };
 
-		vector<int> leftdp = robRange(root->left);  //è¿”å›å·¦å­æ ‘çš„dpæ•°ç»„
-		vector<int> rightdp = robRange(root->right);  //è¿”å›å³å­æ ‘çš„dpæ•°ç»„
+		vector<int> leftdp = robRange(root->left);  //·µ»Ø×ó×ÓÊ÷µÄdpÊı×é
+		vector<int> rightdp = robRange(root->right);  //·µ»ØÓÒ×ÓÊ÷µÄdpÊı×é
 
-		int val1 = max(leftdp[0], leftdp[1]) + max(rightdp[0], rightdp[1]);   //ä¸å·å½“å‰èŠ‚ç‚¹çš„æœ€å¤§å€¼
-		int val2 = root->val + leftdp[0] + rightdp[0];   //å·å½“å‰èŠ‚ç‚¹çš„æœ€å¤§å€¼
+		int val1 = max(leftdp[0], leftdp[1]) + max(rightdp[0], rightdp[1]);   //²»Íµµ±Ç°½ÚµãµÄ×î´óÖµ
+		int val2 = root->val + leftdp[0] + rightdp[0];   //Íµµ±Ç°½ÚµãµÄ×î´óÖµ
 		return { val1,val2 };
 	}
+
+
+	//µÚ¶ş´Î×ö£¬Ê÷ĞÎdpµÚÒ»Ìâ
+	int rob1(TreeNode* root) { // ºóĞò±éÀú
+		vector<int> res = robHelper(root);
+		return max(res[0], res[1]);
+	}
+	vector<int> robHelper(TreeNode* root) {
+		if (root == nullptr)
+			return vector<int>{0, 0};
+		vector<int> left = robHelper(root->left);
+		vector<int> right = robHelper(root->right);
+
+		vector<int> dp(2);
+		dp[0] = max(left[0], left[1]) + max(right[0], right[1]);
+		dp[1] = root->val + left[0] + right[0];
+		return dp;
+	}
+
 
 	TreeNode* buildTree(vector<string>& nums) {
 		if (nums.empty()) return nullptr;
