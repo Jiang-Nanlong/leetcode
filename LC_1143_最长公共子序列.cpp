@@ -2,14 +2,14 @@
 #include <vector>
 using namespace std;
 
-//æ‰¾å‡ºä¸¤ä¸ªæ•°ç»„ä¸­æœ€é•¿å…¬å…±å­åºåˆ—çš„é•¿åº¦ï¼Œå­åºåˆ—ä¸­çš„å­—æ¯ä¸ä¸€å®šæ˜¯è¿žç»­çš„ã€‚
-//å¼€å§‹æˆ‘ä»¥ä¸ºæ˜¯LeetCode 300å’Œ718ä¸¤ä¸ªé¢˜ç»“åˆï¼Œä½†æ˜¯åŽæ¥å‘çŽ°é€’æŽ¨å…¬å¼å†™ä¸äº†ã€‚
-//è¿™ä¸ªé¢˜çš„dpæ•°ç»„å’Œå«ä¹‰è¿˜æ˜¯æ¯”è¾ƒå¥½æƒ³
-//è¿™ä¸ªé¢˜çš„é€’æŽ¨å…¬å¼æ¯”è¾ƒéš¾æƒ³
+//ÕÒ³öÁ½¸öÊý×éÖÐ×î³¤¹«¹²×ÓÐòÁÐµÄ³¤¶È£¬×ÓÐòÁÐÖÐµÄ×ÖÄ¸²»Ò»¶¨ÊÇÁ¬ÐøµÄ¡£
+//¿ªÊ¼ÎÒÒÔÎªÊÇLeetCode 300ºÍ718Á½¸öÌâ½áºÏ£¬µ«ÊÇºóÀ´·¢ÏÖµÝÍÆ¹«Ê½Ð´²»ÁË¡£
+//Õâ¸öÌâµÄdpÊý×éºÍº¬Òå»¹ÊÇ±È½ÏºÃÏë
+//Õâ¸öÌâµÄµÝÍÆ¹«Ê½±È½ÏÄÑÏë
 
 class Solution {
 public:
-	//è¿™ä¸ªæ˜¯æŒ‰ä»£ç éšæƒ³å½•çš„ä»£ç å†™å¾—ï¼Œæ–¹ä¾¿åˆå§‹åŒ–
+	//Õâ¸öÊÇ°´´úÂëËæÏëÂ¼µÄ´úÂëÐ´µÃ£¬·½±ã³õÊ¼»¯
 	int longestCommonSubsequence(string text1, string text2) {
 		vector<vector<int>> dp(text1.size() + 1, vector<int>(text2.size() + 1, 0));
 		for (int i = 1; i <= text1.size(); i++) {
@@ -23,10 +23,10 @@ public:
 		return dp[text1.size()][text2.size()];
 	}
 
-	//è¿™æ˜¯è‡ªå·±å†™çš„ï¼Œåˆå§‹åŒ–éº»çƒ¦äº†ä¸€ç‚¹ï¼Œä½†æ˜¯çœ‹èµ·æ¥æ€è·¯æ›´æ¸…æ™°
+	//ÕâÊÇ×Ô¼ºÐ´µÄ£¬³õÊ¼»¯Âé·³ÁËÒ»µã£¬µ«ÊÇ¿´ÆðÀ´Ë¼Â·¸üÇåÎú
 	int longestCommonSubsequence1(string text1, string text2) {
 		vector<vector<int>> dp(text1.size(), vector<int>(text2.size(), 0));
-		if (text1[0] == text2[0]) dp[0][0] = 1;  //è¿™ä¸€å¥æ˜¯ä¸ºäº†é˜²æ­¢ç¬¬ä¸€ä¸ªå­—æ¯ä¸ä¸€æ ·ï¼Œåœ¨ä¸‹è¾¹ä¸¤ä¸ªåˆå§‹åŒ–çš„æ—¶å€™iä»Ž0å¼€å§‹ä¼šå‡ºçŽ°æ•°ç»„è¶Šç•Œçš„é—®é¢˜
+		if (text1[0] == text2[0]) dp[0][0] = 1;  //ÕâÒ»¾äÊÇÎªÁË·ÀÖ¹µÚÒ»¸ö×ÖÄ¸²»Ò»Ñù£¬ÔÚÏÂ±ßÁ½¸ö³õÊ¼»¯µÄÊ±ºòi´Ó0¿ªÊ¼»á³öÏÖÊý×éÔ½½çµÄÎÊÌâ
 
 		for (int i = 1; i < text1.size(); i++) {
 			if (text1[i] == text2[0]) dp[i][0] = 1;
@@ -46,6 +46,43 @@ public:
 			}
 		}
 		return dp[text1.size() - 1][text2.size() - 1];
+	}
+
+	//µÚ¶þ´Î×ö£¬¾ÓÈ»×Ô¼º×ö³öÀ´ÁË£¬Ì«Å£ÁË
+	int longestCommonSubsequence2(string text1, string text2) {
+		vector<vector<int>>dp(text1.size() + 1, vector<int>(text2.size() + 1, 0));
+
+		for (int i = 1; i <= text1.size(); i++) {
+			for (int j = 1; j <= text2.size(); j++) {
+				if (text1[i - 1] == text2[j - 1])
+					dp[i][j] = dp[i - 1][j - 1] + 1;
+				else
+					dp[i][j] = max(dp[i - 1][j], dp[i][j - 1]);
+			}
+		}
+		return dp[text1.size()][text2.size()];
+	}
+
+	//ÓÅ»¯ÎªÒ»Î¬Êý×é
+	int longestCommonSubsequence3(string text1, string text2) {
+		vector<int> dp(text2.size() + 1, 0);
+
+		for (int i = 1; i <= text1.size(); i++) {
+			int prev = 0;
+			for (int j = 1; j <= text2.size(); j++) {
+				int temp = dp[j];
+				if (text1[i - 1] == text2[j - 1]) {
+					//×¢Òâ¿´¶þÎ¬Êý×éµÄÊ±ºò£¬Èç¹ûµ±Ç°ÔªËØÏàÍ¬£¬ÄÇÃ´Òª´Ó×óÉÏ·½[i-1][j-1]+1µÃµ½µ±Ç°Öµ£¬
+					// µ«ÊÇÄÚ²ãÑ­»·´ÓÇ°Íùºó±éÀú£¬»á¸²¸Ç×óÉÏ·½µÄÖµ£¬Ò²¾ÍÊÇdpÊý×éÖÐµÄÇ°Ò»¸öÎ»ÖÃ£¬ËùÒÔÒªÓÃprev±£´æÇ°Ò»¸ödpÖµ
+					dp[j] = prev + 1;
+				}
+				else {
+					dp[j] = max(dp[j], dp[j - 1]);
+				}
+				prev = temp;
+			}
+		}
+		return dp[text2.size()];
 	}
 };
 
