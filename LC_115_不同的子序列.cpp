@@ -31,11 +31,32 @@ public:
 
 		return dp[s.size()][t.size()];
 	}
+
+	// 第二次做，还是做错了，跟第一次做的时候一样，相等时的递推公式写错了，再就是初始化的时候写错了
+	int numDistinct1(string s, string t) {
+		vector<vector<unsigned long long>> dp(t.size() + 1, vector<unsigned long long>(s.size() + 1, 0));
+		// 这回的dp数组和第一次做的时候写的正好反过来了，感觉这种更习惯
+		// dp[i][j]表示以i-1为结尾的子序列t在以j-1为结尾的子序列s中出现的次数
+
+		for (int i = 0; i <= s.size(); i++)  //初始化，要重新看dp[i][j]的含义再初始化
+			dp[0][i] = 1;
+
+		for (int i = 1; i <= t.size(); i++) {
+			for (int j = 1; j <= s.size(); j++) {
+				if (t[i - 1] == s[j - 1])
+					dp[i][j] = dp[i - 1][j - 1] + dp[i][j - 1];  //这个递推公式没想到
+				else
+					dp[i][j] = dp[i][j - 1];
+			}
+		}
+		return dp[t.size()][s.size()];
+	}
 };
 
 int main() {
 	Solution st;
 	string s = "rabbbit", t = "rabbit";
 	cout << st.numDistinct(s, t) << endl;
+	cout << st.numDistinct1(s, t) << endl;
 	return 0;
 }

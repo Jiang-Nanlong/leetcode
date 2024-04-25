@@ -2,13 +2,13 @@
 #include <vector>
 using namespace std;
 
-//ç»™å®šä¸¤ä¸ªå­—ç¬¦ä¸²ï¼Œè¿”å›žä½¿å¾—ä¸¤ä¸ªå­—ç¬¦ä¸²ç›¸åŒæ‰€éœ€åˆ é™¤çš„æœ€å°å­—ç¬¦æ•°
-//ç¬¬ä¸€ç§æ–¹æ³•æ˜¯æŒ‰ä»£ç éšæƒ³å½•çš„å†™çš„ï¼Œdp[i][j]è¡¨ç¤ºä»¥i-1ä¸ºç»“å°¾çš„å­—ç¬¦ä¸²word1ï¼Œå’Œä»¥j-1ä¸ºç»“å°¾çš„å­—ç¬¦ä¸²word2ï¼Œè¦æƒ³è¾¾åˆ°ç›¸ç­‰ï¼Œæ‰€éœ€è¦åˆ é™¤å…ƒç´ çš„æœ€å°æ¬¡æ•°
-//word1[i - 1] == word2[j - 1]æ—¶çš„é€’æŽ¨å…¬å¼å¥½æƒ³ï¼Œä½†æ˜¯ä¸ç›¸ç­‰æ—¶çš„é€’æŽ¨å…¬å¼æœ‰ç‚¹éš¾æƒ³ï¼Œ
-// å¯ä»¥ä»Žä¸‰ä¸ªæ–¹å‘è¿‡:
-// ä¸€æ˜¯å¯ä»¥åˆ é™¤word1[i-1]ï¼Œæœ€å°æ“ä½œæ•°æ˜¯dp[i-1][j]+1;
-// äºŒæ˜¯å¯ä»¥åˆ é™¤word2[j-1]ï¼Œæœ€å°æ“ä½œæ•°æ˜¯dp[i][j-1]+1;
-// ä¸‰æ˜¯åŒæ—¶åˆ é™¤word1[i-1]å’Œword2[j-1]ï¼Œæœ€å°æ“ä½œæ•°æ˜¯dp[i-1][j-1]+2
+//¸ø¶¨Á½¸ö×Ö·û´®£¬·µ»ØÊ¹µÃÁ½¸ö×Ö·û´®ÏàÍ¬ËùÐèÉ¾³ýµÄ×îÐ¡×Ö·ûÊý
+//µÚÒ»ÖÖ·½·¨ÊÇ°´´úÂëËæÏëÂ¼µÄÐ´µÄ£¬dp[i][j]±íÊ¾ÒÔi-1Îª½áÎ²µÄ×Ö·û´®word1£¬ºÍÒÔj-1Îª½áÎ²µÄ×Ö·û´®word2£¬ÒªÏë´ïµ½ÏàµÈ£¬ËùÐèÒªÉ¾³ýÔªËØµÄ×îÐ¡´ÎÊý
+//word1[i - 1] == word2[j - 1]Ê±µÄµÝÍÆ¹«Ê½ºÃÏë£¬µ«ÊÇ²»ÏàµÈÊ±µÄµÝÍÆ¹«Ê½ÓÐµãÄÑÏë£¬
+// ¿ÉÒÔ´ÓÈý¸ö·½Ïò¹ý:
+// Ò»ÊÇ¿ÉÒÔÉ¾³ýword1[i-1]£¬×îÐ¡²Ù×÷ÊýÊÇdp[i-1][j]+1;
+// ¶þÊÇ¿ÉÒÔÉ¾³ýword2[j-1]£¬×îÐ¡²Ù×÷ÊýÊÇdp[i][j-1]+1;
+// ÈýÊÇÍ¬Ê±É¾³ýword1[i-1]ºÍword2[j-1]£¬×îÐ¡²Ù×÷ÊýÊÇdp[i-1][j-1]+2
 
 class Solution {
 public:
@@ -28,7 +28,7 @@ public:
 		return dp[word1.size()][word2.size()];
 	}
 
-	//å¼€å§‹æˆ‘ç”¨ä¸‹è¾¹è¿™ç§æ–¹æ³•åšçš„ï¼Œå°±æ˜¯å…ˆæ‰¾å‡ºä¸¤ä¸ªå­—ç¬¦ä¸²ä¸­çš„æœ€é•¿å…¬å…±å­ä¸²ï¼Œç„¶åŽç”¨ä¸¤ä¸ªå­—ç¬¦ä¸²çš„ä¸ªæ•°åˆ åŽ»æœ€é•¿å…¬å…±å­ä¸²çš„é•¿åº¦å°±è¡Œ
+	//¿ªÊ¼ÎÒÓÃÏÂ±ßÕâÖÖ·½·¨×öµÄ£¬¾ÍÊÇÏÈÕÒ³öÁ½¸ö×Ö·û´®ÖÐµÄ×î³¤¹«¹²×Ó´®£¬È»ºóÓÃÁ½¸ö×Ö·û´®µÄ¸öÊýÉ¾È¥×î³¤¹«¹²×Ó´®µÄ³¤¶È¾ÍÐÐ
 	int minDistance1(string word1, string word2) {
 		vector<vector<int>> dp(word1.size() + 1, vector<int>(word2.size() + 1, 0));
 		for (int i = 1; i <= word1.size(); i++) {
@@ -40,6 +40,64 @@ public:
 			}
 		}
 		return word1.size() + word2.size() - 2 * dp[word1.size()][word2.size()];
+	}
+
+	// µÚ¶þ´Î×ö£¬ÒòÎªÕâ¸öÌâÖ»ÄÜÉ¾³ý×Ö·û£¬ËùÒÔ¼ÆËã³öÁ½¸ö×Ö·û´®µÄ×î³¤ÖØ¸´×ÓÐòÁÐ£¬È»ºó¾ÍÄÜ¼ÆËã³öÒªÉ¾³ýµÄ×Ö·ûÊý
+	int minDistance2(string word1, string word2) {
+		vector<vector<int>> dp(word1.size() + 1, vector<int>(word2.size() + 1, 0));
+
+		for (int i = 1; i <= word1.size(); i++) {
+			for (int j = 1; j <= word2.size(); j++) {
+				if (word1[i - 1] == word2[j - 1])
+					dp[i][j] = dp[i - 1][j - 1] + 1;
+				else
+					dp[i][j] = max(dp[i - 1][j], dp[i][j - 1]);
+			}
+		}
+
+		return word1.size() + word2.size() - 2 * dp[word1.size()][word2.size()];
+	}
+
+	// ÓÅ»¯dpÊý×é
+	int minDistance3(string word1, string word2) {
+		vector<int> dp(word2.size() + 1, 0);
+
+		for (int i = 1; i <= word1.size(); i++) {
+			int prev = 0;
+			for (int j = 1; j <= word2.size(); j++) {
+				int temp = dp[j];
+				if (word1[i - 1] == word2[j - 1])
+					dp[j] = prev + 1;
+				else
+					dp[j] = max(dp[j], dp[j - 1]);
+				prev = temp;
+			}
+		}
+
+		return word1.size() + word2.size() - 2 * dp[word2.size()];
+	}
+
+	//pdfÉÏµÄÐ´·¨
+	int minDistance4(string word1, string word2) {
+		vector<vector<int>> dp(word1.size() + 1,
+			vector<int>(word2.size() + 1, 0));
+
+		for (int i = 0; i <= word1.size(); i++)
+			dp[i][0] = i;
+		for (int i = 0; i <= word2.size(); i++)
+			dp[0][i] = i;
+
+		for (int i = 1; i <= word1.size(); i++) {
+			for (int j = 1; j <= word2.size(); j++) {
+				if (word1[i - 1] == word2[j - 1])  //Èç¹ûµ±Ç°ÔªËØÏàÍ¬£¬ÄÇÃ´ÒªÉ¾³ýµÄÔªËØºÍ×óÉÏ·½µÄÒ»Ñù
+					dp[i][j] = dp[i - 1][j - 1];
+				else
+					dp[i][j] = min(dp[i - 1][j - 1] + 2, 
+						min(dp[i - 1][j] + 1, dp[i][j - 1] + 1));  //Èç¹ûµ±Ç°ÔªËØ²»Í¬£¬¿ÉÒÔÓÐÈýÖÖÇé¿öÉ¾³ýÔªËØÀ´´ïµ½ÏàÍ¬
+			}
+		}
+
+		return dp[word1.size()][word2.size()];
 	}
 };
 
