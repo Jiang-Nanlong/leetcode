@@ -80,8 +80,7 @@ public:
 	//dp[i][j]表示nums1中以i-1为结尾的子数组和nums2中以j-1为结尾的子数组重复子数组的长度
 	//这样就不用初始化最左边一列和最上边一行了，因为这两行没有意义
 	int findLength3(vector<int>& nums1, vector<int>& nums2) {
-		vector<vector<int>> dp(nums1.size() + 1,
-			vector<int>(nums2.size() + 1, 0));
+		vector<vector<int>> dp(nums1.size() + 1, vector<int>(nums2.size() + 1, 0));
 		int res = 0;
 		for (int i = 1; i <= nums1.size(); i++) {
 			for (int j = 1; j <= nums2.size(); j++) {
