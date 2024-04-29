@@ -5,7 +5,7 @@ using namespace std;
 
 class Solution {
 public:
-	int trap(vector<int>& height) {
+	int trap(vector<int>& height) {  //错的，思路不对
 		vector<int> res(height.size(), -1);
 		stack<int> stk;
 		for (int i = 0; i < height.size(); i++) {
@@ -99,6 +99,77 @@ public:
 		return sum;
 
 	}
+
+	//第二次做，没想起单调栈的做法
+	//双指针做法，先分别求出每个柱子左右两边的最高柱子，在求的时候要把当前柱子本身也考虑进去
+	int trap4(vector<int>& height) {
+		if (height.size() <= 2)
+			return 0;
+		int n = height.size();
+		vector<int> maxLeftHeight(n), maxRightHeight(n);
+
+		maxLeftHeight[0] = height[0];
+		for (int i = 1; i < n; i++) {
+			maxLeftHeight[i] = max(height[i], maxLeftHeight[i - 1]);
+		}
+		maxRightHeight[n - 1] = height[n - 1];
+		for (int i = n - 2; i >= 0; i--) {
+			maxRightHeight[i] = max(height[i], maxRightHeight[i + 1]);
+		}
+
+		int sum = 0;
+		for (int i = 0; i < n; i++) {
+			int count = min(maxLeftHeight[i], maxRightHeight[i]) - height[i];
+			if (count > 0)
+				sum += count;
+		}
+		return sum;
+	}
+
+	//其实也可以不考虑当前柱子本身，只考虑它的两边就行，不过把最开始的柱子左边的最小值考虑成-1，最后一个柱子右边的最小值也考虑成-1
+	int trap5(vector<int>& height) {
+		if (height.size() <= 2)
+			return 0;
+		int n = height.size();
+		vector<int> maxLeftHeight(n, -1), maxRightHeight(n, -1);
+
+		for (int i = 1; i < n; i++) {
+			maxLeftHeight[i] = max(height[i - 1], maxLeftHeight[i - 1]);
+		}
+		for (int i = n - 2; i >= 0; i--) {
+			maxRightHeight[i] = max(height[i + 1], maxRightHeight[i + 1]);
+		}
+
+		int sum = 0;
+		for (int i = 0; i < n; i++) {
+			int count = min(maxLeftHeight[i], maxRightHeight[i]) - height[i];
+			if (count > 0)
+				sum += count;
+		}
+		return sum;
+	}
+
+	//单调栈做法，开始还是没做出来，不过后来看了答案让我有了一些思考。
+	//单调栈适合于求第一个比当前元素大或者第一个比当前元素小的元素。而本题中对于一个当前柱子的高度，求出它左边第一个比它高的柱子的高度和右边第一个比它高的高度
+	//但是这两个比它高的柱子，也有可能是某个凹槽的底部，所以这就注定了“本题的计算思路是横着算面积”，也就是当前柱子高度为底部高度，左右第一高中的低者为水面高度，
+	//两边柱子之间的差距为底面宽，然后求乘积。
+	int trap6(vector<int>& height) {
+		stack<int> stk;
+		int sum = 0;
+		for (int i = 0; i < height.size(); i++) {
+			while (!stk.empty() && height[i] > height[stk.top()]) {
+				int bottom = height[stk.top()];
+				stk.pop();
+				if (!stk.empty()) {
+					int high = min(height[i], height[stk.top()]) - bottom;
+					int width = i - stk.top() - 1;
+					sum += width * high;
+				}
+			}
+			stk.push(i);
+		}
+		return sum;
+	}
 };
 
 int main() {
@@ -108,5 +179,8 @@ int main() {
 	cout << st.trap1(height) << endl;
 	cout << st.trap2(height) << endl;
 	cout << st.trap3(height) << endl;
+	cout << st.trap4(height) << endl;
+	cout << st.trap5(height) << endl;
+	cout << st.trap6(height) << endl;
 	return 0;
 }
