@@ -3,7 +3,7 @@
 #include <stack>
 using namespace std;
 
-//è¿˜æ˜¯æ±‚ä¸‹ä¸€ä¸ªæ›´å¤§çš„å…ƒç´ ï¼Œä½†æ˜¯è¿™é‡Œçš„numsæ˜¯ä¸€ä¸ªå¾ªç¯æ•°ç»„ï¼Œè¿™æ ·çš„è¯åªéœ€è¦éå†ä¸¤éæ•°ç»„å°±èƒ½ç»™æ±‚å‡ºæ‰€æœ‰çš„ä¸‹ä¸€ä¸ªæ›´å¤§å…ƒç´ äº†ã€‚
+//»¹ÊÇÇóÏÂÒ»¸ö¸ü´óµÄÔªËØ£¬µ«ÊÇÕâÀïµÄnumsÊÇÒ»¸öÑ­»·Êı×é£¬ÕâÑùµÄ»°Ö»ĞèÒª±éÀúÁ½±éÊı×é¾ÍÄÜ¸øÇó³öËùÓĞµÄÏÂÒ»¸ö¸ü´óÔªËØÁË¡£
 
 class Solution {
 public:
@@ -20,6 +20,45 @@ public:
 		}
 		return res;
 	}
+
+	//µÚ¶ş´Î×ö£¬²»¹ıºóÀ´Í»È»·¢ÏÖtempÊı×éÒ²Ö»ÓÃÁËÇ°nÎ»£¬ÒòÎªÕû¸öforÑ­»·ÖĞÒ»Ö±ÓÃ%n
+	vector<int> nextGreaterElements1(vector<int>& nums) {
+		stack<int> stk;
+		int n = nums.size();
+		vector<int> temp(n * 2, -1);
+		for (int i = 0; i < n * 2; i++) {
+			while (!stk.empty() && nums[i % n] > nums[stk.top()]) {
+				temp[stk.top()] = nums[i % n];
+				stk.pop();
+			}
+			stk.push(i % n);
+		}
+		vector<int> res(nums.size(), -1);
+		for (int i = 0; i < nums.size(); i++) {
+			if (temp[i] != -1) {
+				res[i] = temp[i];
+			}
+			else {
+				res[i] = temp[i + nums.size()];
+			}
+		}
+		return res;
+	}
+
+	//¸Ä½øºó
+	vector<int> nextGreaterElements2(vector<int>& nums) {
+		stack<int> stk;
+		int n = nums.size();
+		vector<int> temp(n, -1);
+		for (int i = 0; i < n * 2; i++) {
+			while (!stk.empty() && nums[i % n] > nums[stk.top()]) {
+				temp[stk.top()] = nums[i % n];
+				stk.pop();
+			}
+			stk.push(i % n);
+		}
+		return temp;
+	}
 };
 
 int main() {
@@ -28,5 +67,14 @@ int main() {
 	vector<int> res = st.nextGreaterElements(nums);
 	for (int i : res)
 		cout << i << "  ";
+	cout << endl;
+	vector<int> res1 = st.nextGreaterElements1(nums);
+	for (int i : res1)
+		cout << i << "  ";
+	cout << endl;
+	vector<int> res2 = st.nextGreaterElements2(nums);
+	for (int i : res2)
+		cout << i << "  ";
+	cout << endl;
 	return 0;
 }

@@ -4,12 +4,12 @@
 #include <stack>
 using namespace std;
 
-//ç»™å®šä¸¤ä¸ªæ•°ç»„nums1å’Œnums2ï¼Œnums1æ˜¯nums2çš„å­é›†ï¼Œæ‰¾å‡ºnums1[i]åœ¨nums2ä¸­å¯¹åº”çš„ç¬¬ä¸€ä¸ªå¤§çš„å…ƒç´ ï¼Œæœ€åè¿”å›æ•°ç»„resï¼Œres[i]æ˜¯num1[i]åœ¨nums2æ•°ç»„ä¸­ç¬¬ä¸€ä¸ªæ¯”nums1[i]å¤§çš„å€¼
+//¸ø¶¨Á½¸öÊı×énums1ºÍnums2£¬nums1ÊÇnums2µÄ×Ó¼¯£¬ÕÒ³önums1[i]ÔÚnums2ÖĞ¶ÔÓ¦µÄµÚÒ»¸ö´óµÄÔªËØ£¬×îºó·µ»ØÊı×éres£¬res[i]ÊÇnum1[i]ÔÚnums2Êı×éÖĞµÚÒ»¸ö±Ènums1[i]´óµÄÖµ
 
 class Solution {
 public:
 
-	//è¿™æ˜¯æˆ‘è‡ªå·±å†™çš„ä»£ç 
+	//ÕâÊÇÎÒ×Ô¼ºĞ´µÄ´úÂë
 	vector<int> nextGreaterElement(vector<int>& nums1, vector<int>& nums2) {
 		unordered_map<int, int> ump;
 		stack<int> stk;
@@ -31,7 +31,7 @@ public:
 		return res;
 	}
 
-	//ä¸‹è¾¹æ˜¯ä»£ç éšæƒ³å½•çš„ä»£ç ï¼Œæ„Ÿè§‰ä»–è¿™ä¸ªæ›´å¥½ï¼Œå› ä¸ºnums1æ˜¯nums2çš„å­é›†ï¼Œå¯èƒ½äºŒè€…çš„é•¿åº¦å·®è·æ¯”è¾ƒå¤§ï¼Œå¹¶ä¸ä¸€å®šéƒ½è¦æŠŠnums2çš„ç¬¬ä¸€ä¸ªæ›´å¤§å…ƒç´ æ±‚å‡ºæ¥
+	//ÏÂ±ßÊÇ´úÂëËæÏëÂ¼µÄ´úÂë£¬¸Ğ¾õËûÕâ¸ö¸üºÃ£¬ÒòÎªnums1ÊÇnums2µÄ×Ó¼¯£¬¿ÉÄÜ¶şÕßµÄ³¤¶È²î¾à±È½Ï´ó£¬²¢²»Ò»¶¨¶¼Òª°Ñnums2µÄµÚÒ»¸ö¸ü´óÔªËØÇó³öÀ´
 	vector<int> nextGreaterElement1(vector<int>& nums1, vector<int>& nums2) {
 		unordered_map<int, int> ump;
 		stack<int> stk;
@@ -47,6 +47,49 @@ public:
 				stk.pop();
 			}
 			stk.push(i);
+		}
+		return res;
+	}
+
+	//µÚ¶ş´Î×ö£¬¿ªÊ¼µÄÊ±ºò»¹ÊÇ¸úµÚÒ»´ÎÒ»Ñù£¬Ïë°ÑÕû¸önums2Êı×éµÄËùÓĞÏÂÒ»¸ö×î´óÔªËØ¶¼Çó³öÀ´£¬È»ºóÔÙÕÒnums1ÖĞµÄÔªËØ½øĞĞÆ¥Åä
+	//È»ºó¾ÍÏë²»ÆğÀ´Ó¦¸ÃÔõÃ´ÅªÁË£¬ºóÀ´¿´ÁËÒ»ÏÂÖ®Ç°Ìá½»µÄ´úÂë
+	vector<int> nextGreaterElement2(vector<int>& nums1, vector<int>& nums2) {
+		stack<int> stk;
+		vector<int> res(nums1.size(), -1);
+		unordered_map<int, int> umap;
+		for (int i = 0; i < nums1.size(); i++)
+			umap[nums1[i]] = i;
+
+		for (int i = 0; i < nums2.size(); i++) {
+			while (!stk.empty() && nums2[i] > nums2[stk.top()]) {
+				if (umap.find(nums2[stk.top()]) != umap.end()) {
+					res[umap[nums2[stk.top()]]] = nums2[i];
+				}
+				stk.pop();
+			}
+			stk.push(i);
+		}
+		return res;
+	}
+
+	//ÕâÃ´Ğ´Ò²ĞĞ£¬µ«ÊÇ²»ÈçÉÏ±ßµÄºÃ
+	vector<int> nextGreaterElement3(vector<int>& nums1, vector<int>& nums2) {
+		stack<int> stk;
+		vector<int> res(nums1.size(), -1), temp(nums2.size(), -1);
+		unordered_map<int, int> umap;
+		for (int i = 0; i < nums2.size(); i++)
+			umap[nums2[i]] = i;
+
+		for (int i = 0; i < nums2.size(); i++) {
+			while (!stk.empty() && nums2[i] > nums2[stk.top()]) {
+				temp[stk.top()] = nums2[i];
+				stk.pop();
+			}
+			stk.push(i);
+		}
+
+		for (int i = 0; i < nums1.size(); i++) {
+			res[i] = temp[umap[nums1[i]]];
 		}
 		return res;
 	}

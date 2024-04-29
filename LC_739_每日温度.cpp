@@ -3,8 +3,8 @@
 #include <stack>
 using namespace std;
 
-//ç»™å®šä¸€ä¸ªæ•´æ•°æ•°ç»„temperaturesï¼Œè¿”å›ä¸€ä¸ªæ•°ç»„resï¼Œres[i]è¡¨ç¤ºtemperatures[i]ä¹‹åçš„ç¬¬å‡ å¤©çš„æ¸©åº¦ä¼šé«˜äºä»Šå¤©ï¼Œå¦‚æœæ²¡æœ‰æ›´é«˜çš„ï¼Œres[i]=0ï¼›
-//è¿™é‡Œä»‹ç»äº†ä¸€ç§å«åšå•è°ƒæ ˆçš„æ–°æ–¹æ³•ï¼Œè¿™ä¸ªæ–¹æ³•è¿˜ç®—ç®€å•ï¼Œæ ˆå†…ä¿å­˜å¤©æ•°è€Œéæ¸©åº¦ï¼Œä»æ ˆé¡¶åˆ°æ ˆåº•å¤©æ•°å¯¹åº”çš„æ°”æ¸©é€’å¢ï¼Œå› ä¸ºåªæœ‰è¿™æ ·ï¼Œå½“ä»Šå¤©æ¸©åº¦é«˜äºä¹‹å‰æŸå¤©çš„æ¸©åº¦æ—¶æ‰ä¼šè¢«è®°å½•ã€‚
+//¸ø¶¨Ò»¸öÕûÊıÊı×étemperatures£¬·µ»ØÒ»¸öÊı×éres£¬res[i]±íÊ¾temperatures[i]Ö®ºóµÄµÚ¼¸ÌìµÄÎÂ¶È»á¸ßÓÚ½ñÌì£¬Èç¹ûÃ»ÓĞ¸ü¸ßµÄ£¬res[i]=0£»
+//ÕâÀï½éÉÜÁËÒ»ÖÖ½Ğ×öµ¥µ÷Õ»µÄĞÂ·½·¨£¬Õâ¸ö·½·¨»¹Ëã¼òµ¥£¬Õ»ÄÚ±£´æÌìÊı¶ø·ÇÎÂ¶È£¬´ÓÕ»¶¥µ½Õ»µ×ÌìÊı¶ÔÓ¦µÄÆøÎÂµİÔö£¬ÒòÎªÖ»ÓĞÕâÑù£¬µ±½ñÌìÎÂ¶È¸ßÓÚÖ®Ç°Ä³ÌìµÄÎÂ¶ÈÊ±²Å»á±»¼ÇÂ¼¡£
 
 class Solution {
 public:
@@ -20,6 +20,42 @@ public:
 		}
 		return res;
 	}
+
+	//µÚ¶ş´Î×ö£¬´úÂëĞ´µÄÌ«¸´ÔÓÁË
+	vector<int> dailyTemperatures1(vector<int>& temperatures) {
+		stack<int> stk;
+		vector<int> res(temperatures.size(), 0);
+
+		for (int i = 0; i < temperatures.size(); i++) {
+			if (!stk.empty() && temperatures[stk.top()] < temperatures[i]) {
+				while (!stk.empty() && temperatures[stk.top()] < temperatures[i]) {
+					res[stk.top()] = i - stk.top();
+					stk.pop();
+				}
+				stk.push(i);
+			}
+			else if (stk.empty() ||
+				temperatures[stk.top()] >= temperatures[i]) {
+				stk.push(i);
+			}
+		}
+		return res;
+	}
+
+	//¼ò»¯ºó
+	vector<int> dailyTemperatures2(vector<int>& temperatures) {
+		stack<int> stk;
+		vector<int> res(temperatures.size(), 0);
+
+		for (int i = 0; i < temperatures.size(); i++) {
+			while (!stk.empty() && temperatures[stk.top()] < temperatures[i]) {
+				res[stk.top()] = i - stk.top();
+				stk.pop();
+			}
+			stk.push(i);
+		}
+		return res;
+	}
 };
 
 int main() {
@@ -27,6 +63,14 @@ int main() {
 	vector<int> temperatures = { 73, 74, 75, 71, 69, 72, 76, 73 };
 	vector<int> res = st.dailyTemperatures(temperatures);
 	for (auto i : res)
+		cout << i << "  ";
+	cout << endl;
+	vector<int> res1 = st.dailyTemperatures1(temperatures);
+	for (auto i : res1)
+		cout << i << "  ";
+	cout << endl;
+	vector<int> res2 = st.dailyTemperatures2(temperatures);
+	for (auto i : res2)
 		cout << i << "  ";
 	return 0;
 }
