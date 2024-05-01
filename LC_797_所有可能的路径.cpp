@@ -2,8 +2,8 @@
 #include <vector>
 using namespace std;
 
-//ç»™å®šä¸€ä¸ªæœ‰å‘æ— ç¯å›¾ï¼Œæ‰¾å‡º0åˆ°ç¬¬n-1ä¸ªèŠ‚ç‚¹çš„æ‰€æœ‰è·¯å¾„
-//ç”¨dfsï¼Œå…¶å®å°±æ˜¯ä¸€ä¸ªç®€å•çš„å›æº¯é¢˜
+//¸ø¶¨Ò»¸öÓĞÏòÎŞ»·Í¼£¬ÕÒ³ö0µ½µÚn-1¸ö½ÚµãµÄËùÓĞÂ·¾¶
+//ÓÃdfs£¬ÆäÊµ¾ÍÊÇÒ»¸ö¼òµ¥µÄ»ØËİÌâ
 
 class Solution {
 public:
@@ -26,6 +26,26 @@ public:
 			path.pop_back();
 		}
 	}
+
+	//µÚ¶ş´Î×ö
+	vector<vector<int>> res;
+	vector<int> path;
+	vector<vector<int>> allPathsSourceTarget1(vector<vector<int>>& graph) {
+		path.push_back(0);
+		dfs(graph, 0);
+		return res;
+	}
+	void dfs(vector<vector<int>>& graph, int n) {
+		if (n == graph.size() - 1) {
+			res.push_back(path);
+			return;
+		}
+		for (int i = 0; i < graph[n].size(); i++) {
+			path.push_back(graph[n][i]);
+			dfs(graph, graph[n][i]);
+			path.pop_back();
+		}
+	}
 };
 
 int main() {
@@ -35,6 +55,15 @@ int main() {
 	for (int i = 0; i < res.size(); i++) {
 		for (int j = 0; j < res[i].size(); j++) {
 			cout << res[i][j] << "  ";
+		}
+		cout << endl;
+	}
+	cout << endl;
+
+	vector<vector<int>>res1 = st.allPathsSourceTarget(graph);
+	for (int i = 0; i < res1.size(); i++) {
+		for (int j = 0; j < res1[i].size(); j++) {
+			cout << res1[i][j] << "  ";
 		}
 		cout << endl;
 	}

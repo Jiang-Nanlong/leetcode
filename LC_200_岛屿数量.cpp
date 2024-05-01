@@ -3,8 +3,8 @@
 #include <queue>
 using namespace std;
 
-//ç»™å®šä¸€ä¸ªäºŒç»´æ•°ç»„gridï¼Œå…¶ä¸­1è¡¨ç¤ºå²›å±¿ï¼Œ0è¡¨ç¤ºæ°´ï¼Œå²›å±¿åªèƒ½æ˜¯ç”±æ°´å¹³æˆ–ç«–ç›´æ–¹å‘ä¸Šç›¸é‚»çš„1ç»„æˆï¼Œè¿”å›æ•´ä¸ªæ•°ç»„ä¸­å²›å±¿çš„æ•°é‡ã€‚
-//è¿™ä¸ªé¢˜çš„æ€è·¯å’Œæˆ‘æƒ³çš„ä¸€æ ·ï¼Œå°±æ˜¯è®¾ç½®ä¸€ä¸ªç›¸åŒçš„boolå‹çš„æ•°ç»„ï¼Œåˆ¤æ–­æ˜¯å¦æ¯ä¸ªä½ç½®éƒ½éå†è¿‡äº†ï¼Œå¦‚æœæŸä¸ªä½ç½®ï¼Œæ²¡æœ‰è¢«éå†è¿‡ï¼Œè€Œè¿™ä¸ªåœ°æ–¹æ°å¥½åˆæ˜¯1çš„è¯ï¼Œå°±è¯´æ˜è¿™ä¸ªå²›å±¿å’Œä¹‹å‰çš„ä¸ç›¸è¿ï¼Œç»“æœ+1
+//¸ø¶¨Ò»¸ö¶şÎ¬Êı×égrid£¬ÆäÖĞ1±íÊ¾µºÓì£¬0±íÊ¾Ë®£¬µºÓìÖ»ÄÜÊÇÓÉË®Æ½»òÊúÖ±·½ÏòÉÏÏàÁÚµÄ1×é³É£¬·µ»ØÕû¸öÊı×éÖĞµºÓìµÄÊıÁ¿¡£
+//Õâ¸öÌâµÄË¼Â·ºÍÎÒÏëµÄÒ»Ñù£¬¾ÍÊÇÉèÖÃÒ»¸öÏàÍ¬µÄboolĞÍµÄÊı×é£¬ÅĞ¶ÏÊÇ·ñÃ¿¸öÎ»ÖÃ¶¼±éÀú¹ıÁË£¬Èç¹ûÄ³¸öÎ»ÖÃ£¬Ã»ÓĞ±»±éÀú¹ı£¬¶øÕâ¸öµØ·½Ç¡ºÃÓÖÊÇ1µÄ»°£¬¾ÍËµÃ÷Õâ¸öµºÓìºÍÖ®Ç°µÄ²»ÏàÁ¬£¬½á¹û+1
 
 class Solution {
 public:
@@ -38,7 +38,7 @@ public:
 	}
 
 private:
-	int dir[4][2] = { 0,1,1,0,-1,0,0,-1 };  //è¿™é‡Œè¡¨ç¤ºå››ä¸ªæ–¹å‘çš„æ–¹æ³•å’Œæˆ‘ä¹‹å‰å†™çš„ä¸å¤ªä¸€æ ·ï¼Œä½†æˆ‘å¿˜äº†ä¹‹å‰æ˜¯æ€ä¹ˆå†™çš„äº†
+	int dir[4][2] = { 0,1,1,0,-1,0,0,-1 };  //ÕâÀï±íÊ¾ËÄ¸ö·½ÏòµÄ·½·¨ºÍÎÒÖ®Ç°Ğ´µÄ²»Ì«Ò»Ñù£¬µ«ÎÒÍüÁËÖ®Ç°ÊÇÔõÃ´Ğ´µÄÁË
 	void dfs(vector<vector<char>>& grid, vector<vector<bool>>& visited, int x, int y) {
 		for (int i = 0; i < 4; i++) {
 			int next_x = x + dir[i][0];
@@ -71,6 +71,78 @@ private:
 		}
 	}
 
+public:
+	//µÚ¶ş´Î×ö£¬¹ã¶ÈÓÅÏÈËÑË÷
+	int numIslands2(vector<vector<char>>& grid) {
+		int count = 0;
+		vector<vector<bool>> visied(grid.size(),
+			vector<bool>(grid[0].size(), false));
+		for (int i = 0; i < grid.size(); i++) {
+			for (int j = 0; j < grid[0].size(); j++) {
+				if (visied[i][j] == false && grid[i][j] == '1') {
+					count++;
+					bfs1(grid, visied, i, j);
+				}
+			}
+		}
+		return count;
+	}
+
+	void bfs1(vector<vector<char>>& grid, vector<vector<bool>>& visied, int x,
+		int y) {
+		queue<pair<int, int>> que;
+		que.push(make_pair(x, y));
+		visied[x][y] = true;
+		while (!que.empty()) {
+			pair<int, int> cur = que.front();
+			que.pop();
+			int cur_x = cur.first, cur_y = cur.second;
+			for (int i = 0; i < 4; i++) {
+				int next_x = cur_x + dir[i][0];
+				int next_y = cur_y + dir[i][1];
+				if (next_x < 0 || next_x >= grid.size() || next_y < 0 ||
+					next_y >= grid[0].size() || grid[next_x][next_y] == '0')
+					continue;
+				if (visied[next_x][next_y] == false) {
+					que.push(make_pair(next_x, next_y));
+					visied[next_x][next_y] = true;
+				}
+			}
+		}
+	}
+
+	//Éî¶ÈÓÅÏÈËÑË÷
+	int numIslands3(vector<vector<char>>& grid) {
+		int count = 0;
+		vector<vector<bool>> visied(grid.size(),
+			vector<bool>(grid[0].size(), false));
+		for (int i = 0; i < grid.size(); i++) {
+			for (int j = 0; j < grid[0].size(); j++) {
+				if (visied[i][j] == false && grid[i][j] == '1') {
+					count++;
+					visied[i][j] = true;
+					dfs1(grid, visied, i, j);
+				}
+			}
+		}
+		return count;
+	}
+
+	void dfs1(vector<vector<char>>& grid, vector<vector<bool>>& visied, int x,
+		int y) {
+
+		for (int i = 0; i < 4; i++) {
+			int next_x = x + dir[i][0];
+			int next_y = y + dir[i][1];
+			if (next_x < 0 || next_x >= grid.size() || next_y < 0 ||
+				next_y >= grid[0].size() || grid[next_x][next_y] == '0')
+				continue;
+			if (visied[next_x][next_y] == false) {
+				visied[next_x][next_y] = true;
+				dfs1(grid, visied, next_x, next_y);
+			}
+		}
+	}
 };
 
 int main() {
@@ -90,5 +162,11 @@ int main() {
 	cout << "---------" << endl;
 	cout << st.numIslands1(grid) << endl;
 	cout << st.numIslands1(grid1) << endl;
+	cout << "---------" << endl;
+	cout << st.numIslands2(grid) << endl;
+	cout << st.numIslands2(grid1) << endl;
+	cout << "---------" << endl;
+	cout << st.numIslands3(grid) << endl;
+	cout << st.numIslands3(grid1) << endl;
 	return 0;
 }
