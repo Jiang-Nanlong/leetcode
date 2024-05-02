@@ -3,9 +3,9 @@
 #include <queue>
 using namespace std;
 
-//è¿™ä¸ªé¢˜çš„æ˜¯è¦æ±‚å‡ºæ‰€æœ‰ä¸ç€è¾¹ï¼ŒåŒæ—¶åˆæ— æ³•åˆ°è¾¾çš„é™†åœ°çš„æ•°é‡
-//å¯ä»¥ä»å››æ¡è¾¹å¼€å§‹éå†ï¼ŒæŠŠæ‰€æœ‰å¯ä»¥é€šè¿‡è¾¹éå†åˆ°çš„é™†åœ°éƒ½å˜æˆæµ·æ´‹ï¼Œç„¶åæœ€åç»Ÿä¸€éå†ä¸€æ¬¡ï¼Œçœ‹çœ‹è¿˜æœ‰å¤šå°‘é™†åœ°ï¼Œå°±æ˜¯æœ€åçš„ç»“æœ
-//åŒæ ·ä¹Ÿåˆ†æˆæ·±åº¦ä¼˜å…ˆéå†å’Œå¹¿åº¦ä¼˜å…ˆéå†ä¸¤ç§æ–¹å¼
+//Õâ¸öÌâµÄÊÇÒªÇó³öËùÓĞ²»×Å±ß£¬Í¬Ê±ÓÖÎŞ·¨µ½´ïµÄÂ½µØµÄÊıÁ¿
+//¿ÉÒÔ´ÓËÄÌõ±ß¿ªÊ¼±éÀú£¬°ÑËùÓĞ¿ÉÒÔÍ¨¹ı±ß±éÀúµ½µÄÂ½µØ¶¼±ä³Éº£Ñó£¬È»ºó×îºóÍ³Ò»±éÀúÒ»´Î£¬¿´¿´»¹ÓĞ¶àÉÙÂ½µØ£¬¾ÍÊÇ×îºóµÄ½á¹û
+//Í¬ÑùÒ²·Ö³ÉÉî¶ÈÓÅÏÈ±éÀúºÍ¹ã¶ÈÓÅÏÈ±éÀúÁ½ÖÖ·½Ê½
 
 class Solution {
 public:
@@ -76,6 +76,94 @@ private:
 			}
 		}
 	}
+
+public:
+	//µÚ¶ş´Î×ö
+	//Éî¶ÈÓÅÏÈËÑË÷
+	int numEnclaves2(vector<vector<int>>& grid) {
+		for (int i = 0; i < grid.size(); i++) {
+			if (grid[i][0])
+				dfs1(grid, i, 0);
+			if (grid[i][grid[0].size() - 1])
+				dfs1(grid, i, grid[0].size() - 1);
+		}
+		for (int i = 0; i < grid[0].size(); i++) {
+			if (grid[0][i])
+				dfs1(grid, 0, i);
+			if (grid[grid.size() - 1][i])
+				dfs1(grid, grid.size() - 1, i);
+		}
+
+		int count = 0;
+		for (int i = 0; i < grid.size(); i++)
+			for (int j = 0; j < grid[0].size(); j++)
+				if (grid[i][j])
+					count++;
+
+		return count;
+	}
+
+	void dfs1(vector<vector<int>>& grid, int x, int y) {
+		grid[x][y] = 0;
+		for (int i = 0; i < 4; i++) {
+			int next_x = x + dir[i][0];
+			int next_y = y + dir[i][1];
+			if (next_x < 0 || next_x >= grid.size() || next_y < 0 ||
+				next_y >= grid[0].size())
+				continue;
+			if (grid[next_x][next_y]) {
+				dfs1(grid, next_x, next_y);
+			}
+		}
+	}
+
+	//¹ã¶ÈÓÅÏÈËÑË÷
+	int numEnclaves3(vector<vector<int>>& grid) {
+		for (int i = 0; i < grid.size(); i++) {
+			if (grid[i][0])
+				bfs1(grid, i, 0);
+			if (grid[i][grid[0].size() - 1])
+				bfs1(grid, i, grid[0].size() - 1);
+		}
+		for (int i = 0; i < grid[0].size(); i++) {
+			if (grid[0][i])
+				bfs1(grid, 0, i);
+			if (grid[grid.size() - 1][i])
+				bfs1(grid, grid.size() - 1, i);
+		}
+
+		int count = 0;
+		for (int i = 0; i < grid.size(); i++)
+			for (int j = 0; j < grid[0].size(); j++)
+				if (grid[i][j])
+					count++;
+
+		return count;
+	}
+
+	void bfs1(vector<vector<int>>& grid, int x, int y) {
+		grid[x][y] = 0;
+		queue<pair<int, int>> que;
+		que.push(make_pair(x, y));
+		while (!que.empty()) {
+			pair<int, int> cur = que.front();
+			que.pop();
+			int cur_x = cur.first;
+			int cur_y = cur.second;
+			for (int i = 0; i < 4; i++) {
+				int next_x = cur_x + dir[i][0];
+				int next_y = cur_y + dir[i][1];
+				if (next_x < 0 || next_x >= grid.size() || next_y < 0 ||
+					next_y >= grid[0].size())
+					continue;
+				if (grid[next_x][next_y]) {
+					grid[next_x][next_y] = 0;
+					que.push(make_pair(next_x, next_y));
+				}
+			}
+		}
+
+	}
 };
 
 int main() {
@@ -94,5 +182,7 @@ int main() {
 
 	cout << st.numEnclaves(grid) << endl;
 	cout << st.numEnclaves1(grid) << endl;
+	cout << st.numEnclaves2(grid) << endl;
+	cout << st.numEnclaves3(grid) << endl;
 	return 0;
 }
