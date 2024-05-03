@@ -3,10 +3,10 @@
 #include <queue>
 using namespace std;
 
-//ç»™ä½ ä¸€ä¸ª m x n çš„çŸ©é˜µ board ï¼Œç”±è‹¥å¹²å­—ç¬¦ 'X' å’Œ 'O' ï¼Œæ‰¾åˆ°æ‰€æœ‰è¢« 'X' å›´ç»•çš„åŒºåŸŸï¼Œå¹¶å°†è¿™äº›åŒºåŸŸé‡Œæ‰€æœ‰çš„ 'O' ç”¨ 'X' å¡«å……
-//æˆ‘æƒ³çš„æ˜¯å…ˆå¤åˆ¶ä¸€ä¸ªä¸€æ¨¡ä¸€æ ·çš„æ•°ç»„tempï¼Œç„¶åä»å››ä¸ªè¾¹æ¡†å¼€å§‹éå†ï¼Œå¦‚æœé‡åˆ°Oå°±å˜æˆXï¼Œæœ€åå’Œboardå¯¹æ¯”ï¼Œtempä¸­ä¸ºOçš„ä½ç½®è¯´æ˜å°±æ˜¯è¢«åŒ…å›´çš„åœ°æ–¹ï¼Œç„¶åæŠŠboardä¸­çš„è¿™äº›å˜æˆXå°±è¡Œäº†
-//ä½†æ˜¯ä»£ç éšæƒ³å½•é‡Œè¯´äº†ä¸€ç§ç©ºé—´å¤æ‚åº¦æ›´ä½çš„æ–¹æ³•ï¼Œä¸ç”¨å¤åˆ¶æ•°ç»„ï¼Œåªéœ€è¦åœ¨boardæ•°ç»„ä¸­æŠŠé ç€è¾¹ç•Œçš„Oå˜æˆé™¤äº†Xå’ŒOä¹‹å¤–çš„å­—æ¯ï¼Œæœ€åé‡æ–°éå†æ•°ç»„ï¼Œå¦‚æœä¸€ä¸ªä½ç½®æ˜¯Aè¯´æ˜å®ƒå¯ä»¥é€šè¿‡è¾¹ç•Œè®¿é—®çš„Oï¼Œé‡æ–°ä¿®æ”¹æˆOå°±è¡Œã€‚
-// å¦‚æœä¸€ä¸ªä½ç½®æ˜¯Oè¯´æ˜å°±æ˜¯è¢«åŒ…å›´çš„ï¼Œä¿®æ”¹æˆXå°±è¡Œã€‚
+//¸øÄãÒ»¸ö m x n µÄ¾ØÕó board £¬ÓÉÈô¸É×Ö·û 'X' ºÍ 'O' £¬ÕÒµ½ËùÓĞ±» 'X' Î§ÈÆµÄÇøÓò£¬²¢½«ÕâĞ©ÇøÓòÀïËùÓĞµÄ 'O' ÓÃ 'X' Ìî³ä
+//ÎÒÏëµÄÊÇÏÈ¸´ÖÆÒ»¸öÒ»Ä£Ò»ÑùµÄÊı×étemp£¬È»ºó´ÓËÄ¸ö±ß¿ò¿ªÊ¼±éÀú£¬Èç¹ûÓöµ½O¾Í±ä³ÉX£¬×îºóºÍboard¶Ô±È£¬tempÖĞÎªOµÄÎ»ÖÃËµÃ÷¾ÍÊÇ±»°üÎ§µÄµØ·½£¬È»ºó°ÑboardÖĞµÄÕâĞ©±ä³ÉX¾ÍĞĞÁË
+//µ«ÊÇ´úÂëËæÏëÂ¼ÀïËµÁËÒ»ÖÖ¿Õ¼ä¸´ÔÓ¶È¸üµÍµÄ·½·¨£¬²»ÓÃ¸´ÖÆÊı×é£¬Ö»ĞèÒªÔÚboardÊı×éÖĞ°Ñ¿¿×Å±ß½çµÄO±ä³É³ıÁËXºÍOÖ®ÍâµÄ×ÖÄ¸£¬×îºóÖØĞÂ±éÀúÊı×é£¬Èç¹ûÒ»¸öÎ»ÖÃÊÇAËµÃ÷Ëü¿ÉÒÔÍ¨¹ı±ß½ç·ÃÎÊµÄO£¬ÖØĞÂĞŞ¸Ä³ÉO¾ÍĞĞ¡£
+// Èç¹ûÒ»¸öÎ»ÖÃÊÇOËµÃ÷¾ÍÊÇ±»°üÎ§µÄ£¬ĞŞ¸Ä³ÉX¾ÍĞĞ¡£
 class Solution {
 public:
 	void solve(vector<vector<char>>& board) {
@@ -38,13 +38,13 @@ public:
 		}
 		for (int i = 0; i < board.size(); i++) {
 			for (int j = 0; j < board[0].size(); j++) {
-				if (board[i][j] == 'O') board[i][j] = 'X';  //æ³¨æ„è¿™ä¸¤ä¸ªifçš„é¡ºåºä¸è¦ææ··
+				if (board[i][j] == 'O') board[i][j] = 'X';  //×¢ÒâÕâÁ½¸öifµÄË³Ğò²»Òª¸ã»ì
 				if (board[i][j] == 'A') board[i][j] = 'O';
 			}
 		}
 	}
 
-	//bfsç‰ˆæœ¬
+	//bfs°æ±¾
 	void solve2(vector<vector<char>>& board) {
 		for (int i = 0; i < board.size(); i++) {
 			if (board[i][0] == 'O') bfs(board, i, 0);
@@ -56,7 +56,7 @@ public:
 		}
 		for (int i = 0; i < board.size(); i++) {
 			for (int j = 0; j < board[0].size(); j++) {
-				if (board[i][j] == 'O') board[i][j] = 'X';  //æ³¨æ„è¿™ä¸¤ä¸ªifçš„é¡ºåºä¸è¦ææ··
+				if (board[i][j] == 'O') board[i][j] = 'X';  //×¢ÒâÕâÁ½¸öifµÄË³Ğò²»Òª¸ã»ì
 				if (board[i][j] == 'A') board[i][j] = 'O';
 			}
 		}
@@ -78,7 +78,7 @@ private:
 
 
 	void dfs1(vector<vector<char>>& board, int x, int y) {
-		board[x][y] = 'A';  //æŠŠå¯ä»¥é€šè¿‡è¾¹ç•Œè®¿é—®çš„Oéƒ½ä¿®æ”¹æˆA
+		board[x][y] = 'A';  //°Ñ¿ÉÒÔÍ¨¹ı±ß½ç·ÃÎÊµÄO¶¼ĞŞ¸Ä³ÉA
 		for (int i = 0; i < 4; i++) {
 			int next_x = x + dir[i][0];
 			int next_y = y + dir[i][1];
@@ -109,6 +109,89 @@ private:
 		}
 	}
 
+public:
+	//µÚ¶ş´Î×ö
+	//Éî¶ÈÓÅÏÈËÑË÷
+	void solve3(vector<vector<char>>& board) {
+		for (int i = 0; i < board.size(); i++) {
+			if (board[i][0] == 'O')
+				dfs2(board, i, 0);
+			if (board[i][board[0].size() - 1] == 'O')
+				dfs2(board, i, board[0].size() - 1);
+		}
+		for (int i = 0; i < board[0].size(); i++) {
+			if (board[0][i] == 'O')
+				dfs2(board, 0, i);
+			if (board[board.size() - 1][i] == 'O')
+				dfs2(board, board.size() - 1, i);
+		}
+		for (int i = 0; i < board.size(); i++) {
+			for (int j = 0; j < board[0].size(); j++) {
+				if (board[i][j] == 'O')
+					board[i][j] = 'X';
+				if (board[i][j] == 'A')
+					board[i][j] = 'O';
+			}
+		}
+	}
+	void dfs2(vector<vector<char>>& board, int x, int y) {
+		board[x][y] = 'A';
+		for (int i = 0; i < 4; i++) {
+			int next_x = x + dir[i][0];
+			int next_y = y + dir[i][1];
+			if (next_x < 0 || next_x >= board.size() || next_y < 0 ||
+				next_y >= board[0].size())
+				continue;
+			if (board[next_x][next_y] == 'O') {
+				dfs2(board, next_x, next_y);
+			}
+		}
+	}
+
+	//¹ã¶ÈÓÅÏÈËÑË÷
+	void solve4(vector<vector<char>>& board) {
+		for (int i = 0; i < board.size(); i++) {
+			if (board[i][0] == 'O')
+				bfs1(board, i, 0);
+			if (board[i][board[0].size() - 1] == 'O')
+				bfs1(board, i, board[0].size() - 1);
+		}
+		for (int i = 0; i < board[0].size(); i++) {
+			if (board[0][i] == 'O')
+				bfs1(board, 0, i);
+			if (board[board.size() - 1][i] == 'O')
+				bfs1(board, board.size() - 1, i);
+		}
+		for (int i = 0; i < board.size(); i++) {
+			for (int j = 0; j < board[0].size(); j++) {
+				if (board[i][j] == 'O')
+					board[i][j] = 'X';
+				if (board[i][j] == 'A')
+					board[i][j] = 'O';
+			}
+		}
+	}
+	void bfs1(vector<vector<char>>& board, int x, int y) {
+		board[x][y] = 'A';
+		queue<pair<int, int>> que;
+		que.push(make_pair(x, y));
+		while (!que.empty()) {
+			pair<int, int> cur = que.front();
+			que.pop();
+			int cur_x = cur.first, cur_y = cur.second;
+			for (int i = 0; i < 4; i++) {
+				int next_x = cur_x + dir[i][0];
+				int next_y = cur_y + dir[i][1];
+				if (next_x < 0 || next_x >= board.size() || next_y < 0 ||
+					next_y >= board[0].size())
+					continue;
+				if (board[next_x][next_y] == 'O') {
+					board[next_x][next_y] = 'A';
+					que.push(make_pair(next_x, next_y));
+				}
+			}
+		}
+	}
 };
 
 int main() {

@@ -3,15 +3,15 @@
 #include <queue>
 using namespace std;
 
-//æ°´åªèƒ½å¾€å°äºæˆ–ç­‰äºå½“å‰å€¼çš„åœ°æ–¹æµï¼Œé¢˜ç›®è¦æ±‚æ˜¯æ‰¾å‡ºæ•°ç»„ä¸­æ‰€æœ‰ç‚¹çš„åæ ‡ï¼Œè¿™äº›ç‚¹çš„æ°´æ—¢å¯ä»¥æµå‘å¤ªå¹³æ´‹ï¼Œåˆå¯ä»¥æµå‘å¤§è¥¿æ´‹ï¼Œå¤§è¥¿æ´‹åœ¨å³ä¸‹æ–¹ï¼Œå¤ªå¹³æ´‹åœ¨å·¦ä¸Šæ–¹
-//æ„Ÿè§‰è¿™é‡Œçš„dfséœ€è¦è¿”å›å€¼ï¼Œä½†æ˜¯å¦‚æœè¿”å›boolçš„è¯ï¼Œé‚£æ€ä¹ˆç¡®å®šæ˜¯åˆ°è¾¾äº†å¤ªå¹³æ´‹è¿˜æ˜¯å¤§è¥¿æ´‹ï¼Œè¿˜æ˜¯éƒ½åˆ°è¾¾äº†
-//è¿˜æ˜¯å†™ä¸å‡ºæ¥ï¼Œåªèƒ½çœ‹ä»£ç éšæƒ³å½•çš„äº†ä»–è®²äº†ä¸€ç§é€†æµè€Œä¸Šçš„æ–¹æ³•ï¼Œå°±æ˜¯ä»å¤ªå¹³æ´‹æ–¹å‘å’Œå¤§è¥¿æ´‹æ–¹å‘é€†æµè€Œä¸Šï¼Œåˆ›å»ºä¸¤ä¸ªvisitedæ•°ç»„
-//æœ€åæ¯”è¾ƒä¸¤ä¸ªæ•°ç»„çš„ç›¸åŒç‚¹ï¼Œè¿™äº›ç‚¹å°±æ˜¯æ—¢å¯ä»¥åˆ°å¤ªå¹³æ´‹ï¼Œåˆå¯ä»¥åˆ°å¤§è¥¿æ´‹çš„ç‚¹ã€‚
-//è¿˜æ˜¯åˆ†ä¸ºdfså’Œbfsä¸¤ç§ç‰ˆæœ¬
-//å¦å¤–è¿™ä¸ªè§£æ³•çš„æ—¶é—´å¤æ‚åº¦æ˜¯O(m*n)ï¼Œå› ä¸ºdfsçš„æ—¶é—´å¤æ‚åº¦æ˜¯O(m*n)ï¼Œç„¶åä¸»å‡½æ•°é‡Œçš„å¤´ä¸¤ä¸ªforå¾ªç¯çœ‹èµ·æ¥æ˜¯æ¯ä¸ªé‡Œè¾¹éå†äº†ä¸¤édfsï¼Œæ—¶é—´å¤æ‚åº¦æ˜¯ n * (n * m) + m * (n * m)ã€‚
-//ä½†æ˜¯å› ä¸ºæœ‰visitedæ•°ç»„çš„å­˜åœ¨ï¼Œæ¯ä¸ªä½ç½®åªä¼šéå†ä¸€æ¬¡ï¼Œæ‰€ä»¥ä¸¤ä¸ªforå¾ªç¯é‡Œçš„dfs(heights, visited_pacific, i, 0)å’Œdfs(heights, visited_pacific, 0, i)å¯ä»¥çœ‹åšä¸€ç»„ï¼Œä¸€å…±éå†ä¸€éæ•°ç»„
-//dfs(heights, visited_attlantic, i, heights[0].size() - 1)å’Œdfs(heights, visited_attlantic, heights.size() - 1, i)å¯ä»¥çœ‹åšä¸€ç»„ï¼Œä¸€å…±éå†ä¸€éæ•°ç»„ï¼Œæ‰€ä»¥å¤´ä¸¤ä¸ªforå¾ªç¯çš„æ—¶é—´å¤æ‚åº¦å…¶å®æ˜¯2*m*nã€‚
-//æœ€åçš„åŒå±‚forå¾ªç¯çš„æ—¶é—´å¤æ‚åº¦æ˜¯m*nï¼Œæ‰€ä»¥æœ€åæ€»çš„æ—¶é—´å¤æ‚åº¦æ˜¯O(m*n)ã€‚
+//Ë®Ö»ÄÜÍùĞ¡ÓÚ»òµÈÓÚµ±Ç°ÖµµÄµØ·½Á÷£¬ÌâÄ¿ÒªÇóÊÇÕÒ³öÊı×éÖĞËùÓĞµãµÄ×ø±ê£¬ÕâĞ©µãµÄË®¼È¿ÉÒÔÁ÷ÏòÌ«Æ½Ñó£¬ÓÖ¿ÉÒÔÁ÷Ïò´óÎ÷Ñó£¬´óÎ÷ÑóÔÚÓÒÏÂ·½£¬Ì«Æ½ÑóÔÚ×óÉÏ·½
+//¸Ğ¾õÕâÀïµÄdfsĞèÒª·µ»ØÖµ£¬µ«ÊÇÈç¹û·µ»ØboolµÄ»°£¬ÄÇÔõÃ´È·¶¨ÊÇµ½´ïÁËÌ«Æ½Ñó»¹ÊÇ´óÎ÷Ñó£¬»¹ÊÇ¶¼µ½´ïÁË
+//»¹ÊÇĞ´²»³öÀ´£¬Ö»ÄÜ¿´´úÂëËæÏëÂ¼µÄÁËËû½²ÁËÒ»ÖÖÄæÁ÷¶øÉÏµÄ·½·¨£¬¾ÍÊÇ´ÓÌ«Æ½Ñó·½ÏòºÍ´óÎ÷Ñó·½ÏòÄæÁ÷¶øÉÏ£¬´´½¨Á½¸övisitedÊı×é
+//×îºó±È½ÏÁ½¸öÊı×éµÄÏàÍ¬µã£¬ÕâĞ©µã¾ÍÊÇ¼È¿ÉÒÔµ½Ì«Æ½Ñó£¬ÓÖ¿ÉÒÔµ½´óÎ÷ÑóµÄµã¡£
+//»¹ÊÇ·ÖÎªdfsºÍbfsÁ½ÖÖ°æ±¾
+//ÁíÍâÕâ¸ö½â·¨µÄÊ±¼ä¸´ÔÓ¶ÈÊÇO(m*n)£¬ÒòÎªdfsµÄÊ±¼ä¸´ÔÓ¶ÈÊÇO(m*n)£¬È»ºóÖ÷º¯ÊıÀïµÄÍ·Á½¸öforÑ­»·¿´ÆğÀ´ÊÇÃ¿¸öÀï±ß±éÀúÁËÁ½±édfs£¬Ê±¼ä¸´ÔÓ¶ÈÊÇ n * (n * m) + m * (n * m)¡£
+//µ«ÊÇÒòÎªÓĞvisitedÊı×éµÄ´æÔÚ£¬Ã¿¸öÎ»ÖÃÖ»»á±éÀúÒ»´Î£¬ËùÒÔÁ½¸öforÑ­»·ÀïµÄdfs(heights, visited_pacific, i, 0)ºÍdfs(heights, visited_pacific, 0, i)¿ÉÒÔ¿´×öÒ»×é£¬Ò»¹²±éÀúÒ»±éÊı×é
+//dfs(heights, visited_attlantic, i, heights[0].size() - 1)ºÍdfs(heights, visited_attlantic, heights.size() - 1, i)¿ÉÒÔ¿´×öÒ»×é£¬Ò»¹²±éÀúÒ»±éÊı×é£¬ËùÒÔÍ·Á½¸öforÑ­»·µÄÊ±¼ä¸´ÔÓ¶ÈÆäÊµÊÇ2*m*n¡£
+//×îºóµÄË«²ãforÑ­»·µÄÊ±¼ä¸´ÔÓ¶ÈÊÇm*n£¬ËùÒÔ×îºó×ÜµÄÊ±¼ä¸´ÔÓ¶ÈÊÇO(m*n)¡£
 
 class Solution {
 public:
@@ -107,6 +107,104 @@ private:
 			}
 		}
 	}
+public:
+	//µÚ¶ş´Î×ö
+	//Éî¶ÈÓÅÏÈËÑË÷
+	vector<vector<int>> pacificAtlantic2(vector<vector<int>>& heights) {
+		vector<vector<bool>> visited1(heights.size(), vector<bool>(heights[0].size(), false));
+		vector<vector<bool>> visited2(heights.size(), vector<bool>(heights[0].size(), false));
+		for (int i = 0; i < heights.size(); i++) {
+			if (visited1[i][0] == false)
+				dfs1(heights, visited1, i, 0);
+			if (visited2[i][heights[0].size() - 1] == false)
+				dfs1(heights, visited2, i, heights[0].size() - 1);
+		}
+
+		for (int i = 0; i < heights[0].size(); i++) {
+			if (visited1[0][i] == false)
+				dfs1(heights, visited1, 0, i);
+			if (visited2[heights.size() - 1][i] == false)
+				dfs1(heights, visited2, heights.size() - 1, i);
+		}
+		vector<vector<int>> res;
+		for (int i = 0; i < heights.size(); i++) {
+			for (int j = 0; j < heights[0].size(); j++) {
+				if (visited1[i][j] == true && visited2[i][j] == true) {
+					res.push_back({ i, j });
+				}
+			}
+		}
+		return res;
+	}
+
+	void dfs1(vector<vector<int>>& heights, vector<vector<bool>>& visited, int x, int y) {
+		visited[x][y] = true;
+		for (int i = 0; i < 4; i++) {
+			int next_x = x + dir[i][0];
+			int next_y = y + dir[i][1];
+			if (next_x < 0 || next_x >= heights.size() || next_y < 0 ||
+				next_y >= heights[0].size())
+				continue;
+			if (visited[next_x][next_y] == false &&
+				heights[next_x][next_y] >= heights[x][y]) {
+				dfs1(heights, visited, next_x, next_y);
+			}
+		}
+	}
+
+	//¹ã¶ÈÓÅÏÈËÑË÷
+	vector<vector<int>> pacificAtlantic3(vector<vector<int>>& heights) {
+		vector<vector<bool>> visited1(heights.size(),
+			vector<bool>(heights[0].size(), false));
+		vector<vector<bool>> visited2(heights.size(),
+			vector<bool>(heights[0].size(), false));
+		for (int i = 0; i < heights.size(); i++) {
+			if (visited1[i][0] == false)
+				bfs1(heights, visited1, i, 0);
+			if (visited2[i][heights[0].size() - 1] == false)
+				bfs1(heights, visited2, i, heights[0].size() - 1);
+		}
+
+		for (int i = 0; i < heights[0].size(); i++) {
+			if (visited1[0][i] == false)
+				bfs1(heights, visited1, 0, i);
+			if (visited2[heights.size() - 1][i] == false)
+				bfs1(heights, visited2, heights.size() - 1, i);
+		}
+		vector<vector<int>> res;
+		for (int i = 0; i < heights.size(); i++) {
+			for (int j = 0; j < heights[0].size(); j++) {
+				if (visited1[i][j] == true && visited2[i][j] == true) {
+					res.push_back({ i, j });
+				}
+			}
+		}
+		return res;
+	}
+
+	void bfs1(vector<vector<int>>& heights, vector<vector<bool>>& visited, int x,
+		int y) {
+		visited[x][y] = true;
+		queue<pair<int, int>> que;
+		que.push(make_pair(x, y));
+		while (!que.empty()) {
+			pair<int, int> cur = que.front();
+			que.pop();
+			int cur_x = cur.first, cur_y = cur.second;
+			for (int i = 0; i < 4; i++) {
+				int next_x = cur_x + dir[i][0];
+				int next_y = cur_y + dir[i][1];
+				if (next_x < 0 || next_x >= heights.size() || next_y < 0 ||
+					next_y >= heights[0].size())
+					continue;
+				if (visited[next_x][next_y] == false &&
+					heights[next_x][next_y] >= heights[cur_x][cur_y]) {
+					visited[next_x][next_y] = true;
+					que.push(make_pair(next_x, next_y));
+				}
+			}
+		}
+	}
 };
 
 int main() {
@@ -142,5 +240,36 @@ int main() {
 		cout << endl;
 	}
 
+	cout << "------------------" << endl;
+	vector<vector<int>> heights2{
+		{1, 2, 2, 3, 5},
+		{3, 2, 3, 4, 4},
+		{2, 4, 5, 3, 1},
+		{6, 7, 1, 4, 5},
+		{5, 1, 1, 2, 4}
+	};
+	vector<vector<int>>res2 = st.pacificAtlantic2(heights2);
+	for (int i = 0; i < res2.size(); i++) {
+		for (int j = 0; j < res2[0].size(); j++) {
+			cout << res2[i][j] << "  ";
+		}
+		cout << endl;
+	}
+
+	cout << "------------------" << endl;
+	vector<vector<int>> heights3{
+		{1, 2, 2, 3, 5},
+		{3, 2, 3, 4, 4},
+		{2, 4, 5, 3, 1},
+		{6, 7, 1, 4, 5},
+		{5, 1, 1, 2, 4}
+	};
+	vector<vector<int>>res3 = st.pacificAtlantic3(heights3);
+	for (int i = 0; i < res3.size(); i++) {
+		for (int j = 0; j < res3[0].size(); j++) {
+			cout << res3[i][j] << "  ";
+		}
+		cout << endl;
+	}
 	return 0;
 }
