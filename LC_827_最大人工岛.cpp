@@ -5,15 +5,15 @@
 #include <queue>
 using namespace std;
 
-//ç»™å®šä¸€ä¸ªn*nçš„æ•°å­—ï¼Œæ•°ç»„ä¸­çš„1è¡¨ç¤ºé™†åœ°ï¼Œ0è¡¨ç¤ºæ°´ï¼Œå°è¯•åªä¸€æ¬¡æŠŠ0æ¢æˆ1ï¼Œè¿”å›æœ€å¤§çš„å²›å±¿çš„æ•°é‡
-//å¼€å§‹æˆ‘åªæƒ³åˆ°äº†ç”¨æš´åŠ›çš„è§£æ³•ï¼Œå°±æ˜¯å¯¹äºæ¯ä¸€ä¸ªæ˜¯0çš„ç‚¹ä¸ºèµ·ç‚¹ï¼Œéƒ½æ‰§è¡Œä¸€édfsï¼Œè¿”å›èƒ½éå†åˆ°çš„é™†åœ°çš„æ•°é‡ï¼Œæœ€åæœ€å¤§çš„æ•°é‡åªå¯èƒ½æ˜¯ä¸¤ç§æƒ…å†µï¼š
-//ä¸€ç§æ˜¯0å˜æˆ1ä¹‹åå–æœ€å¤§å€¼ï¼Œç¬¬äºŒç§æ˜¯åœ°å›¾ä¸­æ²¡æœ‰0ï¼Œå…¨æ˜¯1.
+//¸ø¶¨Ò»¸ön*nµÄÊı×Ö£¬Êı×éÖĞµÄ1±íÊ¾Â½µØ£¬0±íÊ¾Ë®£¬³¢ÊÔÖ»Ò»´Î°Ñ0»»³É1£¬·µ»Ø×î´óµÄµºÓìµÄÊıÁ¿
+//¿ªÊ¼ÎÒÖ»Ïëµ½ÁËÓÃ±©Á¦µÄ½â·¨£¬¾ÍÊÇ¶ÔÓÚÃ¿Ò»¸öÊÇ0µÄµãÎªÆğµã£¬¶¼Ö´ĞĞÒ»±édfs£¬·µ»ØÄÜ±éÀúµ½µÄÂ½µØµÄÊıÁ¿£¬×îºó×î´óµÄÊıÁ¿Ö»¿ÉÄÜÊÇÁ½ÖÖÇé¿ö£º
+//Ò»ÖÖÊÇ0±ä³É1Ö®ºóÈ¡×î´óÖµ£¬µÚ¶şÖÖÊÇµØÍ¼ÖĞÃ»ÓĞ0£¬È«ÊÇ1.
 
-//æš´åŠ›è§£æ³•ï¼Œå¾ˆæ˜æ˜¾è¿™ä¸ªè§£æ³•è¶…æ—¶äº†ï¼Œæ—¶é—´å¤æ‚åº¦æ˜¯O(n^4)ï¼Œé‡Œè¾¹è‚¯å®šæœ‰å¥½å¤šé‡å¤è®¡ç®—ï¼Œä½†æ˜¯æˆ‘åˆæƒ³ä¸å‡ºæ€ä¹ˆä¼˜åŒ–
+//±©Á¦½â·¨£¬ºÜÃ÷ÏÔÕâ¸ö½â·¨³¬Ê±ÁË£¬Ê±¼ä¸´ÔÓ¶ÈÊÇO(n^4)£¬Àï±ß¿Ï¶¨ÓĞºÃ¶àÖØ¸´¼ÆËã£¬µ«ÊÇÎÒÓÖÏë²»³öÔõÃ´ÓÅ»¯
 class Solution {
 public:
 	int largestIsland(vector<vector<int>>& grid) {
-		int sum = 0, res = 0, count0 = 0, count1 = 0;  //count0å’Œcount1ç”¨æ¥ç»Ÿè®¡åœ°å›¾ä¸­0å’Œ1çš„æ•°é‡ï¼Œå¦‚æœæ²¡æœ‰0.å°±ç›´æ¥è¿”å›1çš„æ•°é‡ã€‚å¦åˆ™ï¼Œå°±è¿”å›res
+		int sum = 0, res = 0, count0 = 0, count1 = 0;  //count0ºÍcount1ÓÃÀ´Í³¼ÆµØÍ¼ÖĞ0ºÍ1µÄÊıÁ¿£¬Èç¹ûÃ»ÓĞ0.¾ÍÖ±½Ó·µ»Ø1µÄÊıÁ¿¡£·ñÔò£¬¾Í·µ»Øres
 		res = 0;
 		for (int i = 0; i < grid.size(); i++) {
 			for (int j = 0; j < grid.size(); j++) {
@@ -35,9 +35,9 @@ public:
 		return res;
 	}
 
-	//ä»£ç éšæƒ³å½•çš„è§£æ³•ç‰¹åˆ«å·§å¦™ï¼Œå°±æ˜¯å…ˆéå†æ•´ä¸ªåœ°å›¾ï¼ŒæŠŠæ¯ä¸ªå²›å±¿éƒ½æ ‡ä¸Šå·ï¼Œæ¯”å¦‚ä¸€å—å²›å±¿å…¨æ ‡æˆ2ï¼Œä¸€å—å…¨æ ‡æˆ3...ï¼Œç„¶åç”¨ä¸€ä¸ªmapä¿å­˜æ¯ä¸ªæ ‡å·å¯¹åº”çš„å²›å±¿é¢ç§¯ã€‚
-	//ç„¶åå†é‡å¤´å¼€å§‹éå†ï¼Œå°è¯•æŠŠæ¯ä¸€ä¸ª0å˜æˆ1ï¼Œç„¶åå†ç»Ÿè®¡ä¸è¿™ä¸ª1ç›¸é‚»çš„å²›å±¿çš„æ ‡å·ï¼Œç„¶åé€šè¿‡æ ‡å·è·å–é¢ç§¯å°±è¡Œäº†ï¼Œæ—¶é—´å¤æ‚åº¦æ˜¯O(n^2)
-	//å…¶å®è¿™é‡Œä¹Ÿå¯ä»¥ä¸è®¾ç½®visitedæ•°ç»„ï¼Œgrid[i][j]==1å°±æ›¿ä»£äº†visitedæ•°ç»„çš„åŠŸèƒ½
+	//´úÂëËæÏëÂ¼µÄ½â·¨ÌØ±ğÇÉÃî£¬¾ÍÊÇÏÈ±éÀúÕû¸öµØÍ¼£¬°ÑÃ¿¸öµºÓì¶¼±êÉÏºÅ£¬±ÈÈçÒ»¿éµºÓìÈ«±ê³É2£¬Ò»¿éÈ«±ê³É3...£¬È»ºóÓÃÒ»¸ömap±£´æÃ¿¸ö±êºÅ¶ÔÓ¦µÄµºÓìÃæ»ı¡£
+	//È»ºóÔÙÖØÍ·¿ªÊ¼±éÀú£¬³¢ÊÔ°ÑÃ¿Ò»¸ö0±ä³É1£¬È»ºóÔÙÍ³¼ÆÓëÕâ¸ö1ÏàÁÚµÄµºÓìµÄ±êºÅ£¬È»ºóÍ¨¹ı±êºÅ»ñÈ¡Ãæ»ı¾ÍĞĞÁË£¬Ê±¼ä¸´ÔÓ¶ÈÊÇO(n^2)
+	//ÆäÊµÕâÀïÒ²¿ÉÒÔ²»ÉèÖÃvisitedÊı×é£¬grid[i][j]==1¾ÍÌæ´úÁËvisitedÊı×éµÄ¹¦ÄÜ
 	int largestIsland1(vector<vector<int>>& grid) {
 		vector<vector<bool>> visited(grid.size(), vector<bool>(grid.size(), false));
 		unordered_map<int, int> ump;
@@ -65,11 +65,11 @@ public:
 		if (isAllIsland) return grid.size() * grid.size();
 
 		int res = 0;
-		unordered_set<int> ust; //å½“å‰ç‚¹çš„å››å‘¨å¯èƒ½æ˜¯æœ‰ç›¸åŒçš„å²›å±¿ï¼Œæ¯”å¦‚ä¸Šä¸‹éƒ½æ˜¯å²›å±¿2ï¼Œå¼•å…¥setæ¥åˆ¤æ–­æŸä¸ªå²›å±¿çš„é¢ç§¯æ˜¯å¦å·²ç»è®¡ç®—åœ¨å†…äº†
+		unordered_set<int> ust; //µ±Ç°µãµÄËÄÖÜ¿ÉÄÜÊÇÓĞÏàÍ¬µÄµºÓì£¬±ÈÈçÉÏÏÂ¶¼ÊÇµºÓì2£¬ÒıÈësetÀ´ÅĞ¶ÏÄ³¸öµºÓìµÄÃæ»ıÊÇ·ñÒÑ¾­¼ÆËãÔÚÄÚÁË
 		for (int i = 0; i < grid.size(); i++) {
 			for (int j = 0; j < grid.size(); j++) {
 				if (grid[i][j] == 0) {
-					count = 1;  //è®¡ç®—ä¸Šå½“å‰èŠ‚ç‚¹
+					count = 1;  //¼ÆËãÉÏµ±Ç°½Úµã
 					ust.clear();
 					for (int k = 0; k < 4; k++) {
 						int next_i = i + dir[k][0];
@@ -114,11 +114,11 @@ public:
 		if (isAllIsland) return grid.size() * grid.size();
 
 		int res = 0;
-		unordered_set<int> ust; //å½“å‰ç‚¹çš„å››å‘¨å¯èƒ½æ˜¯æœ‰ç›¸åŒçš„å²›å±¿ï¼Œæ¯”å¦‚ä¸Šä¸‹éƒ½æ˜¯å²›å±¿2ï¼Œå¼•å…¥setæ¥åˆ¤æ–­æŸä¸ªå²›å±¿çš„é¢ç§¯æ˜¯å¦å·²ç»è®¡ç®—åœ¨å†…äº†
+		unordered_set<int> ust; //µ±Ç°µãµÄËÄÖÜ¿ÉÄÜÊÇÓĞÏàÍ¬µÄµºÓì£¬±ÈÈçÉÏÏÂ¶¼ÊÇµºÓì2£¬ÒıÈësetÀ´ÅĞ¶ÏÄ³¸öµºÓìµÄÃæ»ıÊÇ·ñÒÑ¾­¼ÆËãÔÚÄÚÁË
 		for (int i = 0; i < grid.size(); i++) {
 			for (int j = 0; j < grid.size(); j++) {
 				if (grid[i][j] == 0) {
-					count = 1;  //è®¡ç®—ä¸Šå½“å‰èŠ‚ç‚¹
+					count = 1;  //¼ÆËãÉÏµ±Ç°½Úµã
 					ust.clear();
 					for (int k = 0; k < 4; k++) {
 						int next_i = i + dir[k][0];
@@ -186,7 +186,7 @@ private:
 		}
 	}
 
-	//å»æ‰visitedæ•°ç»„ä»¥åçš„bfsä»£ç 
+	//È¥µôvisitedÊı×éÒÔºóµÄbfs´úÂë
 	void bfs1(vector<vector<int>>& grid, int x, int y, int& count, int mark) {
 		queue<pair<int, int>> que;
 		que.push({ x,y });
@@ -204,8 +204,179 @@ private:
 				int next_y = cur_y + dir[i][1];
 				if (next_x < 0 || next_x >= grid.size() || next_y < 0 || next_y >= grid.size()) continue;
 				if (grid[next_x][next_y] == 1) {
-					grid[next_x][next_y] = mark;   //è¿™ä¸ªåœ°æ–¹è°ƒè¯•äº†å¥½é•¿æ—¶é—´ï¼Œå¼€å§‹æ˜¯æ”¾åˆ°count++;ä¸Šè¾¹ï¼Œä½†æ˜¯ç»“æœä¸å¯¹ï¼Œè°ƒè¯•è¿‡åå‘ç°æ˜¯å› ä¸ºæ²¡æœ‰åŠæ—¶ä¿®æ”¹ä¸ºmarkï¼Œå¯¼è‡´å½“å‰èŠ‚ç‚¹è¢«é‡å¤æ·»åŠ 
+					grid[next_x][next_y] = mark;   //Õâ¸öµØ·½µ÷ÊÔÁËºÃ³¤Ê±¼ä£¬¿ªÊ¼ÊÇ·Åµ½count++;ÉÏ±ß£¬µ«ÊÇ½á¹û²»¶Ô£¬µ÷ÊÔ¹ıºó·¢ÏÖÊÇÒòÎªÃ»ÓĞ¼°Ê±ĞŞ¸ÄÎªmark£¬µ¼ÖÂµ±Ç°½Úµã±»ÖØ¸´Ìí¼Ó
 					que.push({ next_x,next_y });
+				}
+			}
+		}
+	}
+public:
+	// µÚ¶ş´Î×ö£¬Õâ¸öÌâµÄË¼Â·»¹ÊÇÍ¦ÇåÎú
+	// Éî¶ÈÓÅÏÈËÑË÷
+	int largestIsland3(vector<vector<int>>& grid) {
+		vector<vector<bool>> visited(grid.size(), vector<bool>(grid[0].size(), false));
+		int count = 0;
+		int mark = 2;
+		unordered_map<int, int> umap;
+		bool allisland = true;
+		for (int i = 0; i < grid.size(); i++) {
+			for (int j = 0; j < grid[0].size(); j++) {
+				if (grid[i][j] == 0) allisland = false;
+				if (visited[i][j] == false && grid[i][j] == 1) {
+					count = 0;
+					dfs2(grid, visited, i, j, mark, count);
+					umap[mark] = count;
+					mark++;
+				}
+			}
+		}
+
+		if (allisland) return(grid.size() * grid[0].size());
+		int res = 0;
+		for (int i = 0; i < grid.size(); i++) {
+			for (int j = 0; j < grid[0].size(); j++) {
+				if (grid[i][j] == 0) {
+					int count = 1;
+					unordered_set<int> uset;
+					for (int k = 0; k < 4; k++) {
+						int next_x = i + dir[k][0];
+						int next_y = j + dir[k][1];
+						if (next_x < 0 || next_x >= grid.size() || next_y < 0 || next_y >= grid[0].size()) continue;
+						if (grid[next_x][next_y] != 0 && uset.find(grid[next_x][next_y]) == uset.end()) {
+							uset.insert(grid[next_x][next_y]);
+							count += umap[grid[next_x][next_y]];
+						}
+					}
+					res = max(res, count);
+				}
+			}
+		}
+		return res;
+
+	}
+	void dfs2(vector<vector<int>>& grid, vector<vector<bool>>& visited, int x, int y, int mark, int& count) {
+		visited[x][y] = true;
+		grid[x][y] = mark;
+		count++;
+		for (int i = 0; i < 4; i++) {
+			int next_x = x + dir[i][0], next_y = y + dir[i][1];
+			if (next_x < 0 || next_x >= grid.size() || next_y < 0 || next_y >= grid[0].size()) continue;
+			if (grid[next_x][next_y] == 1 && visited[next_x][next_y] == false)
+				dfs2(grid, visited, next_x, next_y, mark, count);
+		}
+	}
+
+	// ÕâÀï»¹¿ÉÒÔ²»ÓÃvisitedÊı×é£¬ÒòÎª±Ï¾¹Òª¸Ä±ägrid[x][y]µÄÖµ£¬Èç¹ûgrid[x][y]==1ËµÃ÷Ã»ÓĞ·ÃÎÊ¹ı
+	// Éî¶ÈÓÅÏÈËÑË÷
+	int largestIsland4(vector<vector<int>>& grid) {
+		int count = 0;
+		int mark = 2;
+		unordered_map<int, int> umap;
+		bool allisland = true;
+		for (int i = 0; i < grid.size(); i++) {
+			for (int j = 0; j < grid[0].size(); j++) {
+				if (grid[i][j] == 0) allisland = false;
+				if (grid[i][j] == 1) {
+					count = 0;
+					dfs3(grid, i, j, mark, count);
+					umap[mark] = count;
+					mark++;
+				}
+			}
+		}
+
+		if (allisland) return(grid.size() * grid[0].size());
+		int res = 0;
+		for (int i = 0; i < grid.size(); i++) {
+			for (int j = 0; j < grid[0].size(); j++) {
+				if (grid[i][j] == 0) {
+					int count = 1;
+					unordered_set<int> uset;
+					for (int k = 0; k < 4; k++) {
+						int next_x = i + dir[k][0];
+						int next_y = j + dir[k][1];
+						if (next_x < 0 || next_x >= grid.size() || next_y < 0 || next_y >= grid[0].size()) continue;
+						if (grid[next_x][next_y] != 0 && uset.find(grid[next_x][next_y]) == uset.end()) {
+							uset.insert(grid[next_x][next_y]);
+							count += umap[grid[next_x][next_y]];
+						}
+					}
+					res = max(res, count);
+				}
+			}
+		}
+		return res;
+
+	}
+	void dfs3(vector<vector<int>>& grid, int x, int y, int mark, int& count) {
+		grid[x][y] = mark;
+		count++;
+		for (int i = 0; i < 4; i++) {
+			int next_x = x + dir[i][0], next_y = y + dir[i][1];
+			if (next_x < 0 || next_x >= grid.size() || next_y < 0 || next_y >= grid[0].size()) continue;
+			if (grid[next_x][next_y] == 1)
+				dfs3(grid, next_x, next_y, mark, count);
+		}
+	}
+
+	// ¹ã¶ÈÓÅÏÈËÑË÷
+	int largestIsland5(vector<vector<int>>& grid) {
+		int count = 0;
+		int mark = 2;
+		unordered_map<int, int> umap;
+		bool allisland = true;
+		for (int i = 0; i < grid.size(); i++) {
+			for (int j = 0; j < grid[0].size(); j++) {
+				if (grid[i][j] == 0) allisland = false;
+				if (grid[i][j] == 1) {
+					count = 0;
+					bfs2(grid, i, j, mark, count);
+					umap[mark] = count;
+					mark++;
+				}
+			}
+		}
+
+		if (allisland) return(grid.size() * grid[0].size());
+		int res = 0;
+		for (int i = 0; i < grid.size(); i++) {
+			for (int j = 0; j < grid[0].size(); j++) {
+				if (grid[i][j] == 0) {
+					int count = 1;
+					unordered_set<int> uset;
+					for (int k = 0; k < 4; k++) {
+						int next_x = i + dir[k][0];
+						int next_y = j + dir[k][1];
+						if (next_x < 0 || next_x >= grid.size() || next_y < 0 || next_y >= grid[0].size()) continue;
+						if (grid[next_x][next_y] != 0 && uset.find(grid[next_x][next_y]) == uset.end()) {
+							uset.insert(grid[next_x][next_y]);
+							count += umap[grid[next_x][next_y]];
+						}
+					}
+					res = max(res, count);
+				}
+			}
+		}
+		return res;
+
+	}
+	void bfs2(vector<vector<int>>& grid, int x, int y, int mark, int& count) {
+		grid[x][y] = mark;
+		queue<pair<int, int>> que;
+		que.push(make_pair(x, y));
+		count++;
+		while (!que.empty()) {
+			pair<int, int> cur = que.front();
+			que.pop();
+			int cur_x = cur.first, cur_y = cur.second;
+
+			for (int i = 0; i < 4; i++) {
+				int next_x = cur_x + dir[i][0], next_y = cur_y + dir[i][1];
+				if (next_x < 0 || next_x >= grid.size() || next_y < 0 || next_y >= grid[0].size()) continue;
+				if (grid[next_x][next_y] == 1) {
+					grid[next_x][next_y] = mark;
+					count++;
+					que.push(make_pair(next_x, next_y));
 				}
 			}
 		}
