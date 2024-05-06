@@ -6,20 +6,20 @@
 #include <queue>
 using namespace std;
 
-//ç»™å®šä¸€ä¸ªwordListé‡Œè¾¹æœ‰ä¸€äº›å•è¯ï¼Œç„¶åä¸€ä¸ªbeginwordï¼Œä¸€ä¸ªendwordï¼Œæ‰€æœ‰çš„å•è¯é•¿åº¦éƒ½ä¸€æ ·ã€‚beginwordä¸åœ¨wordlistä¸­ï¼Œendwordåœ¨wordlistä¸­ï¼Œè¿”å›æœ€çŸ­å˜æ¢åºåˆ—ä¸­çš„é•¿åº¦ï¼Œæ¥æŠŠbeginwordå˜æˆendwordï¼Œæ¯æ¬¡åªèƒ½å˜æ¢ä¸€ä¸ªå­—æ¯ï¼Œ
-//åºåˆ—ä¸­çš„å•è¯éƒ½æ˜¯ä»wordlistä¸­æ‰¾ã€‚å¦‚æœä¸å­˜åœ¨è¿™æ ·çš„åºåˆ—ï¼Œå°±è¿”å›0ã€‚
-//ç›¸é‚»çš„ä¸¤ä¸ªå˜æ¢ä¹‹é—´åªå·®ä¸€ä¸ªå­—æ¯ï¼Œå¯ä»¥ç”¨æ·±åº¦ä¼˜å…ˆéå†æ¥åšï¼Œä½†æ˜¯æ€ä¹ˆè¡¨ç¤ºè¿™ç§æ•°æ®ç»“æ„å‘¢ï¼Ÿè®©åªå·®ä¸€ä¸ªå­—æ¯çš„å•è¯å¯ä»¥ç›¸äº’å˜æ¢ã€‚
+//¸ø¶¨Ò»¸öwordListÀï±ßÓĞÒ»Ğ©µ¥´Ê£¬È»ºóÒ»¸öbeginword£¬Ò»¸öendword£¬ËùÓĞµÄµ¥´Ê³¤¶È¶¼Ò»Ñù¡£beginword²»ÔÚwordlistÖĞ£¬endwordÔÚwordlistÖĞ£¬·µ»Ø×î¶Ì±ä»»ĞòÁĞÖĞµÄ³¤¶È£¬À´°Ñbeginword±ä³Éendword£¬Ã¿´ÎÖ»ÄÜ±ä»»Ò»¸ö×ÖÄ¸£¬
+//ĞòÁĞÖĞµÄµ¥´Ê¶¼ÊÇ´ÓwordlistÖĞÕÒ¡£Èç¹û²»´æÔÚÕâÑùµÄĞòÁĞ£¬¾Í·µ»Ø0¡£
+//ÏàÁÚµÄÁ½¸ö±ä»»Ö®¼äÖ»²îÒ»¸ö×ÖÄ¸£¬¿ÉÒÔÓÃÉî¶ÈÓÅÏÈ±éÀúÀ´×ö£¬µ«ÊÇÔõÃ´±íÊ¾ÕâÖÖÊı¾İ½á¹¹ÄØ£¿ÈÃÖ»²îÒ»¸ö×ÖÄ¸µÄµ¥´Ê¿ÉÒÔÏà»¥±ä»»¡£
 // 
-//çœ‹äº†è®²è§£æ‰çŸ¥é“ï¼Œè¿™è¯´çš„æ˜¯æ— å‘å›¾æ±‚æœ€çŸ­è·¯å¾„ï¼Œè¿™é‡Œç”¨çš„æ˜¯bfsæ±‚çš„ä¸¤ç‚¹é—´çš„æœ€çŸ­è·¯å¾„ï¼Œå› ä¸ºåªæœ‰bfsèƒ½éå†åˆ°ç»ˆç‚¹ï¼Œé‚£ä¹ˆæ±‚å‡ºæ¥çš„å°±æ˜¯æœ€çŸ­è·¯å¾„ã€‚è€Œä¸”ä»èµ·ç‚¹åˆ°ç»ˆç‚¹çš„è·¯å¾„ä¸æ­¢ä¸€æ¡
-//çœŸçš„éš¾ï¼Œæƒ³ä¸åˆ°ï¼Œä½†æ˜¯çœ‹ä»£ç åˆèƒ½çœ‹æ˜ç™½
+//¿´ÁË½²½â²ÅÖªµÀ£¬ÕâËµµÄÊÇÎŞÏòÍ¼Çó×î¶ÌÂ·¾¶£¬ÕâÀïÓÃµÄÊÇbfsÇóµÄÁ½µã¼äµÄ×î¶ÌÂ·¾¶£¬ÒòÎªÖ»ÓĞbfsÄÜ±éÀúµ½ÖÕµã£¬ÄÇÃ´Çó³öÀ´µÄ¾ÍÊÇ×î¶ÌÂ·¾¶¡£¶øÇÒ´ÓÆğµãµ½ÖÕµãµÄÂ·¾¶²»Ö¹Ò»Ìõ
+//ÕæµÄÄÑ£¬Ïë²»µ½£¬µ«ÊÇ¿´´úÂëÓÖÄÜ¿´Ã÷°×
 
 class Solution {
 public:
 	int ladderLength(string beginWord, string endWord, vector<string>& wordList) {
-		unordered_set<string> uset(wordList.begin(), wordList.end());  //vectorè½¬æ¢æˆunordered_setï¼Œåç»­æŸ¥æ‰¾æ›´å¿«
-		if (uset.find(endWord) == uset.end()) return 0;  //å¦‚æœç»ˆç‚¹ä¸åœ¨wordlisté‡Œï¼Œç›´æ¥è¿”å›0
+		unordered_set<string> uset(wordList.begin(), wordList.end());  //vector×ª»»³Éunordered_set£¬ºóĞø²éÕÒ¸ü¿ì
+		if (uset.find(endWord) == uset.end()) return 0;  //Èç¹ûÖÕµã²»ÔÚwordlistÀï£¬Ö±½Ó·µ»Ø0
 
-		unordered_map<string, int> visitMap;  //ç”¨æ¥è®°å½•wordlistä¸­çš„æŸä¸ªç‚¹æ˜¯å¦å·²ç»éå†è¿‡ï¼Œè€Œä¸”ä»èµ·ç‚¹åˆ°è¿™ä¸ªç‚¹çš„è·ç¦»æ˜¯å¤šå°‘
+		unordered_map<string, int> visitMap;  //ÓÃÀ´¼ÇÂ¼wordlistÖĞµÄÄ³¸öµãÊÇ·ñÒÑ¾­±éÀú¹ı£¬¶øÇÒ´ÓÆğµãµ½Õâ¸öµãµÄ¾àÀëÊÇ¶àÉÙ
 		queue<string> que;
 		que.push(beginWord);
 		visitMap.insert(pair<string, int>(beginWord, 1));
@@ -27,13 +27,49 @@ public:
 			string word = que.front();
 			que.pop();
 			int path = visitMap[word];
-			for (int i = 0; i < word.size(); i++) {  //æ²¡æƒ³åˆ°è¿™ä¸¤ä¸ªforå¾ªç¯æ¥æŒ‘é€‰ä¸‹ä¸€ä¸ªå¯ä»¥éå†åˆ°çš„å•è¯çš„æ–¹æ³•ï¼Œç«Ÿç„¶å¯ä»¥è¿™ä¹ˆæœ´å®æ— å
+			for (int i = 0; i < word.size(); i++) {  //Ã»Ïëµ½ÕâÁ½¸öforÑ­»·À´ÌôÑ¡ÏÂÒ»¸ö¿ÉÒÔ±éÀúµ½µÄµ¥´ÊµÄ·½·¨£¬¾¹È»¿ÉÒÔÕâÃ´ÆÓÊµÎŞ»ª
 				string newword = word;
 				for (int j = 0; j < 26; j++) {
 					newword[i] = j + 'a';
-					if (newword == endWord) return path + 1;  //å¦‚æœä¸Šä¸€ä¸ªèŠ‚ç‚¹å¯ä»¥ç›´æ¥éå†åˆ°ç»ˆç‚¹ï¼Œç›´æ¥è¿”å›path+1
-					if (uset.find(newword) != uset.end() && visitMap.find(newword) == visitMap.end()) {   //å¦‚æœå½“å‰èŠ‚ç‚¹æ²¡æœ‰è¢«éå†ï¼Œè€Œä¸”ä»–è¿˜åœ¨wordlistä¸­ï¼Œå°±æŠŠå®ƒæ·»åŠ åˆ°visitMapå’Œqueä¸­
+					if (newword == endWord) return path + 1;  //Èç¹ûÉÏÒ»¸ö½Úµã¿ÉÒÔÖ±½Ó±éÀúµ½ÖÕµã£¬Ö±½Ó·µ»Øpath+1
+					if (uset.find(newword) != uset.end() && visitMap.find(newword) == visitMap.end()) {   //Èç¹ûµ±Ç°½ÚµãÃ»ÓĞ±»±éÀú£¬¶øÇÒËû»¹ÔÚwordlistÖĞ£¬¾Í°ÑËüÌí¼Óµ½visitMapºÍqueÖĞ
 						visitMap.insert(pair<string, int>(newword, path + 1));
+						que.push(newword);
+					}
+				}
+			}
+		}
+		return 0;
+	}
+
+	//µÚ¶ş´Î×ö£¬»¹ÊÇÏë²»µ½ÔõÃ´×ö
+	// ¶Ô×Å´ğ°¸Ğ´ÍêÒÔºó£¬·ÖÎöÒ»ÏÂÕâ¸öÌâ£¬¸Ğ¾õÕâ¸öÌâµÄÆäÊµÊÇÇóÎŞÏòÓĞ»·Í¼µÄÁ½µãÖ®¼äµÄ×î¶ÌÂ·¾¶¡£
+	// ÄÑµãÔÚÓÚÔõÃ´ÅĞ¶ÏÁ½¸öµãÖ®¼äÊÇ·ñÓĞÁ´½Ó£¬´ğ°¸ÖĞÓÃÁËÒ»ÖÖ±¿·½·¨£¬ÒòÎªÈç¹ûÁ½¸öµ¥´ÊÖ®¼äÓĞÁ´½ÓµÄ»°£¬ËµÃ÷Á½¸öµ¥´ÊÖ»²îÒ»¸ö×ÖÄ¸£¬ËùÒÔ´ğ°¸ÖĞ°¤¸ö±éÀúµ¥´ÊÖĞµÄ×ÖÄ¸£¬È»ºó¸ü»»³ÉÆäËûµÄ×ÖÄ¸À´ÅĞ¶ÏÊÇ·ñÔÚÒ»¿ªÊ¼µÄwordlistÖĞ£¬
+	// ÔÙ¾ÍÊÇ±¾ÌâÊ¹ÓÃ¹ã¶ÈÓÅÏÈËÑË÷£¬ÕâÑù±éÀúµ½µÄÒ»¸öĞÂ½áµãÊ±ËùĞèÒªµÄÂ·¾¶Êı£¬¾ÍÊÇÆğµãµ½´ïÕâ¸öĞÂ½áµãµÄ×î¶ÌÂ·¾¶
+	int ladderLength1(string beginWord, string endWord, vector<string>& wordList) {
+		unordered_set<string> uset(wordList.begin(), wordList.end());
+		if (uset.find(endWord) == uset.end())
+			return 0;
+
+		queue<string> que;
+		que.push(beginWord);
+		unordered_map<string, int> umap;   //±£´æÆğµãµ½Ã¿¸öµ¥´ÊµÄÂ·¾¶³¤¶È
+		umap.insert(make_pair(beginWord, 1));
+
+		while (!que.empty()) {
+			string word = que.front();
+			que.pop();
+			int pathlength = umap[word];
+
+			for (int i = 0; i < word.size(); i++) {  //±éÀúµ¥´ÊÖĞµÄÃ¿Ò»¸ö×ÖÄ¸
+				string newword = word;
+				for (int j = 0; j < 26; j++) {		//°¤¸ö¸ü»»Ã¿Ò»¸ö×ÖÄ¸
+					newword[i] = j + 'a';
+					if (newword == endWord)     //Èç¹ûÓöµ½ÁËendword
+						return pathlength + 1;
+
+					if (uset.find(newword) != uset.end() && umap.find(newword) == umap.end()) {  //Èç¹ûµ±Ç°µ¥´ÊÔÚwordlistÖĞ£¬²¢ÇÒ»¹Ã»ÓĞÆğµãµ½µ±Ç°µ¥´ÊµÄ×î¶ÌÂ·¾¶³¤¶È
+						umap.insert(make_pair(newword, pathlength + 1));
 						que.push(newword);
 					}
 				}
@@ -47,5 +83,6 @@ int main() {
 	string beginWord = "hit", endWord = "cog";
 	vector<string> wordList = { "hot", "dot", "dog", "lot", "log", "cog" };
 	cout << st.ladderLength(beginWord, endWord, wordList) << endl;
+	cout << st.ladderLength1(beginWord, endWord, wordList) << endl;
 	return 0;
 }
