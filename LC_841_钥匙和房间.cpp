@@ -3,9 +3,9 @@
 #include <queue>
 using namespace std;
 
-//ç»™å®šä¸€ä¸ªäºŒç»´æ•°ç»„ï¼Œæ•°ç»„ä¸­çš„æ¯ä¸€è¡Œä»£è¡¨ä¸€ä¸ªæˆ¿é—´ï¼Œæˆ¿é—´å†…çš„å…ƒç´ æ˜¯å…¶ä»–æˆ¿é—´çš„é’¥åŒ™ï¼Œå¯ä»¥æ‰“å¼€å…¶ä»–æˆ¿é—´çš„é”ï¼Œå¼€å§‹åªæœ‰ç¬¬0å·æˆ¿é—´é—¨å¼€ç€
-//å¦‚æœèƒ½æ‰“å¼€æ‰€æœ‰æˆ¿é—´çš„é—¨å°±è¿”å›trueï¼Œå¦åˆ™è¿”å›falseã€‚
-//åŒæ ·å¯ä»¥åˆ†ä¸ºbfså’Œdfsç‰ˆï¼Œä¸è¿‡è¿™é‡Œçš„dfsåˆ†ä¸ºä¸¤ä¸ªç‰ˆæœ¬ï¼Œä¸»è¦åŒºåˆ«æ˜¯åœ¨å½“å‰å±‚å¤„ç†å½“å‰å±‚çš„visitedæ•°ç»„è¿˜æ˜¯ä¸‹ä¸€å±‚çš„visitedæ•°ç»„
+//¸ø¶¨Ò»¸ö¶şÎ¬Êı×é£¬Êı×éÖĞµÄÃ¿Ò»ĞĞ´ú±íÒ»¸ö·¿¼ä£¬·¿¼äÄÚµÄÔªËØÊÇÆäËû·¿¼äµÄÔ¿³×£¬¿ÉÒÔ´ò¿ªÆäËû·¿¼äµÄËø£¬¿ªÊ¼Ö»ÓĞµÚ0ºÅ·¿¼äÃÅ¿ª×Å
+//Èç¹ûÄÜ´ò¿ªËùÓĞ·¿¼äµÄÃÅ¾Í·µ»Øtrue£¬·ñÔò·µ»Øfalse¡£
+//Í¬Ñù¿ÉÒÔ·ÖÎªbfsºÍdfs°æ£¬²»¹ıÕâÀïµÄdfs·ÖÎªÁ½¸ö°æ±¾£¬Ö÷ÒªÇø±ğÊÇÔÚµ±Ç°²ã´¦Àíµ±Ç°²ãµÄvisitedÊı×é»¹ÊÇÏÂÒ»²ãµÄvisitedÊı×é
 
 class Solution {
 public:
@@ -73,6 +73,75 @@ private:
 			dfs2(rooms, visitedRoom, key);
 		}
 	}
+
+	//µÚ¶ş´Î×ö
+public:
+	// ×Ô¼ºĞ´µÄ´úÂë£¬¸Ğ¾õÒ²Ã»ÓÃµ½Ê²Ã´Ëã·¨£¬ÆäÊµÊÇÓÃµÄ¹ã¶ÈÓÅÏÈËÑË÷
+	bool canVisitAllRooms3(vector<vector<int>>& rooms) {
+		vector<bool> visited(rooms.size(), false);
+		visited[0] = true;
+		queue<int> que;
+		for (int i = 0; i < rooms[0].size(); i++)
+			que.push(rooms[0][i]);
+
+		while (!que.empty()) {
+			int num = que.front();
+			que.pop();
+			if (visited[num] == true) continue;
+			visited[num] = true;
+			for (int i = 0; i < rooms[num].size(); i++)
+				que.push(rooms[num][i]);
+		}
+		for (bool flag : visited)
+			if (flag == false)
+				return false;
+
+		return true;
+	}
+
+	//dfsĞ´·¨
+	bool canVisitAllRooms4(vector<vector<int>>& rooms) {
+		vector<bool> visited(rooms.size(), false);
+		visited[0] = true;
+		dfs3(rooms, 0, visited);
+		for (bool flag : visited)
+			if (flag == false)
+				return false;
+
+		return true;
+	}
+	void dfs3(vector<vector<int>>& rooms, int room, vector<bool>& visited) {
+		vector<int> keys = rooms[room];
+		for (int& key : keys) {
+			if (visited[key])
+				continue;
+			visited[key] = true;
+			dfs3(rooms, key, visited);
+		}
+	}
+
+	// ÁíÒ»ÖÖdfs£¬µ«ÊÇ¸Ğ¾õ²»ÈçÉÏÒ»ÖÖdfsºÃÀí½â
+	bool canVisitAllRooms5(vector<vector<int>>& rooms) {
+		vector<bool> visited(rooms.size(), false);
+
+		dfs4(rooms, 0, visited);
+
+		for (bool flag : visited)
+			if (flag == false)
+				return false;
+
+		return true;
+	}
+	void dfs4(vector<vector<int>>& rooms, int room, vector<bool>& visited) {
+		if (visited[room])
+			return;
+		visited[room] = true;
+
+		vector<int> keys = rooms[room];
+		for (int& key : keys) {
+			dfs4(rooms, key, visited);
+		}
+	}
 };
 
 int main() {
@@ -83,5 +152,9 @@ int main() {
 	cout << st.canVisitAllRooms(rooms2) << endl;
 	cout << st.canVisitAllRooms1(rooms2) << endl;
 	cout << st.canVisitAllRooms2(rooms2) << noboolalpha << endl;
+	cout << "----------------" << endl;
+	cout << boolalpha << st.canVisitAllRooms3(rooms2) << endl;
+	cout << st.canVisitAllRooms4(rooms2) << endl;
+	cout << st.canVisitAllRooms5(rooms2) << noboolalpha << endl;
 	return 0;
 }
