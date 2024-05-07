@@ -2,8 +2,8 @@
 #include <vector>
 using namespace std;
 
-//ç»™å®šä¸€ä¸ªå›¾ï¼Œè¿™ä¸ªå›¾æ˜¯äºŒå‰æ ‘ä¸­æ·»åŠ ä¸€æ¡è¾¹å½¢æˆçš„ï¼Œæœ‰ç¯çš„å›¾ï¼Œç°åœ¨è¦æ‰¾å‡ºè¿™æ¡è¾¹ï¼Œè®©è¿™ä¸ªå›¾é‡æ–°å˜å›æ ‘
-//å› ä¸ºæ˜¯ä¸€ä¸ªå›¾å˜æˆçš„ï¼Œæ‰€ä»¥åº”è¯¥éƒ½æœ‰ä¸€ä¸ªå…¬å…±çš„æ ¹èŠ‚ç‚¹ï¼Œä»å¤´å¼€å§‹éå†æ‰€æœ‰çš„è¾¹ï¼Œå¦‚æœæœ‰ä¸€æ¡è¾¹çš„ä¸¤ä¸ªèŠ‚ç‚¹çš„æ ¹èŠ‚ç‚¹ç›¸åŒï¼Œè¯´æ˜è¿™æ¡è¾¹çš„ä¸¤ä¸ªèŠ‚ç‚¹éƒ½å·²ç»åœ¨æ ‘é‡Œäº†ï¼Œå¦‚æœæ­¤æ—¶å†æŠŠä¸¤ä¸ªèŠ‚ç‚¹è¿èµ·æ¥å°±ä¼šå½¢æˆç¯ã€‚
+//¸ø¶¨Ò»¸öÍ¼£¬Õâ¸öÍ¼ÊÇ¶ş²æÊ÷ÖĞÌí¼ÓÒ»Ìõ±ßĞÎ³ÉµÄ£¬ÓĞ»·µÄÍ¼£¬ÏÖÔÚÒªÕÒ³öÕâÌõ±ß£¬ÈÃÕâ¸öÍ¼ÖØĞÂ±ä»ØÊ÷
+//ÒòÎªÊÇÒ»¸öÍ¼±ä³ÉµÄ£¬ËùÒÔÓ¦¸Ã¶¼ÓĞÒ»¸ö¹«¹²µÄ¸ù½Úµã£¬´ÓÍ·¿ªÊ¼±éÀúËùÓĞµÄ±ß£¬Èç¹ûÓĞÒ»Ìõ±ßµÄÁ½¸ö½ÚµãµÄ¸ù½ÚµãÏàÍ¬£¬ËµÃ÷ÕâÌõ±ßµÄÁ½¸ö½Úµã¶¼ÒÑ¾­ÔÚÊ÷ÀïÁË£¬Èç¹û´ËÊ±ÔÙ°ÑÁ½¸ö½ÚµãÁ¬ÆğÀ´¾Í»áĞÎ³É»·¡£
 
 class Solution {
 public:
@@ -44,12 +44,57 @@ private:
 	}
 };
 
+//µÚ¶ş´Î×ö
+class Solution1 {
+public:
+	vector<int> findRedundantConnection(vector<vector<int>>& edges) {
+		vector<int> res;
+		init();
+		for (int i = 0; i < edges.size(); i++) {
+			if (isSame(edges[i][0], edges[i][1]))
+				res = edges[i];
+			else
+				join(edges[i][0], edges[i][1]);
+		}
+		return res;
+	}
+
+	int n = 1001;
+	vector<int> father = vector<int>(n, 0);
+	void init() {
+		for (int i = 0; i < n; i++)
+			father[i] = i;
+	}
+	int find(int u) { return u == father[u] ? u : father[u] = find(father[u]); }
+	bool isSame(int u, int v) {
+		u = find(u);
+		v = find(v);
+		return u == v;
+	}
+	void join(int u, int v) {
+		u = find(u);
+		v = find(v);
+		if (u == v)
+			return;
+		father[v] = u;
+	}
+};
+
 int main() {
 	Solution st;
 	vector<vector<int>> edges = { {1, 2},{2, 3},{3, 4},{1, 4},{1, 5} };
 	vector<int> res = st.findRedundantConnection(edges);
 	if (!res.empty()) {
 		for (int i : res)
+			cout << i << "  ";
+	}
+	cout << endl;
+	cout << "------------------" << endl;
+
+	Solution1 st1;
+	vector<int> res1 = st1.findRedundantConnection(edges);
+	if (!res1.empty()) {
+		for (int i : res1)
 			cout << i << "  ";
 	}
 	return 0;

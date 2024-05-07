@@ -2,13 +2,13 @@
 #include <vector>
 using namespace std;
 
-//ç»™å®šä¸€ä¸ªäºŒç»´æ•°ç»„edgesï¼Œedges[i]={u,v}è¡¨ç¤ºèŠ‚ç‚¹uå’ŒèŠ‚ç‚¹vä¹‹é—´å­˜åœ¨ä¸€æ¡è¾¹ï¼Œè€Œä¸”æ˜¯åŒå‘è¾¹ï¼Œè€Œä¸”æ¯ä¸ªé¡¶ç‚¹æ²¡æœ‰æŒ‡å‘è‡ªèº«çš„è¾¹
-//è¿”å›sourceå’Œdestinationä¹‹é—´æ˜¯å¦å­˜åœ¨è·¯å¾„
-//è¿™ä¸ªé¢˜æ˜¯ç”¨å¹¶æŸ¥é›†åš
+//¸ø¶¨Ò»¸ö¶şÎ¬Êı×éedges£¬edges[i]={u,v}±íÊ¾½ÚµãuºÍ½ÚµãvÖ®¼ä´æÔÚÒ»Ìõ±ß£¬¶øÇÒÊÇË«Ïò±ß£¬¶øÇÒÃ¿¸ö¶¥µãÃ»ÓĞÖ¸Ïò×ÔÉíµÄ±ß
+//·µ»ØsourceºÍdestinationÖ®¼äÊÇ·ñ´æÔÚÂ·¾¶
+//Õâ¸öÌâÊÇÓÃ²¢²é¼¯×ö
 
 class Solution {
 public:
-	//ä¸‹è¾¹è¿™ä¸ªæ˜¯ä¸€å¼€å§‹æˆ‘å†™çš„ä»£ç ï¼Œä½†æ˜¯ä¸è¡Œï¼Œå› ä¸ºä¸€å¼€å§‹æˆ‘ä»¥ä¸ºedges[i]å°±æ˜¯ä»iå¼•å‡ºçš„ä¸€æ¡è¾¹ï¼Œè¿™æ ·å°±èƒ½é¡ºç€è¿™æ¡è¾¹ä¸€ç›´æ‰¾ä¸‹å»ï¼Œåæ¥å‡ºé”™äº†æ‰æ˜ç™½ä¸æ˜¯è¿™æ ·ã€‚edgesæ•°ç»„é‡Œå°±æ˜¯å­˜çš„æ‰€æœ‰è¾¹ã€‚
+	//ÏÂ±ßÕâ¸öÊÇÒ»¿ªÊ¼ÎÒĞ´µÄ´úÂë£¬µ«ÊÇ²»ĞĞ£¬ÒòÎªÒ»¿ªÊ¼ÎÒÒÔÎªedges[i]¾ÍÊÇ´ÓiÒı³öµÄÒ»Ìõ±ß£¬ÕâÑù¾ÍÄÜË³×ÅÕâÌõ±ßÒ»Ö±ÕÒÏÂÈ¥£¬ºóÀ´³ö´íÁË²ÅÃ÷°×²»ÊÇÕâÑù¡£edgesÊı×éÀï¾ÍÊÇ´æµÄËùÓĞ±ß¡£
 	/*bool validPath(int n, vector<vector<int>>& edges, int source, int destination) {
 		int begin = source;
 		for (int i = 0; i < edges.size(); i++) {
@@ -55,9 +55,46 @@ private:
 	}
 };
 
+//µÚ¶ş´Î×ö
+class Solution1 {
+public:
+	bool validPath(int n, vector<vector<int>>& edges, int source,
+		int destination) {
+		init();
+		for (int i = 0; i < edges.size(); i++)
+			join(edges[i][0], edges[i][1]);
+
+		return isSame(source, destination);
+	}
+
+	int n = 200001;
+	vector<int> father = vector<int>(n, 0);
+	void init() {
+		for (int i = 0; i < n; i++) {
+			father[i] = i;
+		}
+	}
+	int find(int u) { return u == father[u] ? u : father[u] = find(father[u]); }
+
+	bool isSame(int u, int v) {
+		u = find(u);
+		v = find(v);
+		return u == v;
+	}
+
+	void join(int u, int v) {
+		u = find(u);
+		v = find(v);
+		if (u == v)
+			return;
+		father[v] = u;
+	}
+};
 int main() {
 	Solution st;
 	vector<vector<int>> edges{ {0, 1},{0, 2},{3, 5},{5, 4},{4, 3} };
 	cout << boolalpha << st.validPath(6, edges, 0, 5) << noboolalpha << endl;
+	Solution1 st1;
+	cout << boolalpha << st1.validPath(6, edges, 0, 5) << noboolalpha << endl;
 	return 0;
 }

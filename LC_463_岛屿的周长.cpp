@@ -3,8 +3,8 @@
 #include <queue>
 using namespace std;
 
-//ç»™å®šä¸€ä¸ªæ•°ç»„ï¼Œæ•°ç»„ä¸­çš„1è¡¨ç¤ºé™†åœ°ï¼Œ0è¡¨ç¤ºæ°´ã€‚å…¶ä¸­æœ‰ä¸”ä»…æœ‰ä¸€å—ç”±é™†åœ°ç»„æˆçš„å²›å±¿ï¼Œæ±‚è¯¥å²›å±¿çš„å‘¨é•¿ã€‚
-//åŒæ ·ä¹Ÿåˆ†ä¸ºbfså’Œdfsä¸¤ç§ç‰ˆæœ¬ï¼Œç»™é˜Ÿåˆ—ä¸­çš„æ¯ä¸€ä¸ªå…ƒç´ éƒ½count+=4ï¼Œå¦‚æœè¯¥å—é™†åœ°çš„å››ä¸ªä¸´è¾¹ï¼Œæœ‰ä¸€ä¸ªæ˜¯å²›å±¿çš„è¯å°±count--ï¼Œè€Œå¦‚æœæ˜¯è¾¹ç•Œçš„è¯å°±ä¸ç”¨ç®¡ã€‚
+//¸ø¶¨Ò»¸öÊı×é£¬Êı×éÖĞµÄ1±íÊ¾Â½µØ£¬0±íÊ¾Ë®¡£ÆäÖĞÓĞÇÒ½öÓĞÒ»¿éÓÉÂ½µØ×é³ÉµÄµºÓì£¬Çó¸ÃµºÓìµÄÖÜ³¤¡£
+//Í¬ÑùÒ²·ÖÎªbfsºÍdfsÁ½ÖÖ°æ±¾£¬¸ø¶ÓÁĞÖĞµÄÃ¿Ò»¸öÔªËØ¶¼count+=4£¬Èç¹û¸Ã¿éÂ½µØµÄËÄ¸öÁÙ±ß£¬ÓĞÒ»¸öÊÇµºÓìµÄ»°¾Ícount--£¬¶øÈç¹ûÊÇ±ß½çµÄ»°¾Í²»ÓÃ¹Ü¡£
 
 class Solution {
 public:
@@ -34,20 +34,20 @@ public:
 		return count;
 	}
 
-	//æˆ–è€…ä¹Ÿå¯ä»¥ä¸ç”¨bfså’Œdfsï¼Œå°±éå†æ‰€æœ‰ä¸º1çš„èŠ‚ç‚¹ï¼Œç„¶åéå†å››ä¸ªæ–¹å‘ï¼Œå¯¹æ¯ä¸ªæ–¹å‘å•ç‹¬åˆ¤æ–­
+	//»òÕßÒ²¿ÉÒÔ²»ÓÃbfsºÍdfs£¬¾Í±éÀúËùÓĞÎª1µÄ½Úµã£¬È»ºó±éÀúËÄ¸ö·½Ïò£¬¶ÔÃ¿¸ö·½Ïòµ¥¶ÀÅĞ¶Ï
 	int islandPerimeter2(vector<vector<int>>& grid) {
 		int result = 0;
 		for (int i = 0; i < grid.size(); i++) {
 			for (int j = 0; j < grid[0].size(); j++) {
 				if (grid[i][j] == 1) {
-					for (int k = 0; k < 4; k++) {       // ä¸Šä¸‹å·¦å³å››ä¸ªæ–¹å‘
+					for (int k = 0; k < 4; k++) {       // ÉÏÏÂ×óÓÒËÄ¸ö·½Ïò
 						int x = i + dir[k][0];
-						int y = j + dir[k][1];    // è®¡ç®—å‘¨è¾¹åæ ‡x,y
-						if (x < 0                       // iåœ¨è¾¹ç•Œä¸Š
-							|| x >= grid.size()     // iåœ¨è¾¹ç•Œä¸Š
-							|| y < 0                // jåœ¨è¾¹ç•Œä¸Š
-							|| y >= grid[0].size()  // jåœ¨è¾¹ç•Œä¸Š
-							|| grid[x][y] == 0) {   // x,yä½ç½®æ˜¯æ°´åŸŸ
+						int y = j + dir[k][1];    // ¼ÆËãÖÜ±ß×ø±êx,y
+						if (x < 0                       // iÔÚ±ß½çÉÏ
+							|| x >= grid.size()     // iÔÚ±ß½çÉÏ
+							|| y < 0                // jÔÚ±ß½çÉÏ
+							|| y >= grid[0].size()  // jÔÚ±ß½çÉÏ
+							|| grid[x][y] == 0) {   // x,yÎ»ÖÃÊÇË®Óò
 							result++;
 						}
 					}
@@ -57,19 +57,19 @@ public:
 		return result;
 	}
 
-	//è¿™æ˜¯ä»£ç éšæƒ³å½•æçš„å¦ä¸€ç§æ–¹æ³•ï¼Œåªè¦æœ‰ä¸¤ä¸ªé™†åœ°æŒ¨ç€ï¼Œè¾¹æ•°å°±å¾—å‡2ã€‚å°±åˆ†å¼€ç»Ÿè®¡æœ‰å¤šå°‘å—é™†åœ°å’Œå¤šå°‘ä¸ªæŒ¨ç€çš„ã€‚
+	//ÕâÊÇ´úÂëËæÏëÂ¼ÌáµÄÁíÒ»ÖÖ·½·¨£¬Ö»ÒªÓĞÁ½¸öÂ½µØ°¤×Å£¬±ßÊı¾ÍµÃ¼õ2¡£¾Í·Ö¿ªÍ³¼ÆÓĞ¶àÉÙ¿éÂ½µØºÍ¶àÉÙ¸ö°¤×ÅµÄ¡£
 	int islandPerimeter3(vector<vector<int>>& grid) {
-		int sum = 0;    // é™†åœ°æ•°é‡
-		int cover = 0;  // ç›¸é‚»æ•°é‡
+		int sum = 0;    // Â½µØÊıÁ¿
+		int cover = 0;  // ÏàÁÚÊıÁ¿
 		for (int i = 0; i < grid.size(); i++) {
 			for (int j = 0; j < grid[0].size(); j++) {
 				if (grid[i][j] == 1) {
 					sum++;
-					// ç»Ÿè®¡ä¸Šè¾¹ç›¸é‚»é™†åœ°
+					// Í³¼ÆÉÏ±ßÏàÁÚÂ½µØ
 					if (i - 1 >= 0 && grid[i - 1][j] == 1) cover++;
-					// ç»Ÿè®¡å·¦è¾¹ç›¸é‚»é™†åœ°
+					// Í³¼Æ×ó±ßÏàÁÚÂ½µØ
 					if (j - 1 >= 0 && grid[i][j - 1] == 1) cover++;
-					// ä¸ºä»€ä¹ˆæ²¡ç»Ÿè®¡ä¸‹è¾¹å’Œå³è¾¹ï¼Ÿ å› ä¸ºé¿å…é‡å¤è®¡ç®—ï¼Œæœ€å³ä¸‹çš„èŠ‚ç‚¹çš„å³è¾¹å’Œä¸‹è¾¹è‚¯å®šæ˜¯ä¸ä¼šæœ‰æŒ¨ç€çš„ï¼Œæ‰€æœ‰ä¸ç”¨è€ƒè™‘
+					// ÎªÊ²Ã´Ã»Í³¼ÆÏÂ±ßºÍÓÒ±ß£¿ ÒòÎª±ÜÃâÖØ¸´¼ÆËã£¬×îÓÒÏÂµÄ½ÚµãµÄÓÒ±ßºÍÏÂ±ß¿Ï¶¨ÊÇ²»»áÓĞ°¤×ÅµÄ£¬ËùÓĞ²»ÓÃ¿¼ÂÇ
 				}
 			}
 		}
@@ -116,6 +116,76 @@ private:
 			}
 		}
 	}
+
+	//µÚ¶ş´Î×ö
+		//ÓÃdfsºÍbfs¶¼ĞĞ£¬Ö÷ÒªÊÇ¿´Ê²Ã´Çé¿öÏÂ»áÓĞ±ß£¬Ö÷ÒªÓĞÎåÖÖ£¬Ç°ËÄÖÖÊÇµ±Ç°Î»ÖÃµÄËÄÌõ±ßÓĞ°¤×Å±ß½çµÄ£¬Ò²¾ÍÊÇËÄ¸ö·½ÏòÓĞÔ½½çµÄ£»
+		// µÚÎåÖÖÊÇËÄ¸ö·½ÏòÓĞgrid[next_x][next_y]==0µÄÇé¿ö£¬»á²úÉúÒ»Ìõ±ß
+		// µ½ÕâÎÒÍ»È»Ïëµ½¿ÉÒÔ±éÀúÃ¿¸öÎ»ÖÃ£¬ÅĞ¶ÏËüµÄËÄ¸ö·½ÏòÓĞÃ»ÓĞ³öÏÖÉÏ±ßÎåÖÖÇé¿ö¾Í¿ÉÒÔ
+public:
+	int islandPerimeter4(vector<vector<int>>& grid) {
+		int count = 0;
+		vector<vector<bool>> visited(grid.size(),
+			vector<bool>(grid[0].size(), false));
+		for (int i = 0; i < grid.size(); i++)
+			for (int j = 0; j < grid[0].size(); j++)
+				if (grid[i][j] == 1 && visited[i][j] == false)
+					dfs1(grid, visited, i, j, count);
+
+		return count;
+	}
+	void dfs1(vector<vector<int>>& grid, vector<vector<bool>>& visited, int x,
+		int y, int& count) {
+		visited[x][y] = true;
+		for (int i = 0; i < 4; i++) {
+			int next_x = x + dir[i][0];
+			int next_y = y + dir[i][1];
+			if (next_x < 0 || next_x >= grid.size() || next_y < 0 ||
+				next_y >= grid[0].size() || grid[next_x][next_y] == 0) {
+				count++;
+				continue;
+			}
+			if (grid[next_x][next_y] == 1 && visited[next_x][next_y] == false)
+				dfs1(grid, visited, next_x, next_y, count);
+		}
+	}
+
+	//Ö±½Ó±éÀúËùÓĞ½Úµã£¬ÅĞ¶ÏËÄÖÜÊÇ·ñÓĞÒÔÉÏÎåÖÖÇé¿ö
+	int islandPerimeter5(vector<vector<int>>& grid) {
+		int count = 0;
+
+		for (int i = 0; i < grid.size(); i++)
+			for (int j = 0; j < grid[0].size(); j++)
+				if (grid[i][j] == 1) {
+					for (int k = 0; k < 4; k++) {
+						int next_x = i + dir[k][0];
+						int next_y = j + dir[k][1];
+						if (next_x < 0 || next_x >= grid.size() || next_y < 0 ||
+							next_y >= grid[0].size() ||
+							grid[next_x][next_y] == 0)
+							count++;
+					}
+				}
+
+		return count;
+	}
+
+	//´úÂëËæÏëÂ¼µÄ·½·¨£¬²»Ì«ºÃÏëµ½
+	int islandPerimeter6(vector<vector<int>>& grid) {
+		int island = 0;  //Í³¼ÆÂ½µØÊıÁ¿
+		int cover = 0;   //Í³¼ÆÏàÁÚµÄÊıÁ¿
+		for (int i = 0; i < grid.size(); i++) {
+			for (int j = 0; j < grid[0].size(); j++) {
+				if (grid[i][j] == 1) {
+					island++;
+					if (i - 1 >= 0 && grid[i - 1][j] == 1)
+						cover++;
+					if (j - 1 >= 0 && grid[i][j - 1] == 1)
+						cover++;
+				}
+			}
+		}
+		return island * 4 - cover * 2;
+	}
 };
 
 int main() {
@@ -125,5 +195,8 @@ int main() {
 	cout << st.islandPerimeter1(grid) << endl;
 	cout << st.islandPerimeter2(grid) << endl;
 	cout << st.islandPerimeter3(grid) << endl;
+	cout << st.islandPerimeter4(grid) << endl;
+	cout << st.islandPerimeter5(grid) << endl;
+	cout << st.islandPerimeter6(grid) << endl;
 	return 0;
 }
