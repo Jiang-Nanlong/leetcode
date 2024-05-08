@@ -2,15 +2,15 @@
 #include <vector>
 using namespace std;
 
-//é¢˜æ„æ˜¯ç»™å®šä¸€ä¸ªäºŒå‰æ ‘ï¼Œæ•°ä¸­çš„æ¯æ¡è¾¹éƒ½æ˜¯æœ‰å‘è¾¹ï¼Œçˆ¶èŠ‚ç‚¹æŒ‡å‘å¶èŠ‚ç‚¹ã€‚ç„¶åŽäºŒå‰æ ‘ä¸­å¤šäº†ä¸€æ¡è¾¹ï¼Œä½¿å¾—äºŒå‰æ ‘å˜æˆäº†æœ‰å‘å›¾ï¼ŒçŽ°åœ¨éœ€è¦æ‰¾å‡ºè¿™æ¡è¾¹
-//å¦‚æžœæœ‰å¤šæ¡è¾¹æ»¡è¶³é¢˜æ„ï¼Œè¿”å›žæœ€åŽå‡ºçŽ°çš„è¾¹ã€‚
-//edgesæ˜¯ä¸€ä¸ªäºŒç»´æ•°ç»„ï¼Œedges[i]={uï¼Œv}ï¼Œè¡¨ç¤ºuæŒ‡å‘vçš„ä¸€æ¡è¾¹
+//ÌâÒâÊÇ¸ø¶¨Ò»¸ö¶þ²æÊ÷£¬ÊýÖÐµÄÃ¿Ìõ±ß¶¼ÊÇÓÐÏò±ß£¬¸¸½ÚµãÖ¸ÏòÒ¶½Úµã¡£È»ºó¶þ²æÊ÷ÖÐ¶àÁËÒ»Ìõ±ß£¬Ê¹µÃ¶þ²æÊ÷±ä³ÉÁËÓÐÏòÍ¼£¬ÏÖÔÚÐèÒªÕÒ³öÕâÌõ±ß
+//Èç¹ûÓÐ¶àÌõ±ßÂú×ãÌâÒâ£¬·µ»Ø×îºó³öÏÖµÄ±ß¡£
+//edgesÊÇÒ»¸ö¶þÎ¬Êý×é£¬edges[i]={u£¬v}£¬±íÊ¾uÖ¸ÏòvµÄÒ»Ìõ±ß
 
-//è¿™ä¸ªé¢˜æ˜¯çœŸéš¾ï¼Œæˆ‘æ€Žä¹ˆä¹Ÿæƒ³ä¸åˆ°å’Œå¹¶æŸ¥é›†æœ‰å…³ç³»ã€‚åŽæ¥çœ‹äº†ç­”æ¡ˆæ‰çŸ¥é“ï¼Œä¸€ä¸ªæ ‘è¦å˜æˆå›¾ï¼Œæ— éžä¸¤ç§æƒ…å†µï¼Œç¬¬ä¸€ç§æ˜¯æ ‘ä¸­çš„æŸä¸ªèŠ‚ç‚¹åœ¨æ·»åŠ äº†ä¸€æ¡è¾¹ä»¥åŽï¼Œå˜æˆäº†å…¥åº¦ä¸º2çš„äº†ã€‚
-//ç¬¬äºŒç§æƒ…å†µæ˜¯æ ‘ä¸­å­˜åœ¨ä¸€ä¸ªçŽ¯ã€‚
-//å…¥åº¦ä¸º2çš„æƒ…å†µï¼Œé€šè¿‡ç»Ÿè®¡æ¯ä¸ªèŠ‚ç‚¹çš„å…¥åº¦æƒ…å†µï¼Œæ‰¾å‡ºè¿žæŽ¥åœ¨å…¥åº¦ä¸º2çš„èŠ‚ç‚¹ä¸Šçš„è¾¹ï¼Œç„¶åŽä¾æ¬¡åˆ é™¤è¿™äº›è¾¹ï¼Œåˆ¤æ–­åˆ é™¤åŽçš„å›¾æ˜¯å¦æž„æˆä¸€ä¸ªäºŒå‰æ ‘ã€‚åˆ¤æ–­æ˜¯å¦æ˜¯æ ‘å¯ä»¥é€šè¿‡å¹¶æŸ¥é›†æ¥å®žçŽ°ã€‚
-//å­˜åœ¨çŽ¯çš„æƒ…å†µï¼Œä»…ä»…ä½¿ç”¨å¹¶æŸ¥é›†å°±è¡Œï¼Œå¦‚æžœå½“å‰è¾¹çš„ä¸¤ä¸ªèŠ‚ç‚¹éƒ½åœ¨å¹¶æŸ¥é›†å†…ï¼Œè€Œä¸”è¿™ä¸¤ä¸ªèŠ‚ç‚¹çš„æ ¹èŠ‚ç‚¹ä¸€æ ·ï¼Œé‚£ä¹ˆè¿™æ¡è¾¹å°±æ˜¯æˆ‘ä»¬è¦æ‰¾çš„ï¼Œå› ä¸ºè¿™ä¸¤ä¸ªèŠ‚ç‚¹å·²ç»æŒ‡å‘åŒä¸€ä¸ªæ ¹èŠ‚ç‚¹äº†ï¼ŒçŽ°åœ¨åˆæƒ³ç”¨ä¸€æ¡è¾¹æŠŠä»–ä¿©è¿žèµ·æ¥ï¼Œé‚£è‚¯å®šæ˜¯å‡ºé”™äº†ã€‚
-//è¿™ä¸ªé¢˜çœŸéš¾ã€‚
+//Õâ¸öÌâÊÇÕæÄÑ£¬ÎÒÔõÃ´Ò²Ïë²»µ½ºÍ²¢²é¼¯ÓÐ¹ØÏµ¡£ºóÀ´¿´ÁË´ð°¸²ÅÖªµÀ£¬Ò»¸öÊ÷Òª±ä³ÉÍ¼£¬ÎÞ·ÇÁ½ÖÖÇé¿ö£¬µÚÒ»ÖÖÊÇÊ÷ÖÐµÄÄ³¸ö½ÚµãÔÚÌí¼ÓÁËÒ»Ìõ±ßÒÔºó£¬±ä³ÉÁËÈë¶ÈÎª2µÄÁË¡£
+//µÚ¶þÖÖÇé¿öÊÇÊ÷ÖÐ´æÔÚÒ»¸ö»·¡£
+//Èë¶ÈÎª2µÄÇé¿ö£¬Í¨¹ýÍ³¼ÆÃ¿¸ö½ÚµãµÄÈë¶ÈÇé¿ö£¬ÕÒ³öÁ¬½ÓÔÚÈë¶ÈÎª2µÄ½ÚµãÉÏµÄ±ß£¬È»ºóÒÀ´ÎÉ¾³ýÕâÐ©±ß£¬ÅÐ¶ÏÉ¾³ýºóµÄÍ¼ÊÇ·ñ¹¹³ÉÒ»¸ö¶þ²æÊ÷¡£ÅÐ¶ÏÊÇ·ñÊÇÊ÷¿ÉÒÔÍ¨¹ý²¢²é¼¯À´ÊµÏÖ¡£
+//´æÔÚ»·µÄÇé¿ö£¬½ö½öÊ¹ÓÃ²¢²é¼¯¾ÍÐÐ£¬Èç¹ûµ±Ç°±ßµÄÁ½¸ö½Úµã¶¼ÔÚ²¢²é¼¯ÄÚ£¬¶øÇÒÕâÁ½¸ö½ÚµãµÄ¸ù½ÚµãÒ»Ñù£¬ÄÇÃ´ÕâÌõ±ß¾ÍÊÇÎÒÃÇÒªÕÒµÄ£¬ÒòÎªÕâÁ½¸ö½ÚµãÒÑ¾­Ö¸ÏòÍ¬Ò»¸ö¸ù½ÚµãÁË£¬ÏÖÔÚÓÖÏëÓÃÒ»Ìõ±ß°ÑËûÁ©Á¬ÆðÀ´£¬ÄÇ¿Ï¶¨ÊÇ³ö´íÁË¡£
+//Õâ¸öÌâÕæÄÑ¡£
 
 class Solution {
 public:
@@ -20,25 +20,25 @@ public:
 		for (int i = 0; i < n; i++) {
 			inDegree[edges[i][1]]++;
 		}
-		vector<int> vec;  //è®°å½•è¿žæŽ¥åœ¨å…¥åº¦ä¸º2çš„èŠ‚ç‚¹ä¸Šçš„è¾¹åœ¨edgesæ•°ç»„ä¸­çš„ç´¢å¼•
-		for (int i = n - 1; i >= 0; i--) {   //å› ä¸ºå­˜åœ¨å¤šæ¡è¾¹çš„æ—¶å€™è¿”å›žæœ€åŽä¸€æ¡ï¼Œæ‰€ä»¥è¿™é‡Œé€†åºéåŽ†ï¼Œæ‰¾å‡ºä¸¤æ¡æŒ‡å‘åŒä¸€ä¸ªèŠ‚ç‚¹çš„è¾¹
+		vector<int> vec;  //¼ÇÂ¼Á¬½ÓÔÚÈë¶ÈÎª2µÄ½ÚµãÉÏµÄ±ßÔÚedgesÊý×éÖÐµÄË÷Òý
+		for (int i = n - 1; i >= 0; i--) {   //ÒòÎª´æÔÚ¶àÌõ±ßµÄÊ±ºò·µ»Ø×îºóÒ»Ìõ£¬ËùÒÔÕâÀïÄæÐò±éÀú£¬ÕÒ³öÁ½ÌõÖ¸ÏòÍ¬Ò»¸ö½ÚµãµÄ±ß
 			if (inDegree[edges[i][1]] == 2)
 				vec.push_back(i);
 		}
 		if (vec.size() > 0) {
-			if (isTreeAfterRemoveEdge(edges, vec[0]))  //å…ˆä½¿ç”¨ä¸åŒ…å«vec[0]çš„è¾¹çš„æ•°ç»„æž„é€ å¹¶æŸ¥é›†ï¼Œåˆ¤æ–­æ˜¯å¦èƒ½æž„æˆä¸€æ£µæ ‘
+			if (isTreeAfterRemoveEdge(edges, vec[0]))  //ÏÈÊ¹ÓÃ²»°üº¬vec[0]µÄ±ßµÄÊý×é¹¹Ôì²¢²é¼¯£¬ÅÐ¶ÏÊÇ·ñÄÜ¹¹³ÉÒ»¿ÃÊ÷
 				return edges[vec[0]];
 			else
 				return edges[vec[1]];
 		}
 
-		return getRemoveEdge(edges);  //å¦‚æžœè¿è¡Œåˆ°è¿™ï¼Œè¯´æ˜Žé¢˜ç›®å¤šçš„é‚£æ¡è¾¹ä¸æ˜¯å› ä¸ºå…¥åº¦ä¸º2ï¼Œè€Œæ˜¯å› ä¸ºå½¢æˆäº†çŽ¯
+		return getRemoveEdge(edges);  //Èç¹ûÔËÐÐµ½Õâ£¬ËµÃ÷ÌâÄ¿¶àµÄÄÇÌõ±ß²»ÊÇÒòÎªÈë¶ÈÎª2£¬¶øÊÇÒòÎªÐÎ³ÉÁË»·
 	}
 
 private:
-	static const int N = 1001; // èŠ‚ç‚¹æ•°
+	static const int N = 1001; // ½ÚµãÊý
 	vector<int> father = vector<int>(N, 0);
-	int n; // è¾¹æ•°
+	int n; // ±ßÊý
 	void init() {
 		for (int i = 0; i < n; i++) {
 			father[i] = i;
@@ -62,7 +62,7 @@ private:
 	bool isTreeAfterRemoveEdge(vector<vector<int>>& edges, int deleteEdge) {
 		init();
 		for (int i = 0; i < n; i++) {
-			if (i == deleteEdge)   //ä½¿ç”¨edgesæ•°ç»„ä¸­é™¤äº†deleteEdgeè¿™æ¡è¾¹ä¹‹å¤–çš„å…¶ä»–è¾¹æ¥æž„é€ æ ‘ï¼Œçœ‹æ˜¯å¦èƒ½æž„é€ æˆåŠŸ
+			if (i == deleteEdge)   //Ê¹ÓÃedgesÊý×éÖÐ³ýÁËdeleteEdgeÕâÌõ±ßÖ®ÍâµÄÆäËû±ßÀ´¹¹ÔìÊ÷£¬¿´ÊÇ·ñÄÜ¹¹Ôì³É¹¦
 				continue;
 			if (isSame(edges[i][0], edges[i][1]))
 				return false;
@@ -71,7 +71,7 @@ private:
 		return true;
 	}
 
-	vector<int> getRemoveEdge(vector<vector<int>>& edges) {   //æ ¹æ®edgesæ•°ç»„æž„é€ è¿™æ£µæ ‘ï¼Œçœ‹çœ‹å“ªæ¡è¾¹ä¸­çš„ä¸¤ä¸ªèŠ‚ç‚¹åœ¨æ ‘ä¸­å·²ç»å­˜åœ¨ï¼Œè€Œä¸”å…·æœ‰ç›¸åŒçš„æ ¹èŠ‚ç‚¹ï¼Œé‚£ä¹ˆç»“æžœå°±æ˜¯å“ªæ¡è¾¹
+	vector<int> getRemoveEdge(vector<vector<int>>& edges) {   //¸ù¾ÝedgesÊý×é¹¹ÔìÕâ¿ÃÊ÷£¬¿´¿´ÄÄÌõ±ßÖÐµÄÁ½¸ö½ÚµãÔÚÊ÷ÖÐÒÑ¾­´æÔÚ£¬¶øÇÒ¾ßÓÐÏàÍ¬µÄ¸ù½Úµã£¬ÄÇÃ´½á¹û¾ÍÊÇÄÄÌõ±ß
 		init();
 		for (int i = 0; i < n; i++) {
 			if (isSame(edges[i][0], edges[i][1]))
@@ -82,11 +82,93 @@ private:
 	}
 };
 
+// µÚ¶þ´Î×ö£¬»¹ÊÇ²»»á£¬Õâ¸öÌâÌ«ÄÑÁË
+// ÌâÄ¿µÄÒâË¼ÊÇÔ­±¾ÊÇÒ»¿ÃÊ÷£¬È»ºóÆäÖÐ¼ÓÁËÒ»Ìõ±ß¾Í³ÉÁËÍ¼ÁË£¬ÏÖÔÚÒªÕÒ³öÕâÌõ±ß¡£Èç¹ûÓÐÁ½Ìõ±ß¿ÉÒÔÉ¾³ý£¬ÄÇÃ´¾ÍÉ¾³ýºó±ß³öÏÖµÄÄÇÌõ±ß
+// ´ð°¸ÖÐÌÖÂÛÁËÁ½ÖÖÇé¿ö£¬Ò»ÖÖÊÇÍ¼ÖÐÄ³¸ö½ÚµãµÄÈë¶ÈÎª2£¬ÄÇÃ´Á¬½Óµ½¸Ã½ÚµãµÄÁ½Ìõ±ß¿Ï¶¨ÓÐÒ»ÌõÊÇ´ð°¸£»ÁíÒ»ÖÖÇé¿öÊÇÍ¼ÖÐÓÐ»·£¬ÕâÖÖÇé¿öÖ»ÄÜÓÃ²¢²é¼¯À´ÕÒ¡£
+// ÔÚµÚÒ»ÖÖÇé¿öÖÐ£¬É¾³ýÒ»Ìõ±ßÒÔºóÒªÅÐ¶ÏÍ¼ÊÇ·ñ±äÎªÒ»¿ÃÊ÷£¬Ò²ÊÇÒªÓÃ²¢²é¼¯À´×ö¡£
+
+class Solution1 {
+public:
+	vector<int> findRedundantDirectedConnection(vector<vector<int>>& edges) {
+		int inDegree[N] = { 0 };
+		edgesNum = edges.size();
+		for (int i = 0; i < edgesNum; i++)
+			inDegree[edges[i][1]]++;
+
+		vector<int> vec;
+		for (int i = edgesNum - 1; i >= 0; i--) {
+			if (inDegree[edges[i][1]] == 2)
+				vec.push_back(i);
+		}
+		if (vec.size() > 0) {
+			if (isTreeAfterRemoveEdge(edges, vec[0]))
+				return edges[vec[0]];
+			else
+				return edges[vec[1]];
+		}
+
+		return getRemoveEdge(edges);
+	}
+
+private:
+	static const int N = 1001;
+	vector<int> father = vector<int>(N, 0);
+	int edgesNum;
+
+	void init() {
+		for (int i = 0; i < N; i++)
+			father[i] = i;
+	}
+
+	int find(int u) { return u == father[u] ? u : father[u] = find(father[u]); }
+
+	bool isSame(int u, int v) {
+		u = find(u);
+		v = find(v);
+		return u == v;
+	}
+
+	void join(int u, int v) {
+		u = find(u);
+		v = find(v);
+		if (u == v)
+			return;
+		father[v] = u;
+	}
+
+	vector<int> getRemoveEdge(vector<vector<int>>& edges) {  //ÓÃÀ´´¦ÀíÍ¼ÖÐ°üº¬»·µÄÇé¿ö£¬Ò»µ©ÕÒµ½Ä³Ìõ±ßµÄ½Úµã¶¼ÒÑ¾­ÔÚ²¢²é¼¯ÖÐ£¬¾Í·µ»ØÕâÌõ±ß
+		init();
+		for (int i = 0; i < edgesNum; i++) {
+			if (isSame(edges[i][0], edges[i][1]))
+				return edges[i];
+			join(edges[i][0], edges[i][1]);
+		}
+		return {};
+	}
+
+	bool isTreeAfterRemoveEdge(vector<vector<int>>& edges, int deleteEdge) { //ÅÐ¶ÏÒÆ³ýµÚdeleteEdgeÌõ±ßÒÔºó£¬Í¼ÊÇ·ñ±ä³ÉÁËÊ÷
+		init();
+		for (int i = 0; i < edgesNum; i++) {
+			if (i == deleteEdge)
+				continue;
+			if (isSame(edges[i][0], edges[i][1]))
+				return false;
+			join(edges[i][0], edges[i][1]);
+		}
+		return true;
+	}
+};
+
 int main() {
 	Solution st;
 	vector<vector<int>> edges{ {1, 2},{2, 3},{3, 4},{4, 1},{1, 5} };
 	vector<int> res = st.findRedundantDirectedConnection(edges);
 	if (res.size() > 0)
 		cout << res[0] << "  " << res[1] << endl;
+	cout << "-----------" << endl;
+	Solution1 st1;
+	vector<int> res1 = st1.findRedundantDirectedConnection(edges);
+	if (res1.size() > 0)
+		cout << res1[0] << "  " << res1[1] << endl;
 	return 0;
 }
