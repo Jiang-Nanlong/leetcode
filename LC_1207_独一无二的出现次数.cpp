@@ -5,6 +5,7 @@
 #include <iostream>
 #include <algorithm>
 #include <vector>
+#include <unordered_map>
 using namespace std;
 
 class Solution
@@ -48,6 +49,44 @@ public:
         }
         return true;
     }
+
+    //第二次做
+    //统计每个元素出现的次数，然后重新排序次数，判断有没有相同的
+    bool uniqueOccurrences3(vector<int>& arr) {
+        unordered_map<int, int> umap;
+        for (int i = 0; i < arr.size(); i++)
+            umap[arr[i]]++;
+
+        vector<int> vec;
+        for (auto it = umap.begin(); it != umap.end(); it++) {
+            vec.push_back(it->second);
+        }
+        sort(vec.begin(), vec.end());
+        for (int i = 1; i < vec.size(); i++)
+            if (vec[i] == vec[i - 1])
+                return false;
+
+        return true;
+    }
+
+    //另一种做法，也是先统计每个数字出现的次数，然后用一个bool数组，统计每个次数是不是已经出现过，如果出现过就直接返回false
+    // 这个更好，既不需要重新排序，遍历的次数也更少
+    bool uniqueOccurrences4(vector<int>& arr) {
+        vector<int> count(2001, 0);    //题目提示中-1000 <= arr[i] <= 1000
+        for (int i = 0; i < arr.size(); i++)  //统计每个数字出现的次数
+            count[1000 + arr[i]]++;
+
+        vector<bool> appear(1001, false);  //题目提示1 <= arr.length <= 1000，所以每个数字的次数最大不会超过1000次
+        for (int i = 0; i < 2001; i++)   //遍历每个次数
+            if (count[i] != 0) {
+                if (appear[count[i]] == true)
+                    return false;
+                else
+                    appear[count[i]] = true;
+            }
+
+        return true;
+    }
 };
 
 int main()
@@ -55,6 +94,8 @@ int main()
     Solution st;
     vector<int> arr{1, 2, 2, 1, 1, 3};
     cout << boolalpha << st.uniqueOccurrences(arr) << endl;
-    cout << st.uniqueOccurrences2(arr) << noboolalpha << endl;
+    cout << st.uniqueOccurrences2(arr) << endl;
+    cout << st.uniqueOccurrences3(arr) << endl;
+    cout << st.uniqueOccurrences4(arr) << noboolalpha << endl;
     return 0;
 }
