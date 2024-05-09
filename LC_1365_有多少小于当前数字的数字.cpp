@@ -4,6 +4,7 @@
 #include <iostream>
 #include <algorithm>
 #include <vector>
+#include <unordered_map>
 using namespace std;
 
 class Solution {
@@ -26,6 +27,24 @@ public:
         }
         return nums;
     }
+
+    //第二次做
+    //其实就是记录重新排序后每个元素第一次出现的位置
+    vector<int> smallerNumbersThanCurrent1(vector<int>& nums) {
+        vector<int> temp(nums.begin(), nums.end());
+        sort(temp.begin(), temp.end());
+
+        unordered_map<int, int> umap;
+        for (int i = 0; i < temp.size(); i++) {
+            if (umap.count(temp[i]) == 0)
+                umap.insert({ temp[i], i });
+        }
+        vector<int> res(nums.size());
+        for (int i = 0; i < nums.size(); i++) {
+            res[i] = umap[nums[i]];
+        }
+        return res;
+    }
 };
 
 int main() {
@@ -33,6 +52,12 @@ int main() {
     vector<int> nums{ 8,1,2,2,3 };
     vector<int> res = st.smallerNumbersThanCurrent(nums);
     for (auto& i : res)
+        cout << i << "  ";
+
+    cout << endl;
+    vector<int> nums1{ 8,1,2,2,3 };
+    vector<int> res1 = st.smallerNumbersThanCurrent1(nums1);
+    for (auto& i : res1)
         cout << i << "  ";
     return 0;
 }
