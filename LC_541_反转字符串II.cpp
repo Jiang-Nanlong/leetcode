@@ -1,10 +1,11 @@
 #include <iostream>
 #include <string>
+#include <algorithm>
 using namespace std;
 
-//è¿™ä¸ªé¢˜å¼€å§‹æ²¡è¯»æ˜Žç™½ï¼ŒåŽæ¥çœ‹äº†è®¨è®ºæ‰çŸ¥é“å’‹å›žäº‹ï¼Œä½†æ˜¯çœŸè¦å†™çš„æ—¶å€™ï¼Œåˆå‘çŽ°ä¸å¤ªå¥½å†™ï¼Œè¿™å±…ç„¶æ˜¯ä¸ªç®€å•é¢˜ã€‚
-//é¢˜ç›®çš„è¦æ±‚æ˜¯ç»™å®šä¸€ä¸ªå­—ç¬¦ä¸²sï¼Œå’Œä¸€ä¸ªkï¼Œæ¯ç»„åˆ†ä¸º2kä¸ªå­—ç¬¦ï¼Œåè½¬å‰kä¸ªï¼Œæœ€åŽåˆ°è¾¾å­—ç¬¦ä¸²æœ€åŽä¸€ç»„æ—¶ï¼Œå¦‚æžœå‰©ä½™çš„å­—ç¬¦å¤§äºŽkä¸ªå°±åè½¬å‰kä¸ªï¼Œä¸å¤Ÿkä¸ªçš„è¯ï¼Œå°±å…¨éƒ¨åè½¬ã€‚
-//å¼€å§‹æˆ‘æ˜¯æƒ³ç”¨ä¸€ä¸ªflagæ¥è¡¨ç¤ºæ˜¯ä¸æ˜¯åè½¬ï¼Œtrueåè½¬ï¼Œfalseä¸ç¿»è½¬ï¼ŒåŽæ¥å‘çŽ°å†™ä¸å‡ºï¼Œå°±ç›´æŽ¥çœ‹ç­”æ¡ˆäº†ï¼Œå”‰ æ„æ­»
+//Õâ¸öÌâ¿ªÊ¼Ã»¶ÁÃ÷°×£¬ºóÀ´¿´ÁËÌÖÂÛ²ÅÖªµÀÕ¦»ØÊÂ£¬µ«ÊÇÕæÒªÐ´µÄÊ±ºò£¬ÓÖ·¢ÏÖ²»Ì«ºÃÐ´£¬Õâ¾ÓÈ»ÊÇ¸ö¼òµ¥Ìâ¡£
+//ÌâÄ¿µÄÒªÇóÊÇ¸ø¶¨Ò»¸ö×Ö·û´®s£¬ºÍÒ»¸ök£¬Ã¿×é·ÖÎª2k¸ö×Ö·û£¬·´×ªÇ°k¸ö£¬×îºóµ½´ï×Ö·û´®×îºóÒ»×éÊ±£¬Èç¹ûÊ£ÓàµÄ×Ö·û´óÓÚk¸ö¾Í·´×ªÇ°k¸ö£¬²»¹»k¸öµÄ»°£¬¾ÍÈ«²¿·´×ª¡£
+//¿ªÊ¼ÎÒÊÇÏëÓÃÒ»¸öflagÀ´±íÊ¾ÊÇ²»ÊÇ·´×ª£¬true·´×ª£¬false²»·­×ª£¬ºóÀ´·¢ÏÖÐ´²»³ö£¬¾ÍÖ±½Ó¿´´ð°¸ÁË£¬°¦ ³îËÀ
 
 
 class Solution {
@@ -27,6 +28,41 @@ public:
 			right--;
 		}
 	}
+
+	//ÕâÊÇµÚ¶þ´ÎÐ´µÄ´úÂë£¬Õâ¸öÌâµÄÄÑµã¾ÍÊÇÔÚÓÚ×îºó·­×ª²»¹»2k¸öµÄÊ±ºò£¬ÕâÊ±ÓÖ·ÖÎªÁ½ÖÖ£¬Ò»ÖÖÊÇ²»µ½k¸ö£¬Ò»ÖÖÊÇ´óÓÚkÐ¡ÓÚ2k¸ö×Ö·û¡£
+	string reverseStr1(string s, int k) {
+		int count = s.size() / k;
+		int i = 0;
+		while (i < count) {  //ÕâÀï¿ÉÒÔ½â¾öµÚ¶þÖÖÇé¿ö£¬´óÓÚkÐ¡ÓÚ2k£¬¿ÉÒÔ·­×ªÇ°k¸ö¡£
+			swapHelper(s, i * k, i * k + k - 1);
+			i += 2;
+		}
+
+		swapHelper(s, i * k, s.size() - 1);  //ÕâÁ½ÖÖÇé¿ö¶¼»áÔËÐÐÕâÒ»²½£¬Èç¹ûÊÇµÚÒ»ÖÖÇé¿öµÄ»°£¬¾ÍºÜºÃÀí½â¡£Ö÷ÒªÊÇµÚ¶þÖÖÇé¿öµÄºó°ë²¿·Ö£¬Ò²»áÔËÐÐÕâÀï£¬±ÈÈçËµabcdefghi£¬k=3ÕâÖÖ£¬ÔËÐÐµ½ÕâÊ±£¬i=4£¬ÕâÊ±ÒÑ¾­³¬¹ýÊý×é½çÏÞÁË£¬
+		//¼´Ê¹½øÈëÁËswapHelperº¯Êý£¬Ò²²»»á½øÈëwhileÑ­»·¡£µ«ÊÇÈç¹ûÊÇµÚÒ»ÖÖÇé¿ö£¬ÕâÊ£Óà²»µ½k¸ö×Ö·û£¬±¾¸Ã¾ÍÔÚi*kµÄÎ»ÖÃ
+		return s;
+	}
+
+	//µÚÈý´Î×ö£¬ÆäÊµ¿ÉÒÔÖ±½ÓÊ¹ÓÃC++×Ô´øµÄreverseº¯Êý
+	string reverseStr2(string s, int k) {
+		for (int i = 0; i < s.size(); i += 2 * k) {
+			if (i + k <= s.size()) {
+				reverse(s.begin() + i, s.begin() + i + k);
+				continue;
+			}
+			reverse(s.begin() + i, s.end());
+		}
+		return s;
+	}
+
+private:
+	void swapHelper(string& s, int begin, int end) {
+		int left = begin, right = end;
+		while (left <= right) {
+			swap(s[left++], s[right--]);
+		}
+	}
+
 };
 
 int main() {
@@ -35,5 +71,9 @@ int main() {
 	int k = 2;
 	string res = st.reverseStr(s, k);
 	cout << res << endl;
+	string res1 = st.reverseStr1(s, k);
+	cout << res1 << endl;
+	string res2 = st.reverseStr2(s, k);
+	cout << res2 << endl;
 	return 0;
 }
