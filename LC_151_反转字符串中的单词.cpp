@@ -2,9 +2,14 @@
 #include <string>
 using namespace std;
 
-//è¿™ä¸ªé¢˜æ˜¯è¦åè½¬å¥å­é‡Œå•è¯å‡ºçŽ°çš„é¡ºåºï¼Œä½†æ˜¯ä¸ç¿»è½¬æ¯ä¸€ä¸ªå•è¯
-//å¼€å§‹çš„æ—¶å€™æˆ‘æƒ³çš„æ˜¯å…ˆåŽ»æŽ‰å¥å­ä¸­å¤šä½™çš„ç©ºæ ¼ï¼Œç„¶åŽåŽæ¥åˆæƒ³å…ˆè®¡ç®—å‡ºæ­£å¸¸å¥å­ä¸­åº”è¯¥æœ‰å¤šå°‘ä¸ªå­—ç¬¦ï¼Œç„¶åŽè°ƒç”¨resizeè°ƒæ•´stringçš„å¤§å°ï¼Œç„¶åŽç”¨ä¸¤ä¸ªæŒ‡é’ˆï¼Œä¸€ä¸ªæŒ‡å‘ä¹‹å‰çš„å­—ç¬¦ä¸²ï¼Œä¸€ä¸ªæŒ‡å‘æ–°æ·»åŠ çš„ï¼Œç„¶åŽä¸€ä¸ªå•è¯ä¸€ä¸ªå•è¯çš„å¾€é‡Œè¾¹åŠ ï¼Œæœ€åŽè°ƒç”¨substr
-//ä½†æ˜¯åŽæ¥å‘çŽ°ä¸å¤ªè¡Œ
+
+#include <iostream>
+#include <string>
+using namespace std;
+
+//Õâ¸öÌâÊÇÒª·´×ª¾ä×ÓÀïµ¥´Ê³öÏÖµÄË³Ðò£¬µ«ÊÇ²»·­×ªÃ¿Ò»¸öµ¥´Ê
+//¿ªÊ¼µÄÊ±ºòÎÒÏëµÄÊÇÏÈÈ¥µô¾ä×ÓÖÐ¶àÓàµÄ¿Õ¸ñ£¬È»ºóºóÀ´ÓÖÏëÏÈ¼ÆËã³öÕý³£¾ä×ÓÖÐÓ¦¸ÃÓÐ¶àÉÙ¸ö×Ö·û£¬È»ºóµ÷ÓÃresizeµ÷ÕûstringµÄ´óÐ¡£¬È»ºóÓÃÁ½¸öÖ¸Õë£¬Ò»¸öÖ¸ÏòÖ®Ç°µÄ×Ö·û´®£¬Ò»¸öÖ¸ÏòÐÂÌí¼ÓµÄ£¬È»ºóÒ»¸öµ¥´ÊÒ»¸öµ¥´ÊµÄÍùÀï±ß¼Ó£¬×îºóµ÷ÓÃsubstr
+//µ«ÊÇºóÀ´·¢ÏÖ²»Ì«ÐÐ
 class Solution {
 public:
 	string reverseWords(string s) {
@@ -24,8 +29,8 @@ private:
 	void removeSpace(string& s) {
 		int count = 0;
 		for (int i = 0; i < s.size(); i++) {
-			if (s[i] != ' ') {
-				if (count != 0) s[count++] = ' ';  //å¦‚æžœè¯¥å•è¯ä¸æ˜¯ç¬¬ä¸€ä¸ªå•è¯å°±åœ¨å®ƒçš„å‰è¾¹è¡¥ä¸Šä¸€ä¸ªç©ºæ ¼
+			if (s[i] != ' ') {  //ÄÜ´ÓÕâ½øÀ´ËµÃ÷s[i]µÄÇ°Ò»¸öÊÇ¿Õ¸ñ
+				if (count != 0) s[count++] = ' ';  //Èç¹û¸Ãµ¥´Ê²»ÊÇµÚÒ»¸öµ¥´Ê¾ÍÔÚËüµÄÇ°±ß²¹ÉÏÒ»¸ö¿Õ¸ñ
 
 				while (i < s.size() && s[i] != ' ') {
 					s[count++] = s[i++];
@@ -40,17 +45,86 @@ private:
 			swap(s[begin++], s[end--]);
 		}
 	}
+
+
+	//µÚ¶þ´Î×ö
+public:
+	string reverseWords1(string s) {
+		removeSpace1(s);
+		swapHelper(s, 0, s.size() - 1);
+		for (int slow = 0, fast = 0; fast <= s.size(); fast++) {
+			if (s[fast] == ' ' || fast == s.size()) {
+				swapHelper(s, slow, fast - 1);
+				slow = fast + 1;
+			}
+		}
+		return s;
+	}
+
+private:
+	void removeSpace1(string& s) {
+		int slow = 0, fast = 0;
+		for (; fast < s.size(); fast++) {
+			if (s[fast] == ' ') {
+				continue;
+			}
+			else {
+				if (slow != 0 && s[fast - 1] == ' ')
+					s[slow++] = ' ';
+				s[slow++] = s[fast];
+			}
+		}
+		s.resize(slow);
+	}
+	void swapHelper(string& s, int begin, int end) {
+		int left = begin, right = end;
+		while (left <= right)
+			swap(s[left++], s[right--]);
+	}
+
+public:
+	//µÚÈý´Î×ö£¬Õâ¸öÌâµÄÖ÷ÒªÄÑµã»¹ÊÇÒÆ³ý¶àÓàµÄ¿Õ¸ñ
+	string reverseWords2(string s) {
+		removeSpace2(s);
+		cout << s << endl;
+		reverse(s.begin(), s.end());
+		int left = 0, right = 0;
+		while (right <= s.size()) {
+			if (s[right] == ' ' || right == s.size()) {
+				reverse(s.begin() + left, s.begin() + right);
+				left = right + 1;
+			}
+			right++;
+		}
+		return s;
+	}
+
+	void removeSpace2(string& s) {  // ÒÆ³ý¶àÓàµÄ0
+		int slow = 0, fast = 0;
+		while (fast < s.size()) {
+			if ((s[fast] != ' ') || (fast > 0 && s[fast] == ' ' && s[fast - 1] != ' ')) // Èç¹ûµ±Ç°fastÎª¿Õ¸ñ£¬¶øfast-1Îª×ÖÄ¸Ê±£¬ËµÃ÷Õâ¸ö¿Õ¸ñ¸Ã´æÔÚ¡£µ«ÊÇÕâ»áµ¼ÖÂ×îºóÒ»¸ö¿ÉÄÜÊÇ¿Õ¸ñ£¬ËùÒÔ×îºóÒªÅÐ¶Ïs[slow-1]ÊÇ·ñÊÇ¿Õ¸ñ
+				s[slow++] = s[fast++];
+			else
+				fast++;  //Ç°µ¼¿Õ¸ñ»áÖ±½Ó×ßÕâÀï£¬ÍùºóÒÆ¶¯fastÖ¸Õë
+		}
+		if (s[slow - 1] == ' ') s.resize(slow - 1);
+		else s.resize(slow);
+	}
 };
 
-//è¿™æ˜¯çœ‹äº†ä»£ç éšæƒ³å½•çš„ä»£ç ï¼Œåˆ†ä¸‰ä¸ªæ­¥éª¤ï¼š1.å…ˆåŽ»æŽ‰å¤šä½™çš„ç©ºæ ¼  2ã€‚ç„¶åŽåè½¬æ•´ä¸ªå¥å­  3.ç„¶åŽéåŽ†å¥å­ä¸­çš„å•è¯ï¼Œå†æŠŠæ¯ä¸ªå•è¯åè½¬å›žæ¥ã€‚
-//ç¬¬ä¸€æ­¥åŽ»é™¤å¤šä½™çš„ç©ºæ ¼ï¼Œç”¨åˆ°äº†LeetCode27é¢˜é‡Œçš„åŒæŒ‡é’ˆæ–¹æ³•
-//åŽè¾¹ä¸¤æ­¥ç”¨åˆ°äº†LeetCode 344é‡Œçš„ç¿»è½¬å­—ç¬¦ä¸²çš„æ–¹æ³•
-//è¿™ä¸ªé¢˜è¿˜æ˜¯æ¯”è¾ƒç»¼åˆçš„
+//ÕâÊÇ¿´ÁË´úÂëËæÏëÂ¼µÄ´úÂë£¬·ÖÈý¸ö²½Öè£º1.ÏÈÈ¥µô¶àÓàµÄ¿Õ¸ñ  2¡£È»ºó·´×ªÕû¸ö¾ä×Ó  3.È»ºó±éÀú¾ä×ÓÖÐµÄµ¥´Ê£¬ÔÙ°ÑÃ¿¸öµ¥´Ê·´×ª»ØÀ´¡£
+//µÚÒ»²½È¥³ý¶àÓàµÄ¿Õ¸ñ£¬ÓÃµ½ÁËLeetCode27ÌâÀïµÄË«Ö¸Õë·½·¨
+//ºó±ßÁ½²½ÓÃµ½ÁËLeetCode 344ÀïµÄ·­×ª×Ö·û´®µÄ·½·¨
+//Õâ¸öÌâ»¹ÊÇ±È½Ï×ÛºÏµÄ
 
 int main() {
 	Solution st;
-	string s("the sky is blue");
+	string s("  the  sky is blue   ");
 	string res = st.reverseWords(s);
 	cout << res << endl;
+	string res1 = st.reverseWords1(s);
+	cout << res1 << endl;
+	string res2 = st.reverseWords2(s);
+	cout << res2 << endl;
 	return 0;
 }

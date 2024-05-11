@@ -10,13 +10,13 @@ public:
 			return { -1, -1 };
 		else {
 			int left = index, right = index;
-			for (; left >= 0 && nums[left] == target; left--);  //å¼€å§‹çš„æ—¶å€™è¿™ä¸¤ä¸ªforå¾ªç¯çš„åˆ¤æ–­æ¡ä»¶å†™åäº†ï¼Œä¹Ÿå°±æ˜¯å…ˆåˆ¤æ–­æ˜¯å¦ç›¸ç­‰ï¼Œå†åˆ¤æ–­æ˜¯å¦è¶Šç•Œäº†ï¼Œç»“æœå½“æ•°ç»„ä¸­åªæœ‰ä¸€ä¸ªå…ƒç´ æ—¶å°±æŠ¥è¶Šç•Œçš„é”™è¯¯ã€‚
+			for (; left >= 0 && nums[left] == target; left--);  //¿ªÊ¼µÄÊ±ºòÕâÁ½¸öforÑ­»·µÄÅĞ¶ÏÌõ¼şĞ´·´ÁË£¬Ò²¾ÍÊÇÏÈÅĞ¶ÏÊÇ·ñÏàµÈ£¬ÔÙÅĞ¶ÏÊÇ·ñÔ½½çÁË£¬½á¹ûµ±Êı×éÖĞÖ»ÓĞÒ»¸öÔªËØÊ±¾Í±¨Ô½½çµÄ´íÎó¡£
 			for (; right < nums.size() && nums[right] == target; right++);
 			return { left + 1, right - 1 };
 		}
 	}
 
-	//ä¸‹è¾¹è¿™æ˜¯ç¬¬ä¸€å›åšè¿™ä¸ªé¢˜æ—¶æäº¤çš„ä»£ç 
+	//ÏÂ±ßÕâÊÇµÚÒ»»Ø×öÕâ¸öÌâÊ±Ìá½»µÄ´úÂë
 	vector<int> searchRange1(vector<int>& nums, int target) {
 		int left = 0, right = nums.size() - 1;
 		while (left <= right) {
@@ -52,6 +52,57 @@ private:
 		for (; right <= nums.size() - 1 && nums[right] == target; right++);
 		return vector<int>{++left, --right};
 	}
+
+public:
+	// µÚÈı´Î×ö£¬¿ªÊ¼µÄÊ±ºòÃ»×¢Òâµ½ÒªÓÃ0(logn)µÄÊ±¼ä¸´ÔÓ¶È½â¾ö
+	vector<int> searchRange2(vector<int>& nums, int target) {
+		vector<int> res(2, 0);
+		bool firstappear = false;
+		for (int i = 0; i < nums.size(); i++) {
+			if (nums[i] == target) {
+				if (firstappear == false) {
+					res[0] = i;
+					res[1] = i;
+					firstappear = true;
+				}
+				else
+					res[1] = i;
+			}
+		}
+		if (firstappear)
+			return res;
+		return { -1, -1 };
+	}
+
+	//ÓÃ¶ş·Ö²éÕÒ×ö
+	vector<int> searchRange3(vector<int>& nums, int target) {
+		int mid = binarySearch3(nums, target);
+		if (mid == -1)
+			return { -1, -1 };
+		vector<int> res(2, mid);
+		int left = mid, right = mid;
+		while (left >= 0 && nums[left] == target) {
+			res[0] = left--;
+		}
+		while (right < nums.size() && nums[right] == target) {
+			res[1] = right++;
+		}
+		return res;
+	}
+
+	int binarySearch3(vector<int>& nums, int target) {
+		int left = 0, right = nums.size() - 1;
+		while (left <= right) {
+			int mid = left + (right - left) / 2;
+			if (target < nums[mid])
+				right = mid - 1;
+			else if (target > nums[mid])
+				left = mid + 1;
+			else
+				return mid;
+		}
+		return -1;
+	}
 };
 
 int main() {
@@ -62,5 +113,9 @@ int main() {
 	cout << res[0] << "  " << res[1] << endl;
 	vector<int>res1 = st.searchRange1(nums, target);
 	cout << res1[0] << "  " << res1[1] << endl;
+	vector<int> res2 = st.searchRange2(nums, target);
+	cout << res2[0] << "  " << res2[1] << endl;
+	vector<int>res3 = st.searchRange3(nums, target);
+	cout << res3[0] << "  " << res3[1] << endl;
 	return 0;
 }
