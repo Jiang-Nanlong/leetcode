@@ -32,8 +32,8 @@ public:
 		return preHead->next;
 	}
 
-	//è¿™æ˜¯ç¬¬äºŒæ¬¡å†™çš„ä»£ç ï¼Œä½†æ˜¯æˆ‘çŽ°åœ¨å†çœ‹ç¬¬ä¸€æ¬¡å†™çš„å·²ç»çœ‹ä¸æ‡‚äº†ï¼Œæ„Ÿè§‰å½“æ—¶å†™çš„çœŸå¤æ‚ï¼Œè¿™ä¼šå†™çš„ç®€å•å¤šäº†ï¼Œç»“æž„ä¹Ÿæ¸…æ™°ã€‚
-	ListNode* swapPairs(ListNode* head) {
+	//ÕâÊÇµÚ¶þ´ÎÐ´µÄ´úÂë£¬µ«ÊÇÎÒÏÖÔÚÔÙ¿´µÚÒ»´ÎÐ´µÄÒÑ¾­¿´²»¶®ÁË£¬¸Ð¾õµ±Ê±Ð´µÄÕæ¸´ÔÓ£¬Õâ»áÐ´µÄ¼òµ¥¶àÁË£¬½á¹¹Ò²ÇåÎú¡£
+	ListNode* swapPairs1(ListNode* head) {
 		ListNode* phead = new ListNode(-1, head);
 		ListNode* p = phead;
 		while (p->next && p->next->next) {
@@ -42,6 +42,22 @@ public:
 			temp->next = p->next->next;
 			p->next->next = temp;
 			p = p->next->next;
+		}
+		return phead->next;
+	}
+
+	//µÚÈý´Î×ö
+	ListNode* swapPairs2(ListNode* head) {
+		ListNode* phead = new ListNode(-1, head);
+		ListNode* p = phead;
+		while (p->next && p->next->next) {
+			ListNode* temp1 = p->next;
+			ListNode* temp2 = p->next->next;
+
+			p->next = temp2;
+			temp1->next = temp2->next;
+			temp2->next = temp1;
+			p = temp1;
 		}
 		return phead->next;
 	}
