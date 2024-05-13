@@ -85,6 +85,40 @@ public:
 		}
 		return NULL;
 	}
+
+	//第三次做
+	ListNode* getIntersectionNode2(ListNode* headA, ListNode* headB) {
+		int countA = 0, countB = 0;
+		ListNode* p = headA, * q = headB;
+		while (p) {
+			countA++;
+			p = p->next;
+		}
+		p = headA;
+		while (q) {
+			countB++;
+			q = q->next;
+		}
+		q = headB;
+
+		if (countA < countB) {
+			p = headB;
+			q = headA;
+		}
+
+		int diff = abs(countA - countB);
+		while (diff--) {
+			p = p->next;
+		}
+
+		while (p) {
+			if (p == q)
+				return p;
+			p = p->next;
+			q = q->next;
+		}
+		return nullptr;
+	}
 };
 
 int main() {
