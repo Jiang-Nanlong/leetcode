@@ -1,9 +1,11 @@
 #include <iostream>
 #include <queue>
 #include <stack>
+#include <vector>
+#include <string>
 using namespace std;
 
-//鍜孡eetCode 101 涓�鏍凤紝涓嶈繃杩欓噷姣旇緝鐨勬槸鐩稿悓浣嶇疆锛屼篃鍙互浣跨敤鏍堟垨闃熷垪鏉ュ疄鐜帮紝涓嶈繃姣旇緝鐨勬槸鐩稿悓浣嶇疆
+//和LeetCode 101 一样，不过这里比较的是相同位置，也可以使用栈或队列来实现，不过比较的是相同位置
 
 struct TreeNode {
 	int val;
@@ -74,7 +76,7 @@ public:
 		return true;
 	}
 
-	//绗簩娆″仛
+	//第二次做
 	bool isSameTree1(TreeNode* p, TreeNode* q) { return isSameTreeHelper(p, q); }
 	bool isSameTreeHelper(TreeNode* p, TreeNode* q) {
 		if (p == nullptr && q == nullptr)
@@ -89,6 +91,59 @@ public:
 		return isSameTreeHelper(p->left, q->left) &&
 			isSameTreeHelper(p->right, q->right);
 	}
+
+	//第三次做
+	bool isSameTree2(TreeNode* p, TreeNode* q) {
+		if (!p && q)
+			return false;
+		else if (p && !q)
+			return false;
+		else if (!p && !q)
+			return true;
+		else if (p->val == q->val) {
+			bool l = isSameTree2(p->left, q->left);
+			bool r = isSameTree2(p->right, q->right);
+			return l && r;
+		}
+		else
+			return false;
+	}
+
+	TreeNode* buildTree(vector<string>& nums) {
+		if (nums.empty()) return nullptr;
+
+		TreeNode* root = new TreeNode(stoi(nums[0]));
+		queue<TreeNode*> que;
+		que.push(root);
+
+		int i = 1;
+		while (i < nums.size()) {
+			TreeNode* node = que.front();
+			que.pop();
+
+			if (nums[i] != "null") {
+				node->left = new TreeNode(stoi(nums[i]));
+				que.push(node->left);
+			}
+			i++;
+
+			if (i < nums.size() && nums[i] != "null") {
+				node->right = new TreeNode(stoi(nums[i]));
+				que.push(node->right);
+			}
+			i++;
+		}
+		return root;
+	}
 };
 
-void main() {}
+void main() {
+	Solution st;
+	vector<string> nums1{ "1","2" };
+	vector<string> nums2{ "1","null","2" };
+
+	TreeNode* root1 = st.buildTree(nums1);
+	TreeNode* root2 = st.buildTree(nums2);
+
+	cout << boolalpha << st.isSameTree2(root1, root2) << noboolalpha;
+}

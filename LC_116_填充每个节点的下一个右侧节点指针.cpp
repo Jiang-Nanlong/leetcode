@@ -2,7 +2,7 @@
 #include <queue>
 using namespace std;
 
-//é¢˜ç›®è¦æ±‚æ˜¯æ¯ä¸ªèŠ‚ç‚¹éƒ½æœ‰ä¸€ä¸ªnextæŒ‡é’ˆï¼Œè¦æŠŠæ¯ä¸€å±‚çš„nextæŒ‡é’ˆéƒ½ä¸²èµ·æ¥ï¼ŒæŒ‡å‘ä»–çš„å³ä¾§èŠ‚ç‚¹ã€‚åˆå§‹çŠ¶æ€ä¸‹ï¼Œæ¯ä¸ªèŠ‚ç‚¹çš„nextæŒ‡é’ˆéƒ½æ˜¯nullptr
+//ÌâÄ¿ÒªÇóÊÇÃ¿¸ö½Úµã¶¼ÓĞÒ»¸önextÖ¸Õë£¬Òª°ÑÃ¿Ò»²ãµÄnextÖ¸Õë¶¼´®ÆğÀ´£¬Ö¸ÏòËûµÄÓÒ²à½Úµã¡£³õÊ¼×´Ì¬ÏÂ£¬Ã¿¸ö½ÚµãµÄnextÖ¸Õë¶¼ÊÇnullptr
 
 class Node {
 public:
@@ -49,8 +49,8 @@ public:
 	}
 
 
-	//ç¬¬äºŒæ¬¡åšï¼Œè¿™å›å†åšæ„Ÿè§‰ç¬¬ä¸€æ¬¡å†™çš„å¤ªå•°å—¦äº†ã€‚
-	Node* connect(Node* root) {
+	//µÚ¶ş´Î×ö£¬Õâ»ØÔÙ×ö¸Ğ¾õµÚÒ»´ÎĞ´µÄÌ«†ªàÂÁË¡£
+	Node* connect1(Node* root) {
 		if (root == nullptr)
 			return nullptr;
 		queue<Node*> que;
@@ -73,6 +73,60 @@ public:
 		return root;
 	}
 
+	// µÚÈı´Î×ö
+	Node* connect2(Node* root) {
+		if (root == NULL)
+			return NULL;
+		queue<Node*> que;
+		que.push(root);
+		while (!que.empty()) {
+			int size = que.size();
+			Node* cur = NULL;
+			while (size-- > 1) {
+				cur = que.front();
+				que.pop();
+				cur->next = que.front();
+				if (cur->left)
+					que.push(cur->left);
+				if (cur->right)
+					que.push(cur->right);
+			}
+			cur = que.front();
+			que.pop();
+			cur->next = NULL;
+			if (cur->left)
+				que.push(cur->left);
+			if (cur->right)
+				que.push(cur->right);
+		}
+		return root;
+	}
+
+	//¼ò»¯ÒÔºó
+	Node* connect3(Node* root) {
+		if (root == NULL)
+			return NULL;
+		queue<Node*> que;
+		que.push(root);
+		while (!que.empty()) {
+			int size = que.size();
+			Node* cur = NULL;
+			while (size--) {
+				cur = que.front();
+				que.pop();
+				if (size) {
+					cur->next = que.front();
+				}
+				if (cur->left)
+					que.push(cur->left);
+				if (cur->right)
+					que.push(cur->right);
+			}
+		}
+		return root;
+	}
 };
 
-void main() {}
+void main() {
+
+}
