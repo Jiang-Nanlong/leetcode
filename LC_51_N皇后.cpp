@@ -3,14 +3,14 @@
 #include <string>
 using namespace std;
 
-//ä¼ è¯´ä¸­çš„Nçš‡åé—®é¢˜
-//å…¶å®è¿™ä¸ªé¢˜åªè¦ç”»å‡ºæ ‘å½¢ç»“æ„ï¼Œè·Ÿä»¥å¾€çš„å›æº¯é¢˜çš„æ€è·¯ä¸€æ ·
+//´«ËµÖĞµÄN»ÊºóÎÊÌâ
+//ÆäÊµÕâ¸öÌâÖ»Òª»­³öÊ÷ĞÎ½á¹¹£¬¸úÒÔÍùµÄ»ØËİÌâµÄË¼Â·Ò»Ñù
 
 class Solution {
 public:
 	vector<vector<string>> solveNQueens(int n) {
 		vector<vector<string>> res;
-		vector<string> chessboard(n, string(n, '.')); //è¿™ä¸ªåœ°æ–¹ä¸€å¼€å§‹ä¸è¦å¿˜äº†åˆå§‹åŒ–æ£‹ç›˜
+		vector<string> chessboard(n, string(n, '.')); //Õâ¸öµØ·½Ò»¿ªÊ¼²»ÒªÍüÁË³õÊ¼»¯ÆåÅÌ
 		Helper(n, 0, chessboard, res);
 		return res;
 	}
@@ -43,7 +43,7 @@ public:
 		return true;
 	}
 
-	//ç¬¬äºŒæ¬¡åšï¼Œæ„Ÿè§‰æ•´ä½“æ€è·¯æ²¡é—®é¢˜ï¼Œä¸è¿‡å°±æ˜¯å†™çš„ç£•ç£•å·´å·´ï¼Œæ²¡æœ‰ä¿¡å¿ƒ
+	//µÚ¶ş´Î×ö£¬¸Ğ¾õÕûÌåË¼Â·Ã»ÎÊÌâ£¬²»¹ı¾ÍÊÇĞ´µÄ¿Ä¿Ä°Í°Í£¬Ã»ÓĞĞÅĞÄ
 	vector<vector<string>> res;
 
 	vector<vector<string>> solveNQueens1(int n) {
@@ -83,11 +83,11 @@ public:
 		return true;
 	}
 
-	vector<vector<string>> res;
-	//ä»æ£‹ç›˜ä¸‹è¾¹å¾€ä¸Šéå†ï¼Œç”¨nè¡¨ç¤ºå½“å‰æ‰€åœ¨çš„è¡Œ
+	//´ÓÆåÅÌÏÂ±ßÍùÉÏ±éÀú£¬ÓÃn±íÊ¾µ±Ç°ËùÔÚµÄĞĞ
 	vector<vector<string>> solveNQueens2(int n) {
 		string s(n, '.');
 		vector<string> chessboard(n, s);
+		res.clear();
 		backtracking1(chessboard, n - 1);
 		return res;
 	}
@@ -122,9 +122,50 @@ public:
 		return true;
 	}
 
+
+	//µÚÈı´Î×ö
+	vector<vector<string>> solveNQueens3(int n) {
+		string s(n, '.');
+		vector<string> board(n, s);
+		res.clear();
+		backtrace(board, 0, n);
+		return res;
+	}
+	void backtrace(vector<string>& board, int row, int n) {
+		if (row == n) {
+			res.push_back(board);
+			return;
+		}
+
+		for (int col = 0; col < n; col++) {
+			if (isVaild3(board, row, col)) {
+				board[row][col] = 'Q';
+				backtrace(board, row + 1, n);
+				board[row][col] = '.';
+			}
+		}
+	}
+
+	bool isVaild3(vector<string>& board, int row, int col) {
+		for (int i = row - 1; i >= 0; i--) {
+			if (board[i][col] == 'Q')
+				return false;
+		}
+
+		for (int i = row - 1, j = col - 1; i >= 0 && j >= 0; i--, j--) {
+			if (board[i][j] == 'Q')
+				return false;
+		}
+		for (int i = row - 1, j = col + 1; i >= 0 && j < board.size();
+			i--, j++) {
+			if (board[i][j] == 'Q')
+				return false;
+		}
+		return true;
+	}
 };
 
-void main() {
+int main() {
 	Solution st;
 	vector<vector<string>> res = st.solveNQueens(4);
 	for (int i = 0; i < res.size(); i++) {
@@ -132,4 +173,12 @@ void main() {
 			cout << res[i][j] << endl;
 		cout << endl;
 	}
+	cout << "---------" << endl;
+	vector<vector<string>> res1 = st.solveNQueens3(4);
+	for (int i = 0; i < res1.size(); i++) {
+		for (int j = 0; j < res1[0].size(); j++)
+			cout << res1[i][j] << endl;
+		cout << endl;
+	}
+	return 0;
 }
