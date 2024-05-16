@@ -77,6 +77,40 @@ public:
 		}
 		return 0;
 	}
+
+	//第三次做
+	// 还是广度优先搜索，只要找到endword，所对应的路径就是长度最短的
+	int ladderLength2(string beginWord, string endWord, vector<string>& wordList) {
+		unordered_set<string> uset(wordList.begin(), wordList.end());
+		unordered_map<string, int> visited;
+		visited.insert({ beginWord, 1 });
+		if (uset.find(endWord) == uset.end())
+			return 0;
+
+		// 广度优先搜索
+		queue<string> que;
+		que.push(beginWord);
+		while (!que.empty()) {
+			string word = que.front();
+			que.pop();
+			int pathlength = visited[word];
+			for (int i = 0; i < word.size(); i++) {
+				string curword = word;
+				for (int j = 0; j < 26; j++) {
+					curword[i] = j + 'a';
+					if (curword == endWord)
+						return pathlength + 1;
+					if (curword != word && uset.find(curword) != uset.end() && visited.find(curword) == visited.end()) {
+					// if判断里我担心修改过字母以后的单词是原来的单词，所以添加了一个curword!=word的条件。
+					// 但是加完发现，visited.find(curword) == visited.end()就已经有这个功能了
+						visited.insert({ curword, pathlength + 1 });
+						que.push(curword);
+					}
+				}
+			}
+		}
+		return 0;
+	}
 };
 int main() {
 	Solution st;
@@ -84,5 +118,6 @@ int main() {
 	vector<string> wordList = { "hot", "dot", "dog", "lot", "log", "cog" };
 	cout << st.ladderLength(beginWord, endWord, wordList) << endl;
 	cout << st.ladderLength1(beginWord, endWord, wordList) << endl;
+	cout << st.ladderLength2(beginWord, endWord, wordList) << endl;
 	return 0;
 }

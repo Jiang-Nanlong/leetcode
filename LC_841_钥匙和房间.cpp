@@ -142,6 +142,30 @@ public:
 			dfs4(rooms, key, visited);
 		}
 	}
+
+	//又一次做
+public:
+	bool canVisitAllRooms6(vector<vector<int>>& rooms) {
+		vector<bool> visited(rooms.size(), false);
+		queue<int> que;
+		que.push(0);
+
+		while (!que.empty()) {
+			int key = que.front();
+			que.pop();
+			if (visited[key])
+				continue;
+			visited[key] = true;
+			for (int& i : rooms[key]) {
+				que.push(i);
+			}
+		}
+		for (bool b : visited)
+			if (b == false)
+				return false;
+
+		return true;
+	}
 };
 
 int main() {
@@ -156,5 +180,6 @@ int main() {
 	cout << boolalpha << st.canVisitAllRooms3(rooms2) << endl;
 	cout << st.canVisitAllRooms4(rooms2) << endl;
 	cout << st.canVisitAllRooms5(rooms2) << noboolalpha << endl;
+	cout << boolalpha << st.canVisitAllRooms6(rooms2) << noboolalpha << endl;
 	return 0;
 }
