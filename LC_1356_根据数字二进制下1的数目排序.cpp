@@ -33,6 +33,7 @@ public:
 };
 
 //代码随想录的方法，这个更简单，直接在原数组上排序
+//这个地方我没想出这种写法主要还是因为我没这么写过cmp函数，以前都是用的简单的。
 class Solution1 {
 public:
     static int countof1(int x) {
