@@ -80,6 +80,43 @@ public:
 	}
 };
 
+// 第三次做
+class Solution2 {
+public:
+	int n = 1001;
+	vector<int> father = vector<int>(n);
+	void init() {
+		for (int i = 0; i < n; i++) {
+			father[i] = i;
+		}
+	}
+	int find(int u) { return u == father[u] ? u : father[u] = find(father[u]); }
+	bool isSame(int u, int v) {
+		u = find(u);
+		v = find(v);
+		return u == v;
+	}
+
+	void join(int u, int v) {
+		u = find(u);
+		v = find(v);
+		if (u == v)
+			return;
+		father[v] = u;
+	}
+
+	vector<int> findRedundantConnection(vector<vector<int>>& edges) {
+		init();
+		for (int i = 0; i < edges.size(); i++) {
+			if (isSame(edges[i][0], edges[i][1]))
+				return edges[i];
+			else
+				join(edges[i][0], edges[i][1]);
+		}
+		return {};
+	}
+};
+
 int main() {
 	Solution st;
 	vector<vector<int>> edges = { {1, 2},{2, 3},{3, 4},{1, 4},{1, 5} };
@@ -95,6 +132,15 @@ int main() {
 	vector<int> res1 = st1.findRedundantConnection(edges);
 	if (!res1.empty()) {
 		for (int i : res1)
+			cout << i << "  ";
+	}
+	cout << endl;
+	cout << "------------------" << endl;
+
+	Solution2 st2;
+	vector<int> res2 = st2.findRedundantConnection(edges);
+	if (!res2.empty()) {
+		for (int i : res2)
 			cout << i << "  ";
 	}
 	return 0;

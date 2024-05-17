@@ -159,6 +159,82 @@ private:
 	}
 };
 
+
+//第三次做，这回自己做出来了
+class Solution2 {
+public:
+	int n = 1001;
+	vector<int> father = vector<int>(n);
+	void init() {
+		for (int i = 0; i < n; i++)
+			father[i] = i;
+	}
+	int find(int u) { return u == father[u] ? u : father[u] = find(father[u]); }
+	bool isSame(int u, int v) {
+		u = find(u);
+		v = find(v);
+		return u == v;
+	}
+	void join(int u, int v) {
+		u = find(u);
+		v = find(v);
+		if (u == v)
+			return;
+		father[u] = v;
+	}
+
+	bool isATree(vector<vector<int>>& edges, vector<int> edge) {  //判读移除edge这条边以后是不是一棵树
+		init();
+		for (int i = 0; i < edges.size(); i++) {
+			if (edges[i] != edge) {
+				if (isSame(edges[i][0], edges[i][1]))
+					return false;
+				else
+					join(edges[i][0], edges[i][1]);
+			}
+		}
+		return true;
+	}
+
+	vector<int> findRedundantDirectedConnection(vector<vector<int>>& edges) {
+		vector<int> inDegree = vector<int>(n, 0);
+		int node = -1;
+		for (int i = 0; i < edges.size(); i++) {  // 统计每个节点的入度
+			if (++inDegree[edges[i][1]] == 2)
+				node = edges[i][1];
+		}
+
+		vector<vector<int>> mayedges;
+		if (node != -1) {
+			for (int i = edges.size() - 1; i >= 0; i--) {  // 把导致入度为2的两条边都找出来
+				if (edges[i][1] == node) {
+					mayedges.push_back(edges[i]);
+				}
+			}
+		}
+
+		if (!mayedges.empty()) {  // if条件成立说明有一个节点入度为2
+			cout << mayedges[0][0] << "," << mayedges[0][1] << endl;
+			cout << mayedges[1][0] << "," << mayedges[1][1] << endl;
+
+			if (isATree(edges, mayedges[0]))  // 分别移除两条边看看剩下的还是不是树
+				return mayedges[0];
+			else
+				return mayedges[1];
+		}
+		else {  // 说明图中有环
+			init();
+			for (int i = 0; i < edges.size(); i++) {
+				if (isSame(edges[i][0], edges[i][1]))
+					return edges[i];
+				else
+					join(edges[i][0], edges[i][1]);
+			}
+		}
+		return {};
+	}
+};
+
 int main() {
 	Solution st;
 	vector<vector<int>> edges{ {1, 2},{2, 3},{3, 4},{4, 1},{1, 5} };
@@ -166,9 +242,16 @@ int main() {
 	if (res.size() > 0)
 		cout << res[0] << "  " << res[1] << endl;
 	cout << "-----------" << endl;
+
 	Solution1 st1;
 	vector<int> res1 = st1.findRedundantDirectedConnection(edges);
 	if (res1.size() > 0)
 		cout << res1[0] << "  " << res1[1] << endl;
+
+	cout << "-----------" << endl;
+	Solution2 st2;
+	vector<int> res2 = st2.findRedundantDirectedConnection(edges);
+	if (res2.size() > 0)
+		cout << res2[0] << "  " << res2[1] << endl;
 	return 0;
 }

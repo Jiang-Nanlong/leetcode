@@ -186,6 +186,26 @@ public:
 		}
 		return island * 4 - cover * 2;
 	}
+
+	// 又一次做
+	int islandPerimeter7(vector<vector<int>>& grid) {
+		int count = 0;
+		int dir[4][2] = { 0, 1, 1, 0, -1, 0, 0, -1 };
+		for (int i = 0; i < grid.size(); i++) {
+			for (int j = 0; j < grid[0].size(); j++) {
+				if (grid[i][j]) {
+					for (int k = 0; k < 4; k++) {
+						int next_x = i + dir[k][0];
+						int next_y = j + dir[k][1];
+						if (next_x < 0 || next_x == grid.size() || next_y < 0 ||
+							next_y == grid[0].size() || grid[next_x][next_y] == 0)
+							count++;
+					}
+				}
+			}
+		}
+		return count;
+	}
 };
 
 int main() {
@@ -198,5 +218,7 @@ int main() {
 	cout << st.islandPerimeter4(grid) << endl;
 	cout << st.islandPerimeter5(grid) << endl;
 	cout << st.islandPerimeter6(grid) << endl;
+	vector<vector<int>> grid1 = { {0, 1} };
+	cout << st.islandPerimeter7(grid1) << endl;
 	return 0;
 }
