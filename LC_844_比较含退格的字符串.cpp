@@ -31,7 +31,7 @@ public:
 		return (s == t);
 	}
 
-	//ç¬¬äºŒæ¬¡åšçš„ä»£ç >>  è·Ÿç¬¬ä¸€æ¬¡çš„é€»è¾‘ä¸€æ ·ï¼Œåªä¸è¿‡é‡å¤éƒ¨åˆ†æ²¡å†™æˆå‡½æ•°
+	//µÚ¶ş´Î×öµÄ´úÂë>>  ¸úµÚÒ»´ÎµÄÂß¼­Ò»Ñù£¬Ö»²»¹ıÖØ¸´²¿·ÖÃ»Ğ´³Éº¯Êı
 	bool backspaceCompare1(string s, string t) {
 		int i = 0, j = 0;
 		for (; i < s.size(); i++) {
@@ -40,7 +40,7 @@ public:
 				j++;
 			}
 			else {
-				j = j - 1 > 0 ? j - 1 : 0;  //å¼€å§‹è¿™ä¸ªåœ°æ–¹æ²¡å†™å¯¹ï¼Œæ²¡æƒ³åˆ°æœ‰å¥½å‡ ä¸ªè¿ç»­é€€æ ¼ä½¿å¾—æ…¢æŒ‡é’ˆå°äº0çš„æƒ…å†µ
+				j = j - 1 > 0 ? j - 1 : 0;  //¿ªÊ¼Õâ¸öµØ·½Ã»Ğ´¶Ô£¬Ã»Ïëµ½ÓĞºÃ¼¸¸öÁ¬ĞøÍË¸ñÊ¹µÃÂıÖ¸ÕëĞ¡ÓÚ0µÄÇé¿ö
 			}
 		}
 		s.resize(j);
@@ -58,8 +58,32 @@ public:
 		t.resize(j);
 		return s == t;
 	}
-	//ç¬¬äºŒæ¬¡åšçš„ä»£ç <<
+	//µÚ¶ş´Î×öµÄ´úÂë<<
 
+
+	//µÚÈı´Î×ö
+	bool backspaceCompare2(string s, string t) {
+		Helper(s);
+		Helper(t);
+		return s == t;
+	}
+
+	void Helper(string& s) {
+		int slow = 0, fast = 0;
+		while (fast < s.size()) {
+			if (s[fast] != '#') {
+				s[slow] = s[fast];
+				slow++;
+			}
+			else {
+				slow--;
+				if (slow < 0)
+					slow = 0;
+			}
+			fast++;
+		}
+		s.resize(slow);
+	}
 
 private:
 	void compareHelper(string& s) {
@@ -72,11 +96,11 @@ private:
 				slow = slow - 1 > 0 ? slow - 1 : 0;
 			}
 		}
-		//return slow;   //å¯ä»¥ä¸è¿”å›slowï¼Œè€Œæ˜¯ä½¿ç”¨resizeå‡½æ•°ï¼ŒæŠŠstringæ¢æˆslowå¤§å°ï¼Œè¿™æ ·å°±ä¸ç”¨åˆ»æ„è¿”å›slowï¼Œç„¶åæ¯”è¾ƒäº†
+		//return slow;   //¿ÉÒÔ²»·µ»Øslow£¬¶øÊÇÊ¹ÓÃresizeº¯Êı£¬°Ñstring»»³Éslow´óĞ¡£¬ÕâÑù¾Í²»ÓÃ¿ÌÒâ·µ»Øslow£¬È»ºó±È½ÏÁË
 		s.resize(slow);
 	}
 };
-//è¿™ä¸ªé¢˜çš„æ–¹æ³•è¿˜æ˜¯æ¯”è¾ƒå®¹æ˜“æƒ³åˆ°çš„ï¼Œç”¨å¿«æ…¢æŒ‡é’ˆï¼Œå¦‚æœå¿«æŒ‡é’ˆé‡åˆ°äº†#ï¼Œå°±æŠŠæ…¢æŒ‡é’ˆé€€æ ¼ä¸€ä¸ª
+//Õâ¸öÌâµÄ·½·¨»¹ÊÇ±È½ÏÈİÒ×Ïëµ½µÄ£¬ÓÃ¿ìÂıÖ¸Õë£¬Èç¹û¿ìÖ¸ÕëÓöµ½ÁË#£¬¾Í°ÑÂıÖ¸ÕëÍË¸ñÒ»¸ö
 
 int main() {
 	Solution st;
@@ -84,5 +108,6 @@ int main() {
 	bool flag = st.backspaceCompare(s, t);
 	cout << flag << endl;
 	cout << boolalpha << st.backspaceCompare1(s, t) << noboolalpha << endl;
+	cout << boolalpha << st.backspaceCompare2(s, t) << noboolalpha << endl;
 	return 0;
 }

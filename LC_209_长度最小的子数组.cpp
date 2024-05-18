@@ -1,6 +1,6 @@
 /*
-* 209 é•¿åº¦æœ€å°çš„å­æ•°ç»„
-* ç»™å®šä¸€ä¸ªå«æœ‰nä¸ªæ­£æ•´æ•°çš„æ•°ç»„å’Œæ­£æ•´æ•°targetï¼Œåœ¨æ•°ç»„ä¸­æ‰¾å‡ºè¿ç»­çš„å­æ•°ç»„æ»¡è¶³è¿™å‡ ä¸ªæ•°çš„å’Œå¤§äºç­‰äºtargetï¼Œè¿”å›å­æ•°ç»„é•¿åº¦çš„æœ€å°å€¼
+* 209 ³¤¶È×îĞ¡µÄ×ÓÊı×é
+* ¸ø¶¨Ò»¸öº¬ÓĞn¸öÕıÕûÊıµÄÊı×éºÍÕıÕûÊıtarget£¬ÔÚÊı×éÖĞÕÒ³öÁ¬ĞøµÄ×ÓÊı×éÂú×ãÕâ¼¸¸öÊıµÄºÍ´óÓÚµÈÓÚtarget£¬·µ»Ø×ÓÊı×é³¤¶ÈµÄ×îĞ¡Öµ
 */
 #include <iostream>
 #include <vector>
@@ -9,10 +9,10 @@ using namespace std;
 class Solution {
 public:
 	int minSubArrayLen(int target, vector<int>& nums) {
-		int i = 0, sum = 0, count = 0, result = INT_MAX;  //iä½œä¸ºæ»‘åŠ¨çª—å£çš„å¼€å§‹ä½ç½®ï¼Œsumæ˜¯çª—å£çš„æ€»å’Œï¼Œcountæ˜¯å½“å‰çª—å£å†…æ»¡è¶³æ¡ä»¶çš„æ•°ç»„çš„é•¿åº¦ï¼Œresultæ˜¯æœ€åçš„ç»“æœ
-		for (int j = 0; j < nums.size(); j++) {   //jæ˜¯æ»‘åŠ¨çª—å£çš„ç»“æŸä½ç½®
+		int i = 0, sum = 0, count = 0, result = INT_MAX;  //i×÷Îª»¬¶¯´°¿ÚµÄ¿ªÊ¼Î»ÖÃ£¬sumÊÇ´°¿ÚµÄ×ÜºÍ£¬countÊÇµ±Ç°´°¿ÚÄÚÂú×ãÌõ¼şµÄÊı×éµÄ³¤¶È£¬resultÊÇ×îºóµÄ½á¹û
+		for (int j = 0; j < nums.size(); j++) {   //jÊÇ»¬¶¯´°¿ÚµÄ½áÊøÎ»ÖÃ
 			sum += nums[j];
-			while (sum >= target) {   //ç¼©å°çª—å£
+			while (sum >= target) {   //ËõĞ¡´°¿Ú
 				count = j - i + 1;
 				result = result < count ? result : count;
 				sum -= nums[i++];
@@ -21,8 +21,8 @@ public:
 		return result == INT_MAX ? 0 : result;
 	}
 
-	//ç¬¬äºŒæ¬¡åšçš„ä»£ç 
-	//æ²¡æƒ³èµ·æ¥æ˜¯æ»‘åŠ¨çª—å£çš„é¢˜ï¼Œåæ¥çœ‹äº†æç¤ºæƒ³èµ·æ¥äº†ï¼Œä½†æ˜¯åœ¨å†™ä»£ç çš„æ—¶å€™ï¼Œä¸€æ˜¯ä¸Šæ¥å°±æ’åºäº†ï¼Œå…¶å®ä¸è¯¥æ’åºçš„ï¼ŒäºŒæ˜¯åœ¨æ¯æ¬¡ç¼©å°çª—å£åéƒ½æŠŠçª—å£å†…çš„ç»“æœå˜ä¸º0äº†ï¼Œå…¶å®ä¹Ÿä¸è¯¥æ”¹çš„ã€‚
+	//µÚ¶ş´Î×öµÄ´úÂë
+	//Ã»ÏëÆğÀ´ÊÇ»¬¶¯´°¿ÚµÄÌâ£¬ºóÀ´¿´ÁËÌáÊ¾ÏëÆğÀ´ÁË£¬µ«ÊÇÔÚĞ´´úÂëµÄÊ±ºò£¬Ò»ÊÇÉÏÀ´¾ÍÅÅĞòÁË£¬ÆäÊµ²»¸ÃÅÅĞòµÄ£¬¶şÊÇÔÚÃ¿´ÎËõĞ¡´°¿Úºó¶¼°Ñ´°¿ÚÄÚµÄ½á¹û±äÎª0ÁË£¬ÆäÊµÒ²²»¸Ã¸ÄµÄ¡£
 	int minSubArrayLen1(int target, vector<int>& nums) {
 		int sum = 0, res = INT_MAX;
 		for (int front = 0, last = 0; front < nums.size(); front++) {
@@ -39,10 +39,28 @@ public:
 			return 0;
 		return res;
 	}
+
+	//µÚÈı´ÎÔÙ×ö
+	int minSubArrayLen2(int target, vector<int>& nums) {
+		int res = INT_MAX;
+		int slow = 0, fast = 0;
+		int sum = 0;
+		while (fast < nums.size()) {
+			sum += nums[fast];
+			while (sum >= target) {
+				res = min(res, fast - slow + 1);
+				sum -= nums[slow++];
+			}
+			fast++;
+		}
+		if (res == INT_MAX)
+			return 0;
+		return res;
+	}
 };
 
-//è¿™ä¸ªé¢˜æ˜¯æ»‘åŠ¨çª—å£çš„é¢˜ï¼Œå› ä¸ºå¥½é•¿æ—¶é—´æ²¡æ¥è§¦æ»‘åŠ¨çª—å£äº†ï¼Œçœ‹åˆ°é¢˜ä¹‹åéšçº¦æ„Ÿè§‰åº”è¯¥ç”¨ä¸¤ä¸ªæŒ‡é’ˆé€‰å‡ºä¸€ä¸ªèŒƒå›´ï¼Œä½†æ˜¯æ¥ä¸‹æ¥å°±æ²¡å¤´ç»ªäº†
-//ç„¶åç›´æ¥çœ‹äº†ç­”æ¡ˆï¼Œæ‰çŸ¥é“å’‹åš
+//Õâ¸öÌâÊÇ»¬¶¯´°¿ÚµÄÌâ£¬ÒòÎªºÃ³¤Ê±¼äÃ»½Ó´¥»¬¶¯´°¿ÚÁË£¬¿´µ½ÌâÖ®ºóÒşÔ¼¸Ğ¾õÓ¦¸ÃÓÃÁ½¸öÖ¸ÕëÑ¡³öÒ»¸ö·¶Î§£¬µ«ÊÇ½ÓÏÂÀ´¾ÍÃ»Í·Ğ÷ÁË
+//È»ºóÖ±½Ó¿´ÁË´ğ°¸£¬²ÅÖªµÀÕ¦×ö
 
 int main() {
 	Solution st;
@@ -50,5 +68,7 @@ int main() {
 	int res = st.minSubArrayLen(7, nums);
 	cout << res << endl;
 	cout << st.minSubArrayLen1(7, nums) << endl;
+	cout << res << endl;
+	cout << st.minSubArrayLen2(7, nums) << endl;
 	return 0;
 }
