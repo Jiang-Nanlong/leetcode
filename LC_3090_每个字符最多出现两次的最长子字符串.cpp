@@ -2,7 +2,7 @@
 #include <unordered_map>
 using namespace std;
 
-//脫脰脢脟脪禄碌脌禄卢露炉麓掳驴脷脤芒
+//又是一道滑动窗口题
 
 class Solution {
 public:
@@ -20,11 +20,29 @@ public:
         }
         return maxLength;
     }
+
+    // 第二次做
+    int maximumLengthSubstring1(string s) {
+        unordered_map<char, int> umap;
+        int slow = 0, fast = 0;
+        int res = 0;
+        while (fast < s.size()) {
+            umap[s[fast]]++;
+            while (umap[s[fast]] > 2) {
+                umap[s[slow]]--;
+                slow++;
+            }
+            res = max(res, fast - slow + 1);
+            fast++;
+        }
+        return res;
+    }
 };
 
 int main() {
     Solution st;
     string s("bcbbbcba");
     cout << st.maximumLengthSubstring(s) << endl;
+    cout << st.maximumLengthSubstring1(s) << endl;
     return 0;
 }

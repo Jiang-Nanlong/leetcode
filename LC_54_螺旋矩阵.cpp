@@ -3,7 +3,7 @@
 using namespace std;
 
 /*
-* ç»™ä½ ä¸€ä¸ª m è¡Œ n åˆ—çš„çŸ©é˜µ matrix ï¼Œè¯·æŒ‰ç…§ é¡ºæ—¶é’ˆèºæ—‹é¡ºåº ï¼Œè¿”å›çŸ©é˜µä¸­çš„æ‰€æœ‰å…ƒç´ ã€‚
+* ¸øÄãÒ»¸ö m ĞĞ n ÁĞµÄ¾ØÕó matrix £¬Çë°´ÕÕ Ë³Ê±ÕëÂİĞıË³Ğò £¬·µ»Ø¾ØÕóÖĞµÄËùÓĞÔªËØ¡£
 *
 */
 class Solution {
@@ -34,9 +34,32 @@ public:
 		}
 		return res;
 	}
+
+	// µÚ¶ş´Î×ö
+	vector<int> spiralOrder1(vector<vector<int>>& matrix) {
+		int m = matrix.size(), n = matrix[0].size();
+		vector<int> res(m * n);
+		int count = 0;
+		for (int i = 0; i <= min(m, n) / 2; i++) {
+			for (int j = i; j < n - i; j++) {
+				if (count < m * n)
+					res[count++] = matrix[i][j];
+			}
+			for (int j = n - i - 1, k = i + 1; k < m - i; k++)
+				if (count < m * n)
+					res[count++] = matrix[k][j];
+			for (int j = n - i - 2, k = m - i - 1; j >= i; j--)
+				if (count < m* n)
+					res[count++] = matrix[k][j];
+			for (int j = i, k = m - i - 2; k > i; k--)
+				if (count < m * n)
+					res[count++] = matrix[k][j];
+		}
+		return res;
+	}
 };
-//è¿™ä¸ªé¢˜ä¸ç®—æ³•æ— å…³ï¼Œçº¯è€ƒä»£ç 
-//è¿™é‡Œå¼•å…¥countæ˜¯å› ä¸ºå¦‚æœæœ€åä¸€å±‚ä¸å¤Ÿä¸€åœˆçš„è¯ï¼Œå¦‚æœæ²¡æœ‰countä½œä¸ºçº¦æŸï¼Œä¼šæœ‰é”™è¯¯ï¼Œæ—¢ç„¶çŸ¥é“äº†çŸ©é˜µçš„å¤§å°ï¼Œå°±ç›´æ¥å¼„ä¸ªcountæ§åˆ¶å®ƒè¾“å‡ºå¤šå°‘ä¸ªæ•°
+//Õâ¸öÌâÓëËã·¨ÎŞ¹Ø£¬´¿¿¼´úÂë
+//ÕâÀïÒıÈëcountÊÇÒòÎªÈç¹û×îºóÒ»²ã²»¹»Ò»È¦µÄ»°£¬Èç¹ûÃ»ÓĞcount×÷ÎªÔ¼Êø£¬»áÓĞ´íÎó£¬¼ÈÈ»ÖªµÀÁË¾ØÕóµÄ´óĞ¡£¬¾ÍÖ±½ÓÅª¸öcount¿ØÖÆËüÊä³ö¶àÉÙ¸öÊı
 
 int main() {
 	Solution st;
@@ -45,5 +68,9 @@ int main() {
 	for (int i = 0; i < res.size(); i++)
 		cout << res[i] << " ";
 	cout << endl;
-	return 0;
+	vector<int> res1 = st.spiralOrder1(matrix);
+	for (int i = 0; i < res1.size(); i++)
+		cout << res1[i] << " ";
+	cout << endl;
+	exit(0);
 }

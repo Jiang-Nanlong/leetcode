@@ -3,9 +3,9 @@
 using namespace std;
 
 /*
-* ç»™ä¸€ä¸ªæ­£æ•´æ•° n ï¼Œç”Ÿæˆä¸€ä¸ªåŒ…å« 1 åˆ° næ–¹çš„æ‰€æœ‰å…ƒç´ ï¼Œä¸”å…ƒç´ æŒ‰é¡ºæ—¶é’ˆé¡ºåºèºæ—‹æ’åˆ—çš„ n x n æ­£æ–¹å½¢çŸ©é˜µ
+* ¸øÒ»¸öÕıÕûÊı n £¬Éú³ÉÒ»¸ö°üº¬ 1 µ½ n·½µÄËùÓĞÔªËØ£¬ÇÒÔªËØ°´Ë³Ê±ÕëË³ĞòÂİĞıÅÅÁĞµÄ n x n Õı·½ĞÎ¾ØÕó
 */
-//è¿™ä¸ªé¢˜å°±æ˜¯è€ƒå¯Ÿä»£ç ï¼Œä¸è€ƒç®—æ³•ã€‚
+//Õâ¸öÌâ¾ÍÊÇ¿¼²ì´úÂë£¬²»¿¼Ëã·¨¡£
 class Solution {
 public:
 	vector<vector<int>> generateMatrix(int n) {
@@ -25,6 +25,31 @@ public:
 		}
 		return res;
 	}
+
+	// µÚ¶ş´Î×ö£¬±ÈÈçµÚÒ»´ÎĞ´µÄ¼òµ¥
+	vector<vector<int>> generateMatrix1(int n) {
+		vector<vector<int>> res(n, vector<int>(n, 0));
+		int count = 1;
+		for (int i = 0; i <= n / 2; i++) {
+			for (int j = i; j < n - i; j++) {
+				res[i][j] = count;
+				count++;
+			}
+			for (int j = n - i - 1, k = i + 1; k < n - i; k++) {
+				res[k][j] = count;
+				count++;
+			}
+			for (int k = n - i - 1, j = n - i - 2; j >= i; j--) {
+				res[k][j] = count;
+				count++;
+			}
+			for (int j = i, k = n - i - 2; k > i; k--) {
+				res[k][j] = count;
+				count++;
+			}
+		}
+		return res;
+	}
 };
 
 int main() {
@@ -33,6 +58,14 @@ int main() {
 	for (int i = 0; i < res.size(); i++) {
 		for (int j = 0; j < res[0].size(); j++) {
 			cout << res[i][j] << " ";
+		}
+		cout << endl;
+	}
+
+	vector<vector<int>> res1 = st.generateMatrix1(3);
+	for (int i = 0; i < res1.size(); i++) {
+		for (int j = 0; j < res1[0].size(); j++) {
+			cout << res1[i][j] << " ";
 		}
 		cout << endl;
 	}
