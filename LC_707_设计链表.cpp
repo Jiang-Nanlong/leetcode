@@ -11,7 +11,7 @@ public:
 		ListedNode(int x, ListedNode* p) :val(x), next(p) {}
 	};
 	MyLinkedList() {
-		ListHead = new ListedNode();  //å®šä¹‰ä¸€ä¸ªå¤´ç»“ç‚¹
+		ListHead = new ListedNode();  //¶¨ÒåÒ»¸öÍ·½áµã
 		sizeofList = 0;
 	}
 
@@ -68,7 +68,7 @@ private:
 	int sizeofList;
 };
 
-//ä¸‹è¾¹æ˜¯ç¬¬äºŒéåš
+//ÏÂ±ßÊÇµÚ¶ş±é×ö
 class MyLinkedList1 {
 public:
 	struct ListedNode {
@@ -87,8 +87,8 @@ public:
 	int get(int index) {
 		if (index >= nodeNum || index < 0)
 			return -1;
-		ListedNode* p = NodeList->next;   //æ³¨æ„è¿™é‡Œçš„indexæ˜¯ä»NodeList->nextå¼€å§‹ç®—çš„ï¼Œä½†æ˜¯ä¸‹è¾¹çš„addAtIndexå’ŒdeleteAtIndexéƒ½æ˜¯ä»NodeListå¼€å§‹ç®—çš„ï¼Œå› ä¸ºè¿™é‡Œçš„getæœ€åå°±æ˜¯è¦è®©æŒ‡é’ˆæŒ‡å‘indexå¤„ï¼Œè€Œå¦å¤–ä¸¤ä¸ªéƒ½æ˜¯è¦æŒ‡å‘indexçš„å‰ä¸€ä¸ª
-		for (int i = 0; i < index; i++)   //è¿™é‡Œå¾ªç¯indexæ¬¡ï¼ŒæŒ‡å‘indexï¼Œä»ç¬¬0ä¸ªå…ƒç´ å¼€å§‹ï¼Œç§»åŠ¨ä¸€ä¸‹ï¼ŒæŒ‡å‘ç¬¬ä¸€ä¸ªå…ƒç´ ï¼›ç§»åŠ¨ä¸¤ä¸‹ï¼ŒæŒ‡å‘ç¬¬äºŒä¸ªå…ƒç´ ï¼Œä»¥æ­¤ç±»æ¨
+		ListedNode* p = NodeList->next;   //×¢ÒâÕâÀïµÄindexÊÇ´ÓNodeList->next¿ªÊ¼ËãµÄ£¬µ«ÊÇÏÂ±ßµÄaddAtIndexºÍdeleteAtIndex¶¼ÊÇ´ÓNodeList¿ªÊ¼ËãµÄ£¬ÒòÎªÕâÀïµÄget×îºó¾ÍÊÇÒªÈÃÖ¸ÕëÖ¸Ïòindex´¦£¬¶øÁíÍâÁ½¸ö¶¼ÊÇÒªÖ¸ÏòindexµÄÇ°Ò»¸ö
+		for (int i = 0; i < index; i++)   //ÕâÀïÑ­»·index´Î£¬Ö¸Ïòindex£¬´ÓµÚ0¸öÔªËØ¿ªÊ¼£¬ÒÆ¶¯Ò»ÏÂ£¬Ö¸ÏòµÚÒ»¸öÔªËØ£»ÒÆ¶¯Á½ÏÂ£¬Ö¸ÏòµÚ¶ş¸öÔªËØ£¬ÒÔ´ËÀàÍÆ
 			p = p->next;
 		return p->val;
 	}
@@ -135,6 +135,76 @@ private:
 };
 
 
+// µÚÈı´Î×ö
+class MyLinkedList2 {
+public:
+	struct ListNode {
+		int val;
+		ListNode* next;
+		ListNode() : val(0), next(nullptr) {}
+		ListNode(int x) : val(x), next(nullptr) {}
+		ListNode(int x, ListNode* next) : val(x), next(next) {}
+	};
+
+	MyLinkedList2() {
+		phead = new ListNode(-1);
+		num = 0;
+	}
+
+	int get(int index) {
+		if (index >= num) return -1;
+		ListNode* p = phead->next;
+		while (index--) {
+			p = p->next;
+		}
+		return p->val;
+	}
+
+	void addAtHead(int val) {
+		ListNode* newNode = new ListNode(val, phead->next);
+		phead->next = newNode;
+		num++;
+	}
+
+	void addAtTail(int val) {
+		ListNode* p = phead;
+		while (p->next) {
+			p = p->next;
+		}
+		ListNode* newNode = new ListNode(val);
+		p->next = newNode;
+		num++;
+	}
+
+	void addAtIndex(int index, int val) {
+		if (index > num) return;
+		ListNode* p = phead;
+		while (index--)
+			p = p->next;
+
+		ListNode* newNode = new ListNode(val, p->next);
+		p->next = newNode;
+		num++;
+	}
+
+	void deleteAtIndex(int index) {
+		if (index >= num) return;
+		ListNode* p = phead;
+		while (index--)
+			p = p->next;
+		ListNode* temp = p->next;
+		p->next = temp->next;
+		delete temp;
+		num--;
+	}
+
+private:
+	ListNode* phead;
+	int num;
+
+};
+
+
 /**
  * Your MyLinkedList object will be instantiated and called as such:
  * MyLinkedList* obj = new MyLinkedList();
@@ -145,7 +215,13 @@ private:
  * obj->deleteAtIndex(index);
  */
 int main() {
-	MyLinkedList mlist;
+	MyLinkedList2 mlist;
+	mlist.addAtHead(1);
+	mlist.addAtTail(3);
+	mlist.addAtIndex(1, 2);
+	cout << mlist.get(1) << endl;
+	mlist.deleteAtIndex(1);
+	cout << mlist.get(1) << endl;
 	return 0;
 }
 

@@ -4,8 +4,8 @@
 using namespace std;
 
 /*
-* ç»™å‡ºå››ä¸ªç­‰é•¿çš„æ•°ç»„ï¼Œæ‰¾å‡ºæœ‰å¤šå°‘ç§ç»„åˆæ–¹å¼ä½¿å¾—å››ä¸ªæ•°ç»„ä¸­çš„å…ƒç´ åŠ ä¸€å—ç­‰äº0ã€‚
-* åˆšåšè¿™ä¸ªé¢˜çœŸçš„æ˜¯ä¸€ç‚¹å¤´ç»ªä¹Ÿæ²¡æœ‰ï¼Œä¹Ÿæ²¡æƒ³åˆ°å’Œå“ˆå¸Œè¡¨èƒ½æœ‰ä»€ä¹ˆè”ç³»ã€‚çœ‹äº†ç­”æ¡ˆæ‰çŸ¥é“ã€‚
+* ¸ø³öËÄ¸öµÈ³¤µÄÊı×é£¬ÕÒ³öÓĞ¶àÉÙÖÖ×éºÏ·½Ê½Ê¹µÃËÄ¸öÊı×éÖĞµÄÔªËØ¼ÓÒ»¿éµÈÓÚ0¡£
+* ¸Õ×öÕâ¸öÌâÕæµÄÊÇÒ»µãÍ·Ğ÷Ò²Ã»ÓĞ£¬Ò²Ã»Ïëµ½ºÍ¹şÏ£±íÄÜÓĞÊ²Ã´ÁªÏµ¡£¿´ÁË´ğ°¸²ÅÖªµÀ¡£
 */
 
 class Solution {
@@ -23,7 +23,7 @@ public:
 		return count;
 	}
 
-	//ç¬¬äºŒå›åšï¼ŒçœŸæ²¡æƒ³èµ·æ¥æ€ä¹ˆåš
+	//µÚ¶ş»Ø×ö£¬ÕæÃ»ÏëÆğÀ´ÔõÃ´×ö
 	int fourSumCount1(vector<int>& nums1, vector<int>& nums2, vector<int>& nums3,
 		vector<int>& nums4) {
 		unordered_map<int, int> umap;
@@ -41,6 +41,23 @@ public:
 			}
 
 		return count;
+	}
+
+	// µÚÈı´Î×öÁË£¬»¹ÊÇÃ»ÓĞÏë³öÀ´
+	int fourSumCount2(vector<int>& nums1, vector<int>& nums2, vector<int>& nums3,
+		vector<int>& nums4) {
+		unordered_map<int, int> umap;
+		for (int& i : nums1)
+			for (int& j : nums2)
+				umap[i + j]++;
+
+		int res = 0;
+		for (int& i : nums3)
+			for (int& j : nums4)
+				if (umap.find(0 - i - j) != umap.end())
+					res += umap[-i - j];
+
+		return res;
 	}
 };
 

@@ -28,7 +28,7 @@ public:
 		return h->next;
 	}
 
-	//ç¬¬äºŒå›å†™çš„ä»£ç 
+	//µÚ¶ş»ØĞ´µÄ´úÂë
 	ListNode* removeElements1(ListNode* head, int val) {
 		if (head == nullptr)
 			return nullptr;
@@ -43,9 +43,30 @@ public:
 				delete temp;
 			}
 			else
-				p = p->next;   //å¼€å§‹çš„æ—¶å€™è¿™é‡Œçš„é€»è¾‘å†™é”™äº†ï¼Œæ²¡æœ‰å†™elseï¼Œä¸€ç›´æŠ¥è¶…æ—¶çš„é”™è¯¯ï¼Œåæ¥æ‰‹åŠ¨æ¼”ç¤ºäº†ä¸€éæ‰çŸ¥é“
+				p = p->next;   //¿ªÊ¼µÄÊ±ºòÕâÀïµÄÂß¼­Ğ´´íÁË£¬Ã»ÓĞĞ´else£¬Ò»Ö±±¨³¬Ê±µÄ´íÎó£¬ºóÀ´ÊÖ¶¯ÑİÊ¾ÁËÒ»±é²ÅÖªµÀ
+		}
+		return phead->next;
+	}
+
+	// µÚÈı´Î×ö
+	ListNode* removeElements2(ListNode* head, int val) {
+		ListNode* phead = new ListNode(-1, head);
+		ListNode* pre = phead, * cur = head;
+		while (cur) {
+			if (cur->val == val) {
+				pre->next = cur->next;
+				delete cur;
+				cur = pre->next;
+			}
+			else {
+				pre = cur;
+				cur = cur->next;
+			}
 		}
 		return phead->next;
 	}
 };
 
+int main() {
+	return 0;
+}
