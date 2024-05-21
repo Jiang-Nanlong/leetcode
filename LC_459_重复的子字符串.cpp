@@ -2,11 +2,11 @@
 #include <string>
 using namespace std;
 
-//è¿™ä¸ªé¢˜å±…ç„¶æ˜¯ä¸€ä¸ªç®€å•é¢˜ï¼Œè¿™ä¹Ÿå¤ªéš¾äº†
+//Õâ¸öÌâ¾ÓÈ»ÊÇÒ»¸ö¼òµ¥Ìâ£¬ÕâÒ²Ì«ÄÑÁË
 
 class Solution {
 public:
-	/*bool repeatedSubstringPattern(string s) {  //ç§»åŠ¨åŒ¹é… æ—¶é—´å¤æ‚åº¦O(n)
+	/*bool repeatedSubstringPattern(string s) {  //ÒÆ¶¯Æ¥Åä Ê±¼ä¸´ÔÓ¶ÈO(n)
 		string t = s + s;
 		t.erase(t.begin());
 		t.erase(t.end() - 1);
@@ -15,13 +15,13 @@ public:
 
 	}*/
 
-	//KMPåšæ³•  æ—¶é—´å¤æ‚åº¦O(n)
+	//KMP×ö·¨  Ê±¼ä¸´ÔÓ¶ÈO(n)
 	bool repeatedSubstringPattern(string s) {
 		if (s.size() == 0) return false;
 		int* next = new int[s.size()];
 		getNext(s, next);
-		if ((next[s.size() - 1] != 0) && (s.size() % (s.size() - next[s.size() - 1]) == 0))   //è¿™é‡Œæœ€åçš„æœ€å°é‡å¤å­ä¸²å°±æ˜¯å‰s.size() - next[s.size() - 1]ä¸ªå…ƒç´ ã€‚  
-			//next[s.size() - 1] != 0æ˜¯ä¸ºäº†é˜²æ­¢å‡ºç°abacè¿™ç§æƒ…å†µï¼Œè¿™ç§æƒ…å†µä¸‹å¦‚æœæ²¡æœ‰è¿™ä¸ªæ¡ä»¶ä¼šåˆ¤æ–­ä¸ºæœ‰é‡å¤å­ä¸²ï¼Œå…¶å®æ˜¯æ²¡æœ‰çš„ã€‚
+		if ((next[s.size() - 1] != 0) && (s.size() % (s.size() - next[s.size() - 1]) == 0))   //ÕâÀï×îºóµÄ×îĞ¡ÖØ¸´×Ó´®¾ÍÊÇÇ°s.size() - next[s.size() - 1]¸öÔªËØ¡£  
+			//next[s.size() - 1] != 0ÊÇÎªÁË·ÀÖ¹³öÏÖabacÕâÖÖÇé¿ö£¬ÕâÖÖÇé¿öÏÂÈç¹ûÃ»ÓĞÕâ¸öÌõ¼ş»áÅĞ¶ÏÎªÓĞÖØ¸´×Ó´®£¬ÆäÊµÊÇÃ»ÓĞµÄ¡£
 			return true;
 		return false;
 	}
@@ -39,8 +39,8 @@ private:
 	}
 
 public:
-	//ç¬¬äºŒæ¬¡åšè¿˜æ˜¯æ²¡æœ‰åšå‡ºæ¥ï¼Œä¸¤ä¸ªæ–¹æ³•ä¸€ä¸ªä¹Ÿæ²¡æƒ³èµ·æ¥
-	//çœ‹äº†ç­”æ¡ˆä»¥åæ‰æƒ³èµ·æ¥ã€‚å¦‚æœä¸€ä¸ªå­—ç¬¦ä¸²æ˜¯ç”±é‡å¤å­ä¸²æ„æˆçš„ï¼Œé‚£ä¹ˆå®ƒä¸€å®šå­˜åœ¨ç›¸åŒçš„æœ€é•¿ç›¸ç­‰å‰åç¼€ï¼Œæ ¹æ®å‰ç¼€å’Œåç¼€çš„ä½ç½®å…³ç³»ï¼Œå¯ä»¥è§‚å¯Ÿåˆ°ä»–ä»¬ä¸é‡å çš„ä½ç½®å°±åº”è¯¥æ˜¯è¦æ±‚çš„å­å­—ç¬¦ä¸²ã€‚
+	//µÚ¶ş´Î×ö»¹ÊÇÃ»ÓĞ×ö³öÀ´£¬Á½¸ö·½·¨Ò»¸öÒ²Ã»ÏëÆğÀ´
+	//¿´ÁË´ğ°¸ÒÔºó²ÅÏëÆğÀ´¡£Èç¹ûÒ»¸ö×Ö·û´®ÊÇÓÉÖØ¸´×Ó´®¹¹³ÉµÄ£¬ÄÇÃ´ËüÒ»¶¨´æÔÚÏàÍ¬µÄ×î³¤ÏàµÈÇ°ºó×º£¬¸ù¾İÇ°×ººÍºó×ºµÄÎ»ÖÃ¹ØÏµ£¬¿ÉÒÔ¹Û²ìµ½ËûÃÇ²»ÖØµşµÄÎ»ÖÃ¾ÍÓ¦¸ÃÊÇÒªÇóµÄ×Ó×Ö·û´®¡£
 	bool repeatedSubstringPattern1(string s) {
 		string t = s + s;
 		t.erase(t.begin());
@@ -68,7 +68,16 @@ public:
 		}
 	}
 
-
+public:
+	// µÚÈı´Î×ö
+	bool repeatedSubstringPattern3(string s) {
+		string s1 = s + s;
+		s1.erase(s1.begin());
+		s1.erase(s1.end() - 1);
+		if (s1.find(s) == -1)
+			return false;
+		return true;
+	}
 };
 
 void main() {
@@ -78,4 +87,5 @@ void main() {
 	cout << st.repeatedSubstringPattern(s2) << noboolalpha << endl;
 	cout << boolalpha << st.repeatedSubstringPattern2(s1) << endl;
 	cout << st.repeatedSubstringPattern2(s2) << noboolalpha << endl;
+	cout << boolalpha << st.repeatedSubstringPattern3(s2) << noboolalpha << endl;
 }

@@ -110,6 +110,41 @@ public:
 		if (s[slow - 1] == ' ') s.resize(slow - 1);
 		else s.resize(slow);
 	}
+
+public:
+	// 第四次做了
+	string reverseWords3(string s) {
+		removeextraspace(s);
+		cout << s << endl;
+		reverse(s.begin(), s.end());
+		for (int slow = 0, fast = 0; fast <= s.size(); fast++) {
+			if (s[fast] == ' ' || fast == s.size()) {
+				reverse(s.begin() + slow, s.begin() + fast);
+				slow = fast + 1;
+			}
+		}
+		return s;
+	}
+
+	void removeextraspace(string& s) {
+		int slow = 0, fast = 0;
+		while (fast < s.size()) {
+			if (s[fast] == ' ') {
+				if (slow == 0) {
+					fast++;
+					continue;
+				}else if (fast > 0 && s[fast - 1] != ' ') {
+					s[slow++] = s[fast];
+				}
+			}
+			else
+				s[slow++] = s[fast];
+			fast++;
+		}
+		if (slow > 0 && s[slow - 1] == ' ')
+			slow--;
+		s.resize(slow);
+	}
 };
 
 //这是看了代码随想录的代码，分三个步骤：1.先去掉多余的空格  2。然后反转整个句子  3.然后遍历句子中的单词，再把每个单词反转回来。
@@ -126,5 +161,7 @@ int main() {
 	cout << res1 << endl;
 	string res2 = st.reverseWords2(s);
 	cout << res2 << endl;
+	string res3 = st.reverseWords3(s);
+	cout << res3 << endl;
 	return 0;
 }

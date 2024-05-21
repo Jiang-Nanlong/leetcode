@@ -55,6 +55,19 @@ public:
 		return s;
 	}
 
+	// 第四次做了
+	string reverseStr3(string s, int k) {
+		for (int i = 0; i < s.size(); i += 2 * k) {
+			if (i + k <= s.size()) {
+				std::reverse(s.begin() + i, s.begin() + i + k);
+			}
+			else {
+				std::reverse(s.begin() + i, s.end());
+			}
+		}
+		return s;
+	}
+
 private:
 	void swapHelper(string& s, int begin, int end) {
 		int left = begin, right = end;
@@ -75,5 +88,7 @@ int main() {
 	cout << res1 << endl;
 	string res2 = st.reverseStr2(s, k);
 	cout << res2 << endl;
+	string res3 = st.reverseStr3(s, k);
+	cout << res3 << endl;
 	return 0;
 }
