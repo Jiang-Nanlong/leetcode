@@ -2,7 +2,7 @@
 #include <queue>
 using namespace std;
 
-//ç”¨é˜Ÿåˆ—å®ç°æ ˆï¼Œä¹Ÿéœ€è¦ä¸¤ä¸ªé˜Ÿåˆ—ï¼Œå…¶ä¸­ä¸€ä¸ªé˜Ÿåˆ—ç”¨æ¥å¤‡ä»½å¦ä¸€ä¸ªï¼Œæ¯”å¦‚è¯´åœ¨popæ—¶ï¼Œå°±éœ€è¦ç”¨å¤‡ä»½é˜Ÿåˆ—Bæ¥å¤‡ä»½å¦ä¸€ä¸ªé˜Ÿåˆ—Açš„å‰n-1ä¸ªå…ƒç´ ï¼Œç„¶åå†å¼¹å‡ºAçš„æœ€åä¸€ä¸ªå…ƒç´ ï¼Œç„¶åå†é‡æ–°æŠŠå¤‡ä»½é˜Ÿåˆ—Bä¸­çš„å…ƒç´ å­˜åˆ°é˜Ÿåˆ—Aä¸­ï¼Œè¿™æ ·å°±å®ç°äº†åå…¥å…ˆå‡ºçš„æ•ˆæœã€‚
+//ÓÃ¶ÓÁĞÊµÏÖÕ»£¬Ò²ĞèÒªÁ½¸ö¶ÓÁĞ£¬ÆäÖĞÒ»¸ö¶ÓÁĞÓÃÀ´±¸·İÁíÒ»¸ö£¬±ÈÈçËµÔÚpopÊ±£¬¾ÍĞèÒªÓÃ±¸·İ¶ÓÁĞBÀ´±¸·İÁíÒ»¸ö¶ÓÁĞAµÄÇ°n-1¸öÔªËØ£¬È»ºóÔÙµ¯³öAµÄ×îºóÒ»¸öÔªËØ£¬È»ºóÔÙÖØĞÂ°Ñ±¸·İ¶ÓÁĞBÖĞµÄÔªËØ´æµ½¶ÓÁĞAÖĞ£¬ÕâÑù¾ÍÊµÏÖÁËºóÈëÏÈ³öµÄĞ§¹û¡£
 
 //class MyStack {
 //public:
@@ -33,7 +33,7 @@ using namespace std;
 //	}
 //
 //	int top() {
-//		/*int res = this->pop();    //è¿™æ ·ä¹Ÿè¡Œï¼Œå…ˆå¼¹å‡ºæœ€åä¸€ä¸ªï¼Œç„¶åå†é‡æ–°å‹å…¥åˆ°é˜Ÿåˆ—Açš„é˜Ÿå°¾
+//		/*int res = this->pop();    //ÕâÑùÒ²ĞĞ£¬ÏÈµ¯³ö×îºóÒ»¸ö£¬È»ºóÔÙÖØĞÂÑ¹Èëµ½¶ÓÁĞAµÄ¶ÓÎ²
 //		que1.push(res);
 //		return res;
 //		*/
@@ -47,7 +47,7 @@ using namespace std;
 //	queue<int> que1, que2;
 //};
 
-//åªæœ‰popçš„æ—¶å€™æ‰ç”¨åˆ°ä¸¤ä¸ªé˜Ÿåˆ—ï¼Œå…¶å®åªç”¨ä¸€ä¸ªä¹Ÿè¡Œï¼Œåªéœ€è¦æŠŠå‡ºé˜Ÿçš„å…ƒç´ é¡ºä¾¿æ’å…¥åˆ°é˜Ÿå°¾å°±è¡Œï¼Œä¸è¿‡è¦å¼¹å‡ºæœ€åä¸€ä¸ªå…ƒç´ ã€‚
+//Ö»ÓĞpopµÄÊ±ºò²ÅÓÃµ½Á½¸ö¶ÓÁĞ£¬ÆäÊµÖ»ÓÃÒ»¸öÒ²ĞĞ£¬Ö»ĞèÒª°Ñ³ö¶ÓµÄÔªËØË³±ã²åÈëµ½¶ÓÎ²¾ÍĞĞ£¬²»¹ıÒªµ¯³ö×îºóÒ»¸öÔªËØ¡£
 class MyStack {
 public:
 	MyStack() {
@@ -69,12 +69,12 @@ public:
 			res = que.front();
 			que.pop();
 		}
-		
+
 		return res;
 	}
 
 	int top() {
-		/*int res = this->pop();    //è¿™æ ·ä¹Ÿè¡Œï¼Œå…ˆå¼¹å‡ºæœ€åä¸€ä¸ªï¼Œç„¶åå†é‡æ–°å‹å…¥åˆ°é˜Ÿåˆ—Açš„é˜Ÿå°¾
+		/*int res = this->pop();    //ÕâÑùÒ²ĞĞ£¬ÏÈµ¯³ö×îºóÒ»¸ö£¬È»ºóÔÙÖØĞÂÑ¹Èëµ½¶ÓÁĞAµÄ¶ÓÎ²
 		que1.push(res);
 		return res;
 		*/
@@ -88,10 +88,10 @@ private:
 	queue<int> que;
 };
 
-//ç¬¬äºŒæ¬¡åšï¼Œè¿™ä¸ªtop()å‡½æ•°å’Œä¹‹å‰å†™çš„ä¸€æ¨¡ä¸€æ ·
-class MyStack {
+//µÚ¶ş´Î×ö£¬Õâ¸ötop()º¯ÊıºÍÖ®Ç°Ğ´µÄÒ»Ä£Ò»Ñù
+class MyStack1 {
 public:
-	MyStack() {}
+	MyStack1() {}
 
 	void push(int x) { que.push(x); }
 
@@ -119,6 +119,40 @@ public:
 private:
 	queue<int> que;
 };
+
+// µÚÈı´Î×ö
+class MyStack2 {
+public:
+	MyStack2() {}
+
+	void push(int x) { que.push(x); }
+
+	int pop() {
+		if (empty())
+			return -1;
+		int size = que.size();
+		size -= 1;
+		while (size--) {
+			int num = que.front();
+			que.pop();
+			que.push(num);
+		}
+		int res = que.front();
+		que.pop();
+		return res;
+	}
+
+	int top() {
+		int num = pop();
+		que.push(num);
+		return num;
+	}
+
+	bool empty() { return que.empty(); }
+
+private:
+	queue<int> que;
+};
 /**
  * Your MyStack object will be instantiated and called as such:
  * MyStack* obj = new MyStack();
@@ -128,6 +162,12 @@ private:
  * bool param_4 = obj->empty();
  */
 
-void main() {
-
+int main() {
+	MyStack2 stk2;
+	stk2.push(1);
+	stk2.push(2);
+	cout << stk2.top() << endl;
+	cout << stk2.pop() << endl;
+	cout << boolalpha << stk2.empty() << noboolalpha << endl;
+	return 0;
 }
