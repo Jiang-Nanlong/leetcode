@@ -3,14 +3,14 @@
 #include <deque>
 using namespace std;
 
-//给定一个nums数组，和一个窗口大小为k的滑动窗口，然后每次窗口右移一个，每次返回窗口内的最大值
-//这是一个困难题，刚开始看一点头绪没有。然后就看了代码随想录的视频。
-//这里用队里来表示窗口，返回窗口内的最大值，但是没有这样的数据结构，所以自己写了一个MyQueue。这是一个递减队列，队列中的最大值就表示当前窗口的最大值。
-//这个数据结构使用双端队列，然后有三个操作，一个是pop，一个push，一个getMax。
-//pop这个容易想，就是如果滑出窗口的那个值等于队列当前的最大值，那么就出队
-//push比较难想，因为队列一直维护递减，然后队列中的最大值就是窗口内的最大值。然后这个push比较有意思，用刚进入窗口的值与队列从后向前比，因为是双端队列，可以在后边出队，如果队列中的值小于刚进入窗口的值，就出队，然后继续往前比，知道没有比当前值大的，
-//然后当前值入队。其实到这里也比较好想，因为那些比当前值小的数，不可能是窗口内的最大值了，直接出队就行了。然后当前值并不一定是窗口内的最大值，他可能是下一个窗口的最大值，所以要入队。
-//getMax直接返回对头元素就行了
+//����һ��nums���飬��һ�����ڴ�СΪk�Ļ������ڣ�Ȼ��ÿ�δ�������һ����ÿ�η��ش����ڵ����ֵ
+//����һ�������⣬�տ�ʼ��һ��ͷ��û�С�Ȼ��Ϳ��˴�������¼����Ƶ��
+//�����ö�������ʾ���ڣ����ش����ڵ����ֵ������û�����������ݽṹ�������Լ�д��һ��MyQueue������һ���ݼ����У������е����ֵ�ͱ�ʾ��ǰ���ڵ����ֵ��
+//������ݽṹʹ��˫�˶��У�Ȼ��������������һ����pop��һ��push��һ��getMax��
+//pop��������룬��������������ڵ��Ǹ�ֵ���ڶ��е�ǰ�����ֵ����ô�ͳ���
+//push�Ƚ����룬��Ϊ����һֱά���ݼ���Ȼ������е����ֵ���Ǵ����ڵ����ֵ��Ȼ�����push�Ƚ�����˼���øս��봰�ڵ�ֵ����дӺ���ǰ�ȣ���Ϊ��˫�˶��У������ں�߳��ӣ���������е�ֵС�ڸս��봰�ڵ�ֵ���ͳ��ӣ�Ȼ�������ǰ�ȣ�֪��û�бȵ�ǰֵ��ģ�
+//Ȼ��ǰֵ��ӡ���ʵ������Ҳ�ȽϺ��룬��Ϊ��Щ�ȵ�ǰֵС�������������Ǵ����ڵ����ֵ�ˣ�ֱ�ӳ��Ӿ����ˡ�Ȼ��ǰֵ����һ���Ǵ����ڵ����ֵ������������һ�����ڵ����ֵ������Ҫ��ӡ�
+//getMaxֱ�ӷ��ض�ͷԪ�ؾ�����
 
 class Solution {
 public:
@@ -48,15 +48,60 @@ private:
 	};
 };
 
-//第二遍再做这个题还是不会，还是看的答案才知道怎么做，但是又想不明白为什么这么做。
-//只把可能成为最大值的数加进去，
 
+//�ڶ�����������⻹�ǲ��ᣬ���ǿ��Ĵ𰸲�֪����ô�����������벻����Ϊʲô��ô����
+//ֻ�ѿ��ܳ�Ϊ���ֵ�����ӽ�ȥ��
+
+
+// ���������ˣ�����û������
+class Solution1 {
+private:
+	class MyQue {
+		deque<int> que;
+
+	public:
+		void pop(int value) {
+			if (!que.empty() && que.front() == value)
+				que.pop_front();
+		}
+
+		void push(int value) {
+			while (!que.empty() && que.back() < value)
+				que.pop_back();
+			que.push_back(value);
+		}
+
+		int front() { return que.front(); }
+	};
+
+public:
+	vector<int> maxSlidingWindow(vector<int>& nums, int k) {
+		MyQue que;
+		vector<int> res;
+		for (int i = 0; i < k && i < nums.size(); i++)
+			que.push(nums[i]);
+
+		res.push_back(que.front());
+		for (int i = k; i < nums.size(); i++) {
+			que.pop(nums[i - k]);
+			que.push(nums[i]);
+			res.push_back(que.front());
+		}
+		return res;
+	}
+};
 int main() {
 	Solution st;
 	vector<int> nums{ 1,3,-1,-3,5,3,6,7 };
 	int k = 3;
 	vector<int> res = st.maxSlidingWindow(nums, k);
 	for (auto& i : res)
+		cout << i << " ";
+	cout << endl;
+
+	Solution1 st1;
+	vector<int> res1 = st1.maxSlidingWindow(nums, k);
+	for (auto& i : res1)
 		cout << i << " ";
 	cout << endl;
 	return 0;
