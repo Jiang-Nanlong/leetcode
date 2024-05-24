@@ -3,9 +3,9 @@
 #include <queue>
 using namespace std;
 
-//æ¯”è¾ƒä¸€ä¸ªäºŒå‰æ ‘æ˜¯ä¸æ˜¯è½´å¯¹ç§°
-//è¿™ä¸ªé—®é¢˜çš„å…³é”®æ˜¯æ¯”è¾ƒä¸¤ä¸ªå¯¹ç§°ä½ç½®æ˜¯å¦ç›¸ç­‰,æ—¢å¯ä»¥ç”¨é€’å½’å®žçŽ°ï¼Œä¹Ÿå¯ä»¥ç”¨æ ˆæˆ–é˜Ÿåˆ—å®žçŽ°ã€‚
-//åœ¨ä½¿ç”¨æ ˆæˆ–é˜Ÿåˆ—æ—¶ï¼Œæ¯æ¬¡éƒ½æ˜¯å‡ºé˜Ÿæˆ–å‡ºæ ˆå‰ä¸¤ä¸ªè¿›è¡Œæ¯”è¾ƒï¼Œæ‰€ä»¥åœ¨å…¥æ ˆæˆ–å…¥é˜Ÿçš„æ—¶å€™ä¹Ÿéƒ½æ˜¯ä¸¤ä¸¤å¯¹ç§°çš„å…¥æ ˆï¼Œè¿™æ ·åœ¨å‡ºçš„æ—¶å€™ä¹Ÿæ˜¯ä¸¤ä¸¤çš„å‡ºï¼Œè¿›è¡Œæ¯”è¾ƒ
+//±È½ÏÒ»¸ö¶þ²æÊ÷ÊÇ²»ÊÇÖá¶Ô³Æ
+//Õâ¸öÎÊÌâµÄ¹Ø¼üÊÇ±È½ÏÁ½¸ö¶Ô³ÆÎ»ÖÃÊÇ·ñÏàµÈ,¼È¿ÉÒÔÓÃµÝ¹éÊµÏÖ£¬Ò²¿ÉÒÔÓÃÕ»»ò¶ÓÁÐÊµÏÖ¡£
+//ÔÚÊ¹ÓÃÕ»»ò¶ÓÁÐÊ±£¬Ã¿´Î¶¼ÊÇ³ö¶Ó»ò³öÕ»Ç°Á½¸ö½øÐÐ±È½Ï£¬ËùÒÔÔÚÈëÕ»»òÈë¶ÓµÄÊ±ºòÒ²¶¼ÊÇÁ½Á½¶Ô³ÆµÄÈëÕ»£¬ÕâÑùÔÚ³öµÄÊ±ºòÒ²ÊÇÁ½Á½µÄ³ö£¬½øÐÐ±È½Ï
 
 struct TreeNode {
 	int val;
@@ -21,7 +21,7 @@ public:
 		return Helper(root, root);
 	}
 private:
-	bool Helper(TreeNode* n1, TreeNode* n2) {   //é€’å½’å¤„ç†
+	bool Helper(TreeNode* n1, TreeNode* n2) {   //µÝ¹é´¦Àí
 		if (n1 == nullptr && n2 == nullptr) return true;
 		if (n1 == nullptr || n2 == nullptr) return false;
 		return (n1->val == n2->val) && Helper(n1->left, n2->right) && Helper(n1->right, n2->left);
@@ -69,8 +69,8 @@ public:
 	}
 
 
-	//ç¬¬äºŒæ¬¡åš
-	bool isSymmetric(TreeNode* root) { return isSymmetricHelper(root, root); }
+	//µÚ¶þ´Î×ö
+	bool isSymmetric1(TreeNode* root) { return isSymmetricHelper(root, root); }
 	bool isSymmetricHelper(TreeNode* root1, TreeNode* root2) {
 		if (root1 == nullptr && root2 == nullptr)
 			return true;
@@ -85,7 +85,7 @@ public:
 		else
 			return false;
 	}
-	//isSymmetricHelper1æ²¡æœ‰ç®€åŒ–ä¹‹å‰çš„é€»è¾‘
+	//isSymmetricHelper1Ã»ÓÐ¼ò»¯Ö®Ç°µÄÂß¼­
 	bool isSymmetricHelper1(TreeNode* root1, TreeNode* root2) {
 		if (root1 == nullptr && root2 == nullptr)
 			return true;
@@ -99,6 +99,20 @@ public:
 		bool flag1 = isSymmetricHelper(root1->left, root2->right);
 		bool flag2 = isSymmetricHelper(root1->right, root2->left);
 		return flag1 && flag2;
+	}
+
+	// µÚÈý´Î×öÁË
+	bool isSymmetric2(TreeNode* root) {
+		return backtrace(root->left, root->right);
+	}
+
+	bool backtrace(TreeNode* left, TreeNode* right) {
+		if (left == nullptr && right == nullptr)
+			return true;
+		if ((!left && right) || (left && !right))
+			return false;
+
+		return left->val == right->val && backtrace(left->left, right->right) && backtrace(left->right, right->left);
 	}
 };
 
