@@ -1,8 +1,11 @@
 #include <iostream>
 #include <algorithm>
+#include <vector>
+#include <string>
+#include <queue>
 using namespace std;
 
-//åˆ¤æ–­ä¸€ä¸ªæ•°æ˜¯ä¸æ˜¯å¹³è¡¡äºŒå‰æ ‘
+//ÅÐ¶ÏÒ»¸öÊýÊÇ²»ÊÇÆ½ºâ¶þ²æÊ÷
 
 struct TreeNode {
 	int val;
@@ -18,7 +21,7 @@ public:
 	bool isBalanced(TreeNode* root) {
 		return Height(root) == -1 ? false : true;
 	}
-	int Height(TreeNode* node) {  //æ³¨æ„é€’å½’ä¸‰è¦ç´ 
+	int Height(TreeNode* node) {  //×¢ÒâµÝ¹éÈýÒªËØ
 		if (node == nullptr) return 0;
 
 		int leftHeight = Height(node->left);
@@ -29,8 +32,8 @@ public:
 	}
 
 
-	//ç¬¬äºŒéåšï¼Œè¿˜æ˜¯æ²¡åšå‡ºæ¥ï¼Œè¿™ä¸ªé¢˜ä¸€ä¸ªæ¯”è¾ƒé‡è¦çš„åœ°æ–¹æ˜¯å¾—ç”¨åŽåºéåŽ†ã€‚ç¬¬ä¸€éåšçš„æ—¶å€™æ²¡ä½“ä¼šå‡ºæ¥ä¸ºå•¥è¦ç”¨åŽåºéåŽ†ï¼Œä¹Ÿæ²¡å…³æ³¨
-	//çŽ°åœ¨ç¬¬äºŒéå†æ¥åšï¼Œæ„Ÿè§‰ç¡®å®žæ˜¯åªèƒ½ç”¨åŽåºéåŽ†ï¼Œå› ä¸ºç”¨å‰åºæ±‚çš„è¯ï¼Œåœ¨æ¯ä¸€å±‚å†…æ²¡æ³•æ¯”è¾ƒå·¦å³ä¸¤é¢—å­æ ‘çš„æ·±åº¦å·®ã€‚
+	//µÚ¶þ±é×ö£¬»¹ÊÇÃ»×ö³öÀ´£¬Õâ¸öÌâÒ»¸ö±È½ÏÖØÒªµÄµØ·½ÊÇµÃÓÃºóÐò±éÀú¡£µÚÒ»±é×öµÄÊ±ºòÃ»Ìå»á³öÀ´ÎªÉ¶ÒªÓÃºóÐò±éÀú£¬Ò²Ã»¹Ø×¢
+	//ÏÖÔÚµÚ¶þ±éÔÙÀ´×ö£¬¸Ð¾õÈ·ÊµÊÇÖ»ÄÜÓÃºóÐò±éÀú£¬ÒòÎªÓÃÇ°ÐòÇóµÄ»°£¬ÔÚÃ¿Ò»²ãÄÚÃ»·¨±È½Ï×óÓÒÁ½¿Å×ÓÊ÷µÄÉî¶È²î¡£
 	bool isBalanced1(TreeNode* root) {
 		return getHeight(root) == -1 ? false : true;
 	}
@@ -44,6 +47,59 @@ public:
 			return -1;
 		return 1 + max(leftheight, rightheight);
 	}
+
+	// µÚÈý´Î×ö
+	bool isBalanced2(TreeNode* root) {
+		return isBalancedHelper(root) == -1 ? false : true;
+	}
+
+	int isBalancedHelper(TreeNode* root) {
+		if (root == nullptr)
+			return 0;
+
+		int leftHeight = isBalancedHelper(root->left);
+		int rightHeight = isBalancedHelper(root->right);
+
+		if (leftHeight == -1 || rightHeight == -1)
+			return -1;
+		if (abs(leftHeight - rightHeight) > 1)
+			return -1;
+		else
+			return 1 + max(leftHeight, rightHeight);
+	}
+
+	TreeNode* buildTree(vector<string>& nums) {
+		if (nums.empty()) return nullptr;
+
+		TreeNode* root = new TreeNode(stoi(nums[0]));
+		queue<TreeNode*> que;
+		que.push(root);
+
+		int i = 1;
+		while (i < nums.size()) {
+			TreeNode* node = que.front();
+			que.pop();
+
+			if (nums[i] != "null") {
+				node->left = new TreeNode(stoi(nums[i]));
+				que.push(node->left);
+			}
+			i++;
+
+			if (i < nums.size() && nums[i] != "null") {
+				node->right = new TreeNode(stoi(nums[i]));
+				que.push(node->right);
+			}
+			i++;
+		}
+		return root;
+	}
 };
 
-void main() {}
+int main() {
+	Solution st;
+	vector<string> nums{ "3","9","20","null","null","15","7" };
+	TreeNode* root = st.buildTree(nums);
+	cout << boolalpha << st.isBalanced2(root) << noboolalpha << endl;
+	return 0;
+}

@@ -1,7 +1,10 @@
 #include <iostream>
+#include <vector>
+#include <string>
+#include <queue>
 using namespace std;
 
-//åˆ¤æ–­ä¸€ä¸ªæ ‘ä¸­æ˜¯å¦å­˜åœ¨ä¸€ä¸ªä»Žæ ¹èŠ‚ç‚¹åˆ°å¶å­ç»“ç‚¹çš„è·¯å¾„ï¼Œè·¯å¾„ä¸ŠèŠ‚ç‚¹çš„å’Œç­‰äºŽtargetSumï¼Œå¦‚æžœæœ‰ï¼Œè¿”å›žtrueï¼Œå¦‚æžœæ²¡æœ‰ï¼Œè¿”å›žfalseã€‚
+//ÅÐ¶ÏÒ»¸öÊ÷ÖÐÊÇ·ñ´æÔÚÒ»¸ö´Ó¸ù½Úµãµ½Ò¶×Ó½áµãµÄÂ·¾¶£¬Â·¾¶ÉÏ½ÚµãµÄºÍµÈÓÚtargetSum£¬Èç¹ûÓÐ£¬·µ»Øtrue£¬Èç¹ûÃ»ÓÐ£¬·µ»Øfalse¡£
 struct TreeNode {
 	int val;
 	TreeNode* left;
@@ -32,38 +35,38 @@ public:
 		return false;
 	}
 
-	//ç¬¬äºŒæ¬¡åšï¼Œåšé”™äº†
+	//µÚ¶þ´Î×ö£¬×ö´íÁË
 	bool hasPathSum1(TreeNode* root, int targetSum) {
 		if (root == nullptr)
 			return false;
-		return hasPathSumHelper(root, targetSum, 0);
+		return hasPathSumHelper1(root, targetSum, 0);
 	}
-	bool hasPathSumHelper(TreeNode* root, int targetSum, int sum) {
-		if (root == nullptr && sum == targetSum)  //è¿™ä¸ªåœ°æ–¹ä¸åº”è¯¥æ˜¯root==nullptrï¼Œå› ä¸ºå¯¹äºŽ[1,2]ï¼Œtarget=1ï¼Œè¿™ç§æƒ…å†µæ—¶ï¼Œä¼šç›´æŽ¥åœ¨1çš„å³å­æ ‘è¿”å›žtrueï¼Œ
-			//è€Œè¿™ä¸ªå³å­æ ‘ä¸ºç©ºï¼Œ1ä¹Ÿä¸æ˜¯å¶å­ç»“ç‚¹ã€‚æ‰€ä»¥è¦ä¿®æ”¹åˆ¤æ–­æ¡ä»¶ï¼Œæœ€åŽåˆ°å¶å­ç»“ç‚¹å°±è¡Œäº†ï¼Œä¸ç”¨å†å¾€ä¸‹äº†
+	bool hasPathSumHelper1(TreeNode* root, int targetSum, int sum) {
+		if (root == nullptr && sum == targetSum)  //Õâ¸öµØ·½²»Ó¦¸ÃÊÇroot==nullptr£¬ÒòÎª¶ÔÓÚ[1,2]£¬target=1£¬ÕâÖÖÇé¿öÊ±£¬»áÖ±½ÓÔÚ1µÄÓÒ×ÓÊ÷·µ»Øtrue£¬
+			//¶øÕâ¸öÓÒ×ÓÊ÷Îª¿Õ£¬1Ò²²»ÊÇÒ¶×Ó½áµã¡£ËùÒÔÒªÐÞ¸ÄÅÐ¶ÏÌõ¼þ£¬×îºóµ½Ò¶×Ó½áµã¾ÍÐÐÁË£¬²»ÓÃÔÙÍùÏÂÁË
 			return true;
 
 		if (root == nullptr && sum != targetSum)
 			return false;
 
 		bool leftflag =
-			hasPathSumHelper(root->left, targetSum, sum + root->val);
+			hasPathSumHelper1(root->left, targetSum, sum + root->val);
 		if (leftflag)
 			return true;
 		bool rightflag =
-			hasPathSumHelper(root->right, targetSum, sum + root->val);
+			hasPathSumHelper1(root->right, targetSum, sum + root->val);
 		if (rightflag)
 			return true;
 		return leftflag || rightflag;
 	}
 
-	//æ”¹å®Œä»¥åŽ
+	//¸ÄÍêÒÔºó
 	bool hasPathSum2(TreeNode* root, int targetSum) {
 		if (root == nullptr)
 			return false;
-		return hasPathSumHelper(root, targetSum, 0);
+		return hasPathSumHelper2(root, targetSum, 0);
 	}
-	bool hasPathSumHelper(TreeNode* root, int targetSum, int sum) {
+	bool hasPathSumHelper2(TreeNode* root, int targetSum, int sum) {
 		if (root->left == nullptr && root->right == nullptr) {
 			if ((sum + root->val) == targetSum)
 				return true;
@@ -72,15 +75,81 @@ public:
 		}
 
 		if (root->left)
-			if (hasPathSumHelper(root->left, targetSum, sum + root->val))
+			if (hasPathSumHelper2(root->left, targetSum, sum + root->val))
 				return true;
 
 		if (root->right)
-			if (hasPathSumHelper(root->right, targetSum, sum + root->val))
+			if (hasPathSumHelper2(root->right, targetSum, sum + root->val))
 				return true;
 
-		return false;  //è¿™é‡Œä¹Ÿä¸ç”¨å†™æˆreturn leftflag || rightflag;ï¼Œå› ä¸ºå¦‚æžœå‰è¾¹æœ‰trueå°±ç›´æŽ¥è¿”å›žäº†ï¼Œæ ¹æœ¬åˆ°ä¸äº†è¿™é‡Œ
+		return false;  //ÕâÀïÒ²²»ÓÃÐ´³Éreturn leftflag || rightflag;£¬ÒòÎªÈç¹ûÇ°±ßÓÐtrue¾ÍÖ±½Ó·µ»ØÁË£¬¸ù±¾µ½²»ÁËÕâÀï
+	}
+
+	// µÚÈý´Î×ö
+	bool hasPathSum3(TreeNode* root, int targetSum) {
+		if (root == nullptr)
+			return false;
+		return backtrace(root, 0, targetSum);
+	}
+
+	bool backtrace(TreeNode* root, int sum, int targetSum) {
+		sum += root->val;
+		if (root->left == nullptr && root->right == nullptr) {
+			if (sum == targetSum)
+				return true;
+			else
+				return false;
+		}
+
+		/*bool left = false, right = false;
+		if (root->left)
+			left = backtrace(root->left, sum, targetSum);
+		if (root->right)
+			right = backtrace(root->right, sum, targetSum);
+		if (left || right)
+			return true;*/
+			// ¿ÉÒÔÓÅ»¯Ò»ÏÂ
+		if (root->left)
+			if (backtrace(root->left, sum, targetSum))
+				return true;
+		if (root->right)
+			if (backtrace(root->right, sum, targetSum))
+				return true;
+		return false;
+	}
+
+	TreeNode* buildTree(vector<string>& nums) {
+		if (nums.empty()) return nullptr;
+
+		TreeNode* root = new TreeNode(stoi(nums[0]));
+		queue<TreeNode*> que;
+		que.push(root);
+
+		int i = 1;
+		while (i < nums.size()) {
+			TreeNode* node = que.front();
+			que.pop();
+
+			if (nums[i] != "null") {
+				node->left = new TreeNode(stoi(nums[i]));
+				que.push(node->left);
+			}
+			i++;
+
+			if (i < nums.size() && nums[i] != "null") {
+				node->right = new TreeNode(stoi(nums[i]));
+				que.push(node->right);
+			}
+			i++;
+		}
+		return root;
 	}
 };
 
-void main() {}
+int main() {
+	Solution st;
+	vector<string> num{ "5","4","8","11","null","13","4","7","2","null","null","null","1" };
+	TreeNode* root = st.buildTree(num);
+	cout << boolalpha << st.hasPathSum3(root, 22) << noboolalpha << endl;
+	return 0;
+}
