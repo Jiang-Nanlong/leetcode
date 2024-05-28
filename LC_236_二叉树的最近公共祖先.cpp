@@ -1,11 +1,13 @@
 #include <iostream>
 #include <vector>
+#include <string>
+#include <queue>
 using namespace std;
 
-//这个题感觉有点难。要求找出两个点的最近公共祖先。开始想的是二叉树只支持从上往下找，怎么能从下往上呢。
-//后来看了代码随想录的视频，才知道后序遍历可以从下往上。
-//感觉代码随想录的这个思路，一下子想不到。
-//在评论区看见一个思路，就是通过前序遍历，找到根节点到指定节点的路径，然后分别找出到p和q的路径，然后比较两个路径，就能找出最近的公共节点。
+//�����о��е��ѡ�Ҫ���ҳ������������������ȡ���ʼ����Ƕ�����ֻ֧�ִ��������ң���ô�ܴ��������ء�
+//�������˴�������¼����Ƶ����֪������������Դ������ϡ�
+//�о���������¼�����˼·��һ�����벻����
+//������������һ��˼·������ͨ��ǰ��������ҵ����ڵ㵽ָ���ڵ��·����Ȼ��ֱ��ҳ���p��q��·����Ȼ��Ƚ�����·���������ҳ�����Ĺ����ڵ㡣
 
 struct TreeNode {
 	int val;
@@ -30,7 +32,7 @@ public:
 	}
 
 
-	//这里的flag是用来表示是否找到了指定节点，如果找到了就不用弹出path的末尾节点。
+	//�����flag��������ʾ�Ƿ��ҵ���ָ���ڵ㣬����ҵ��˾Ͳ��õ���path��ĩβ�ڵ㡣
 	TreeNode* lowestCommonAncestor1(TreeNode* root, TreeNode* p, TreeNode* q) {
 		vector<TreeNode*> pathP, pathQ;
 		bool flag = false;
@@ -57,11 +59,11 @@ public:
 		pretraversal(root->left, target, path, flag);
 		pretraversal(root->right, target, path, flag);
 		if (flag) return;
-		path.pop_back();       //这个地方的pop和LeetCode 257 二叉树的所有路径中的pop不太一样，我一直弄不清，后来手动算了一下才知道，257这个题到叶节点就结束了，return了，然后在叶节点的上一层弹出叶节点。
-		//而这里是可以到叶节点的下一层，然后下一层为空就return，然后在叶节点本层就可以弹出叶节点。所以，257中要分开pop，而这里可以一起pop。
+		path.pop_back();       //����ط���pop��LeetCode 257 ������������·���е�pop��̫һ������һֱŪ���壬�����ֶ�����һ�²�֪����257����⵽Ҷ�ڵ�ͽ����ˣ�return�ˣ�Ȼ����Ҷ�ڵ����һ�㵯��Ҷ�ڵ㡣
+		//�������ǿ��Ե�Ҷ�ڵ����һ�㣬Ȼ����һ��Ϊ�վ�return��Ȼ����Ҷ�ڵ㱾��Ϳ��Ե���Ҷ�ڵ㡣���ԣ�257��Ҫ�ֿ�pop�����������һ��pop��
 	}
 
-	//第二遍做，还是没做出来，只想到了用后序遍历，还是没写出代码
+	//�ڶ�����������û��������ֻ�뵽���ú������������ûд������
 	TreeNode* lowestCommonAncestor2(TreeNode* root, TreeNode* p, TreeNode* q) {
 		if (root == NULL)
 			return NULL;
@@ -80,7 +82,58 @@ public:
 			return NULL;
 	}
 
-	//又看了一下第一次做的时候用的前序遍历的方法，这个方法还挺巧
+	//�ֿ���һ�µ�һ������ʱ���õ�ǰ������ķ��������������ͦ��
+
+	//���������ˣ�����û��������ô��
+	TreeNode* lowestCommonAncestor3(TreeNode* root, int p, int q) {
+		if (root->val == p || root->val == q || root == NULL)
+			return root;
+
+		TreeNode* left = lowestCommonAncestor3(root->left, p, q);
+		TreeNode* right = lowestCommonAncestor3(root->right, p, q);
+
+		if (left && right)
+			return root;
+		else if (left)
+			return left;
+		else if (right)
+			return right;
+		else
+			return NULL;
+	}
+	TreeNode* buildTree(vector<string>& nums) {
+		if (nums.empty()) return nullptr;
+
+		TreeNode* root = new TreeNode(stoi(nums[0]));
+		queue<TreeNode*> que;
+		que.push(root);
+
+		int i = 1;
+		while (i < nums.size()) {
+			TreeNode* node = que.front();
+			que.pop();
+
+			if (nums[i] != "null") {
+				node->left = new TreeNode(stoi(nums[i]));
+				que.push(node->left);
+			}
+			i++;
+
+			if (i < nums.size() && nums[i] != "null") {
+				node->right = new TreeNode(stoi(nums[i]));
+				que.push(node->right);
+			}
+			i++;
+		}
+		return root;
+	}
 };
 
-void main() {}
+int main() {
+	Solution st;
+	vector<string> num{ "3","5","1","6","2","0","8","null","null","7","4" };
+	TreeNode* root = st.buildTree(num);
+	TreeNode* parent = st.lowestCommonAncestor3(root, 5, 1);
+	cout << parent->val << endl;
+	return 0;
+}

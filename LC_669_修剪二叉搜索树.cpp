@@ -1,4 +1,7 @@
 #include <iostream>
+#include <vector>
+#include <string>
+#include <queue>
 using namespace std;
 
 
@@ -13,14 +16,14 @@ struct TreeNode {
 
 class Solution {
 public:
-	//åº”è¯¥æ˜¯ç”¨ä¸­åºéåŽ†ï¼Œ
+	//Ó¦¸ÃÊÇÓÃÖÐÐò±éÀú£¬
 	TreeNode* trimBST(TreeNode* root, int low, int high) {
 		/*
-		* //è¿™æ˜¯æˆ‘è‡ªå·±å†™çš„ä»£ç ï¼Œè¿™é‡Œçš„delete rootä¸€ç›´æŠ¥é”™ï¼Œçœ‹äº†è¯„è®ºä¸Šå¥½å¤šäººä¹Ÿéƒ½ååº”è¿™ä¸ªé—®é¢˜ï¼Œä¸çŸ¥é“ä¸ºä»€ä¹ˆ
-		* //è¿™ä¸ªä»£ç å’Œä¸‹è¾¹çš„ä»£ç æ¯”è¾ƒï¼Œåœ¨æ€è·¯ä¸Šæœ€å¤§çš„åŒºåˆ«å°±æ˜¯æˆ‘åªæ˜¯æŠŠè¦åˆ é™¤èŠ‚ç‚¹çš„å·¦å­©å­æˆ–å³å­©å­è¿”å›žäº†ï¼Œå¹¶æ²¡æœ‰è€ƒè™‘ä»–çš„å·¦å­©å­å³å­©å­æ˜¯å¦ç¬¦åˆèŒƒå›´ã€‚
-		* //å°±æ¯”å¦‚è¯´[3,1,4,null,2] low=3,high=4.ç¨‹åºè¿è¡Œåˆ°èŠ‚ç‚¹1çš„æ—¶å€™å°±ç›´æŽ¥è¿”å›ž2äº†ï¼Œè¿™æ—¶å€™2æ›¿ä»£äº†1çš„ä½ç½®ï¼Œä½†æ˜¯ç¨‹åºä¸ä¼šå†åœ¨1çš„ä½ç½®ä¸Šè¿è¡Œç¬¬äºŒéï¼Œ
-		* //æ‰€ä»¥å°±è·³è¿‡äº†2ï¼Œä½†æ˜¯æ­¤æ—¶çš„2ä¹Ÿæ˜¯ä¸ç¬¦åˆè¦æ±‚çš„ã€‚
-		* //ä¸‹è¾¹çš„ä»£ç åœ¨è¿™ä¸ªä½ç½®ä¸Šåˆé€’å½’äº†ï¼Œè¿™æ ·å°±è§£å†³äº†è¿™ä¸ªé—®é¢˜ã€‚
+		* //ÕâÊÇÎÒ×Ô¼ºÐ´µÄ´úÂë£¬ÕâÀïµÄdelete rootÒ»Ö±±¨´í£¬¿´ÁËÆÀÂÛÉÏºÃ¶àÈËÒ²¶¼·´Ó¦Õâ¸öÎÊÌâ£¬²»ÖªµÀÎªÊ²Ã´
+		* //Õâ¸ö´úÂëºÍÏÂ±ßµÄ´úÂë±È½Ï£¬ÔÚË¼Â·ÉÏ×î´óµÄÇø±ð¾ÍÊÇÎÒÖ»ÊÇ°ÑÒªÉ¾³ý½ÚµãµÄ×óº¢×Ó»òÓÒº¢×Ó·µ»ØÁË£¬²¢Ã»ÓÐ¿¼ÂÇËûµÄ×óº¢×ÓÓÒº¢×ÓÊÇ·ñ·ûºÏ·¶Î§¡£
+		* //¾Í±ÈÈçËµ[3,1,4,null,2] low=3,high=4.³ÌÐòÔËÐÐµ½½Úµã1µÄÊ±ºò¾ÍÖ±½Ó·µ»Ø2ÁË£¬ÕâÊ±ºò2Ìæ´úÁË1µÄÎ»ÖÃ£¬µ«ÊÇ³ÌÐò²»»áÔÙÔÚ1µÄÎ»ÖÃÉÏÔËÐÐµÚ¶þ±é£¬
+		* //ËùÒÔ¾ÍÌø¹ýÁË2£¬µ«ÊÇ´ËÊ±µÄ2Ò²ÊÇ²»·ûºÏÒªÇóµÄ¡£
+		* //ÏÂ±ßµÄ´úÂëÔÚÕâ¸öÎ»ÖÃÉÏÓÖµÝ¹éÁË£¬ÕâÑù¾Í½â¾öÁËÕâ¸öÎÊÌâ¡£
 		*
 		if(root==nullptr) return nullptr;
 		if(root->val<low){
@@ -54,23 +57,99 @@ public:
 		return root;
 	}
 
-	//è¿™ä¸ªé¢˜æˆ‘ç¬¬ä¸€æ¬¡åšçš„æ—¶å€™ç«Ÿç„¶èƒ½å†™å‡ºä¸ªå·®ä¸å¤šï¼Œæˆ‘æ“¦
-	//ç¬¬äºŒæ¬¡åšï¼Œè¿˜æ˜¯æ²¡æœ‰åšå‡ºæ¥
+	//Õâ¸öÌâÎÒµÚÒ»´Î×öµÄÊ±ºò¾¹È»ÄÜÐ´³ö¸ö²î²»¶à£¬ÎÒ²Á
+	//µÚ¶þ´Î×ö£¬»¹ÊÇÃ»ÓÐ×ö³öÀ´
 	TreeNode* trimBST1(TreeNode* root, int low, int high) {
 		if (root == nullptr)
 			return nullptr;
 		if (root->val < low) {
-			TreeNode* temp = trimBST1(root->right, low, high);  //å½“å‰èŠ‚ç‚¹çš„å³å­æ ‘å¯èƒ½ç¬¦åˆæ¡ä»¶ï¼Œç„¶åŽä¿®å‰ªå³å­æ ‘
+			TreeNode* temp = trimBST1(root->right, low, high);  //µ±Ç°½ÚµãµÄÓÒ×ÓÊ÷¿ÉÄÜ·ûºÏÌõ¼þ£¬È»ºóÐÞ¼ôÓÒ×ÓÊ÷
 			return temp;
 		}
 		else if (root->val > high) {
-			TreeNode* temp = trimBST1(root->left, low, high);   //å½“å‰èŠ‚ç‚¹çš„å·¦å­©å­å¯èƒ½ç¬¦åˆæ¡ä»¶ï¼Œç»§ç»­ä¿®å‰ªå·¦å­æ ‘
+			TreeNode* temp = trimBST1(root->left, low, high);   //µ±Ç°½ÚµãµÄ×óº¢×Ó¿ÉÄÜ·ûºÏÌõ¼þ£¬¼ÌÐøÐÞ¼ô×ó×ÓÊ÷
 			return temp;
 		}
 		root->left = trimBST1(root->left, low, high);
 		root->right = trimBST1(root->right, low, high);
 		return root;
 	}
+
+	// µÚÈý´Î×ö£¬ÒÀ¾ÉÃ»ÓÐÐ´³öÀ´
+	TreeNode* trimBST2(TreeNode* root, int low, int high) {
+		if (root == nullptr)
+			return nullptr;
+		if (root->val < low) {
+			TreeNode* left = trimBST(root->right, low, high);
+			return left;
+		}
+		if (root->val > high) {
+			TreeNode* right = trimBST(root->left, low, high);
+			return right;
+		}
+		root->left = trimBST(root->left, low, high);
+		root->right = trimBST(root->right, low, high);
+		return root;
+	}
+
+	TreeNode* buildTree(vector<string>& nums) {
+		if (nums.empty()) return nullptr;
+
+		TreeNode* root = new TreeNode(stoi(nums[0]));
+		queue<TreeNode*> que;
+		que.push(root);
+
+		int i = 1;
+		while (i < nums.size()) {
+			TreeNode* node = que.front();
+			que.pop();
+
+			if (nums[i] != "null") {
+				node->left = new TreeNode(stoi(nums[i]));
+				que.push(node->left);
+			}
+			i++;
+
+			if (i < nums.size() && nums[i] != "null") {
+				node->right = new TreeNode(stoi(nums[i]));
+				que.push(node->right);
+			}
+			i++;
+		}
+		return root;
+	}
+
+	vector<string> levelOrder(TreeNode* root) {
+		queue<TreeNode*> que;
+		vector<string> res;
+		if (root == nullptr)
+			return res;
+		else
+			que.push(root);
+
+		while (!que.empty()) {
+			int size = que.size();
+			for (int i = 0; i < size; i++) {
+				TreeNode* cur = que.front();
+				que.pop();
+				res.push_back(to_string(cur->val));
+
+				if (cur->left) que.push(cur->left);
+				if (cur->right) que.push(cur->right);
+			}
+		}
+		return res;
+	}
 };
 
-void main() {}
+int main() {
+	Solution st;
+	vector<string> num{ "3","0","4","null","2","null","null","1" };
+	TreeNode* root = st.buildTree(num);
+	root = st.trimBST2(root, 1, 3);
+	vector<string> res = st.levelOrder(root);
+	for (auto& c : res)
+		cout << c << "  ";
+
+	return 0;
+}

@@ -1,8 +1,11 @@
 #include <iostream>
+#include <vector>
+#include <queue>
+#include <string>
 using namespace std;
 
-//è¿™é¢˜ä¸€çœ‹ä»£ç å¥½ç®€å•ï¼Œå¯æ˜¯æˆ‘åˆæ²¡æƒ³å‡ºæ¥
-//å”‰
+//ÕâÌâÒ»¿´´úÂëºÃ¼òµ¥£¬¿ÉÊÇÎÒÓÖÃ»Ïë³öÀ´
+//°¦
 
 struct TreeNode {
 	int val;
@@ -35,7 +38,7 @@ public:
 		return nullptr;
 	}
 
-	//ç¬¬äºŒéåšè¿˜æ˜¯æ²¡åšå‡ºæ¥ï¼Œè¿™ä¸ªé¢˜çš„æ€è·¯å…¶å®žå¾ˆç®€å•ï¼Œå¦‚æžœåœ¨éåŽ†çš„è¿‡ç¨‹ä¸­ï¼Œå½“å‰èŠ‚ç‚¹çš„å€¼ç¬¬ä¸€æ¬¡å‡ºçŽ°åœ¨på’Œqä¹‹é—´ï¼Œé‚£ä¹ˆå½“å‰èŠ‚ç‚¹å°±ä¸€å®šæ˜¯æœ€è¿‘å…¬å…±ç¥–å…ˆ
+	//µÚ¶þ±é×ö»¹ÊÇÃ»×ö³öÀ´£¬Õâ¸öÌâµÄË¼Â·ÆäÊµºÜ¼òµ¥£¬Èç¹ûÔÚ±éÀúµÄ¹ý³ÌÖÐ£¬µ±Ç°½ÚµãµÄÖµµÚÒ»´Î³öÏÖÔÚpºÍqÖ®¼ä£¬ÄÇÃ´µ±Ç°½Úµã¾ÍÒ»¶¨ÊÇ×î½ü¹«¹²×æÏÈ
 
 	TreeNode* lowestCommonAncestor2(TreeNode* root, TreeNode* p, TreeNode* q) {
 		if (root == NULL) return NULL;
@@ -61,6 +64,52 @@ public:
 		}
 		return NULL;
 	}
+
+	//µÚÈý´Î×ö
+	TreeNode* lowestCommonAncestor4(TreeNode* root, int p, int q) {
+		if (root == NULL)
+			return NULL;
+		if (root->val > p && root->val > q)
+			return lowestCommonAncestor4(root->left, p, q);
+		else if (root->val < p && root->val < q)
+			return lowestCommonAncestor4(root->right, p, q);
+		else
+			return root;
+	}
+
+	TreeNode* buildTree(vector<string>& nums) {
+		if (nums.empty()) return nullptr;
+
+		TreeNode* root = new TreeNode(stoi(nums[0]));
+		queue<TreeNode*> que;
+		que.push(root);
+
+		int i = 1;
+		while (i < nums.size()) {
+			TreeNode* node = que.front();
+			que.pop();
+
+			if (nums[i] != "null") {
+				node->left = new TreeNode(stoi(nums[i]));
+				que.push(node->left);
+			}
+			i++;
+
+			if (i < nums.size() && nums[i] != "null") {
+				node->right = new TreeNode(stoi(nums[i]));
+				que.push(node->right);
+			}
+			i++;
+		}
+		return root;
+	}
 };
 
-void main() {}
+int main() {
+	Solution st;
+	vector<string> num{ "6","2","8","0","4","7","9","null","null","3","5" };
+	TreeNode* root = st.buildTree(num);
+	TreeNode* parent = st.lowestCommonAncestor4(root, 2, 4);
+	cout << parent->val << endl;
+	return 0;
+}

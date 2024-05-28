@@ -1,4 +1,7 @@
 #include <iostream>
+#include <vector>
+#include <queue>
+#include <string>
 using namespace std;
 
 struct TreeNode {
@@ -10,8 +13,8 @@ struct TreeNode {
 	TreeNode(int x, TreeNode* left, TreeNode* right) : val(x), left(left), right(right) {}
 };
 
-//åº”è¯¥æ˜¯åˆ†ä¸‰ç§æƒ…å†µï¼Œç¬¬ä¸€ç§ï¼šåˆ é™¤çš„æ˜¯å¶å­ç»“ç‚¹ï¼Œé‚£ä¹ˆç›´æŽ¥åˆ é™¤å°±è¡Œã€‚ç¬¬äºŒç§ï¼Œå¦‚æžœåˆ é™¤çš„æ˜¯ä¸­é—´èŠ‚ç‚¹ï¼Œè€Œä¸”è¿™ä¸ªèŠ‚ç‚¹åªæœ‰ä¸€ä¸ªåˆ†æ”¯ï¼Œé‚£ä¹ˆå°±ç”¨ä»–çš„åˆ†æ”¯èŠ‚ç‚¹ä»£æ›¿å®ƒçš„ä½ç½®å³å¯ã€‚
-//ç¬¬ä¸‰ç§ï¼Œå¦‚æžœåˆ é™¤çš„æ˜¯ä¸­é—´èŠ‚ç‚¹ï¼Œè€Œä¸”è¿™ä¸ªèŠ‚ç‚¹æœ‰ä¸¤ä¸ªåˆ†æ”¯ï¼Œæˆ‘è®°å¾—çŽ‹é“ä¹¦ä¸Šè¯´çš„æ˜¯ç”¨å·¦å­©å­æˆ–å³å­©å­æ›¿ä»£éƒ½å¯ï¼Œç„¶åŽè¿˜å¾—è°ƒæ•´è¦æ›¿ä»£èŠ‚ç‚¹çš„å­©å­
+//Ó¦¸ÃÊÇ·ÖÈýÖÖÇé¿ö£¬µÚÒ»ÖÖ£ºÉ¾³ýµÄÊÇÒ¶×Ó½áµã£¬ÄÇÃ´Ö±½ÓÉ¾³ý¾ÍÐÐ¡£µÚ¶þÖÖ£¬Èç¹ûÉ¾³ýµÄÊÇÖÐ¼ä½Úµã£¬¶øÇÒÕâ¸ö½ÚµãÖ»ÓÐÒ»¸ö·ÖÖ§£¬ÄÇÃ´¾ÍÓÃËûµÄ·ÖÖ§½Úµã´úÌæËüµÄÎ»ÖÃ¼´¿É¡£
+//µÚÈýÖÖ£¬Èç¹ûÉ¾³ýµÄÊÇÖÐ¼ä½Úµã£¬¶øÇÒÕâ¸ö½ÚµãÓÐÁ½¸ö·ÖÖ§£¬ÎÒ¼ÇµÃÍõµÀÊéÉÏËµµÄÊÇÓÃ×óº¢×Ó»òÓÒº¢×ÓÌæ´ú¶¼¿É£¬È»ºó»¹µÃµ÷ÕûÒªÌæ´ú½ÚµãµÄº¢×Ó
 
 class Solution {
 public:
@@ -21,12 +24,12 @@ public:
 
 		TreeNode* deleteNode(TreeNode* root, int key) {
 			if (root->val == key) {
-				if (root->left == nullptr && root->right == nullptr) {  //rootæ˜¯å¶å­èŠ‚ç‚¹
+				if (root->left == nullptr && root->right == nullptr) {  //rootÊÇÒ¶×Ó½Úµã
 					if (root->val < pre->val)
 						pre->left = nullptr;
 					else pre->right = nullptr;
 				}
-				else if (root->left == nullptr && root->right) {    //rootæ˜¯ä¸­é—´èŠ‚ç‚¹ï¼Œä½†æ˜¯åªæœ‰ä¸€ä¸ªå­©å­
+				else if (root->left == nullptr && root->right) {    //rootÊÇÖÐ¼ä½Úµã£¬µ«ÊÇÖ»ÓÐÒ»¸öº¢×Ó
 					if (root->val < pre->val)
 						pre->left = root->right;
 					else
@@ -38,7 +41,7 @@ public:
 					else
 						pre->right = root->left;
 				}
-				else {  //rootæ˜¯ä¸­é—´èŠ‚ç‚¹ï¼Œæœ‰ä¸¤ä¸ªå­©å­ï¼Œ
+				else {  //rootÊÇÖÐ¼ä½Úµã£¬ÓÐÁ½¸öº¢×Ó£¬
 
 					if (pre->val > root->val) {
 						pre->left = root->left;
@@ -64,18 +67,18 @@ public:
 			return root;
 		}
 	*/
-	//ä¸Šè¾¹æ˜¯æˆ‘æœ€å¼€å§‹å†™çš„ï¼Œæˆ‘è¿˜æ˜¯æ²¡å¤„ç†å¥½é€’å½’å‡½æ•°çš„è¿”å›žå€¼é—®é¢˜ï¼Œåœ¨å†™è¿”å›žå€¼çš„æ—¶å€™ä¸çŸ¥é“å’‹å†™äº†ï¼Œå…¶å®žåº”è¯¥åœ¨61å’Œ62è¡ŒæŽ¥æ”¶ä¸€ä¸‹çš„ã€‚è¦æ˜¯æŒ‰æˆ‘çš„å†™æ³•çš„è¯ï¼Œå‡½æ•°å°±ä¸è¯¥æœ‰è¿”å›žå€¼çš„ã€‚
-	//ä¸‹è¾¹æ˜¯æˆ‘çœ‹äº†ä»£ç éšæƒ³å½•çš„ä»£ç å†™çš„ï¼Œä»–çš„ç¨‹åºå¤„ç†å‰å‡ ç§æƒ…å†µéƒ½æ˜¯ä¸€æ ·çš„ï¼Œä½†æ˜¯æœ€åŽä¸€ç§ä¸ä¸€æ ·ï¼Œä»–æ˜¯ç›´æŽ¥æŠŠå¾…åˆ é™¤èŠ‚ç‚¹çš„å·¦å­æ ‘æ•´ä¸ªçš„æ·»åŠ åˆ°å³å­æ ‘çš„æœ€å·¦ä¸‹ï¼Œç„¶åŽç”¨å³å­æ ‘çš„æ ¹èŠ‚ç‚¹ä»£æ›¿åˆ é™¤èŠ‚ç‚¹çš„ä½ç½®
-	//åŽæ¥æƒ³äº†ä¸€ä¸‹ï¼Œå¥½åƒæ²¡æœ‰è¿”å›žå€¼çš„ç¡®å®žä¸å¤ªè¡Œï¼Œå› ä¸ºè¦åˆ é™¤çš„å¯èƒ½æ˜¯æ ¹èŠ‚ç‚¹ã€‚å¦‚æžœå†™æˆæ²¡æœ‰è¿”å›žå€¼çš„ï¼Œåªèƒ½æ˜¯åœ¨deleteNodeä¸­è°ƒç”¨è¿™ä¸ªå‡½æ•°ï¼Œç„¶åŽè¿”å›žrootï¼Œä½†æ˜¯åˆ é™¤çš„èŠ‚ç‚¹å¯èƒ½å°±æ˜¯root
+	//ÉÏ±ßÊÇÎÒ×î¿ªÊ¼Ð´µÄ£¬ÎÒ»¹ÊÇÃ»´¦ÀíºÃµÝ¹éº¯ÊýµÄ·µ»ØÖµÎÊÌâ£¬ÔÚÐ´·µ»ØÖµµÄÊ±ºò²»ÖªµÀÕ¦Ð´ÁË£¬ÆäÊµÓ¦¸ÃÔÚ61ºÍ62ÐÐ½ÓÊÕÒ»ÏÂµÄ¡£ÒªÊÇ°´ÎÒµÄÐ´·¨µÄ»°£¬º¯Êý¾Í²»¸ÃÓÐ·µ»ØÖµµÄ¡£
+	//ÏÂ±ßÊÇÎÒ¿´ÁË´úÂëËæÏëÂ¼µÄ´úÂëÐ´µÄ£¬ËûµÄ³ÌÐò´¦ÀíÇ°¼¸ÖÖÇé¿ö¶¼ÊÇÒ»ÑùµÄ£¬µ«ÊÇ×îºóÒ»ÖÖ²»Ò»Ñù£¬ËûÊÇÖ±½Ó°Ñ´ýÉ¾³ý½ÚµãµÄ×ó×ÓÊ÷Õû¸öµÄÌí¼Óµ½ÓÒ×ÓÊ÷µÄ×î×óÏÂ£¬È»ºóÓÃÓÒ×ÓÊ÷µÄ¸ù½Úµã´úÌæÉ¾³ý½ÚµãµÄÎ»ÖÃ
+	//ºóÀ´ÏëÁËÒ»ÏÂ£¬ºÃÏñÃ»ÓÐ·µ»ØÖµµÄÈ·Êµ²»Ì«ÐÐ£¬ÒòÎªÒªÉ¾³ýµÄ¿ÉÄÜÊÇ¸ù½Úµã¡£Èç¹ûÐ´³ÉÃ»ÓÐ·µ»ØÖµµÄ£¬Ö»ÄÜÊÇÔÚdeleteNodeÖÐµ÷ÓÃÕâ¸öº¯Êý£¬È»ºó·µ»Øroot£¬µ«ÊÇÉ¾³ýµÄ½Úµã¿ÉÄÜ¾ÍÊÇroot
 	TreeNode* deleteNode(TreeNode* root, int key) {
-		if (root == nullptr) return nullptr;  //å±…ç„¶è¿˜æœ‰æ‰¾ä¸åˆ°èŠ‚ç‚¹è¿™ç§æƒ…å†µ
+		if (root == nullptr) return nullptr;  //¾ÓÈ»»¹ÓÐÕÒ²»µ½½ÚµãÕâÖÖÇé¿ö
 
 		if (root->val == key) {
-			if (root->left == nullptr && root->right == nullptr) {  //rootæ˜¯å¶å­èŠ‚ç‚¹
+			if (root->left == nullptr && root->right == nullptr) {  //rootÊÇÒ¶×Ó½Úµã
 				delete root;
 				return nullptr;
 			}
-			else if (root->left == nullptr && root->right) {    //rootæ˜¯ä¸­é—´èŠ‚ç‚¹ï¼Œä½†æ˜¯åªæœ‰ä¸€ä¸ªå­©å­
+			else if (root->left == nullptr && root->right) {    //rootÊÇÖÐ¼ä½Úµã£¬µ«ÊÇÖ»ÓÐÒ»¸öº¢×Ó
 				TreeNode* temp = root->right;
 				delete root;
 				return temp;
@@ -85,7 +88,7 @@ public:
 				delete root;
 				return temp;
 			}
-			else {  //rootæ˜¯ä¸­é—´èŠ‚ç‚¹ï¼Œæœ‰ä¸¤ä¸ªå­©å­ï¼Œ
+			else {  //rootÊÇÖÐ¼ä½Úµã£¬ÓÐÁ½¸öº¢×Ó£¬
 				TreeNode* temp = root->right;
 				while (temp->left)
 					temp = temp->left;
@@ -103,11 +106,11 @@ public:
 		return root;
 	}
 
-	//ç¬¬äºŒæ¬¡åšï¼Œç›´æŽ¥ä½¿ç”¨çš„è¿­ä»£ï¼Œæ²¡ç”¨é€’å½’
+	//µÚ¶þ´Î×ö£¬Ö±½ÓÊ¹ÓÃµÄµü´ú£¬Ã»ÓÃµÝ¹é
 	TreeNode* deleteNode1(TreeNode* root, int key) {
 		if (root == nullptr)
 			return nullptr;
-		TreeNode* preroot = new TreeNode(-1);  //åŠ ä¸€ä¸ªå¤´ç»“ç‚¹ï¼Œé˜²æ­¢è¢«åˆ é™¤çš„æ˜¯æ ¹èŠ‚ç‚¹
+		TreeNode* preroot = new TreeNode(-1);  //¼ÓÒ»¸öÍ·½áµã£¬·ÀÖ¹±»É¾³ýµÄÊÇ¸ù½Úµã
 		preroot->right = root;
 		TreeNode* parent = preroot, * cur = root;
 		while (cur) {
@@ -144,7 +147,7 @@ public:
 		return preroot->right;
 	}
 
-	//åˆçœ‹ç€ç­”æ¡ˆå†™äº†ä¸€ä¸ªé€’å½’çš„ç‰ˆæœ¬
+	//ÓÖ¿´×Å´ð°¸Ð´ÁËÒ»¸öµÝ¹éµÄ°æ±¾
 	TreeNode* deleteNode2(TreeNode* root, int key) {
 		if (root == nullptr) return nullptr;
 		if (root->val == key) {
@@ -176,8 +179,88 @@ public:
 		if (root->val < key) root->right = deleteNode2(root->right, key);
 		return root;
 	}
+
+	//µÚÈý´Î×ö
+	TreeNode* deleteNode3(TreeNode* root, int key) {
+		if (root == nullptr)
+			return nullptr;
+		TreeNode* p = root, * pre = root;
+		while (p) {  //ÏÈÕÒµ½valÎªkeyµÄ½Úµã
+			if (p->val < key) {
+				pre = p;
+				p = p->right;
+			}
+			else if (p->val > key) {
+				pre = p;
+				p = p->left;
+			}
+			else
+				break;
+		}
+		if (p == nullptr)
+			return root;
+
+		TreeNode* newNode = nullptr;
+		if (p->left) {  // Èç¹ûpµÄ×ó×ÓÊ÷²»Îª¿Õ
+			if (p->right) {   // Èç¹ûÍ¬Ê±pµÄÓÒ×ÓÊ÷Ò²²»Îª¿Õ
+				TreeNode* q = p->left;
+
+				while (q->right) {
+					q = q->right;
+				}
+				q->right = p->right->left;
+				p->right->left = p->left;
+				newNode = p->right;
+			}
+			else
+				newNode = p->left;
+		}
+		else
+			newNode = p->right;
+
+		if (p == root)  // Èç¹ûÒªÉ¾³ýµÄÊÇ¸ù½Úµã
+			return newNode;
+		else if (pre->left == p) {  // ÅÐ¶ÏÒªÉ¾³ýµÄ½ÚµãÔÚpre½ÚµãµÄÄÄÒ»±ß
+			pre->left = newNode;
+		}
+		else if (pre->right == p) {
+			pre->right = newNode;
+		}
+		return root;
+	}
+
+	TreeNode* buildTree(vector<string>& nums) {
+		if (nums.empty()) return nullptr;
+
+		TreeNode* root = new TreeNode(stoi(nums[0]));
+		queue<TreeNode*> que;
+		que.push(root);
+
+		int i = 1;
+		while (i < nums.size()) {
+			TreeNode* node = que.front();
+			que.pop();
+
+			if (nums[i] != "null") {
+				node->left = new TreeNode(stoi(nums[i]));
+				que.push(node->left);
+			}
+			i++;
+
+			if (i < nums.size() && nums[i] != "null") {
+				node->right = new TreeNode(stoi(nums[i]));
+				que.push(node->right);
+			}
+			i++;
+		}
+		return root;
+	}
 };
 
-void main() {
-
+int main() {
+	Solution st;
+	vector<string> num{ "5","3","6","2","4","null","7" };
+	TreeNode* root = st.buildTree(num);
+	TreeNode* res = st.deleteNode3(root, 3);
+	return 0;
 }
