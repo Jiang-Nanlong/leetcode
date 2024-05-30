@@ -136,6 +136,7 @@ public:
 
 	// 第三次做
 	// 这个题主要是树层去重
+	// 其实既可以使用used数组去重，又可以使用i>startIndex && candidates[i] == candidates[i - 1]来去重
 	vector<vector<int>> combinationSum4(vector<int>& candidates, int target) {
 		path.clear();
 		res.clear();
@@ -177,12 +178,19 @@ void main() {
 			cout << res[i][j] << " ";
 		cout << endl;
 	}
-
+	cout << "------------" << endl;
 	vector<vector<int>> res1 = st.combinationSum21(candidates, target);
 	for (int i = 0; i < res1.size(); i++) {
 		for (int j = 0; j < res1[i].size(); j++)
 			cout << res1[i][j] << " ";
 		cout << endl;
 	}
+	cout << "------------" << endl;
 
+	vector<vector<int>> res4 = st.combinationSum4(candidates, target);
+	for (int i = 0; i < res4.size(); i++) {
+		for (int j = 0; j < res4[i].size(); j++)
+			cout << res4[i][j] << " ";
+		cout << endl;
+	}
 }
