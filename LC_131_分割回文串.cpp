@@ -3,9 +3,9 @@
 #include <vector>
 using namespace std;
 
-//ç»™å®šä¸€ä¸ªå­—ç¬¦ä¸²sï¼Œå°†såˆ†å‰²æˆä¸€äº›å­ä¸²ï¼Œä½¿å¾—æ¯ä¸ªå­ä¸²éƒ½æ˜¯å›æ–‡å­ä¸²ï¼Œè¿”å›sçš„æ‰€æœ‰åˆ†å‰²æ–¹æ¡ˆã€‚å›æ–‡ä¸²å°±æ˜¯æ­£ç€è¯»å’Œåç€è¯»éƒ½æ˜¯ä¸€æ ·çš„å­—ç¬¦ä¸²ã€‚
-//å¼€å§‹çš„æ—¶å€™æˆ‘æƒ³ç€ç”¨åŒæŒ‡é’ˆåˆ¤æ–­ä¸€ä¸ªå­ä¸²æ˜¯ä¸æ˜¯å›æ–‡ä¸²ï¼Œä½†æ˜¯åˆæ‹…å¿ƒæ˜¯ä¸æ˜¯è¿˜æœ‰æ›´å·§å¦™çš„æ–¹æ³•ï¼Œåæ¥ä¸€çœ‹æ‰å‘ç°è¿˜çœŸæ˜¯è¿™ä¹ˆå¼„ã€‚
-//è¿™ä¸ªé¢˜å¯ä»¥è½¬åŒ–æˆæ ‘å½¢ç»“æ„ï¼Œæ‰€ä»¥æ‰èƒ½ç”¨å›æº¯ã€‚
+//¸ø¶¨Ò»¸ö×Ö·û´®s£¬½«s·Ö¸î³ÉÒ»Ğ©×Ó´®£¬Ê¹µÃÃ¿¸ö×Ó´®¶¼ÊÇ»ØÎÄ×Ó´®£¬·µ»ØsµÄËùÓĞ·Ö¸î·½°¸¡£»ØÎÄ´®¾ÍÊÇÕı×Å¶ÁºÍ·´×Å¶Á¶¼ÊÇÒ»ÑùµÄ×Ö·û´®¡£
+//¿ªÊ¼µÄÊ±ºòÎÒÏë×ÅÓÃË«Ö¸ÕëÅĞ¶ÏÒ»¸ö×Ó´®ÊÇ²»ÊÇ»ØÎÄ´®£¬µ«ÊÇÓÖµ£ĞÄÊÇ²»ÊÇ»¹ÓĞ¸üÇÉÃîµÄ·½·¨£¬ºóÀ´Ò»¿´²Å·¢ÏÖ»¹ÕæÊÇÕâÃ´Åª¡£
+//Õâ¸öÌâ¿ÉÒÔ×ª»¯³ÉÊ÷ĞÎ½á¹¹£¬ËùÒÔ²ÅÄÜÓÃ»ØËİ¡£
 
 class Solution {
 public:
@@ -23,7 +23,7 @@ public:
 
 		for (int i = startindex; i < s.size(); i++) {
 			if (isPalindrome(s, startindex, i)) {
-				string temp = s.substr(startindex, i - startindex + 1);  //è¿™ä¸€å¥æ˜¯æ•´æ®µç¨‹åºçš„å…³é”®
+				string temp = s.substr(startindex, i - startindex + 1);  //ÕâÒ»¾äÊÇÕû¶Î³ÌĞòµÄ¹Ø¼ü
 				cb.push_back(temp);
 			}
 			else {
@@ -42,7 +42,7 @@ public:
 	}
 
 
-	//ç¬¬äºŒéåšï¼Œè¿˜æ˜¯æ²¡æƒ³å‡ºæ€ä¹ˆåš
+	//µÚ¶ş±é×ö£¬»¹ÊÇÃ»Ïë³öÔõÃ´×ö
 	vector<vector<string>> res;
 	vector<string> path;
 
@@ -57,12 +57,12 @@ public:
 			return;
 		}
 
-		for (int i = startIndex; i < s.size(); i++) {  // [startIndex,i]è¡¨ç¤ºè¦æˆªå–çš„å­ä¸²
+		for (int i = startIndex; i < s.size(); i++) {  // [startIndex,i]±íÊ¾Òª½ØÈ¡µÄ×Ó´®
 			if (isPalindrome1(s, startIndex, i)) {
 				path.push_back(s.substr(startIndex, i - startIndex + 1));
 				backtracking(s, i + 1);
 				path.pop_back();
-			}		
+			}
 		}
 	}
 
@@ -73,9 +73,81 @@ public:
 		}
 		return true;
 	}
+
+	// µÚÈı´Î×ö£¬ĞĞÔÆÁ÷Ë®µÄĞ´³öÀ´ÁË
+	vector<vector<string>> partition2(string s) {
+		path.clear();
+		res.clear();
+		backtracking2(s, 0);
+		return res;
+	}
+	void backtracking2(string& s, int start) {
+		if (start == s.size()) {
+			res.push_back(path);
+			return;
+		}
+
+		for (int i = start; i < s.size(); i++) {
+			if (isPalindrome2(s, start, i)) {
+				string str = s.substr(start, i - start + 1);
+				path.push_back(str);
+				backtracking2(s, i + 1);
+				path.pop_back();
+			}
+		}
+	}
+
+	bool isPalindrome2(string& s, int begin, int end) {
+		while (begin <= end) {
+			if (s[begin++] != s[end--])
+				return false;
+		}
+		return true;
+	}
+
+	// Ê¹ÓÃ¶¯Ì¬¹æ»®Ò»´ÎĞÔ¼ÆËã³öÄÄĞ©ÊÇ»ØÎÄ×Ó´®£¬¾Í²»ĞèÒªÃ¿´Î¶¼µ÷ÓÃisPalindromeÀ´ÅĞ¶ÏÁË
+	// Õâ¸öµØ·½ºÍLeetCode 647 »ØÎÄ×Ó´®Ò»ÑùµÄË¼Â·
+	vector<vector<bool>> dp;
+
+	vector<vector<string>> partition3(string s) {
+		path.clear();
+		res.clear();
+		isPalindrome3(s);
+		backtracking3(s, 0);
+		return res;
+	}
+	void backtracking3(string& s, int start) {
+		if (start == s.size()) {
+			res.push_back(path);
+			return;
+		}
+
+		for (int i = start; i < s.size(); i++) {
+			if (dp[start][i]) {
+				string str = s.substr(start, i - start + 1);
+				path.push_back(str);
+				backtracking3(s, i + 1);
+				path.pop_back();
+			}
+		}
+	}
+
+	void isPalindrome3(string& s) {
+		dp.resize(s.size(), vector<bool>(s.size(), false));
+		for (int i = s.size() - 1; i >= 0; i--) {
+			for (int j = i; j < s.size(); j++) {
+				if (s[i] == s[j]) {
+					if (j - i <= 1)
+						dp[i][j] = true;
+					else if (dp[i + 1][j - 1])
+						dp[i][j] = true;
+				}
+			}
+		}
+	}
 };
 
-void main() {
+int main() {
 	Solution st;
 	string s("aab");
 	vector<vector<string>> res = st.partition(s);
@@ -84,4 +156,21 @@ void main() {
 			cout << res[i][j] << " ";
 		cout << endl;
 	}
+
+	cout << "-----------" << endl;
+	vector<vector<string>> res1 = st.partition2(s);
+	for (int i = 0; i < res1.size(); i++) {
+		for (int j = 0; j < res1[i].size(); j++)
+			cout << res1[i][j] << " ";
+		cout << endl;
+	}
+
+	cout << "-----------" << endl;
+	vector<vector<string>> res3 = st.partition3(s);
+	for (int i = 0; i < res3.size(); i++) {
+		for (int j = 0; j < res3[i].size(); j++)
+			cout << res3[i][j] << " ";
+		cout << endl;
+	}
+	return 0;
 }

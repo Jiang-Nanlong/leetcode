@@ -2,10 +2,10 @@
 #include <string>
 #include <vector>
 using namespace std;
-//è¿™ä¸ªé¢˜è¦åˆ†å‰²æ­£ç¡®çš„IPåœ°å€ï¼Œæ¯”LeetCode 131åˆ†å‰²å›æ–‡å­ä¸²éš¾ï¼Œè¿™ä¸ªåœ°æ–¹è¦æ’å…¥'.'ï¼Œè€Œä¸”è¿˜ä¸èƒ½æ˜¯å‰å¯¼0çš„ï¼Œè·Ÿä¹‹å‰çš„é¢˜åœ¨å¥—è·¯ä¸Šè¿˜ä¸å¤ªä¸€æ ·ã€‚
-//è¿™ä¸ªé¢˜æ˜¯çœ‹çš„ä»£ç éšæƒ³å½•çš„ä»£ç ï¼Œæœ‰ä¸¤ä¸ªåœ°æ–¹ä¸å¤ªæ˜ç™½ï¼Œç¬¬ä¸€ä¸ªå°±æ˜¯ç»ˆæ­¢æ¡ä»¶è¿™é‡Œï¼Œä¸ºä»€ä¹ˆè¦ç”¨pointnumï¼Œ
-// å†å°±æ˜¯forå¾ªç¯é‡Œçš„breakè¿™é‡Œï¼ŒæŒ‰è¯´forå¾ªç¯æ˜¯åœ¨æ ‘å±‚ä¹‹é—´ï¼Œå¦‚æœå½“å‰åˆ†å‰²çš„ä¸åˆç†ï¼Œåè¾¹çš„å¯èƒ½åˆç†ã€‚å¥¥ ï¼Œè¿™é‡Œæˆ‘å¥½åƒæ˜ç™½äº†ï¼Œisvalidé‡Œè¾¹åˆ¤æ–­çš„æ˜¯å‰å¯¼0ï¼Œå¤§äº255çš„ï¼Œå¦‚æœå½“å‰è¿™ä¸¤ä¸ªä¸æ»¡è¶³ï¼Œé‚£ä¹ˆå†å¾€åè¿˜æ˜¯ä¼šä¸æ»¡è¶³ï¼Œæ‰€ä»¥è¿™ä¸ªåˆ†å‰²ä¸åˆç†ï¼Œå°±ä¸è€ƒè™‘æœ¬å±‚ä¹‹åçš„åˆ†å‰²äº†ã€‚
-//æ„Ÿè§‰è¿™é‡Œæœ‰ç‚¹ç»•
+//Õâ¸öÌâÒª·Ö¸îÕıÈ·µÄIPµØÖ·£¬±ÈLeetCode 131·Ö¸î»ØÎÄ×Ó´®ÄÑ£¬Õâ¸öµØ·½Òª²åÈë'.'£¬¶øÇÒ»¹²»ÄÜÊÇÇ°µ¼0µÄ£¬¸úÖ®Ç°µÄÌâÔÚÌ×Â·ÉÏ»¹²»Ì«Ò»Ñù¡£
+//Õâ¸öÌâÊÇ¿´µÄ´úÂëËæÏëÂ¼µÄ´úÂë£¬ÓĞÁ½¸öµØ·½²»Ì«Ã÷°×£¬µÚÒ»¸ö¾ÍÊÇÖÕÖ¹Ìõ¼şÕâÀï£¬ÎªÊ²Ã´ÒªÓÃpointnum£¬
+// ÔÙ¾ÍÊÇforÑ­»·ÀïµÄbreakÕâÀï£¬°´ËµforÑ­»·ÊÇÔÚÊ÷²ãÖ®¼ä£¬Èç¹ûµ±Ç°·Ö¸îµÄ²»ºÏÀí£¬ºó±ßµÄ¿ÉÄÜºÏÀí¡£°Â £¬ÕâÀïÎÒºÃÏñÃ÷°×ÁË£¬isvalidÀï±ßÅĞ¶ÏµÄÊÇÇ°µ¼0£¬´óÓÚ255µÄ£¬Èç¹ûµ±Ç°ÕâÁ½¸ö²»Âú×ã£¬ÄÇÃ´ÔÙÍùºó»¹ÊÇ»á²»Âú×ã£¬ËùÒÔÕâ¸ö·Ö¸î²»ºÏÀí£¬¾Í²»¿¼ÂÇ±¾²ãÖ®ºóµÄ·Ö¸îÁË¡£
+//¸Ğ¾õÕâÀïÓĞµãÈÆ
 
 class Solution {
 public:
@@ -21,7 +21,7 @@ public:
 			return;
 		}
 
-		for (int i = startindex; i < s.size() && i < startindex + 3; i++) {  //å¯ä»¥åŠ ä¸€ä¸ªi < startindex + 3æ¡ä»¶ï¼Œè¿™æ ·å°±ä¸ä¼šå› ä¸ºè¶…è¿‡ä¸‰ä½æ•°è€Œè¶…è¿‡255è€Œè¿›isValidäº†
+		for (int i = startindex; i < s.size() && i < startindex + 3; i++) {  //¿ÉÒÔ¼ÓÒ»¸öi < startindex + 3Ìõ¼ş£¬ÕâÑù¾Í²»»áÒòÎª³¬¹ıÈıÎ»Êı¶ø³¬¹ı255¶ø½øisValidÁË
 			if (isValid(s, startindex, i)) {
 				s.insert(s.begin() + i + 1, '.');
 				pointnum++;
@@ -33,7 +33,7 @@ public:
 		}
 	}
 
-	bool isValid(string& s, int begin, int end) {  //ä¸»è¦åˆ¤æ–­å‰å¯¼0å’Œæ˜¯å¦å¤§äº255
+	bool isValid(string& s, int begin, int end) {  //Ö÷ÒªÅĞ¶ÏÇ°µ¼0ºÍÊÇ·ñ´óÓÚ255
 		if (begin > end) return false;
 		if (s[begin] == '0' && begin != end) return false;
 		int num = 0;
@@ -45,8 +45,8 @@ public:
 		return true;
 	}
 
-	//ç¬¬äºŒæ¬¡åšï¼Œè™½è¯´è¿™ä¸ªå’ŒLeetCode 131 åˆ†å‰²å›æ–‡ä¸²å·®ä¸å¤šï¼Œä½†æ˜¯è¿™ä¸ªé¢˜çš„ç»†èŠ‚æ›´å¤šï¼Œè¿˜æ˜¯æ²¡æœ‰åšå‡ºæ¥
-	//è¿™ä¸ªé¢˜æ˜¯æŠŠæ‰€æœ‰çš„ipåœ°å€çš„è§„æ ¼åˆ¤æ–­éƒ½æ”¾åœ¨äº†ä¸€ä¸ªå‡½æ•°å»å¤„ç†
+	//µÚ¶ş´Î×ö£¬ËäËµÕâ¸öºÍLeetCode 131 ·Ö¸î»ØÎÄ´®²î²»¶à£¬µ«ÊÇÕâ¸öÌâµÄÏ¸½Ú¸ü¶à£¬»¹ÊÇÃ»ÓĞ×ö³öÀ´
+	//Õâ¸öÌâÊÇ°ÑËùÓĞµÄipµØÖ·µÄ¹æ¸ñÅĞ¶Ï¶¼·ÅÔÚÁËÒ»¸öº¯ÊıÈ¥´¦Àí
 	vector<string> res;
 
 	vector<string> restoreIpAddresses1(string s) {
@@ -55,7 +55,7 @@ public:
 	}
 
 	void backtracking(string& s, int startIndex, int pointNum) {
-		if (pointNum == 3 && startIndex != s.size()) {  //startIndex!=s.size()è¿™ä¸ªæ¡ä»¶æ˜¯ç”¨æ¥ä¸ºäº†é˜²æ­¢å·²ç»åŠ äº†ä¸‰ä¸ªç‚¹ï¼Œè€Œç¬¬ä¸‰ä¸ªç‚¹åŠ åœ¨sæœ€åçš„æƒ…å†µå‡ºç°ã€‚
+		if (pointNum == 3 && startIndex != s.size()) {  //startIndex!=s.size()Õâ¸öÌõ¼şÊÇÓÃÀ´ÎªÁË·ÀÖ¹ÒÑ¾­¼ÓÁËÈı¸öµã£¬¶øµÚÈı¸öµã¼ÓÔÚs×îºóµÄÇé¿ö³öÏÖ¡£
 			if (isValid1(s, startIndex, s.size() - 1))
 				res.push_back(s);
 			return;
@@ -71,10 +71,10 @@ public:
 	}
 
 	bool isValid1(string& s, int begin, int end) {
-		if (end - begin + 1 > 3) //è¿˜å¯ä»¥åŠ ä¸ªåˆ¤æ–­ï¼Œå¦‚æœä½æ•°è¶…è¿‡3å°±ç›´æ¥è¿”å›false
+		if (end - begin + 1 > 3) //»¹¿ÉÒÔ¼Ó¸öÅĞ¶Ï£¬Èç¹ûÎ»Êı³¬¹ı3¾ÍÖ±½Ó·µ»Øfalse
 			return false;
 
-		if (s[begin] == '0' && begin != end)  //åˆ¤æ–­å‰å¯¼0
+		if (s[begin] == '0' && begin != end)  //ÅĞ¶ÏÇ°µ¼0
 			return false;
 
 		int num = 0;
@@ -85,12 +85,53 @@ public:
 		}
 		return true;
 	}
+
+public:
+	// µÚÈı´Î×ö
+	vector<string> restoreIpAddresses2(string s) {
+		res.clear();
+		if (s.size() < 4) return{};
+		backtracking2(s, 0, 0);
+		return res;
+	}
+
+	void backtracking2(string& s, int start, int pointnum) {
+		if (pointnum == 3 && isValid2(s, start, s.size() - 1)) {
+			res.push_back(s);
+			return;
+		}
+		for (int i = start; i < s.size(); i++) {
+			if (i - start < 3 && isValid2(s, start, i)) {
+				s.insert(s.begin() + i + 1, '.');
+				backtracking2(s, i + 2, pointnum + 1);
+				s.erase(i + 1, 1);
+			}
+		}
+	}
+
+	bool isValid2(string& s, int start, int end) {
+		if (start > end) return false;
+		else if (end - start + 1 > 3) return false;  // ¼ÓÕâÒ»¾äÖ÷ÒªÊÇÎªÁËÔÚÖÕÖ¹Ìõ¼şÊ±£¬Èç¹ûÊ£ÓàµÄÊı×Ö»¹ºÜ¶à¾ÍÖ±½ÓÍË³öÁË
+		else if (end - start >= 1 && s[start] == '0') return false;
+
+		string str = s.substr(start, end - start + 1);
+		long long num = stoi(str);
+		if (num > 255)return false;
+		return true;
+	}
 };
 
-void main() {
+int main() {
 	Solution st;
 	string s("25525511135");
 	vector<string> res = st.restoreIpAddresses(s);
 	for (auto& s : res)
 		cout << s << endl;
+
+	cout << "---------" << endl;
+	string s1("0279245587303");
+	vector<string> res1 = st.restoreIpAddresses2(s1);
+	for (string& s : res1)
+		cout << s << endl;
+	return 0;
 }

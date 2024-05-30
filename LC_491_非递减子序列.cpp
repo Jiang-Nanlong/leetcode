@@ -3,8 +3,8 @@
 #include <unordered_set>
 using namespace std;
 
-//ç»™å®šä¸€ä¸ªæ•´æ•°æ•°ç»„ï¼Œæ‰¾å‡ºè¯¥æ•°ç»„ä¸­ä¸åŒçš„é€’å¢å­åºåˆ—ï¼Œå­åºåˆ—ä¸­è‡³å°‘æœ‰ä¸¤ä¸ªå…ƒç´ ï¼Œè§£é›†ä¸­ä¸èƒ½æœ‰é‡å¤é¡¹
-//è¿™ä¸ªé¢˜åªè€ƒè™‘åœ¨æ ‘å±‚å»é‡å°±è¡Œ
+//¸ø¶¨Ò»¸öÕûÊıÊı×é£¬ÕÒ³ö¸ÃÊı×éÖĞ²»Í¬µÄµİÔö×ÓĞòÁĞ£¬×ÓĞòÁĞÖĞÖÁÉÙÓĞÁ½¸öÔªËØ£¬½â¼¯ÖĞ²»ÄÜÓĞÖØ¸´Ïî
+//Õâ¸öÌâÖ»¿¼ÂÇÔÚÊ÷²ãÈ¥ÖØ¾ÍĞĞ
 
 class Solution {
 public:
@@ -18,18 +18,18 @@ public:
 		if (cb.size() >= 2)
 			res.push_back(cb);
 
-		int used[201] = { 0 };  //è¿™é‡Œä¹Ÿå¯ä»¥ç”¨setï¼Œä½†æ˜¯é¢˜ç›®è¯´nums[i]åœ¨-100åˆ°100ä¹‹é—´ï¼Œæ‰€ä»¥å¯ä»¥ç”¨æ•°ç»„æ›´å¿«ã€‚
+		int used[201] = { 0 };  //ÕâÀïÒ²¿ÉÒÔÓÃset£¬µ«ÊÇÌâÄ¿Ëµnums[i]ÔÚ-100µ½100Ö®¼ä£¬ËùÒÔ¿ÉÒÔÓÃÊı×é¸ü¿ì¡£
 		for (int i = startindex; i < nums.size(); i++) {
 			if ((!cb.empty() && nums[i] < cb.back()) || (used[100 + nums[i]] == 1))
 				continue;
-			used[nums[i] + 100] = 1;  //è¿™é‡Œçš„usedæ•°ç»„ä¸ç”¨å›æº¯ï¼Œå› ä¸ºä»–åœ¨æ¯ä¸€ä¸ªæ ‘æä¸Šéƒ½ä¼šæ–°åˆ›å»ºï¼Œåªæœ‰åœ¨æ ‘å±‚ä¸Šæ‰ä¼šä¿æŒï¼Œæ‰€ä»¥å¯ä»¥åªåœ¨æ ‘å±‚å»é‡
+			used[nums[i] + 100] = 1;  //ÕâÀïµÄusedÊı×é²»ÓÃ»ØËİ£¬ÒòÎªËûÔÚÃ¿Ò»¸öÊ÷Ö¦ÉÏ¶¼»áĞÂ´´½¨£¬Ö»ÓĞÔÚÊ÷²ãÉÏ²Å»á±£³Ö£¬ËùÒÔ¿ÉÒÔÖ»ÔÚÊ÷²ãÈ¥ÖØ
 			cb.push_back(nums[i]);
 			Helper(nums, i + 1, cb, res);
 			cb.pop_back();
 		}
 	}
 
-	//ç¬¬äºŒéåšï¼Œæ²¡åšå‡ºæ¥ï¼Œè¿™ä¸ªé¢˜å¥½åƒåªèƒ½ä½¿ç”¨usetæ ‘å±‚å»é‡ï¼Œè€Œä¸”åŸæ•°ç»„ä¸èƒ½é‡æ–°æ’åºã€‚
+	//µÚ¶ş±é×ö£¬Ã»×ö³öÀ´£¬Õâ¸öÌâºÃÏñÖ»ÄÜÊ¹ÓÃusetÊ÷²ãÈ¥ÖØ£¬¶øÇÒÔ­Êı×é²»ÄÜÖØĞÂÅÅĞò¡£
 	vector<vector<int>> res;
 	vector<int> path;
 	vector<vector<int>> findSubsequences1(vector<int>& nums) {
@@ -56,7 +56,7 @@ public:
 		}
 	}
 
-	//å› ä¸ºè¿™é‡ŒçŸ¥é“äº†nums[i]çš„èŒƒå›´ï¼Œæ‰€ä»¥å¯ä»¥ç›´æ¥ä½¿ç”¨æ•°ç»„æ¥ä»£æ›¿uset
+	//ÒòÎªÕâÀïÖªµÀÁËnums[i]µÄ·¶Î§£¬ËùÒÔ¿ÉÒÔÖ±½ÓÊ¹ÓÃÊı×éÀ´´úÌæuset
 	vector<vector<int>> findSubsequences2(vector<int>& nums) {
 		backtracking1(nums, 0);
 		return res;
@@ -68,7 +68,7 @@ public:
 		if (startIndex == nums.size()) {
 			return;
 		}
-		int used[201] = { 0 };  //æˆ–è€…å¯ä»¥æŠŠintæ¢ä¸ºbool
+		int used[201] = { 0 };  //»òÕß¿ÉÒÔ°Ñint»»Îªbool
 		for (int i = startIndex; i < nums.size(); i++) {
 			if (used[nums[i] + 100]) continue;
 
@@ -76,6 +76,34 @@ public:
 				used[nums[i] + 100]++;
 				path.push_back(nums[i]);
 				backtracking1(nums, i + 1);
+				path.pop_back();
+			}
+		}
+	}
+
+	//µÚÈı´Î×ö
+	vector<vector<int>> findSubsequences3(vector<int>& nums) {
+		path.clear();
+		res.clear();
+		backtracking3(nums, 0);
+		return res;
+	}
+
+	void backtracking3(vector<int>& nums, int start) {
+		if (path.size() >= 2)
+			res.push_back(path);
+
+		if (start == nums.size())
+			return;
+
+		unordered_set<int> uset;
+		for (int i = start; i < nums.size(); i++) {
+			if (uset.find(nums[i]) != uset.end())
+				continue;
+			if (path.empty() || nums[i] >= path.back()) {
+				path.push_back(nums[i]);
+				uset.insert(nums[i]);
+				backtracking3(nums, i + 1);
 				path.pop_back();
 			}
 		}
@@ -89,6 +117,15 @@ void main() {
 	for (int i = 0; i < res.size(); i++) {
 		for (int j = 0; j < res[i].size(); j++)
 			cout << res[i][j] << " ";
+		cout << endl;
+	}
+
+	cout << "---------------------" << endl;
+
+	vector<vector<int>> res3 = st.findSubsequences3(nums);
+	for (int i = 0; i < res3.size(); i++) {
+		for (int j = 0; j < res3[i].size(); j++)
+			cout << res3[i][j] << " ";
 		cout << endl;
 	}
 }

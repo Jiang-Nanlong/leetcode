@@ -2,9 +2,9 @@
 #include <vector>
 using namespace std;
 
-//æ•°ç»„ä¸­çš„æ¯ä¸ªæ•°éƒ½ä¸ä¸€æ ·ï¼Œè€Œä¸”nums[i]åœ¨-10åˆ°10ä¹‹é—´ï¼Œè¿™ä¸ªé¢˜è¦è¿”å›æ‰€æœ‰æ•°çš„å…¨æ’åˆ—ï¼Œ
-//é‚£ä¹ˆåœ¨æ¯ä¸ªæ ‘æçš„æ¯ä¸€å±‚éƒ½å¾—æŠŠæ‰€æœ‰çš„æ•°éƒ½è€ƒè™‘éï¼Œæ‰€ä»¥forå¾ªç¯ä»0å¼€å§‹ã€‚
-//è€Œä¸”è¿™å›çš„å»é‡ä¸æ˜¯åœ¨æ ‘å±‚ä¸Šï¼Œè€Œæ˜¯åœ¨æ ‘æä¸Šå»æ‰å·²ç»ä½¿ç”¨è¿‡çš„å…ƒç´ ï¼Œæ‰€ä»¥ä½¿ç”¨usedæ•°ç»„ä½œä¸ºå‚æ•°ï¼Œåœ¨æ ‘æçš„æ¯ä¸€å±‚ä½¿ç”¨
+//Êı×éÖĞµÄÃ¿¸öÊı¶¼²»Ò»Ñù£¬¶øÇÒnums[i]ÔÚ-10µ½10Ö®¼ä£¬Õâ¸öÌâÒª·µ»ØËùÓĞÊıµÄÈ«ÅÅÁĞ£¬
+//ÄÇÃ´ÔÚÃ¿¸öÊ÷Ö¦µÄÃ¿Ò»²ã¶¼µÃ°ÑËùÓĞµÄÊı¶¼¿¼ÂÇ±é£¬ËùÒÔforÑ­»·´Ó0¿ªÊ¼¡£
+//¶øÇÒÕâ»ØµÄÈ¥ÖØ²»ÊÇÔÚÊ÷²ãÉÏ£¬¶øÊÇÔÚÊ÷Ö¦ÉÏÈ¥µôÒÑ¾­Ê¹ÓÃ¹ıµÄÔªËØ£¬ËùÒÔÊ¹ÓÃusedÊı×é×÷Îª²ÎÊı£¬ÔÚÊ÷Ö¦µÄÃ¿Ò»²ãÊ¹ÓÃ
 
 class Solution {
 public:
@@ -34,7 +34,7 @@ public:
 		}
 	}
 
-	//ç¬¬äºŒæ¬¡åšï¼Œåªæ˜¯æ„Ÿè§‰åº”è¯¥ç”¨ä¸€ä¸ªusedæ•°ç»„æ¥æ ‡è¯†æ¯ä¸€ä¸ªå…ƒç´ æ˜¯ä¸æ˜¯è¢«ä½¿ç”¨è¿‡äº†
+	//µÚ¶ş´Î×ö£¬Ö»ÊÇ¸Ğ¾õÓ¦¸ÃÓÃÒ»¸öusedÊı×éÀ´±êÊ¶Ã¿Ò»¸öÔªËØÊÇ²»ÊÇ±»Ê¹ÓÃ¹ıÁË
 	vector<int> path;
 	vector<vector<int>> res;
 	vector<vector<int>> permute1(vector<int>& nums) {
@@ -58,9 +58,35 @@ public:
 			used[i] = false;
 		}
 	}
+
+	// µÚÈı´Î×ö
+	vector<vector<int>> permute2(vector<int>& nums) {
+		path.clear();
+		res.clear();
+		vector<bool> used(nums.size(), false);
+		backtracking2(nums, used);
+		return res;
+	}
+
+	void backtracking2(vector<int>& nums, vector<bool>& used) {
+		if (path.size() == nums.size()) {
+			res.push_back(path);
+			return;
+		}
+
+		for (int i = 0; i < nums.size(); i++) {
+			if (used[i] == false) {
+				path.push_back(nums[i]);
+				used[i] = true;
+				backtracking2(nums, used);
+				used[i] = false;
+				path.pop_back();
+			}
+		}
+	}
 };
 
-void main() {
+int main() {
 	Solution st;
 	vector<int> nums{ 1,2,3 };
 	vector<vector<int>> res = st.permute(nums);
@@ -69,4 +95,13 @@ void main() {
 			cout << res[i][j] << " ";
 		cout << endl;
 	}
+
+	cout << "------------" << endl;
+	vector<vector<int>> res2 = st.permute2(nums);
+	for (int i = 0; i < res2.size(); i++) {
+		for (int j = 0; j < res2[i].size(); j++)
+			cout << res2[i][j] << " ";
+		cout << endl;
+	}
+	return 0;
 }
