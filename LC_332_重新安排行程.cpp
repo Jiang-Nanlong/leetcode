@@ -5,32 +5,32 @@
 #include <vector>
 using namespace std;
 
-//ç»™å®šä¸€ä»½èˆªçº¿åˆ—è¡¨ticketsï¼Œå…¶ä¸­tickets[i] = [from, to]ï¼Œè¡¨ç¤ºé£æœºçš„å‡ºå‘ç‚¹å’Œé™è½ç‚¹ã€‚ç°åœ¨è¦æ±‚é‡æ–°è§„åˆ’æ’åºï¼Œ
-//æŠŠè¿™äº›è¡Œç¨‹ä¸²èµ·æ¥ï¼Œä»JFKæœºåœºå‡ºå‘ï¼Œå¦‚æœå­˜åœ¨å¤šä¸ªæœ‰æ•ˆçš„è¡Œç¨‹ï¼ŒæŒ‰ç…§å­—å…¸æ’åºè¿”å›æœ€å°çš„è¡Œç¨‹ç»„åˆã€‚
-//ä¸€å¼€å§‹çœ‹åˆ°è¿™ä¸ªé¢˜æ¯«æ— å¤´ç»ªï¼Œæ€ä¹ˆä¹Ÿæƒ³ä¸åˆ°å¦‚ä½•ç”¨å›æº¯è§£å†³ï¼Œä¹Ÿåˆ«æå¦‚æœæœ‰å¤šä¸ªæœ‰æ•ˆè¡Œç¨‹ï¼ŒæŒ‰ç…§å­—å…¸æ’åºè¿”å›æœ€å°è¡Œç¨‹ç»„åˆè¿™ä»¶äº‹ã€‚
-//æƒ³ç€è½¬æ¢æˆæ ‘å½¢ç»“æ„ï¼Œå°±å¯ä»¥ç”¨å›æº¯äº†ï¼Œä½†æ˜¯åˆä¸çŸ¥é“æ€ä¹ˆè½¬æ¢æˆæ ‘å½¢ç»“æ„ã€‚
-//çœ‹äº†ä»£ç éšæƒ³å½•çš„ä»£ç ï¼Œæ‰çŸ¥é“é‡Œè¾¹çš„unordered_map<string, map<string, int>> targets æ¥ç»Ÿè®¡åŒä¸€å‡ºå‘ç‚¹å’Œä¸åŒç»ˆç‚¹ä¹‹é—´çš„å…³ç³»ï¼Œå¹¶ç»Ÿè®¡å‡ºå‘ç‚¹åˆ°ç»ˆç‚¹çš„æœºç¥¨æ•°
-//åŒæ—¶å†…å±‚çš„map<string, int>åœ¨ç»Ÿè®¡å‡ ä¸ªç»ˆç‚¹æ˜¯å°±å·²ç»æŒ‰æœ‰åºæ’å¥½äº†
-//æœ‰äº†è¿™ä¸ªæ•°æ®ç»“æ„å°±èƒ½å¾ˆå¥½çš„æƒ³åˆ°æ ‘å½¢ç»“æ„ï¼Œç„¶åç”¨å›æº¯äº†ï¼ŒåŒæ—¶å¦‚æœå­˜åœ¨å¤šä¸ªæœ‰æ•ˆè¡Œç¨‹ï¼ŒæŒ‰ç…§å­—å…¸æ’åºè¿”å›æœ€å°è¡Œç¨‹çš„é—®é¢˜ä¹Ÿè§£å†³äº†
+//¸ø¶¨Ò»·İº½ÏßÁĞ±ítickets£¬ÆäÖĞtickets[i] = [from, to]£¬±íÊ¾·É»úµÄ³ö·¢µãºÍ½µÂäµã¡£ÏÖÔÚÒªÇóÖØĞÂ¹æ»®ÅÅĞò£¬
+//°ÑÕâĞ©ĞĞ³Ì´®ÆğÀ´£¬´ÓJFK»ú³¡³ö·¢£¬Èç¹û´æÔÚ¶à¸öÓĞĞ§µÄĞĞ³Ì£¬°´ÕÕ×ÖµäÅÅĞò·µ»Ø×îĞ¡µÄĞĞ³Ì×éºÏ¡£
+//Ò»¿ªÊ¼¿´µ½Õâ¸öÌâºÁÎŞÍ·Ğ÷£¬ÔõÃ´Ò²Ïë²»µ½ÈçºÎÓÃ»ØËİ½â¾ö£¬Ò²±ğÌáÈç¹ûÓĞ¶à¸öÓĞĞ§ĞĞ³Ì£¬°´ÕÕ×ÖµäÅÅĞò·µ»Ø×îĞ¡ĞĞ³Ì×éºÏÕâ¼şÊÂ¡£
+//Ïë×Å×ª»»³ÉÊ÷ĞÎ½á¹¹£¬¾Í¿ÉÒÔÓÃ»ØËİÁË£¬µ«ÊÇÓÖ²»ÖªµÀÔõÃ´×ª»»³ÉÊ÷ĞÎ½á¹¹¡£
+//¿´ÁË´úÂëËæÏëÂ¼µÄ´úÂë£¬²ÅÖªµÀÀï±ßµÄunordered_map<string, map<string, int>> targets À´Í³¼ÆÍ¬Ò»³ö·¢µãºÍ²»Í¬ÖÕµãÖ®¼äµÄ¹ØÏµ£¬²¢Í³¼Æ³ö·¢µãµ½ÖÕµãµÄ»úÆ±Êı
+//Í¬Ê±ÄÚ²ãµÄmap<string, int>ÔÚÍ³¼Æ¼¸¸öÖÕµãÊÇ¾ÍÒÑ¾­°´ÓĞĞòÅÅºÃÁË
+//ÓĞÁËÕâ¸öÊı¾İ½á¹¹¾ÍÄÜºÜºÃµÄÏëµ½Ê÷ĞÎ½á¹¹£¬È»ºóÓÃ»ØËİÁË£¬Í¬Ê±Èç¹û´æÔÚ¶à¸öÓĞĞ§ĞĞ³Ì£¬°´ÕÕ×ÖµäÅÅĞò·µ»Ø×îĞ¡ĞĞ³ÌµÄÎÊÌâÒ²½â¾öÁË
 
 class Solution {
 public:
 	unordered_map<string, map<string, int>> targets;
 	vector<string> findItinerary(vector<vector<string>>& tickets) {
 		vector<string> res;
-		for (vector<string>& c : tickets)  //å…ˆç»Ÿè®¡åŒä¸€èµ·ç‚¹å’Œä¸åŒç»ˆç‚¹ä¹‹é—´çš„å…³ç³»ï¼Œå’Œæœºç¥¨æ•°
+		for (vector<string>& c : tickets)  //ÏÈÍ³¼ÆÍ¬Ò»ÆğµãºÍ²»Í¬ÖÕµãÖ®¼äµÄ¹ØÏµ£¬ºÍ»úÆ±Êı
 			targets[c[0]][c[1]]++;
 		res.push_back("JFK");
 		Helper(tickets.size(), res);
 		return res;
 	}
 
-	//å…³äºä»¥å¾€çš„Helperéƒ½æ²¡æœ‰è¿”å›å€¼ï¼Œè€Œè¿™é‡Œå´è¿”å›boolï¼Œå› ä¸ºä»¥å¾€æ˜¯è¦ç»Ÿè®¡å‡ºå„ç§å„æ ·çš„ç»“æœï¼Œè¿™é‡Œåªéœ€è¦è·å¾—ä¸€ç§ç»“æœï¼Œç„¶åè¿”å›å°±è¡Œäº†ï¼Œæ‰€ä»¥è¿™é‡Œæœ‰è¿”å›å€¼
-	//å½“è¿”å›trueæ—¶ï¼Œå°±ä¼šä¸€è·¯è¿”å›åˆ°æ ˆé¡¶ã€‚
+	//¹ØÓÚÒÔÍùµÄHelper¶¼Ã»ÓĞ·µ»ØÖµ£¬¶øÕâÀïÈ´·µ»Øbool£¬ÒòÎªÒÔÍùÊÇÒªÍ³¼Æ³ö¸÷ÖÖ¸÷ÑùµÄ½á¹û£¬ÕâÀïÖ»ĞèÒª»ñµÃÒ»ÖÖ½á¹û£¬È»ºó·µ»Ø¾ÍĞĞÁË£¬ËùÒÔÕâÀïÓĞ·µ»ØÖµ
+	//µ±·µ»ØtrueÊ±£¬¾Í»áÒ»Â··µ»Øµ½Õ»¶¥¡£
 	bool Helper(int ticketsnum, vector<string>& res) {
 		if (res.size() == ticketsnum + 1)
 			return true;
-		for (pair<const string, int>& c : targets[res[res.size() - 1]]) { //è¿™é‡Œpairä¸­çš„stringç”¨constä¿®é¥°æ˜¯å› ä¸ºï¼Œmapä¸­çš„keyæ˜¯ä¸å…è®¸è¢«ä¿®æ”¹çš„
+		for (pair<const string, int>& c : targets[res[res.size() - 1]]) { //ÕâÀïpairÖĞµÄstringÓÃconstĞŞÊÎÊÇÒòÎª£¬mapÖĞµÄkeyÊÇ²»ÔÊĞí±»ĞŞ¸ÄµÄ
 			if (c.second > 0) {
 				res.push_back(c.first);
 				c.second -= 1;
@@ -42,8 +42,8 @@ public:
 		return false;
 	}
 
-	//ç¬¬äºŒæ¬¡åšï¼Œè¿˜æ˜¯æ²¡æœ‰åšå‡ºæ¥ï¼Œè¿™ä¸ªé¢˜æœ€éš¾æƒ³çš„æ˜¯æ•°æ®ç»“æ„ï¼Œæ—¢å¯ä»¥å¯¹ç»ˆç‚¹ç«™æ’åºï¼Œåˆå¯ä»¥è®°å½•å“ªå¼ ç¥¨æ˜¯å¦å·²ç»è¢«ä½¿ç”¨è¿‡
-	unordered_map<string, map<string, int>> targets;
+	//µÚ¶ş´Î×ö£¬»¹ÊÇÃ»ÓĞ×ö³öÀ´£¬Õâ¸öÌâ×îÄÑÏëµÄÊÇÊı¾İ½á¹¹£¬¼È¿ÉÒÔ¶ÔÖÕµãÕ¾ÅÅĞò£¬ÓÖ¿ÉÒÔ¼ÇÂ¼ÄÄÕÅÆ±ÊÇ·ñÒÑ¾­±»Ê¹ÓÃ¹ı
+	//unordered_map<string, map<string, int>> targets;
 	vector<string> res;
 	bool backtracking(int ticketsNum) {
 		if (res.size() == ticketsNum + 1) {
@@ -63,6 +63,8 @@ public:
 		return false;
 	}
 	vector<string> findItinerary1(vector<vector<string>>& tickets) {
+		res.clear();
+		targets.clear();
 		for (const vector<string>& ticket : tickets) {
 			targets[ticket[0]][ticket[1]]++;
 		}
@@ -70,12 +72,44 @@ public:
 		backtracking(tickets.size());
 		return res;
 	}
+
+	//µÚÈı´Î×öÁË£¬Êı¾İ½á¹¹Ïë³öÀ´ÁË£¬µ«ÊÇÏë²»³öÎªÉ¶ÒªÓĞ·µ»ØÖµ
+	// µ÷ÊÔÁËÒ»±éÖªµÀÁË£¬Âú×ãÖÕÖ¹Ìõ¼şºóÃ»ÓĞÒ»²ã²ãµÄ·µ»Ø»ØÀ´£¬¶øÊÇ¼ÌĞø´ÓÉÏÒ»²ã¼ÌĞøÖ´ĞĞ£¬¾ÍÓÖ»ápop_back()
+	// Ó¦¸ÃÓĞ¸ö·µ»ØÖµ£¬Èç¹ûÂú×ãÌõ¼şÓ¦¸ÃÖ±½ÓÒ»²ã²ã·µ»Ø
+	vector<string> findItinerary2(vector<vector<string>>& tickets) {
+		res.clear();
+		unordered_map<string, map<string, int>> TicketHolder;
+		for (auto ticket : tickets) {
+			TicketHolder[ticket[0]][ticket[1]]++;
+		}
+
+		res.push_back("JFK");
+		backtracking2(tickets.size(), TicketHolder);
+		return res;
+	}
+
+	bool backtracking2(int stationNum, unordered_map<string, map<string, int>>& TicketHolder) {
+		if (res.size() == stationNum + 1) {
+			return true;
+		}
+
+		for (auto& ticket : TicketHolder[res.back()]) {
+			if (ticket.second > 0) {
+				res.push_back(ticket.first);
+				ticket.second--;
+				if (backtracking2(stationNum, TicketHolder)) return true;
+				ticket.second++;
+				res.pop_back();
+			}
+		}
+		return false;
+	}
 };
 
 void main() {
 	Solution st;
 	vector < vector<string>> tickets{ {"MUC","LHR"},{"JFK","MUC"},{"SFO","SJC"},{"LHR","SFO"} };
-	vector<string>res = st.findItinerary(tickets);
+	vector<string>res = st.findItinerary2(tickets);
 	for (auto& s : res)
 		cout << s << " ";
 }

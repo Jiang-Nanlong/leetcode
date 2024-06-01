@@ -163,6 +163,46 @@ public:
 		}
 		return true;
 	}
+
+	// 第四次做了
+	vector<vector<string>> solveNQueens4(int n) {
+		res.clear();
+		string s(n, '.');
+		vector<string> chessboard(n, s);
+		backtracking4(chessboard, 0);
+		return res;
+	}
+	void backtracking4(vector<string>& chessboard, int row) {
+		if (row == chessboard.size()) {
+			res.push_back(chessboard);
+			return;
+		}
+
+		for (int i = 0; i < chessboard.size(); i++) {
+			if (isValid4(chessboard, row, i)) {
+				chessboard[row][i] = 'Q';
+				backtracking4(chessboard, row + 1);
+				chessboard[row][i] = '.';
+			}
+		}
+	}
+
+	bool isValid4(vector<string>& chessboard, int row, int col) {
+		for (int i = 0; i < row; i++) {
+			if (chessboard[i][col] == 'Q')
+				return false;
+		}
+		for (int i = row - 1, j = col - 1; i >= 0 && j >= 0; i--, j--)
+			if (chessboard[i][j] == 'Q')
+				return false;
+
+		for (int i = row - 1, j = col + 1; i >= 0 && j < chessboard.size();
+			i--, j++)
+			if (chessboard[i][j] == 'Q')
+				return false;
+
+		return true;
+	}
 };
 
 int main() {
@@ -180,5 +220,13 @@ int main() {
 			cout << res1[i][j] << endl;
 		cout << endl;
 	}
+	cout << "---------" << endl;
+	vector<vector<string>> res4 = st.solveNQueens4(5);
+	for (int i = 0; i < res4.size(); i++) {
+		for (int j = 0; j < res4[0].size(); j++)
+			cout << res4[i][j] << endl;
+		cout << endl;
+	}
+
 	return 0;
 }

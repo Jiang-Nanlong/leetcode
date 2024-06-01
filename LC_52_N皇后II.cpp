@@ -47,10 +47,53 @@ public:
         }
         return true;
     }
+
+    // 第二次做
+    int res;
+    int totalNQueens1(int n) {
+        res = 0;
+        string s(n, '.');
+        vector<string> chessboard(n, s);
+        backtracking1(chessboard, 0);
+        return res;
+    }
+
+    void backtracking1(vector<string>& chessboard, int row) {
+        if (row == chessboard.size()) {
+            res++;
+            return;
+        }
+
+        for (int i = 0; i < chessboard.size(); i++) {
+            if (isValid1(chessboard, row, i)) {
+                chessboard[row][i] = 'Q';
+                backtracking1(chessboard, row + 1);
+                chessboard[row][i] = '.';
+            }
+        }
+    }
+
+    bool isValid1(vector<string>& chessboard, int row, int col) {
+        for (int i = 0; i < row; i++)
+            if (chessboard[i][col] == 'Q')
+                return false;
+
+        for (int i = row - 1, j = col - 1; i >= 0 && j >= 0; i--, j--)
+            if (chessboard[i][j] == 'Q')
+                return false;
+
+        for (int i = row - 1, j = col + 1; i >= 0 && j < chessboard.size();
+            i--, j++)
+            if (chessboard[i][j] == 'Q')
+                return false;
+
+        return true;
+    }
 };
 
 int main() {
     Solution st;
     cout << st.totalNQueens(4) << endl;
+    cout << st.totalNQueens1(4) << endl;
     return 0;
 }

@@ -2,9 +2,9 @@
 #include <vector>
 using namespace std;
 
-//è¿™ä¸ªé¢˜è·Ÿä»¥å¾€çš„å›žæº¯é¢˜ä¸ä¸€æ ·ï¼Œæ²¡æœ‰ç»ˆæ­¢æ¡ä»¶ï¼Œå¼€å§‹æ²¡çœ‹æ˜Žç™½æ€Žä¹ˆç»“æŸã€‚åŽæ¥æ‰çœ‹æ‡‚ï¼Œåœ¨é€’å½’çš„æœ¬å±‚æŠŠä¸€ä¸ª'.'æ”¹ä¸ºæ•°å­—ï¼Œç„¶åŽè¿›å…¥ä¸‹ä¸€å±‚ï¼Œä¸‹ä¸€å±‚åˆä¼šä»Žæ£‹ç›˜çš„å·¦ä¸Šè§’å¼€å§‹ï¼Œæ‰¾åˆ°ç¬¬ä¸€ä¸ªæ˜¯'.'çš„èŠ‚ç‚¹ï¼Œç„¶åŽä¿®æ”¹å®ƒçš„å€¼ã€‚
-//å°±è¿™ä¹ˆä¸€å±‚å±‚çš„é€’å½’ï¼Œç„¶åŽæ‰¾å‡ºæ‰€æœ‰çš„èŠ‚ç‚¹ï¼Œå¦‚æžœå·²ç»æ²¡æœ‰èŠ‚ç‚¹å¯ä¾›ä¿®æ”¹äº†ï¼Œå°±è¿”å›žtrueï¼Œç„¶åŽå°±ä¼šä¸€å±‚å±‚çš„ç›´æŽ¥è¿”å›žtrueï¼Œå°±æ‰¾åˆ°äº†æˆ‘ä»¬è¦çš„
-//æ„Ÿè§‰è¿™ä¸ªé¢˜æœ‰äº›éš¾ï¼Œæƒ³ä¸é€š
+//Õâ¸öÌâ¸úÒÔÍùµÄ»ØËÝÌâ²»Ò»Ñù£¬Ã»ÓÐÖÕÖ¹Ìõ¼þ£¬¿ªÊ¼Ã»¿´Ã÷°×ÔõÃ´½áÊø¡£ºóÀ´²Å¿´¶®£¬ÔÚµÝ¹éµÄ±¾²ã°ÑÒ»¸ö'.'¸ÄÎªÊý×Ö£¬È»ºó½øÈëÏÂÒ»²ã£¬ÏÂÒ»²ãÓÖ»á´ÓÆåÅÌµÄ×óÉÏ½Ç¿ªÊ¼£¬ÕÒµ½µÚÒ»¸öÊÇ'.'µÄ½Úµã£¬È»ºóÐÞ¸ÄËüµÄÖµ¡£
+//¾ÍÕâÃ´Ò»²ã²ãµÄµÝ¹é£¬È»ºóÕÒ³öËùÓÐµÄ½Úµã£¬Èç¹ûÒÑ¾­Ã»ÓÐ½Úµã¿É¹©ÐÞ¸ÄÁË£¬¾Í·µ»Øtrue£¬È»ºó¾Í»áÒ»²ã²ãµÄÖ±½Ó·µ»Øtrue£¬¾ÍÕÒµ½ÁËÎÒÃÇÒªµÄ
+//¸Ð¾õÕâ¸öÌâÓÐÐ©ÄÑ£¬Ïë²»Í¨
 
 class Solution {
 public:
@@ -51,9 +51,9 @@ public:
 		return true;
 	}
 
-	//ç¬¬äºŒæ¬¡åšï¼Œè¿™æ¬¡åšæ€»ä½“æ€è·¯æ²¡æœ‰é—®é¢˜ã€‚ä¸è¿‡æœ‰ä¸¤ä¸ªåœ°æ–¹æ²¡æ³¨æ„åˆ°ï¼Œæˆ‘å¼€å§‹æƒ³çš„æ˜¯æ¯å±‚é€’å½’éƒ½ä»Žä¸Šä¸€å±‚èŠ‚ç‚¹ç»§ç»­ï¼Œä½†æ˜¯åˆä¸çŸ¥é“å…·ä½“åº”è¯¥æ˜¯å¾€å³è¿˜æ˜¯å¾€ä¸‹ï¼ŒåŽæ¥çœ‹äº†ç­”æ¡ˆæ‰çŸ¥é“ï¼Œæ¯å±‚é€’å½’éƒ½æ˜¯ä»Žå·¦ä¸Šè§’å¼€å§‹ã€‚
-	//å†å°±æ˜¯æˆ‘çš„backtrackingå‡½æ•°æ²¡æœ‰è¿”å›žå€¼ï¼Œè¿™é‡Œæˆ‘å¼€å§‹æƒ³åˆ°æ˜¯ä¸æ˜¯åº”è¯¥è·Ÿé€’å½’äºŒå‰æ ‘æœç´¢ä¸€æ¡è¾¹çš„å†™æ³•ä¸€æ ·ï¼Œæœ‰ä¸€ä¸ªè¿”å›žå€¼ï¼Œé‡åˆ°åˆé€‚çš„ç»“æžœå°±ç›´æŽ¥è¿”å›žã€‚ä½†æ˜¯æ²¡æœ‰å†™ï¼Œä¹Ÿä¸çŸ¥é“é€’å½’çš„ç»ˆæ­¢æ¡ä»¶æ€Žä¹ˆå†™ï¼Œ
-	//åŽæ¥çœ‹äº†ç­”æ¡ˆçŸ¥é“è¦åŠ è¿”å›žå€¼äº†ï¼Œç„¶åŽçŸ¥é“äº†è¦åœ¨å“ªåŠ è¿”å›žå€¼ï¼Œä¹Ÿå°±ä¸éœ€è¦ç»ˆæ­¢æ¡ä»¶äº†ã€‚
+	//µÚ¶þ´Î×ö£¬Õâ´Î×ö×ÜÌåË¼Â·Ã»ÓÐÎÊÌâ¡£²»¹ýÓÐÁ½¸öµØ·½Ã»×¢Òâµ½£¬ÎÒ¿ªÊ¼ÏëµÄÊÇÃ¿²ãµÝ¹é¶¼´ÓÉÏÒ»²ã½Úµã¼ÌÐø£¬µ«ÊÇÓÖ²»ÖªµÀ¾ßÌåÓ¦¸ÃÊÇÍùÓÒ»¹ÊÇÍùÏÂ£¬ºóÀ´¿´ÁË´ð°¸²ÅÖªµÀ£¬Ã¿²ãµÝ¹é¶¼ÊÇ´Ó×óÉÏ½Ç¿ªÊ¼¡£
+	//ÔÙ¾ÍÊÇÎÒµÄbacktrackingº¯ÊýÃ»ÓÐ·µ»ØÖµ£¬ÕâÀïÎÒ¿ªÊ¼Ïëµ½ÊÇ²»ÊÇÓ¦¸Ã¸úµÝ¹é¶þ²æÊ÷ËÑË÷Ò»Ìõ±ßµÄÐ´·¨Ò»Ñù£¬ÓÐÒ»¸ö·µ»ØÖµ£¬Óöµ½ºÏÊÊµÄ½á¹û¾ÍÖ±½Ó·µ»Ø¡£µ«ÊÇÃ»ÓÐÐ´£¬Ò²²»ÖªµÀµÝ¹éµÄÖÕÖ¹Ìõ¼þÔõÃ´Ð´£¬
+	//ºóÀ´¿´ÁË´ð°¸ÖªµÀÒª¼Ó·µ»ØÖµÁË£¬È»ºóÖªµÀÁËÒªÔÚÄÄ¼Ó·µ»ØÖµ£¬Ò²¾Í²»ÐèÒªÖÕÖ¹Ìõ¼þÁË¡£
 	void solveSudoku1(vector<vector<char>>& board) { backtracking(board); }
 
 	bool backtracking(vector<vector<char>>& board) {
@@ -65,14 +65,14 @@ public:
 					if (isValid1(board, i, j, k)) {
 						board[i][j] = k;
 						if (backtracking(board))
-							return true;  //æ‰¾åˆ°åˆé€‚çš„æ£‹ç›˜ï¼Œç›´æŽ¥è¿”å›žtrue
+							return true;  //ÕÒµ½ºÏÊÊµÄÆåÅÌ£¬Ö±½Ó·µ»Øtrue
 						board[i][j] = '.';
 					}
 				}
-				return false;  //å¦‚æžœ9ä¸ªæ•°éƒ½éåŽ†äº†ï¼Œéƒ½ä¸è¡Œï¼Œç›´æŽ¥è¿”å›žfalse
+				return false;  //Èç¹û9¸öÊý¶¼±éÀúÁË£¬¶¼²»ÐÐ£¬Ö±½Ó·µ»Øfalse
 			}
 		}
-		return true; //æ•´ä¸ªæ£‹ç›˜éƒ½éåŽ†äº†ä¸€éï¼Œè¿è¡Œåˆ°è¿™é‡Œè¯´æ˜Žå‰è¾¹æ²¡æœ‰è¿”å›žfalseï¼Œè¯´æ°‘å·²ç»æ‰¾åˆ°äº†åˆé€‚çš„æ£‹ç›˜ï¼Œç›´æŽ¥è¿”å›žtrue
+		return true; //Õû¸öÆåÅÌ¶¼±éÀúÁËÒ»±é£¬ÔËÐÐµ½ÕâÀïËµÃ÷Ç°±ßÃ»ÓÐ·µ»Øfalse£¬ËµÃñÒÑ¾­ÕÒµ½ÁËºÏÊÊµÄÆåÅÌ£¬Ö±½Ó·µ»Øtrue
 	}
 
 	bool isValid1(vector<vector<char>>& board, int row, int col, char key) {
@@ -95,6 +95,59 @@ public:
 
 		return true;
 	}
+
+	// µÚÈý´Î×ö
+	void solveSudoku2(vector<vector<char>>& board) {
+		backtracking2(board);
+	}
+	// ¶øÇÒÕâÀïÓ¦¸ÃÓÐ·µ»ØÖµ£¬ÕÒµ½Ò»ÖÖ½á¹û¾ÍÖ±½Ó·µ»Ø
+	bool backtracking2(vector<vector<char>>& board) {
+		for (int i = 0; i < board.size(); i++) {
+			for (int j = 0; j < board.size(); j++) {
+				if (board[i][j] == '.') {
+					for (int k = '1'; k <= '9'; k++) {
+
+						/*board[i][j] = k;    // ¿ªÊ¼µÄÊ±ºòÊÇÕâÖÖÐ´·¨£¬µ«ÊÇ½á¹û²»¶Ô£¬ºóÀ´µ÷ÊÔÁËÒ»ÏÂ²ÅÖªµÀ¡£
+						// Èç¹ûµ±Ç°Î»ÖÃ²»ºÏÊÊ£¬Ëü»á»Øµ½ÉÏÒ»²ã£¬È»ºóÉÏÒ»²ãÕÒµ½ºÏÊÊµÄÊ±ºò£¬ÔÙ»Øµ½ÕâÒ»²ã£¬µ«ÊÇÕâÒ»²ãµÄ½ÚµãÃ»ÓÐ±ä³É'.'£¬ËùÒÔ¾Í»áÌø¹ýµ±Ç°Î»ÖÃ£¬¼ÌÐø±£ÁôÖ®Ç°´íÎóµÄ½á¹û
+						if (isValid2(board, i, j)) {
+							if (backtracking2(board)) return true;
+						}*/
+
+						board[i][j] = k;
+						if (isValid2(board, i, j)) {
+							if (backtracking(board)) return true;
+						}
+						board[i][j] = '.';  // ÕâÀïÔÙ±ä³É'.'¾ÍÐÐÁË
+
+					}
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+
+
+	bool isValid2(vector<vector<char>>& board, int row, int col) {
+		for (int i = 0; i < board.size(); i++) {
+			if (i != row && board[i][col] == board[row][col])
+				return false;
+		}
+
+		for (int i = 0; i < board.size(); i++) {
+			if (i != col && board[row][i] == board[row][col])
+				return false;
+		}
+
+		for (int i = row / 3 * 3; i < row / 3 * 3 + 3; i++) {
+			for (int j = col / 3 * 3; j < col / 3 * 3 + 3; j++) {
+				if (i != row && j != col && board[i][j] == board[row][col])
+					return false;
+			}
+		}
+		return true;
+	}
+
 };
 
 void main() {
@@ -110,7 +163,7 @@ void main() {
 		{ '.', '.', '.', '4', '1', '9', '.', '.', '5' },
 		{ '.', '.', '.', '.', '8', '.', '.', '7', '9' } };
 
-	st.solveSudoku(board);
+	st.solveSudoku2(board);
 	for (int i = 0; i < 9; i++) {
 		for (int j = 0; j < 9; j++)
 			cout << board[i][j] << " ";
