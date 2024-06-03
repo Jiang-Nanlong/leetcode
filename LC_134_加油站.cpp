@@ -45,6 +45,23 @@ public:
 		if (totalSum < 0) return -1;
 		return start;
 	}
+
+	// 第三次做
+	int canCompleteCircuit2(vector<int>& gas, vector<int>& cost) {
+		int start = 0;
+		int curSum = 0, totalSum = 0;
+		for (int i = 0; i < gas.size(); i++) {
+			totalSum += gas[i] - cost[i];
+			curSum += gas[i] - cost[i];
+			if (curSum < 0) {
+				curSum = 0;
+				start = i + 1;
+			}
+		}
+		if (totalSum < 0)
+			return -1;
+		return start;
+	}
 };
 
 int main() {
