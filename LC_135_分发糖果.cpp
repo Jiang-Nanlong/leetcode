@@ -103,6 +103,26 @@ public:
 		}
 		return accumulate(count.begin(), count.end(), 0);
 	}
+
+	// 第三次做
+	int candy3(vector<int>& ratings) {
+		int count = 0;
+		vector<int> vec(ratings.size(), 1);
+		for (int i = 1; i < ratings.size(); i++) {
+			if (ratings[i] > ratings[i - 1]) {
+				vec[i] = vec[i - 1] + 1;
+			}
+		}
+		count = vec.back();
+		for (int i = ratings.size() - 2; i >= 0; i--) {
+			if (ratings[i] > ratings[i + 1]) {
+				if (vec[i] <= vec[i + 1])
+					vec[i] = vec[i + 1] + 1;
+			}
+			count += vec[i];
+		}
+		return count;
+	}
 };
 
 int main() {
@@ -111,5 +131,6 @@ int main() {
 	int sum = st.candy(ratings);
 	cout << sum << endl;
 	cout << st.candy2(ratings) << endl;
+	cout << st.candy3(ratings) << endl;
 	return 0;
 }

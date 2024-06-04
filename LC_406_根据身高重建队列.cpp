@@ -65,6 +65,23 @@ public:
 		}
 		return vector<vector<int>>(res.begin(), res.end());
 	}
+
+	vector<vector<int>> reconstructQueue3(vector<vector<int>>& people) {
+		sort(people.begin(), people.end(), [&](vector<int>& a, vector<int>& b) {
+			if (a[0] == b[0])
+				return a[1] < b[1];
+			return a[0] > b[0];
+			});
+		list<vector<int>> ls;
+		for (vector<int>& v : people) {
+			auto it = ls.begin();
+			int pos = v[1];
+			while (pos--)
+				it++;
+			ls.insert(it, v);
+		}
+		return vector<vector<int>>(ls.begin(), ls.end());
+	}
 };
 
 int main() {
@@ -74,6 +91,16 @@ int main() {
 	for (int i = 0; i < res.size(); i++) {
 		for (int j = 0; j < res[i].size(); j++) {
 			cout << res[i][j] << " ";
+		}
+		cout << endl;
+	}
+	cout << "-----------" << endl;
+
+	vector<vector<int>> people1{ {7,0} ,{4,4 }, { 7,1 }, { 5,0 }, { 6,1 }, { 5,2 } };
+	vector<vector<int>> res3 = st.reconstructQueue3(people1);
+	for (int i = 0; i < res3.size(); i++) {
+		for (int j = 0; j < res3[i].size(); j++) {
+			cout << res3[i][j] << " ";
 		}
 		cout << endl;
 	}

@@ -45,6 +45,24 @@ public:
 		}
 		return count;
 	}
+
+	// 第三次做
+	int findMinArrowShots2(vector<vector<int>>& points) {
+		sort(points.begin(), points.end(),
+			[](vector<int>& a, vector<int>& b) { return a[0] < b[0]; });
+		int leftboard = points[0][0], rightboard = points[0][1];
+		int count = 1;
+		for (int i = 1; i < points.size(); i++) {
+			if (points[i][0] <= rightboard)
+				rightboard = min(rightboard, points[i][1]);
+			else {
+				leftboard = points[i][0];
+				rightboard = points[i][1];
+				count++;
+			}
+		}
+		return count;
+	}
 };
 
 int main() {
@@ -52,6 +70,12 @@ int main() {
 	vector<vector<int>> points{ {7,15} ,{6,14},{8,12},{3,4},{4,13},{6,14},{9,11},{6,12},{4,13} };
 	int count = st.findMinArrowShots(points);
 	cout << count << endl;
+
+	cout << "------------" << endl;
+	vector<vector<int>> points1{ {7,15} ,{6,14},{8,12},{3,4},{4,13},{6,14},{9,11},{6,12},{4,13} };
+	int count2 = st.findMinArrowShots2(points1);
+	cout << count2 << endl;
+
 	return 0;
 }
 

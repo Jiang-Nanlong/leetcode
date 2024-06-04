@@ -52,7 +52,7 @@ public:
 		int end = intervals[0][1];
 		int count = 0;
 		for (int i = 1; i < intervals.size(); i++) {
-			if (intervals[i][0] < end) {
+			if (intervals[i][0] < end) {  // 第三遍做的时候，再来看这个地方就懂了，如果当前区间和之前的区间相交了，就移除当前区间，count++，保留较短的区间。也就是移除较长的区间，这就是贪心贪的地方。
 				end = min(end, intervals[i][1]);
 				count++;
 			}
@@ -64,6 +64,25 @@ public:
 	}
 
 	//其实这个题还可以在弓箭射气球的那个题改一下就行，弓箭射气球的弓箭数就是最短的不重叠的区间的个数，最后用intervals.size()减去弓箭数就是应该移除的区间数了。
+
+	// 第三次做
+	int eraseOverlapIntervals2(vector<vector<int>>& intervals) {
+		sort(intervals.begin(), intervals.end(),
+			[](vector<int>& a, vector<int>& b) { return a[0] < b[0]; });
+		int leftboard = intervals[0][0], rightboard = intervals[0][1];
+		int count = 1;
+		for (int i = 1; i < intervals.size(); i++) {
+			if (intervals[i][0] < rightboard) {
+				rightboard = min(intervals[i][1], rightboard);
+			}
+			else {
+				leftboard = intervals[i][0];
+				rightboard = intervals[i][1];
+				count++;
+			}
+		}
+		return intervals.size() - count;
+	}
 };
 
 int main() {

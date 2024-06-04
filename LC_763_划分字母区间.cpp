@@ -81,6 +81,62 @@ public:
 		}
 		return res;
 	}
+
+	//第三次做，用合并区间的方法
+	vector<vector<int>> vec;
+	void buildvec(string& s) {
+		bool visited[26] = { false };
+		int n = s.size();
+		for (int i = 0; i < n; i++) {
+			if (visited[s[i] - 'a'] == false) {
+				int j = n;
+				while (j-- >= i) {
+					if (s[j] == s[i]) {
+						vec.push_back({ i, j });
+						visited[s[i] - 'a'] = true;
+						break;
+					}
+				}
+			}
+		}
+	}
+	vector<int> partitionLabels2(string s) {
+		vec.clear();
+		buildvec(s);
+		vector<int> res;
+		int leftboard = vec[0][0], rightboard = vec[0][1];
+		for (int i = 1; i < vec.size(); i++) {
+			if (vec[i][0] < rightboard) {
+				rightboard = max(rightboard, vec[i][1]);
+			}
+			else {
+				res.push_back(rightboard - leftboard + 1);
+				leftboard = vec[i][0];
+				rightboard = vec[i][1];
+			}
+		}
+		res.push_back(rightboard - leftboard + 1);
+		return res;
+	}
+
+	// 看了一下之前的做法，感觉之前的做法更简单更好
+	vector<int> partitionLabels3(string s) {
+		int count[26] = { 0 };
+		for (int i = 0; i < s.size(); i++) {
+			count[s[i] - 'a'] = i;
+		}
+
+		int left = 0, right = 0;
+		vector<int> res;
+		for (int i = 0; i < s.size(); i++) {
+			right = max(right, count[s[i] - 'a']);
+			if (i == right) {
+				res.push_back(right - left + 1);
+				left = right + 1;
+			}
+		}
+		return res;
+	}
 };
 
 int main() {
@@ -88,6 +144,10 @@ int main() {
 	string s("ababcbacadefegdehijhklij");
 	vector<int>res = st.partitionLabels1(s);
 	for (auto i : res)
+		cout << i << " ";
+	cout << "----------" << endl;
+	vector<int>res2 = st.partitionLabels2(s);
+	for (auto i : res2)
 		cout << i << " ";
 	return 0;
 }
