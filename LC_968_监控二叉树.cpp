@@ -1,4 +1,7 @@
 #include <iostream>
+#include <vector>
+#include <queue>
+#include <string>
 using namespace std;
 
 //在树中的某个节点放置一个摄像头，可以监控当前节点的父节点和左右孩子节点以及它本身，总共三层，问最少需要多少个摄像头可以覆盖整棵树
@@ -49,8 +52,66 @@ public:
         if (left == 1 || right == 1) return 2;
         return -1;
     }
+
+    // 第三次做，把终止条件写错了，再就是把 2 2的情况写错了，写成1了。
+    // 还是分三种情况，0表示无覆盖，1表示安装摄像头，2表示有覆盖
+    int count;
+    int minCameraCover1(TreeNode* root) {
+        count = 0;
+        if (backtracking(root) == 0)
+            return count + 1;
+        return count;
+    }
+    int backtracking(TreeNode* root) {
+        if (root == nullptr)
+            return 2;
+
+        int left = backtracking(root->left);
+        int right = backtracking(root->right);
+        if (left == 0 || right == 0) {  // 左右子树至少有一个无覆盖，00,01,02,10,20
+            count++;
+            return 1;
+        }
+        else if (left == 1 || right == 1) {  // 左右子树至少有一个摄像头，11,12,21
+            return 2;
+        }
+        else {  // 左右子树都是有覆盖，22
+            return 0;
+        }
+    }
+
+    TreeNode* buildTree(vector<string>& nums) {
+        if (nums.empty()) return nullptr;
+
+        TreeNode* root = new TreeNode(stoi(nums[0]));
+        queue<TreeNode*> que;
+        que.push(root);
+
+        int i = 1;
+        while (i < nums.size()) {
+            TreeNode* node = que.front();
+            que.pop();
+
+            if (nums[i] != "null") {
+                node->left = new TreeNode(stoi(nums[i]));
+                que.push(node->left);
+            }
+            i++;
+
+            if (i < nums.size() && nums[i] != "null") {
+                node->right = new TreeNode(stoi(nums[i]));
+                que.push(node->right);
+            }
+            i++;
+        }
+        return root;
+    }
 };
 
 int main() {
+    Solution st;
+    vector<string> nums{ "0","0","null","0","0" };
+    TreeNode* root = st.buildTree(nums);
+    cout << st.minCameraCover1(root) << endl;
     return 0;
 }
