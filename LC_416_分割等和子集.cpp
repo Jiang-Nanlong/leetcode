@@ -66,11 +66,29 @@ public:
 			return true;
 		return false;
 	}
+
+	// 第三次做
+	bool canPartition3(vector<int>& nums) {
+		int sum = accumulate(nums.begin(), nums.end(), 0);
+		if (sum % 2 == 1)
+			return false;
+
+		sum /= 2;
+		vector<int> dp(sum + 1, 0);
+		for (int i = 0; i < nums.size(); i++) {
+			for (int j = sum; j >= nums[i]; j--) {
+				dp[j] = max(dp[j], dp[j - nums[i]] + nums[i]);
+			}
+		}
+		return dp[sum] == sum;
+	}
 };
 
 int main() {
 	Solution st;
 	vector<int> nums{ 1,5,11,5 };
-	cout << boolalpha << st.canPartition1(nums) << noboolalpha << endl;
+	cout << boolalpha << st.canPartition1(nums) << endl;
+	cout << st.canPartition2(nums) << endl;
+	cout << st.canPartition3(nums) << noboolalpha << endl;
 	return 0;
 }

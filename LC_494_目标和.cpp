@@ -91,6 +91,47 @@ public:
 		}
 		return dp[left];
 	}
+
+	// 第三次做，没想出怎么会是背包问题，就用回溯做的，不过速度特别慢
+	int findTargetSumWays4(vector<int>& nums, int target) {
+		count = 0;
+		backtracking(nums, target, 0, 0);
+		return count;
+	}
+	void backtracking(vector<int>& nums, int target, int index, int sum) {
+		if (index == nums.size()) {
+			if (sum == target)
+				count++;
+			return;
+		}
+
+		for (int i = 0; i < 2; i++) {
+			if (i == 0) {
+				backtracking(nums, target, index + 1, sum + nums[index]);
+			}
+			else {
+				backtracking(nums, target, index + 1, sum - nums[index]);
+			}
+		}
+	}
+
+	// 这回只想到了思路，但是递推公式和初始化都没想起来
+	int findTargetSumWays5(vector<int>& nums, int target) {
+		int sum = accumulate(nums.begin(), nums.end(), 0);
+		if (abs(target) > sum)
+			return 0;
+		if ((sum + target) % 2 == 1)
+			return 0;
+		sum = (sum + target) / 2;
+		vector<int> dp(sum + 1, 0);
+		dp[0] = 1;
+		for (int i = 0; i < nums.size(); i++) {
+			for (int j = sum; j >= nums[i]; j--) {
+				dp[j] += dp[j - nums[i]];
+			}
+		}
+		return dp[sum];
+	}
 };
 
 //这个题的回溯方法比较简单，动态规划问题真难。最后对着dp数组才勉强看明白

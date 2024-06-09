@@ -56,11 +56,27 @@ public:
 		}
 		return sum - 2 * dp[target];
 	}
+
+	// 第三次做，就是先统计出石头一共多沉，然后看看石头总重量一半大小的背包最多装多少。
+	int lastStoneWeightII3(vector<int>& stones) {
+		int sum = accumulate(stones.begin(), stones.end(), 0);
+		int bagsize = sum / 2;
+		vector<int> dp(bagsize + 1, 0);
+		for (int i = 0; i < stones.size(); i++) {
+			for (int j = bagsize; j >= stones[i]; j--) {
+				dp[j] = max(dp[j], dp[j - stones[i]] + stones[i]);
+			}
+		}
+		return sum - 2 * dp[bagsize];
+	}
+
 };
 
 int main() {
 	Solution st;
 	vector<int> stones{ 2,7,4,1,8,1 };
 	cout << st.lastStoneWeightII1(stones) << endl;
+	cout << st.lastStoneWeightII2(stones) << endl;
+	cout << st.lastStoneWeightII3(stones) << endl;
 	return 0;
 }
