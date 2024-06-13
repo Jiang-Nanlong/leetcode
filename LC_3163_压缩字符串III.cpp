@@ -48,7 +48,7 @@ public:
 
     string compressedString1(string s) {
         string result;
-        int left = 0, right = 0;
+        int right = 0;
         int n = s.length();
 
         while (right < n) {
@@ -68,8 +68,44 @@ public:
         }
         return result;
     }
+
+    string compressedString2(string word) {
+        string res;
+        int count = 1;
+        char c = word[0];
+        for (int i = 1; i < word.size(); i++) {
+            if (word[i] == word[i - 1])
+                count++;
+            else {
+                while (count) {
+                    if (count > 9) {
+                        res += to_string(9) + c;
+                        count -= 9;
+                    }
+                    else {
+                        res += to_string(count) + c;
+                        break;
+                    }
+                }
+                count = 1;
+                c = word[i];
+            }
+        }
+        while (count) {
+            if (count > 9) {
+                res += to_string(9) + c;
+                count -= 9;
+            }
+            else {
+                res += to_string(count) + c;
+                break;
+            }
+        }
+        return res;
+    }
 };
 
+// compressedString1是最好的
 int main() {
     Solution st;
     string s("fffffffffdddddddddddddddddddddddddmmmmooooooooooss");
