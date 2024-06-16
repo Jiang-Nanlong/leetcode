@@ -25,7 +25,9 @@ public:
         for (int i = k; i < energy.size(); i++) {
             energy[i] = max(energy[i], energy[i - k] + energy[i]);
         }
-
+        for (auto i : energy)
+            cout << i << " ";
+        cout << endl;
         int i = energy.size() - 1, res = INT_MIN;
         while (k--) {
             res = max(res, energy[i--]);
@@ -36,8 +38,8 @@ public:
 
 int main() {
     Solution st;
-    vector<int> energy{ 5,-10,4,3,5,-9,9,-7 };
-    int k = 2;
+    vector<int> energy{ -1,-2,-8,6,-6,-6,-6,5,5 };
+    int k = 8;
     cout << st.maximumEnergy(energy, k) << endl;
     cout << st.maximumEnergy1(energy, k) << endl;
     return 0;
