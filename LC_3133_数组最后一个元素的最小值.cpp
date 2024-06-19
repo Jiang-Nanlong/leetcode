@@ -9,7 +9,7 @@ using namespace std;
 class Solution {
 public:
     long long minEnd(int n, int x) {
-        short num[64] = { 0 };
+        char num[64] = { 0 };
         n -= 1;
         for (int i = 0; x; x >>= 1, i++) {
             num[i] = x & 1;
@@ -47,6 +47,7 @@ public:
 
 int main() {
     Solution st;
+    cout << st.minEnd(6715154, 7193485) << endl;
     cout << st.minEnd1(6715154, 7193485) << endl;
     return 0;
 }
