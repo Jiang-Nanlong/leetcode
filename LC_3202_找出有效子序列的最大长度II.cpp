@@ -2,6 +2,8 @@
 #include <vector>
 using namespace std;
 
+// 这个题是LeetCode 3201题的更通俗版本
+
 class Solution {
 public:
     int maximumLength(vector<int>& nums, int k) {
