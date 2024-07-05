@@ -96,13 +96,17 @@ public:
 			pair<int, int> cur = pq.top();
 			pq.pop();
 			if (visited[cur.first]) continue;
+			// 这个地方挺重要，因为就按代码随想录的例子来说，把1加入小顶堆以后，会更新2和3的minDist，同时会把它俩都加入小顶堆。接下来在2和3中选择一个节点作为下一个节点，会选择2。
+			// 在选择2以后又会更新3,4,6的minDist，同时又都会加入到小顶堆，这时候小顶堆里就有两个节点3对应的最短路径了。下一次选择最短路径会选择3（从2过来的这条路径），然后会更新4的最短路径。
+			// 下一次再选择节点时，节点3（从1过来的那条路径）就是最短的，又会再选择一次3，而此时3已经被标记为visited的了。
+			// 也就是说，堆中可能同时存在一个节点的好几个路径长度。
 
 			visited[cur.first] = true;
 			for (Edge edge : grid[cur.first]) {
 				if (!visited[edge.to] && minDist[cur.first] + edge.val < minDist[edge.to]) {  // 这里的minDist[cur.first]可以直接换成cur.second吗？
 					// 有没有可能一个点已经被加入到小顶堆了，但是还没有弹出，然后当前节点又直接连接到这个点，且更近
 					minDist[edge.to] = minDist[cur.first] + edge.val;
-					pq.emplace(pair<int, int>(edge.to, minDist[edge.to]));
+					pq.emplace(pair<int, int>(edge.to, minDist[edge.to]));  // 这个地方是，只要一个节点的最短路径发生变化就把它加入到小顶堆中。
 				}
 			}
 		}
