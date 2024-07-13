@@ -22,7 +22,7 @@ public:
 		vector<int> minDist(1 + v, 10001);
 		vector<bool> isvisited(1 + v, false);
 
-		for (int i = 1; i < v; i++) {
+		for (int i = 1; i < v; i++) {   // v-1Ìõ±ß
 			int cur = -1;
 			int minVal = INT_MAX;
 			for (int j = 1; j <= v; j++) {
