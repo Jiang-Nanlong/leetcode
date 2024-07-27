@@ -19,11 +19,27 @@ public:
         }
         return count;
     }
+
+    // 第二次做
+    int maxOperations1(vector<int>& nums) {
+        int count = 0, score = nums[0] + nums[1];
+        int i = 1;
+        while (i < nums.size()) {
+            if (nums[i] + nums[i - 1] == score) {
+                count++;
+                i += 2;
+            }
+            else
+                return count;
+        }
+        return count;
+    }
 };
 
 int main() {
     Solution st;
     vector<int> nums{ 3,2,1,4,5 };
     cout << st.maxOperations(nums) << endl;
+    cout << st.maxOperations1(nums) << endl;
     return 0;
 }
