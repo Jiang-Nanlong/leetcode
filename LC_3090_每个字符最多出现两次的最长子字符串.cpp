@@ -37,6 +37,20 @@ public:
         }
         return res;
     }
+
+    int maximumLengthSubstring2(string s) {
+        int count[26];
+        memset(count, 0, sizeof(count));
+        int maxlen = 0;
+        for (int i = 0, j = 0; j < s.size(); j++) {
+            char c = s[j];
+            count[c - 'a']++;
+            while (i < j && count[c - 'a'] > 2)
+                --count[s[i++] - 'a'];
+            maxlen = max(maxlen, j - i + 1);
+        }
+        return maxlen;
+    }
 };
 
 int main() {
