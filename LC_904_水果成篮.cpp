@@ -78,6 +78,21 @@ public:
 		}
 		return res;
 	}
+
+	int totalFruit3(vector<int>& fruits) {
+		unordered_map<int, int> umap;
+		int maxlen = 1;
+		for (int i = 0, j = 0; j < fruits.size(); j++) {
+			umap[fruits[j]]++;
+			while (umap.size() > 2) {
+				if (--umap[fruits[i]] == 0)
+					umap.erase(fruits[i]);
+				i++;
+			}
+			maxlen = max(maxlen, j - i + 1);
+		}
+		return maxlen;
+	}
 };
 
 //开始想着得用一个额外的容器保存前边已经存在的数字，只想着存不存在的问题，而没考虑多少，所以就选的set，但是还是做不出来，
@@ -85,11 +100,12 @@ public:
 
 int main() {
 	Solution st;
-	vector<int> nums{ 1,2,3,2,2 };
+	vector<int> nums{ 3,3,3,1,2,1,1,2,3,3,4 };
 	int res = st.totalFruit(nums);
 	cout << res << endl;
 	cout << st.totalFruit1(nums) << endl;
 	cout << st.totalFruit2(nums) << endl;
+	cout << st.totalFruit3(nums) << endl;
 
 	return 0;
 }
