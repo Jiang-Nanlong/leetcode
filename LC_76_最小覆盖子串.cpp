@@ -4,8 +4,6 @@
 #include <algorithm>
 using namespace std;
 
-//ç»™ä½ ä¸€ä¸ªå­—ç¬¦ä¸² s ã€ä¸€ä¸ªå­—ç¬¦ä¸² t ã€‚è¿”å›ž s ä¸­æ¶µç›– t æ‰€æœ‰å­—ç¬¦çš„æœ€å°å­ä¸²ã€‚å¦‚æžœ s ä¸­ä¸å­˜åœ¨æ¶µç›– t æ‰€æœ‰å­—ç¬¦çš„å­ä¸²ï¼Œåˆ™è¿”å›žç©ºå­—ç¬¦ä¸² ""
-
 class Solution {
 	//public:
 	//	string minWindow(string s, string t) {
@@ -40,8 +38,8 @@ class Solution {
 	//		}
 	//		else return false;
 	//	}
-	//ä¸Šè¾¹æ˜¯æˆ‘è‡ªå·±å†™çš„ï¼Œæ¨¡ä»¿ç€ä¹‹å‰çš„æ»‘åŠ¨çª—å£çš„é¢˜ï¼Œå†™äº†ä¸€ä¸ªä¸“é—¨çš„æ¯”è¾ƒå‡½æ•°æ¥æ¯”è¾ƒï¼Œä½†æ˜¯å¦‚æžœå½“så’Œtéƒ½ç‰¹åˆ«å¤§çš„æ—¶å€™å°±è¿è¡Œè¶…æ—¶äº†ã€‚
-	//åŽè¾¹çœ‹äº†ä»£ç éšæƒ³å½•çš„ä»£ç æ‰å†™å‡ºæ¥çš„ï¼Œä½†æ˜¯è¿˜æ˜¯å¼„ä¸å¤ªæ¸…
+	//ÉÏ±ßÊÇÎÒ×Ô¼ºÐ´µÄ£¬Ä£·Â×ÅÖ®Ç°µÄ»¬¶¯´°¿ÚµÄÌâ£¬Ð´ÁËÒ»¸ö×¨ÃÅµÄ±È½Ïº¯ÊýÀ´±È½Ï£¬µ«ÊÇÈç¹ûµ±sºÍt¶¼ÌØ±ð´óµÄÊ±ºò¾ÍÔËÐÐ³¬Ê±ÁË¡£
+	//ºó±ß¿´ÁË´úÂëËæÏëÂ¼µÄ´úÂë²ÅÐ´³öÀ´µÄ£¬µ«ÊÇ»¹ÊÇÅª²»Ì«Çå
 public:
 	string minWindow(string s, string t) {
 		int i = 0, j = 0, cnt = 0, k = 0, count = INT_MAX;
@@ -58,16 +56,95 @@ public:
 		}
 		return count == INT_MAX ? "" : s.substr(k, count);
 	}
+
+
+	// ºóÀ´ÔÚ»¬¶¯´°¿Ú×¨ÏîÁ·Ï°ÖÐÓÖË¢µ½Õâ¸öÌâÁË£¬Õâ¸öÌâµÄÒ»¸öÄÑµã¾ÍÊÇºÎÊ±ËõÐ¡´°¿Ú£¬
+	// Èç¹û°´×Å±¿·½·¨µÄ»°£¬ÒªÒ»¸ö¸öµÄ¿´tÖÐµÄ¸÷¸öÔªËØµÄÊýÁ¿ÔÚµ±Ç°´°¿ÚÄÚÊÇ·ñ¶¼Âú×ãÁË£¬Èç¹ûÂú×ãµÄ»°¾Í¿ÉÒÔËõÐ¡´°¿ÚÁË¡£
+	// µ«ÊÇÕâÖÖ·½·¨²»ÓÃÏë¶¼»á³¬Ê±¡£
+	// ÒýÈëÁËÒ»¸öcntµÄ±äÁ¿£¬Õâ¸ö±äÁ¿Ö»ÓÃÀ´Í³¼Æ¡°±ØÒª×Ö·ûµÄÊýÁ¿¡±£¬Ò²¾ÍÊÇËµÈç¹û´°¿ÚÄÚµ±Ç°ÔªËØµÄÊýÁ¿Ð¡ÓÚtÖÐ¸ÃÔªËØµÄÊýÁ¿£¬
+	// ËµÃ÷µ±Ç°Õâ¸öÔªËØÊÇ×é³ÉtÖÐÔªËØµÄÒ»¸ö±ØÒªÔªËØ£¬¾Í°Ñcnt++£¬Èç¹û´°¿ÚÄÚµÄµ±Ç°×Ö·ûµÄÊýÄ¿ÒÑ¾­³¬¹ýÁËtÖÐ¸Ã×Ö·ûµÄÊýÁ¿£¬ÄÇËµÃ÷µ±Ç°×Ö·û²»ÊÇÒ»¸ö±ØÒªµÄ×Ö·û¡£
+	// µ±cntºÍt.size()ÏàÍ¬Ê±£¬ËµÃ÷ÎÒÃÇÒÑ¾­´Õ¹»ÁËtÖÐµÄÃ¿¸ö×Ö·û£¬ÏÖÔÚ¾Í¿ÉÒÔËõÐ¡´°¿ÚÁË¡£Èç¹ûËõÐ¡ÁË´°¿Úºó£¬µ±Ç°´°¿ÚµÄÄÚµÄ¸Ã×Ö·ûµÄÊýÁ¿ÉÙÓÚÁËtÖÐ¸Ã×Ö·ûµÄÊýÁ¿£¬
+	// ÄÇËµÃ÷µ±Ç°×Ö·ûÊÇÒ»¸ö±ØÒªµÄ×Ö·û£¬ËùÒÔcnt¾ÍµÃ¼õÒ»£¬´ËÊ±Ò²¾ÍÖ»ÄÜÔÙÀ©´ó´°¿ÚÁË¡£
+	string minWindow1(string s, string t) {
+		unordered_map<char, int> umap, umap2;
+		for (char c : t)
+			umap[c]++;
+
+		int start = 0, minlen = INT_MAX;
+		int cnt = 0;
+		for (int i = 0, j = 0; j < s.size(); j++) {
+			char c = s[j];
+			if (umap.find(c) != umap.end()) {
+				if (++umap2[c] <= umap[c])
+					cnt++;
+			}
+			while (cnt == t.size()) {
+				c = s[i];
+				if (umap.find(c) != umap.end()) {
+					if (--umap2[c] < umap[c])
+						cnt--;
+				}
+				if (j - i + 1 < minlen) {
+					start = i;
+					minlen = j - i + 1;
+				}
+				i++;
+			}
+		}
+		return minlen == INT_MAX ? "" : s.substr(start, minlen);
+	}
+
+	string minWindow2(string s, string t) {
+		int count[128], window[128];
+		memset(count, 0, sizeof(count));
+		memset(window, 0, sizeof(window));
+
+		for (char c : t)
+			count[c]++;
+
+		int start = 0, minlen = INT_MAX;
+		int cnt = 0;
+		for (int i = 0, j = 0; j < s.size(); j++) {
+			char c = s[j];
+			++window[c];
+			if (count[c] >= window[c])
+				cnt++;
+
+			while (cnt == t.size()) {
+				c = s[i];
+				--window[c];
+				if (window[c] < count[c])
+					cnt--;
+				if (j - i + 1 < minlen) {
+					start = i;
+					minlen = j - i + 1;
+				}
+				i++;
+			}
+		}
+		return minlen == INT_MAX ? "" : s.substr(start, minlen);
+	}
+
 };
 
-//æ„Ÿè§‰è¿™ä¸ªä»£ç åœ¨åˆ¤æ–­ç¼©å°çª—å£å’Œç¡®å®šæ¯ä¸ªçª—å£å†…æ˜¯ä¸æ˜¯åŒ…å«äº†tä¸­æ‰€æœ‰çš„å­—ç¬¦ï¼Œè¿™ä¸¤ä¸ªåœ°æ–¹éƒ½å†™çš„ç‰¹åˆ«å·§
-//åˆçœ‹äº†å‡ ä¸ªåˆ«äººå†™çš„ä»£ç ï¼Œå¯¹æ»‘åŠ¨çª—å£æœ‰äº†ä¸€ç‚¹ç†è§£äº†ï¼Œæ€è·¯éƒ½æ˜¯åŒæŒ‡é’ˆï¼Œä½†æ˜¯ç¼©å°çª—å£çš„æ¡ä»¶å’Œåˆ¤æ–­æ¯ä¸ªçª—å£æ˜¯å¦ç¬¦åˆè¦æ±‚è¦å› é¢˜è€Œå¼‚
+//¸Ð¾õÕâ¸ö´úÂëÔÚÅÐ¶ÏËõÐ¡´°¿ÚºÍÈ·¶¨Ã¿¸ö´°¿ÚÄÚÊÇ²»ÊÇ°üº¬ÁËtÖÐËùÓÐµÄ×Ö·û£¬ÕâÁ½¸öµØ·½¶¼Ð´µÄÌØ±ðÇÉ
+//ÓÖ¿´ÁË¼¸¸ö±ðÈËÐ´µÄ´úÂë£¬¶Ô»¬¶¯´°¿ÚÓÐÁËÒ»µãÀí½âÁË£¬Ë¼Â·¶¼ÊÇË«Ö¸Õë£¬µ«ÊÇËõÐ¡´°¿ÚµÄÌõ¼þºÍÅÐ¶ÏÃ¿¸ö´°¿ÚÊÇ·ñ·ûºÏÒªÇóÒªÒòÌâ¶øÒì
 
 int main() {
 	Solution st;
 	string s("cabwefgewcwaefgcf"), t("cae");
 	string res = st.minWindow(s, t);
 	for (auto& c : res)
+		cout << c << "  ";
+	cout << endl;
+
+	string res1 = st.minWindow1(s, t);
+	for (auto& c : res1)
+		cout << c << "  ";
+	cout << endl;
+
+	string res2 = st.minWindow2(s, t);
+	for (auto& c : res2)
 		cout << c << "  ";
 	cout << endl;
 	return 0;
