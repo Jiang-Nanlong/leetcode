@@ -9,8 +9,8 @@ using namespace std;
 //			nums[i] *= nums[i];
 //		sort(nums.begin(), nums.end());
 //		return nums;
-//	}*/   //æœ€å¼€å§‹æƒ³åˆ°çš„å°±æ˜¯è¿™ä¸ªç®—æ³•ï¼Œç›´æ¥ç®—å¹³æ–¹ï¼Œç„¶åé‡æ–°æ’åºï¼Œä½†æ˜¯è¿™ä¸ªæ•ˆæœä¸å¤ªå¥½
-//	vector<int> sortedSquares(vector<int>& nums) {   //ç„¶åçœ‹äº†é¢˜è§£æ‰çŸ¥é“è¿™ä¸ªæ–¹æ³•ï¼Œè¿™ä¸ªé¢˜æ˜¯å‡ºç°åœ¨åŒæŒ‡é’ˆä¸€èŠ‚ï¼Œä½†æ˜¯æˆ‘æƒ³ä¸åˆ°æ€ä¹ˆç”¨åŒæŒ‡é’ˆï¼Œçœ‹äº†é¢˜è§£ä»¥åæ‰æç„¶å¤§æ‚Ÿï¼Œä½†æ˜¯è¿™ç§æ–¹æ³•éœ€è¦ä¸€ä¸ªé¢å¤–çš„ç©ºé—´
+//	}*/   //×î¿ªÊ¼Ïëµ½µÄ¾ÍÊÇÕâ¸öËã·¨£¬Ö±½ÓËãÆ½·½£¬È»ºóÖØĞÂÅÅĞò£¬µ«ÊÇÕâ¸öĞ§¹û²»Ì«ºÃ
+//	vector<int> sortedSquares(vector<int>& nums) {   //È»ºó¿´ÁËÌâ½â²ÅÖªµÀÕâ¸ö·½·¨£¬Õâ¸öÌâÊÇ³öÏÖÔÚË«Ö¸ÕëÒ»½Ú£¬µ«ÊÇÎÒÏë²»µ½ÔõÃ´ÓÃË«Ö¸Õë£¬¿´ÁËÌâ½âÒÔºó²Å»ĞÈ»´óÎò£¬µ«ÊÇÕâÖÖ·½·¨ĞèÒªÒ»¸ö¶îÍâµÄ¿Õ¼ä
 //		int k = nums.size() - 1;
 //		int i = 0, j = k;
 //		vector<int> res(nums.size(), 0);
@@ -27,7 +27,7 @@ using namespace std;
 //		return res;
 //	}
 //};
-//ä»¥ä¸Šæ˜¯ç¬¬ä¸€æ¬¡åšçš„æ—¶å€™å†™çš„ä»£ç 
+//ÒÔÉÏÊÇµÚÒ»´Î×öµÄÊ±ºòĞ´µÄ´úÂë
 
 class Solution {
 public:
@@ -47,6 +47,23 @@ public:
 		}
 		return res;
 	}
+
+	vector<int> sortedSquares1(vector<int>& nums) {
+		int n = nums.size();
+		int i = 0, j = n - 1, k = n - 1;
+		vector<int> res(n);
+		while (i <= j) {
+			if (abs(nums[i]) > abs(nums[j])) {
+				res[k--] = nums[i] * nums[i];
+				i++;
+			}
+			else {
+				res[k--] = nums[j] * nums[j];
+				j--;
+			}
+		}
+		return res;
+	}
 };
 
 int main() {
@@ -54,6 +71,11 @@ int main() {
 	vector<int> nums{ -4,-1,0,3,10 };
 	vector<int> res = st.sortedSquares(nums);
 	for (int i : res)
+		cout << i << "  ";
+	cout << endl;
+
+	vector<int> res1 = st.sortedSquares1(nums);
+	for (int i : res1)
 		cout << i << "  ";
 	cout << endl;
 	return 0;
