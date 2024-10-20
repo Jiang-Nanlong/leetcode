@@ -135,6 +135,41 @@ public:
 		}
 		return res;
 	}
+
+	// 又一次做
+	vector<vector<int>> threeSum3(vector<int>& nums) {
+		sort(nums.begin(), nums.end());
+		vector<vector<int>> res;
+		int n = nums.size();
+		for (int i = 0; i < n - 2; i++) {
+			int j = n - 1, k = i + 1;
+			if (nums[i] + nums[j] + nums[j - 1] < 0)
+				continue;
+			if (i > 0 && nums[i] == nums[i - 1])
+				continue;
+			if (nums[i] + nums[i + 1] + nums[i + 2] > 0)
+				break;
+			while (k < j) {
+				int sum = nums[i] + nums[k] + nums[j];
+				if (sum < 0) {
+					while (k < j && nums[k] == nums[k + 1])k++;
+					k++;
+				}
+				else if (sum > 0) {
+					while (k < j && nums[j] == nums[j - 1]) j--;
+					j--;
+				}
+				else {
+					res.push_back({ nums[i], nums[j], nums[k] });
+					while (k < j && nums[k] == nums[k + 1])k++;
+					k++;
+					while (k < j && nums[j] == nums[j - 1]) j--;
+					j--;
+				}
+			}
+		}
+		return res;
+	}
 };
 
 
@@ -162,6 +197,15 @@ int main() {
 	res.clear();
 	vector<int> nums2{ -1,0,1,2,-1,-4 };
 	res = st.threeSum2(nums2);
+	for (int i = 0; i < res.size(); i++) {
+		for (int j = 0; j < res[0].size(); j++)
+			cout << res[i][j] << " ";
+		cout << endl;
+	}
+
+	res.clear();
+	vector<int> nums3{ 0,0,0,0 };
+	res = st.threeSum3(nums3);
 	for (int i = 0; i < res.size(); i++) {
 		for (int j = 0; j < res[0].size(); j++)
 			cout << res[i][j] << " ";
