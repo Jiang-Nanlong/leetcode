@@ -43,6 +43,41 @@ public:
 
         return dp[n - 1];
     }
+
+    using ll = long long;
+    long long maximumTotalDamage1(vector<int>& power) {
+        unordered_map<int, ll> count;
+        for (int& i : power) {
+            count[i] += i;
+        }
+
+        int n = count.size();
+        vector<pair<ll, ll>> vec(n);
+        int i = 0;
+        for (auto& it : count) {
+            vec[i++] = {it.first, it.second};
+        }
+
+        sort(vec.begin(), vec.end());
+
+        vector<ll> dp(n);
+
+        for (i = 0; i < n; i++) {
+            dp[i] = vec[i].second;
+            if (i > 0) {
+                int j = i - 1;
+                for (; j >= 0 && vec[i].first - vec[j].first <= 2; j--)
+                    ;
+                if (j >= 0) {
+                    dp[i] = max(dp[i], 1LL * dp[j] + vec[i].second);
+                }
+                // 到目前为止都是算的使用当前值为vec[i].first的诅咒时，最大伤害有多大
+                dp[i] = max(dp[i], dp[i - 1]);  //这里才是计算的如果不使用值为vec[i].first的诅咒时，最大伤害
+            }
+        }
+
+        return dp[n - 1];
+    }
 };
 
 int main() {
