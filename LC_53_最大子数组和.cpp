@@ -89,12 +89,27 @@ public:
 		}
 		return res;
 	}
+
+  	// ¶¯Ì¬¹æ»®
+	int maxSubArray6(vector<int>& nums) {
+		int n = nums.size();
+		vector<int> dp(n + 1, -10000);
+		int res = -10000;
+		for (int i = 0; i < n; i++) {
+			dp[i + 1] = max(nums[i], dp[i] + nums[i]);
+			res = max(res, dp[i + 1]);
+		}
+
+		return res;
+	}
 };
 
-void main() {
+int main() {
 	Solution st;
 	vector<int> nums{ -2,1,-3,4,-1,2,1,-5,4 };
 	cout << st.maxSubArray(nums) << endl;
 	cout << st.maxSubArray1(nums) << endl;
 	cout << st.maxSubArray2(nums) << endl;
+
+    return 0;
 }
