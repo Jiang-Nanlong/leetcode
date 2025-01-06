@@ -102,6 +102,17 @@ public:
 
 		return res;
 	}
+
+    // 可以把上边的maxSubArray6简化一下，不使用dp数组，而是用一个val来代替
+	int maxSubArray7(vector<int>& nums) {
+		int res=INT_MIN;
+		int val=0;
+		for(int i:nums){
+			val=max(val,0)+i;
+			res=max(res,val);
+		}
+		return res;
+	}
 };
 
 int main() {
