@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <string.h>
 using namespace std;
 
 // 给定两个字符串word1和word2，对于word1中的某个子字符串，如果word2重新排序后是该字符串的前缀，那么说该子字符串是一个合法字符窜。
@@ -60,6 +61,65 @@ public:
 				i++;
 			}
 			res += i;
+		}
+		return res;
+	}
+
+    // 之后有一次做，想起来这是越长越合理的滑动窗口题，但是这里只能想到一个个比较窗口数组和模式串数组
+	long long validSubstringCount2(string word1, string word2) {
+		int count[26];
+		memset(count, 0, sizeof(count));
+		for (char c : word2)
+			count[c - 'a']++;
+
+		int temp[26];
+		memset(temp, 0, sizeof(temp));
+		auto check = [&]() -> bool {
+			for (int i = 0; i < 26; i++)
+				if (temp[i] < count[i])
+					return false;
+
+			return true;
+		};
+
+		int n = word1.size();
+		long long res = 0;
+
+		for (int i = 0, j = 0; i <= j && j < n; j++) {
+			temp[word1[j] - 'a']++;
+
+			while (check()) {
+				res += n - j;
+				temp[word1[i++] - 'a']--;
+			}
+		}
+		return res;
+	}
+
+        // 看了看之前写的代码，感觉有点巧妙，直接用一个变量cnt来统计必要的字符的个数，一旦必要字符的个数和word2的长度相同了，说明窗口内的元素已经可以凑出完整的word2
+	long long validSubstringCount3(string word1, string word2) {
+		int count[26];
+		memset(count, 0, sizeof(count));
+		for (char c : word2)
+			count[c - 'a']++;
+
+		int temp[26];
+		memset(temp, 0, sizeof(temp));
+
+		int cnt = 0;
+		int n = word1.size();
+		long long res = 0;
+
+		for (int i = 0, j = 0; i <= j && j < n; j++) {
+			if (++temp[word1[j] - 'a'] <= count[word1[j] - 'a'])
+				++cnt;
+
+			while (cnt == word2.size()) {
+				res += n - j;
+				if (--temp[word1[i] - 'a'] < count[word1[i] - 'a'])
+					--cnt;
+				i++;
+			}
 		}
 		return res;
 	}

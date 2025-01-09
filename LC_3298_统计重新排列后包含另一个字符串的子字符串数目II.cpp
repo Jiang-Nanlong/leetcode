@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <string.h>
 using namespace std;
 
 // 给定两个字符串word1和word2，对于word1中的某个子字符串，如果word2重新排序后是该字符串的前缀，那么说该子字符串是一个合法字符窜。
@@ -62,6 +63,8 @@ public:
 		}
 		return res;
 	}
+
+        // 这个题和上一个题一模一样，只不过数据范围不同
 };
 
 int main() {

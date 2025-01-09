@@ -2,6 +2,7 @@
 #include <string>
 #include <unordered_map>
 #include <algorithm>
+#include <string.h>
 using namespace std;
 
 class Solution {
@@ -123,6 +124,44 @@ public:
 			}
 		}
 		return minlen == INT_MAX ? "" : s.substr(start, minlen);
+	}
+
+        // 现在再做这种滑动窗口题就已经没有压力了
+	string minWindow3(string s, string t) {
+		if (s.size() < t.size())
+			return "";
+
+		int count[60], window[60];
+		memset(count, 0, sizeof(count));
+		memset(window, 0, sizeof(window));
+
+		for (char c : t)
+			++count[c - 'A'];
+
+		int n = s.size();
+		int cnt = 0;
+		int minlen = INT_MAX;
+		string res;
+		int start_index = -1;
+
+		for (int i = 0, j = 0; j < n; j++) {
+			int index = s[j] - 'A';
+			if (++window[index] <= count[index])
+				++cnt;
+
+			while (cnt == t.size()) {
+				if (minlen > j - i + 1) {
+					minlen = j - i + 1;
+					start_index = i;
+				}
+
+				index = s[i] - 'A';
+				if (--window[index] < count[index])
+					--cnt;
+				i++;
+			}
+		}
+		return start_index == -1 ? "" : s.substr(start_index, minlen);
 	}
 
 };
