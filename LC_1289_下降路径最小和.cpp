@@ -79,6 +79,28 @@ public:
 		}
 		return minPath;
 	}
+
+	int minFallingPathSum1(vector<vector<int>>& grid) {
+		int m = grid.size(), n = grid[0].size();
+
+		for (int i = 1; i < m; i++) {
+			for (int j = 0; j < n; j++) {
+				int cost = INT_MAX;
+				for (int k = 0; k < n; k++) {
+					if (k == j)
+						continue;
+
+					cost = min(cost, grid[i - 1][k]);
+				}
+				grid[i][j] += cost;
+			}
+		}
+
+		int res = INT_MAX;
+		for (int i : grid[m - 1])
+			res = min(res, i);
+		return res;
+	}
 };
 //这方法太牛逼了，太简洁了，负责度有了质的飞跃
 int main() {
