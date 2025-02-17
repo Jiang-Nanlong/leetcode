@@ -82,6 +82,28 @@ public:
 		}
 		return dp[sum] == sum;
 	}
+
+    // 这次看的是0x3F的题解，感觉他这种思路更好一些
+	bool canPartition4(vector<int>& nums) {
+		int sum = accumulate(nums.begin(), nums.end(), 0);
+		if (sum % 2 == 1)
+			return false;
+
+		int target = sum / 2;
+		vector<bool> dp(target + 1, false);
+		dp[0] = true;
+		int pre_sum = 0;
+		for (const int& i : nums) {
+			pre_sum = min(pre_sum + i, target);
+			for (int j = pre_sum; j >= i; j--) {
+				// 如果dp[j-i]是true了，那么dp[j]肯定是true，也就是说如果j-i可由数组中的元素组成，那么j肯定也可以由这些元素加上i组成
+				dp[j] = dp[j] | dp[j - i];
+			}
+			if (dp[target])
+				return true;
+		}
+		return false;
+	}
 };
 
 int main() {
