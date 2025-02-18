@@ -132,6 +132,23 @@ public:
 		}
 		return dp[sum];
 	}
+
+	int findTargetSumWays6(vector<int>& nums, int target) {
+		int sum = accumulate(nums.begin(), nums.end(), 0);
+		if ((sum + target) % 2 || (sum + target) < 0)
+			return 0;
+		target = (sum + target) / 2;
+
+		vector<int> dp(target + 1);
+		dp[0] = 1;
+		int pre_sum = 0;
+		for (const int& i : nums) {
+			pre_sum = min(pre_sum + i, target);
+			for (int j = pre_sum; j >= i; j--)
+				dp[j] += dp[j - i];
+		}
+		return dp[target];
+	}
 };
 
 //这个题的回溯方法比较简单，动态规划问题真难。最后对着dp数组才勉强看明白
