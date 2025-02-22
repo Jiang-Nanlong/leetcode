@@ -14,13 +14,12 @@ public:
         vector<int> dp(n + 1, 0);
         dp[0] = 1;
 
-        for (int i = 1; i <= n; i++) {
-            auto temp = pow(i, x);
-            for (int j = n; j >= temp; j--) {
+        for (int i = 1; i <= pow(n, 1.0 / x) + 1; i++) {
+            int temp = pow(i, x);
+            for (int j = n; j >= temp; j--)
                 dp[j] = (dp[j] + dp[j - temp]) % MOD;
-            }
-
         }
+
         return dp[n];
     }
 };
