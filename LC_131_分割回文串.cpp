@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <functional>
 using namespace std;
 
 //给定一个字符串s，将s分割成一些子串，使得每个子串都是回文子串，返回s的所有分割方案。回文串就是正着读和反着读都是一样的字符串。
@@ -144,6 +145,39 @@ public:
 				}
 			}
 		}
+	}
+};
+
+class Solution1 {
+public:
+	vector<vector<string>> partition(string s) {
+		vector<vector<string>> res;
+		vector<string> path;
+		int n = s.size();
+
+		function<void(int)> dfs = [&](int begin) {
+			if (begin == n) {
+				res.push_back(path);
+				return;
+			}
+
+			for (int end = begin; end < n; end++) {
+				if (isValid(s, begin, end)) {
+					path.push_back(s.substr(begin, end - begin + 1));
+					dfs(end + 1);
+					path.pop_back();
+				}
+			}
+		};
+		dfs(0);
+		return res;
+	}
+
+	bool isValid(const string& s, int left, int right) {
+		while (left <= right)
+			if (s[left++] != s[right--])
+				return false;
+		return true;
 	}
 };
 
