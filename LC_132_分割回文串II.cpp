@@ -2,6 +2,7 @@
 #include <vector>
 #include <string>
 #include <stack>
+#include <climits>
 using namespace std;
 
 // 给定一个字符串，把字符串切割成一个或多个子串，每个子串都是一个回文串，求最少切割刀数
@@ -65,6 +66,31 @@ public:
                 if (ispalindrome[j + 1][i])  //如果[j+1,i]为回文串，那么dp[i]=dp[j]+1,也就是从j的基础上再切一刀就可以
                     dp[i] = min(dp[i], dp[j] + 1);
             }
+        }
+        return dp[n - 1];
+    }
+
+    int minCut2(string s) {
+        int n = s.size();
+        vector<vector<bool>> isValid(n, vector<bool>(n, false));
+        for (int i = n - 1; i >= 0; i--) {
+            for (int j = i; j < n; j++) {
+                if (s[i] == s[j] && (j - i <= 1 || isValid[i + 1][j - 1]))
+                    isValid[i][j] = true;
+            }
+        }
+
+        vector<int> dp(n);
+        for (int i = 1; i < n; i++) {
+            if (isValid[0][i]) {
+                continue;
+            }
+            int res = INT_MAX;
+            for (int j = 0; j < i; j++) {
+                if (isValid[j + 1][i])
+                    res = min(res, dp[j] + 1);
+            }
+            dp[i] = res;
         }
         return dp[n - 1];
     }
