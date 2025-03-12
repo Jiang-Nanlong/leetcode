@@ -10,7 +10,7 @@
 using namespace std;
 
 class LRUCache {
-    shared_mutex mtx;
+    mutable shared_mutex mtx;
     list<pair<int, int> > cache_;
     unordered_map<int, list<pair<int, int> >::iterator> cacheMap;
     int capacity;
