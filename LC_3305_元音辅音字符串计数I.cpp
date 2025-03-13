@@ -1,6 +1,8 @@
 #include <iostream>
 #include <string>
 #include <unordered_map>
+#include <unordered_set>
+#include <cstring>
 using namespace std;
 
 class Solution {
@@ -32,6 +34,52 @@ public:
 				i2++;
 			}
 			res += i2 - i1;
+		}
+		return res;
+	}
+
+	// 三指针滑动窗口
+	long long countOfSubstrings1(string word, int k) {
+		unordered_set<char> uset{'a', 'e', 'i', 'o', 'u'};
+		int array1[26], array2[26];
+		memset(array1, 0, sizeof(array1));
+		memset(array2, 0, sizeof(array2));
+		int cnt_vowel1 = 0, cnt_vowel2 = 0;
+		int cnt_consonant1 = 0, cnt_consonant2 = 0;
+		int left1 = 0, left2 = 0;
+		long long res = 0;
+		for (char c : word) {
+			if (uset.find(c) != uset.end()) {
+				if (++array1[c - 'a'] == 1)
+					++cnt_vowel1;
+				if (++array2[c - 'a'] == 1)
+					++cnt_vowel2;
+			} else {
+				++cnt_consonant1;
+				++cnt_consonant2;
+			}
+
+			while (cnt_vowel1 == 5 && cnt_consonant1 >= k) {
+				char cc = word[left1];
+				if (uset.find(cc) != uset.end()) {
+					if (--array1[cc - 'a'] == 0)
+						--cnt_vowel1;
+				} else
+					--cnt_consonant1;
+
+				++left1;
+			}
+			while (cnt_vowel2 == 5 && cnt_consonant2 > k) {
+				char cc = word[left2];
+				if (uset.find(cc) != uset.end()) {
+					if (--array2[cc - 'a'] == 0)
+						--cnt_vowel2;
+				} else
+					--cnt_consonant2;
+
+				++left2;
+			}
+			res += left1 - left2;
 		}
 		return res;
 	}
