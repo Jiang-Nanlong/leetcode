@@ -38,6 +38,19 @@ public:
 		}
 		return {};
 	}
+
+    // 其实只用一个循环就行
+    vector<int> twoSum2(vector<int>& nums, int target) {
+        unordered_map<int, int> umap;
+        for (int i = 0; i < nums.size(); i++) {
+            auto it = umap.find(target - nums[i]);
+            if (it != umap.end() && it->second != i)
+                return {i, it->second};
+
+            umap[nums[i]]=i;
+        }
+        return {};
+    }
 };
 
 int main() {
