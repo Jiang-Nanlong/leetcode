@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <cstring>
 using namespace std;
 
 // 找出字符串s中所有字符串p的异位词的子串，并记录这些异位词子串的起始位置
@@ -24,6 +25,27 @@ public:
             if (isMatch(count))
                 res.push_back(i - p.size() + 1);
             ++count[s[i - p.size() + 1] - 'a'];
+        }
+        return res;
+    }
+    // 感觉上边这种定长滑动窗口的时间复杂度更高，对于每个s中的元素都要判断一遍计数数组是不是一致。
+  // 还是用不定长滑动窗口更好
+    vector<int> findAnagrams1(string s, string p) {
+        int count[26];
+        memset(count, 0, sizeof(count));
+        for (char c : p)
+            ++count[c - 'a'];
+
+        vector<int> res;
+        int n = s.size();
+        for (int i = 0, j = 0; j < n; j++) {
+            char c = s[j];
+            --count[c - 'a'];
+            while (count[c - 'a'] < 0) {
+                ++count[s[i++] - 'a'];
+            }
+            if (j - i + 1 == p.size())
+                res.push_back(i);
         }
         return res;
     }
