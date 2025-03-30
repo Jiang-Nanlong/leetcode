@@ -164,6 +164,34 @@ public:
 		return start_index == -1 ? "" : s.substr(start_index, minlen);
 	}
 
+	string minWindow4(string s, string t) {
+		unordered_map<char, int> umap1, umap2;
+
+		for (char c : t)
+			++umap1[c];
+
+		int cnt = 0;
+		int min_len = INT_MAX, start = -1;
+		for (int i = 0, j = 0; j < s.size(); j++) {
+			char c = s[j];
+			if (++umap2[c] <= umap1[c])
+				++cnt;
+
+			while (cnt == t.size()) {
+				int len = j - i + 1;
+				if (len < min_len) {
+					start = i;
+					min_len = len;
+				}
+				if (--umap2[s[i]] < umap1[s[i]])
+					--cnt;
+				++i;
+			}
+		}
+		if (start == -1)
+			return "";
+		return s.substr(start, min_len);
+	}
 };
 
 //感觉这个代码在判断缩小窗口和确定每个窗口内是不是包含了t中所有的字符，这两个地方都写的特别巧

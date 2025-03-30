@@ -14,7 +14,7 @@ using namespace std;
 
 class Solution {
 public:
-	vector<int> maxSlidingWindow(vector<int>& nums, int k) {
+	vector<int> maxSlidingWindow(vector<int> &nums, int k) {
 		MyQueue que;
 		vector<int> res;
 		for (int i = 0; i < k; i++) {
@@ -28,6 +28,7 @@ public:
 		}
 		return res;
 	}
+
 private:
 	class MyQueue {
 	public:
@@ -37,11 +38,13 @@ private:
 			if (!que.empty() && x == que.front())
 				que.pop_front();
 		}
+
 		void push(int x) {
 			while (!que.empty() && que.back() < x)
 				que.pop_back();
 			que.push_back(x);
 		}
+
 		int getMax() {
 			return que.front();
 		}
@@ -75,7 +78,7 @@ private:
 	};
 
 public:
-	vector<int> maxSlidingWindow(vector<int>& nums, int k) {
+	vector<int> maxSlidingWindow(vector<int> &nums, int k) {
 		MyQue que;
 		vector<int> res;
 		for (int i = 0; i < k && i < nums.size(); i++)
@@ -90,19 +93,55 @@ public:
 		return res;
 	}
 };
+
+// 用单调队列来做
+vector<int> maxSlidingWindow(vector<int> &nums, int k) {
+	int n = nums.size();
+	vector<int> res(n - k + 1);
+	deque<int> que;
+
+	auto push = [&](int i) -> void {
+		while (!que.empty() && nums[que.back()] < nums[i])
+			que.pop_back();
+		que.push_back(i);
+	};
+
+	auto pop = [&](int pos) -> void {
+		while (!que.empty() && pos - que.front() >= k)
+			que.pop_front();
+	};
+
+	for (int i = 0; i < n; i++) {
+		if (i < k - 1) {
+			push(i);
+			continue;
+		}
+		pop(i);
+		push(i);
+		res[i - k + 1] = nums[que.front()];
+	}
+	return res;
+}
+
 int main() {
 	Solution st;
-	vector<int> nums{ 1,3,-1,-3,5,3,6,7 };
+	vector<int> nums{1, 3, -1, -3, 5, 3, 6, 7};
 	int k = 3;
 	vector<int> res = st.maxSlidingWindow(nums, k);
-	for (auto& i : res)
+	for (auto &i: res)
 		cout << i << " ";
 	cout << endl;
 
 	Solution1 st1;
 	vector<int> res1 = st1.maxSlidingWindow(nums, k);
-	for (auto& i : res1)
+	for (auto &i: res1)
 		cout << i << " ";
 	cout << endl;
+
+	vector<int> res2 = maxSlidingWindow(nums, k);
+	for (auto &i: res2)
+		cout << i << " ";
+	cout << endl;
+
 	return 0;
 }
