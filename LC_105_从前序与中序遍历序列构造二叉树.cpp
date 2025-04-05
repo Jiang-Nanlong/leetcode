@@ -1,5 +1,7 @@
 #include <iostream>
 #include <vector>
+#include <unordered_map>
+#include <functional>
 using namespace std;
 
 //这个题和LeetCode 106 一样，都是重点在于确定根节点，然后分割两个遍历的序列。
@@ -86,6 +88,27 @@ public:
 			buildTreeHelper(preorder, rightpreorderbegin, rightpreorderend,
 				inorder, rightinorderbegin, rightinorderend);
 		return root;
+	}
+
+	TreeNode* buildTree2(vector<int>& preorder, vector<int>& inorder) {
+		int index = 0;
+		unordered_map<int, int> umap;
+		for (int i = 0; i < inorder.size(); i++)
+			umap[inorder[i]] = i;
+
+		function<TreeNode*(int,int)> dfs = [&](int inorderbegin,
+					   int inorderend) -> TreeNode* {
+			if (inorderbegin >= inorderend)
+				return nullptr;
+
+			TreeNode* cur = new TreeNode(preorder[index++]);
+			int i = umap[cur->val];
+
+			cur->left = dfs(inorderbegin, i);
+			cur->right = dfs(i + 1, inorderend);
+			return cur;
+		};
+		return dfs(0, inorder.size());
 	}
 };
 
