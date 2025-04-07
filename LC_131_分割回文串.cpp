@@ -181,6 +181,41 @@ public:
 	}
 };
 
+
+class Solution2 {
+public:
+	vector<vector<string>> partition(string s) {
+		vector<vector<string>> res;
+		vector<string> path;
+
+		auto isValid = [](const string& a) {
+			int i = 0, j = a.size() - 1;
+			while (i <= j) {
+				if (a[i++] != a[j--])
+					return false;
+			}
+			return true;
+		};
+
+		function<void(int)> dfs = [&](int i)->void{
+			if (i == s.size()) {
+				res.push_back(path);
+				return;
+			}
+			for (int j = i; j < s.size(); j++) {
+				string substr = s.substr(i, j - i + 1);
+				if (isValid(substr)) {
+					path.push_back(substr);
+					dfs(j + 1);
+					path.pop_back();
+				}
+			}
+		};
+		dfs(0);
+		return res;
+	}
+};
+
 int main() {
 	Solution st;
 	string s("aab");
