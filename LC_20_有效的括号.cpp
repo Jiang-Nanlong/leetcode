@@ -61,6 +61,24 @@ public:
 		}
 		return stk.empty();
 	}
+
+	bool isValid2(string s) {
+		unordered_map<char, char> umap{{'(', ')'}, {'{', '}'}, {'[', ']'}};
+		stack<char> stk;
+		for (char c : s) {
+			if (umap.contains(c))
+				stk.push(c);
+			else {
+				if (!stk.empty()&&umap[stk.top()] == c)
+					stk.pop();
+				else
+					return false;
+			}
+		}
+		if (!stk.empty())
+			return false;
+		return true;
+	}
 };
 
 void main() {
