@@ -1,2 +1,11 @@
-.idea
+*
+!*/
+!*.*
+
 *.exe
+*.o
+*.obj
+*.out
+
+.idea/
+.vscode/
